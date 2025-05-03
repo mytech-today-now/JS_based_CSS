@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Theme Switcher</title>
+  <!-- Default to Flat theme -->
+  <style id="theme-style">
+    /* Flat Theme */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+    .card {
+      background: #fff;
+      border-radius: 4px;
+      padding: 2rem;
+      max-width: 400px;
+      margin: 4rem auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 { margin-top: 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Dynamic Theme Switcher</h1>
+    <p>Press <strong>Ctrl + Shift + Space</strong> to cycle themes:</p>
+    <ul>
+      <li>Neumorphic</li>
+      <li>Flat</li>
+      <li>Skeuomorphism</li>
+      <li>Brutalism</li>
+      <li>Maximalism</li>
+    </ul>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const themeStyleEl = document.getElementById('theme-style');
+        if (!themeStyleEl) {
+          throw new Error('Missing &lt;style id="theme-style"&gt; element.');
+        }
+
+        const themes = [
+          {
+            name: 'Neumorphic',
+            css: `
+              body {
+                margin: 0;
+                font-family: 'Segoe UI', sans-serif;
+                background: #e0e0e0;
+                color: #333;
+              }
+              .card {
+                background: #e0e0e0;
+                border-radius: 16px;
+                padding: 2rem;
+                max-width: 400px;
+                margin: 4rem auto;
+                box-shadow:  8px 8px 16px rgba(0,0,0,0.2),
+                             -8px -8px 16px rgba(255,255,255,0.7);
+              }
+              h1 { margin-top: 0; }
+            `
+          },
+          {
+            name: 'Flat',
+            css: `
+              body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background: #f5f5f5;
+                color: #333;
+              }
+              .card {
+                background: #fff;
+                border-radius: 4px;
+                padding: 2rem;
+                max-width: 400px;
+                margin: 4rem auto;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+              }
+              h1 { margin-top: 0; }
+            `
+          },
+          {
+            name: 'Skeuomorphism',
+            css: `
+              body {
+                margin: 0;
+                font-family: 'Times New Roman', serif;
+                background: #ddd;
+                color: #222;
+              }
+              .card {
+                background: #fafafa;
+                border: 1px solid #ccc;
+                padding: 2rem;
+                max-width: 400px;
+                margin: 4rem auto;
+                box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+              }
+              h1 { margin-top: 0; font-style: italic; }
+            `
+          },
+          {
+            name: 'Brutalism',
+            css: `
+              body {
+                margin: 0;
+                font-family: monospace;
+                background: #fff;
+                color: #000;
+              }
+              .card {
+                background: #fff;
+                border: 3px solid #000;
+                padding: 2rem;
+                max-width: 400px;
+                margin: 4rem auto;
+              }
+              h1 { margin-top: 0; text-transform: uppercase; }
+            `
+          },
+          {
+            name: 'Maximalism',
+            css: `
+              body {
+                margin: 0;
+                font-family: 'Comic Sans MS', cursive, sans-serif;
+                background: repeating-linear-gradient(
+                  45deg,
+                  #ffe4e1,
+                  #ffe4e1 10px,
+                  #e6e6fa 10px,
+                  #e6e6fa 20px
+                );
+                color: #4b0082;
+              }
+              .card {
+                background: #ffeb3b;
+                border: 5px dotted #e91e63;
+                padding: 2rem;
+                max-width: 400px;
+                margin: 4rem auto;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transform: rotate(-1deg);
+              }
+              h1 { margin-top: 0; font-size: 2rem; animation: wiggle 0.5s infinite alternate; }
+              @keyframes wiggle {
+                from { transform: rotate(-1deg); }
+                to   { transform: rotate(1deg); }
+              }
+            `
+          }
+        ];
+
+        let current = 1; // start on Flat (index 1)
+        console.log(`Initial theme: ${themes[current].name}`);
+
+        document.addEventListener('keydown', (e) => {
+          if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
+            e.preventDefault();
+            try {
+              current = (current + 1) % themes.length;
+              themeStyleEl.textContent = themes[current].css;
+              console.log(`Theme switched to: ${themes[current].name}`);
+            } catch (err) {
+              console.error('Failed to apply theme:', err);
+            }
+          }
+        });
+      } catch (initErr) {
+        console.error('Theme switcher initialization failed:', initErr);
+      }
+    });
+  </script>
+</body>
+</html>
