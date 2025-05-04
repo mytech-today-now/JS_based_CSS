@@ -436,299 +436,276 @@
         <a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">W3C Accessibility</a>
       </p>
     </article>
-  </main><script>
+  </main>
+<!-- Include this after loading jQuery and jQuery Migrate -->
+<script>
 jQuery(function($) {
   try {
-    // 1. Migrate any legacy .load(fn) calls to .on('load', fn):
-    //    Example: $('img.lazy').on('load', function(){ /* … */ });
-
-    // 2. Guard theme‐switcher elements
-    const $themeStyle   = $('#theme-style');
-    const $currentTheme = $('#current-theme');
-    const $themeList    = $('#theme-list');
+    // 1. Guard theme‐switcher elements
+    var $themeStyle   = $('#theme-style');
+    var $currentTheme = $('#current-theme');
+    var $themeList    = $('#theme-list');
     if (!$themeStyle.length || !$currentTheme.length || !$themeList.length) {
-      console.warn('Theme switcher not detected on this page; skipping initialization.');
+      console.warn('Theme switcher elements missing – skipping initialization.');
       return;
     }
 
-    // 3. Define all themes (chronological)
-    const themes = [
+    // 2. Define all themes in chronological order
+    var themes = [
       {
         name: 'Vernacular / Geocities',
-        css: `
-          body { background: repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px); font-family:'Comic Sans MS',cursive; color:#000; }
-          article.style-card { background:#fff2f2; border-color:#cc0000; }
-          .style-title { color:#cc0000; }
-          nav a, #theme-list li.active { color:#cc0000; background:#ffcccc; }
-        `
+        css: "\
+body { background: repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px); font-family:'Comic Sans MS',cursive; color:#000; }\
+article.style-card { background:#fff2f2; border-color:#cc0000; }\
+.style-title { color:#cc0000; }\
+nav a, #theme-list li.active { color:#cc0000; background:#ffcccc; }"
       },
       {
         name: 'Table-Based Design',
-        css: `
-          body { background:#fff; font-family:'Courier New',monospace; color:#000; }
-          main { display:table; width:100%; }
-          article.style-card { display:table-cell; border:2px solid #000; background:#fff; }
-          .style-title { color:#000; }
-          nav a, #theme-list li.active { color:#000; background:#ccc; }
-        `
+        css: "\
+body { background:#fff; font-family:'Courier New',monospace; color:#000; }\
+main { display:table; width:100%; }\
+article.style-card { display:table-cell; border:2px solid #000; background:#fff; }\
+.style-title { color:#000; }\
+nav a, #theme-list li.active { color:#000; background:#ccc; }"
       },
       {
         name: 'Framesets',
-        css: `
-          body { background:#eee; font-family:Tahoma,sans-serif; color:#333; }
-          nav { position:fixed; top:0; left:0; width:20%; height:100%; background:#ddd; }
-          main { margin-left:20%; }
-          article.style-card { background:#f9f9f9; border:2px solid #333; }
-          .style-title { color:#333; }
-          nav a, #theme-list li.active { color:#333; background:#ddd; }
-        `
+        css: "\
+body { background:#eee; font-family:Tahoma,sans-serif; color:#333; }\
+nav { position:fixed; top:0; left:0; width:20%; height:100%; background:#ddd; }\
+main { margin-left:20%; }\
+article.style-card { background:#f9f9f9; border:2px solid #333; }\
+.style-title { color:#333; }\
+nav a, #theme-list li.active { color:#333; background:#ddd; }"
       },
       {
         name: 'Flash-Based Design',
-        css: `
-          body { background:#000; font-family:'Arial Black',sans-serif; color:#fff; }
-          article.style-card { background:#111; border:2px solid #f0f; }
-          .style-title { color:#f0f; }
-          nav a, #theme-list li.active { color:#f0f; background:#220022; }
-        `
+        css: "\
+body { background:#000; font-family:'Arial Black',sans-serif; color:#fff; }\
+article.style-card { background:#111; border:2px solid #f0f; }\
+.style-title { color:#f0f; }\
+nav a, #theme-list li.active { color:#f0f; background:#220022; }"
       },
       {
         name: 'Web 2.0 Glossy',
-        css: `
-          body { background:#f0f8ff; font-family:Verdana,sans-serif; color:#333; }
-          article.style-card { background:#fff; border:2px solid #1e90ff; box-shadow:0 0 10px rgba(30,144,255,.5); }
-          .style-title { color:#1e90ff; }
-          nav a, #theme-list li.active { color:#1e90ff; background:#d0e8ff; }
-        `
+        css: "\
+body { background:#f0f8ff; font-family:Verdana,sans-serif; color:#333; }\
+article.style-card { background:#fff; border:2px solid #1e90ff; box-shadow:0 0 10px rgba(30,144,255,.5); }\
+.style-title { color:#1e90ff; }\
+nav a, #theme-list li.active { color:#1e90ff; background:#d0e8ff; }"
       },
       {
         name: 'Skeuomorphic',
-        css: `
-          body { background:#ddd; font-family:'Times New Roman',serif; color:#222; }
-          article.style-card { background:#f9f9f4; border:2px inset #ccc; }
-          .style-title { color:#875f3a; }
-          nav a, #theme-list li.active { color:#875f3a; background:#eee2d0; }
-        `
+        css: "\
+body { background:#ddd; font-family:'Times New Roman',serif; color:#222; }\
+article.style-card { background:#f9f9f4; border:2px inset #ccc; }\
+.style-title { color:#875f3a; }\
+nav a, #theme-list li.active { color:#875f3a; background:#eee2d0; }"
       },
       {
         name: 'Swiss Style',
-        css: `
-          body { background:#fff; font-family:'Helvetica Neue',sans-serif; color:#000; }
-          article.style-card { background:#fafafa; border:2px solid #000; }
-          .style-title { color:#000; }
-          nav a, #theme-list li.active { color:#000; background:#ccc; }
-        `
+        css: "\
+body { background:#fff; font-family:'Helvetica Neue',sans-serif; color:#000; }\
+article.style-card { background:#fafafa; border:2px solid #000; }\
+.style-title { color:#000; }\
+nav a, #theme-list li.active { color:#000; background:#ccc; }"
       },
       {
         name: 'Minimalist',
-        css: `
-          body { background:#fff; font-family:Arial,sans-serif; color:#000; }
-          article.style-card { background:#fff; border:1px solid #666; }
-          .style-title { color:#666; }
-          nav a, #theme-list li.active { color:#666; background:#e0e0e0; }
-        `
+        css: "\
+body { background:#fff; font-family:Arial,sans-serif; color:#000; }\
+article.style-card { background:#fff; border:1px solid #666; }\
+.style-title { color:#666; }\
+nav a, #theme-list li.active { color:#666; background:#e0e0e0; }"
       },
       {
         name: 'Responsive',
-        css: `
-          body { background:#f9f9f9; font-family:Arial,sans-serif; color:#333; }
-          article.style-card { background:#fff; border:2px solid #009879; }
-          .style-title { color:#009879; }
-          nav a, #theme-list li.active { color:#009879; background:#d0f7ec; }
-        `
+        css: "\
+body { background:#f9f9f9; font-family:Arial,sans-serif; color:#333; }\
+article.style-card { background:#fff; border:2px solid #009879; }\
+.style-title { color:#009879; }\
+nav a, #theme-list li.active { color:#009879; background:#d0f7ec; }"
       },
       {
         name: 'Mobile-First',
-        css: `
-          body { background:#fff; font-family:Arial,sans-serif; color:#333; }
-          article.style-card { background:#fff; border:2px solid #ff6f61; }
-          .style-title { color:#ff6f61; }
-          nav a, #theme-list li.active { color:#ff6f61; background:#ffe6e2; }
-        `
+        css: "\
+body { background:#fff; font-family:Arial,sans-serif; color:#333; }\
+article.style-card { background:#fff; border:2px solid #ff6f61; }\
+.style-title { color:#ff6f61; }\
+nav a, #theme-list li.active { color:#ff6f61; background:#ffe6e2; }"
       },
       {
         name: 'Flat Design',
-        css: `
-          body { background:#f5f5f5; font-family:Arial,sans-serif; color:#333; }
-          article.style-card { background:#fff; border:2px solid #333; }
-          .style-title { color:#333; }
-          nav a, #theme-list li.active { color:#333; background:#cccccc; }
-        `
+        css: "\
+body { background:#f5f5f5; font-family:Arial,sans-serif; color:#333; }\
+article.style-card { background:#fff; border:2px solid #333; }\
+.style-title { color:#333; }\
+nav a, #theme-list li.active { color:#333; background:#cccccc; }"
       },
       {
         name: 'Semi-Flat',
-        css: `
-          body { background:#f0f0f0; font-family:'Helvetica Neue',sans-serif; color:#333; }
-          article.style-card { background:linear-gradient(135deg,#fff,#f8f8f8); border:2px solid #4facfe; }
-          .style-title { color:#4facfe; }
-          nav a, #theme-list li.active { color:#4facfe; background:#e7f5ff; }
-        `
+        css: "\
+body { background:#f0f0f0; font-family:'Helvetica Neue',sans-serif; color:#333; }\
+article.style-card { background:linear-gradient(135deg,#fff,#f8f8f8); border:2px solid #4facfe; }\
+.style-title { color:#4facfe; }\
+nav a, #theme-list li.active { color:#4facfe; background:#e7f5ff; }"
       },
       {
         name: 'Parallax',
-        css: `
-          body { background:#e8f5fd; font-family:Arial,sans-serif; color:#333; }
-          article.style-card { background:#fff; border:2px solid #1e88e5; transform:perspective(600px) translateZ(10px); }
-          .style-title { color:#1e88e5; }
-          nav a, #theme-list li.active { color:#1e88e5; background:#d0e8fe; }
-        `
+        css: "\
+body { background:#e8f5fd; font-family:Arial,sans-serif; color:#333; }\
+article.style-card { background:#fff; border:2px solid #1e88e5; transform:perspective(600px) translateZ(10px); }\
+.style-title { color:#1e88e5; }\
+nav a, #theme-list li.active { color:#1e88e5; background:#d0e8fe; }"
       },
       {
         name: 'Single-Page App',
-        css: `
-          body { background:#fcf3cf; font-family:Verdana,sans-serif; color:#333; }
-          article.style-card { background:#fff; border:2px solid #f39c12; }
-          .style-title { color:#f39c12; }
-          nav a, #theme-list li.active { color:#f39c12; background:#fde8cf; }
-        `
+        css: "\
+body { background:#fcf3cf; font-family:Verdana,sans-serif; color:#333; }\
+article.style-card { background:#fff; border:2px solid #f39c12; }\
+.style-title { color:#f39c12; }\
+nav a, #theme-list li.active { color:#f39c12; background:#fde8cf; }"
       },
       {
         name: 'Progressive Web App',
-        css: `
-          body { background:#e0f7fa; font-family:Arial,sans-serif; color:#333; }
-          article.style-card { background:#fff; border:2px solid #00acc1; }
-          .style-title { color:#00acc1; }
-          nav a, #theme-list li.active { color:#00acc1; background:#d4f1f9; }
-        `
+        css: "\
+body { background:#e0f7fa; font-family:Arial,sans-serif; color:#333; }\
+article.style-card { background:#fff; border:2px solid #00acc1; }\
+.style-title { color:#00acc1; }\
+nav a, #theme-list li.active { color:#00acc1; background:#d4f1f9; }"
       },
       {
         name: 'Cinematic',
-        css: `
-          body { background:#000; font-family:Georgia,serif; color:#fff; }
-          article.style-card { background:#111; border:2px solid #f00; }
-          .style-title { color:#f00; }
-          nav a, #theme-list li.active { color:#f00; background:#300; }
-        `
+        css: "\
+body { background:#000; font-family:Georgia,serif; color:#fff; }\
+article.style-card { background:#111; border:2px solid #f00; }\
+.style-title { color:#f00; }\
+nav a, #theme-list li.active { color:#f00; background:#300; }"
       },
       {
         name: 'Brutalist',
-        css: `
-          body { background:#fff; font-family:'Courier New',monospace; color:#000; }
-          article.style-card { background:#fff; border:3px solid #000; }
-          .style-title { color:#000; }
-          nav a, #theme-list li.active { color:#000; background:#ccc; }
-        `
+        css: "\
+body { background:#fff; font-family:'Courier New',monospace; color:#000; }\
+article.style-card { background:#fff; border:3px solid #000; }\
+.style-title { color:#000; }\
+nav a, #theme-list li.active { color:#000; background:#ccc; }"
       },
       {
         name: 'Neo-Brutalism',
-        css: `
-          body { background:#000; font-family:'Courier New',monospace; color:#0f0; }
-          article.style-card { background:#111; border:3px solid #0f0; }
-          .style-title { color:#0f0; }
-          nav a, #theme-list li.active { color:#0f0; background:#030; }
-        `
+        css: "\
+body { background:#000; font-family:'Courier New',monospace; color:#0f0; }\
+article.style-card { background:#111; border:3px solid #0f0; }\
+.style-title { color:#0f0; }\
+nav a, #theme-list li.active { color:#0f0; background:#030; }"
       },
       {
         name: 'Dark Mode',
-        css: `
-          body { background:#121212; font-family:Arial,sans-serif; color:#e0e0e0; }
-          article.style-card { background:#1e1e1e; border:2px solid #444; }
-          .style-title { color:#e0e0e0; }
-          nav a, #theme-list li.active { color:#e0e0e0; background:#444; }
-        `
+        css: "\
+body { background:#121212; font-family:Arial,sans-serif; color:#e0e0e0; }\
+article.style-card { background:#1e1e1e; border:2px solid #444; }\
+.style-title { color:#e0e0e0; }\
+nav a, #theme-list li.active { color:#e0e0e0; background:#444; }"
       },
       {
         name: 'Neumorphism',
-        css: `
-          body { background:#e0e0e0; font-family:'Segoe UI',sans-serif; color:#333; }
-          article.style-card { background:#e0e0e0; border-radius:12px; box-shadow:8px 8px 16px rgba(0,0,0,0.2), -8px -8px 16px rgba(255,255,255,0.7); }
-          .style-title { color:#555; }
-          nav a, #theme-list li.active { color:#555; background:#d0d0d0; }
-        `
+        css: "\
+body { background:#e0e0e0; font-family:'Segoe UI',sans-serif; color:#333; }\
+article.style-card { background:#e0e0e0; border-radius:12px; box-shadow:8px 8px 16px rgba(0,0,0,0.2), -8px -8px 16px rgba(255,255,255,0.7); }\
+.style-title { color:#555; }\
+nav a, #theme-list li.active { color:#555; background:#d0d0d0; }"
       },
       {
         name: 'Glassmorphism',
-        css: `
-          body { background:rgba(255,255,255,0.3); backdrop-filter:blur(8px); font-family:Arial,sans-serif; color:#333; }
-          article.style-card { background:rgba(255,255,255,0.5); border:2px solid rgba(255,255,255,0.8); backdrop-filter:blur(8px); }
-          .style-title { color:#333; }
-          nav a, #theme-list li.active { color:#333; background:rgba(255,255,255,0.6); }
-        `
+        css: "\
+body { background:rgba(255,255,255,0.3); backdrop-filter:blur(8px); font-family:Arial,sans-serif; color:#333; }\
+article.style-card { background:rgba(255,255,255,0.5); border:2px solid rgba(255,255,255,0.8); backdrop-filter:blur(8px); }\
+.style-title { color:#333; }\
+nav a, #theme-list li.active { color:#333; background:rgba(255,255,255,0.6); }"
       },
       {
         name: 'Corporate Memphis',
-        css: `
-          body { background:#ff6f61; font-family:Helvetica,sans-serif; color:#fff; }
-          article.style-card { background:#fff; border:2px solid #fff; }
-          .style-title { color:#ff6f61; }
-          nav a, #theme-list li.active { color:#ff6f61; background:#fff; }
-        `
+        css: "\
+body { background:#ff6f61; font-family:Helvetica,sans-serif; color:#fff; }\
+article.style-card { background:#fff; border:2px solid #fff; }\
+.style-title { color:#ff6f61; }\
+nav a, #theme-list li.active { color:#ff6f61; background:#fff; }"
       },
       {
         name: 'Retro Web',
-        css: `
-          body { background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px); font-family:'Courier New',monospace; color:#0f0; }
-          article.style-card { background:#001; border:2px solid #0ff; }
-          .style-title { color:#0ff; }
-          nav a, #theme-list li.active { color:#0ff; background:#003; }
-        `
+        css: "\
+body { background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px); font-family:'Courier New',monospace; color:#0f0; }\
+article.style-card { background:#001; border:2px solid #0ff; }\
+.style-title { color:#0ff; }\
+nav a, #theme-list li.active { color:#0ff; background:#003; }"
       },
       {
         name: 'Y2K Web',
-        css: `
-          body { background:linear-gradient(to right,#00f,#0ff); font-family:Arial,sans-serif; color:#000; }
-          article.style-card { background:rgba(255,255,255,0.8); border:2px solid #fff; }
-          .style-title { color:#00f; }
-          nav a, #theme-list li.active { color:#00f; background:#fff; }
-        `
+        css: "\
+body { background:linear-gradient(to right,#00f,#0ff); font-family:Arial,sans-serif; color:#000; }\
+article.style-card { background:rgba(255,255,255,0.8); border:2px solid #fff; }\
+.style-title { color:#00f; }\
+nav a, #theme-list li.active { color:#00f; background:#fff; }"
       },
       {
         name: 'WebGL & 3D',
-        css: `
-          body { background:#001; font-family:'Courier New',monospace; color:#0f0; perspective:800px; }
-          article.style-card { background:#002; border:2px solid #0f0; transform:rotateX(5deg); }
-          .style-title { color:#0f0; }
-          nav a, #theme-list li.active { color:#0f0; background:#003; }
-        `
+        css: "\
+body { background:#001; font-family:'Courier New',monospace; color:#0f0; perspective:800px; }\
+article.style-card { background:#002; border:2px solid #0f0; transform:rotateX(5deg); }\
+.style-title { color:#0f0; }\
+nav a, #theme-list li.active { color:#0f0; background:#003; }"
       },
       {
         name: 'Inclusive Design',
-        css: `
-          body { background:#fff; font-family:Arial,sans-serif; color:#000; }
-          article.style-card { background:#f9f9f9; border:2px solid #007acc; }
-          .style-title { color:#007acc; }
-          nav a, #theme-list li.active { color:#007acc; background:#e0f0ff; }
-        `
+        css: "\
+body { background:#fff; font-family:Arial,sans-serif; color:#000; }\
+article.style-card { background:#f9f9f9; border:2px solid #007acc; }\
+.style-title { color:#007acc; }\
+nav a, #theme-list li.active { color:#007acc; background:#e0f0ff; }"
       }
     ];
 
-    let current = 0;
-
+    // 3. Theme application function
+    var current = 0;
     function applyTheme(idx) {
       if (!themes[idx]) {
         console.error('Invalid theme index:', idx);
         return;
       }
-      themeStyleEl.text(themes[idx].css);
-      currentThemeEl.text('Current Style: ' + themes[idx].name);
-      $themeList.children().removeClass('active').eq(idx).addClass('active');
+      $themeStyle.text(themes[idx].css);
+      $currentTheme.text('Current Style: ' + themes[idx].name);
+      $themeList.children()
+        .removeClass('active')
+        .eq(idx).addClass('active');
       current = idx;
       console.log('Applied theme:', themes[idx].name);
     }
 
-    // Initialize
+    // 4. Initialize
     applyTheme(current);
 
-    // Click‐to‐select
+    // 5. Click handlers
     $themeList.on('click', 'li', function() {
       applyTheme(parseInt($(this).data('index'), 10));
     });
     $('.style-title').on('click', function() {
-      const idx = parseInt($(this).closest('article').data('index'), 10);
+      var idx = parseInt($(this).closest('article').data('index'), 10);
       applyTheme(idx);
     });
 
-    // Keyboard cycle
+    // 6. Keyboard cycle
     $(document).on('keydown', function(e) {
       if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
         e.preventDefault();
         applyTheme((current + 1) % themes.length);
       }
     });
+
   } catch (err) {
     console.error('Initialization failed:', err);
   }
 });
 </script>
+
 </body>
 </html>
