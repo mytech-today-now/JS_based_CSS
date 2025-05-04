@@ -38,21 +38,55 @@
     #theme-list li:hover:not(.active) {
       background: #007acc33;
     }
-    .frame-nav {
-      position: fixed; top:0; left:0;
-      width: 20%; height: 100%;
-      background: #ddd; padding: 1rem;
-      box-sizing: border-box; overflow: auto;
-    }
-    .frame-content {
-      margin-left: 20%; padding: 1rem;
-    }
     nav { text-align: center; margin-bottom: 1.5rem; }
     nav a {
       margin: 0 .5rem; color: #007acc;
       text-decoration: none; font-size: .9rem;
     }
     nav a:hover { text-decoration: underline; }
+    /* Demo widgets */
+    .demo-widgets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      justify-content: center;
+    }
+    .widget {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .widget h2 {
+      font-size: 1rem;
+      margin-bottom: .5rem;
+      text-align: center;
+    }
+    .iframe-container {
+      flex: 1 1 300px;
+      resize: both;
+      overflow: auto;
+    }
+    .iframe-container iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 4px;
+    }
+    .video-demo {
+      flex: 1 1 300px;
+    }
+    .video-demo .video-background {
+      display: flex;
+      gap: .5rem;
+    }
+    .video-demo .video-background video {
+      width: 48%;
+      height: auto;
+      border-radius: 4px;
+    }
     main {
       max-width: 900px; margin: 0 auto;
       position: relative;
@@ -116,9 +150,9 @@
   </header>
 
   <div class="theme-switcher">
-    <h2 id="current-theme">Current Style: Vernacular / Geocities</h2>
+    <h2 id="current-theme">Current Style:</h2>
     <ul id="theme-list">
-      <li data-index="0" class="active">Vernacular / Geocities</li>
+      <li data-index="0">Vernacular / Geocities</li>
       <li data-index="1">Table-Based Design</li>
       <li data-index="2">Framesets</li>
       <li data-index="3">Flash-Based Design</li>
@@ -143,7 +177,7 @@
       <li data-index="22">Retro Web</li>
       <li data-index="23">Y2K Web</li>
       <li data-index="24">WebGL & 3D</li>
-      <li data-index="25">Inclusive Design</li>
+      <li data-index="25">Modern 3D Inclusive Memphis</li>
     </ul>
   </div>
 
@@ -170,6 +204,22 @@
     <a href="#webgl-3d">2015–present</a> |
     <a href="#inclusive-design">Ongoing</a>
   </nav>
+
+  <section class="demo-widgets">
+    <div class="widget iframe-container">
+      <h2>Live Site Preview</h2>
+      <iframe src="https://mytech.today" title="myTech.Today Preview"></iframe>
+    </div>
+    <div class="widget video-demo">
+      <h2>Traffic Video Playback</h2>
+      <div class="video-background">
+        <div id="traffic_videos">
+          <video id="traffic_videos_1" muted playsinline webkit-playsinline autoplay loop></video>
+          <video id="traffic_videos_2" muted playsinline webkit-playsinline autoplay loop></video>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <main>
     <!-- All 26 style cards -->
@@ -490,7 +540,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
 
-  <!-- Theme-switcher + dynamic extras -->
+  <!-- Theme-switcher + dynamic extras + demo widgets init -->
   <script>
   jQuery(function($) {
     try {
@@ -508,52 +558,51 @@
       function clearExtras() {
         $('.extra-under, .extra-counter, .extra-flash-intro').remove();
         $('#main-table, .frame-nav, .frame-content, .beta-badge, .card-texture, .grid-overlay').remove();
-        // restore DOM if frameset was used
-        if ($('.frame-nav').length) {
-          $('.theme-switcher').insertAfter('header');
-          $('.frame-nav, .frame-content').remove();
-          $('main').appendTo('body');
-        }
-        // ensure header elements visible
-        $headerElems.css('visibility', '');
+        $headerElems.show();
       }
 
       var extrasMap = {
-        0: function() {
+        0: null,
+        1: function() {
+          console.log('GeoCities extras');
           $('<img class="extra-under" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Under_construction.gif" alt="Under Construction">').prependTo('main');
           $('<div class="extra-counter">Visitor Count: ' + Math.floor(Math.random()*10000) + '</div>').prependTo('main');
         },
-        1: function() {
+        2: function() {
+          console.log('Table layout extras');
           $('<table id="main-table"><tr><td>Main Content</td><td>Sidebar</td></tr></table>').prependTo('main');
         },
-        2: function() {
+        3: function() {
+          console.log('Framesets extras');
           var $navFrame = $('<div class="frame-nav"></div>').appendTo('body');
           $('.theme-switcher').appendTo($navFrame);
           var $contentFrame = $('<div class="frame-content"></div>').appendTo('body');
           $('main').appendTo($contentFrame);
         },
-        3: function() {
-          // hide page text
-          $headerElems.css('visibility', 'hidden');
+        4: function() {
+          console.log('Flash intro started');
+          $headerElems.hide();
           var $intro = $('<div class="extra-flash-intro">FLASH INTRO</div>').appendTo('body');
           setTimeout(function() {
             $intro.fadeOut(800, function() {
               $intro.remove();
-              // restore visibility
-              $headerElems.css('visibility', '');
+              $headerElems.show();
+              console.log('Flash intro ended, UI restored');
             });
           }, 2000);
         },
-        4: function() {
+        5: function() {
+          console.log('Web 2.0 extras');
           $('<span class="beta-badge">BETA</span>').insertAfter('header h1');
         },
-        5: function() {
+        6: function() {
+          console.log('Skeuomorphic extras');
           $cards.addClass('card-texture');
         },
-        6: function() {
+        7: function() {
+          console.log('Swiss grid overlay extras');
           $('<div class="grid-overlay"></div>').prependTo('main');
         }
-        // no extras for 7–25
       };
 
       var themes = [
@@ -582,10 +631,10 @@
         { name:'Retro Web',                    css:"body{background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px);font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#001;border:2px solid #0ff;}.style-title{color:#0ff;}" },
         { name:'Y2K Web',                      css:"body{background:linear-gradient(to right,#00f,#0ff);font-family:Arial,sans-serif;color:#000;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;}.style-title{color:#00f;}" },
         { name:'WebGL & 3D',                   css:"body{background:#001;font-family:'Courier New',monospace;color:#0f0;perspective:800px;}article.style-card{background:#002;border:2px solid #0f0;transform:rotateX(5deg);}.style-title{color:#0f0;}" },
-        { name:'Inclusive Design',             css:"body{background:#fff;font-family:Arial,sans-serif;color:#000;}article.style-card{background:#f9f9f9;border:2px solid #007acc;}.style-title{color:#007acc;}" }
+        { name:'Modern 3D Inclusive Memphis',  css:"body{background:linear-gradient(135deg,#ff6f61,#ff9a76);font-family:'Helvetica Neue',sans-serif;color:#fff;perspective:1000px;transform-style:preserve-3d;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);transform:rotateX(5deg) rotateY(-5deg);} .style-title{color:#ffeb3b;text-shadow:0 2px 5px rgba(0,0,0,0.5);} .iframe-container iframe{box-shadow:0 2px 10px rgba(0,0,0,0.3);} .video-demo .video-background video{border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.3);}" }
       ];
 
-      var current = 0;
+      var current = 25;
       function applyTheme(idx) {
         if (!themes[idx]) {
           console.error('Invalid theme index:', idx);
@@ -599,7 +648,6 @@
           try { extrasMap[idx](); }
           catch (e) { console.error('Extras failed for theme', idx, e); }
         }
-        current = idx;
         console.log('Applied theme:', themes[idx].name);
       }
 
@@ -621,6 +669,19 @@
           applyTheme((current + 1) % themes.length);
         }
       });
+
+      // Initialize traffic videos
+      try {
+        var trafficVideos = [
+          'https://mytech.today/wp-content/uploads/2025/04/Skyline.mp4',
+          'https://mytech.today/wp-content/uploads/2025/04/River.mp4'
+        ];
+        $('#traffic_videos_1').attr('src', trafficVideos[0]);
+        $('#traffic_videos_2').attr('src', trafficVideos[1]);
+        console.log('Traffic videos initialized');
+      } catch (e) {
+        console.error('Traffic video initialization failed:', e);
+      }
 
     } catch (err) {
       console.error('Initialization failed:', err);
