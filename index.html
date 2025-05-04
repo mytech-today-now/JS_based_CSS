@@ -495,13 +495,12 @@
   <script>
   jQuery(function($) {
     try {
-      var $themeStyle = $('#theme-style'),
-          $currentTheme = $('#current-theme'),
-          $themeList = $('#theme-list'),
-          $cards = $('article.style-card'),
-          $cssEditor = $('#css-editor');
+      var $themeStyle    = $('#theme-style'),
+          $currentTheme  = $('#current-theme'),
+          $themeList     = $('#theme-list'),
+          $cssEditor     = $('#css-editor');
 
-      if (!$themeStyle.length || !$currentTheme.length || !$themeList.length || !$cards.length) {
+      if (!$themeStyle.length || !$currentTheme.length || !$themeList.length) {
         console.error('Essential elements missing, aborting initialization.');
         return;
       }
@@ -538,16 +537,23 @@
       var current = 0;
 
       function formatCss(css) {
-        return css.split(';').map(function(line){
-          return line.trim() ? line.trim() + ';' : '';
-        }).join('\n');
+        try {
+          return css
+            .replace(/}/g, '}\n')
+            .replace(/;/g, ';\n')
+            .replace(/\n+/g, '\n')
+            .trim();
+        } catch (e) {
+          console.error('formatCss failed:', e);
+          return css;
+        }
       }
 
       function autosizeTextarea(el) {
         try {
           el.style.height = 'auto';
           el.style.height = el.scrollHeight + 'px';
-        } catch(e) {
+        } catch (e) {
           console.error('Textarea autosize failed:', e);
         }
       }
@@ -566,7 +572,7 @@
           try {
             $cssEditor.val(formatted);
             autosizeTextarea($cssEditor.get(0));
-          } catch(e) {
+          } catch (e) {
             console.error('Failed to update CSS editor:', e);
           }
         }
@@ -588,9 +594,15 @@
 
       // Keyboard cycle
       $(document).on('keydown', function(e) {
-        if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
+        // Forward with Ctrl+Space
+        if (e.ctrlKey && !e.shiftKey && e.code === 'Space') {
           e.preventDefault();
           applyTheme((current + 1) % themes.length);
+        }
+        // Backward with Ctrl+Shift+Space
+        if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
+          e.preventDefault();
+          applyTheme((current - 1 + themes.length) % themes.length);
         }
       });
 
