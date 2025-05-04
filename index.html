@@ -4,70 +4,83 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Interactive Web Design Styles Showcase</title>
-
-  <!-- Base layout & controls -->
-  <style id="base-style">
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  <style>
+    /* Base styles */
     body {
+      margin: 0; padding: 0;
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      padding: 1rem;
-      position: relative;
+      line-height: 1.6;
     }
-    header { text-align: center; margin-bottom: 1.5rem; }
-    h1 { font-size: 2rem; margin-bottom: .5rem; display: inline-block; }
-    .theme-switcher { text-align: center; margin-bottom: 1.5rem; }
-    .theme-switcher h2 { font-size: 1.25rem; margin-bottom: .5rem; }
-    #theme-list {
-      list-style: none;
-      display: flex; flex-wrap: wrap;
-      justify-content: center; gap: .5rem;
-    }
-    #theme-list li {
-      padding: .5rem 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      cursor: pointer;
-      background: #e0e0e0;
-      transition: background .3s, color .3s;
-    }
-    #theme-list li.active {
-      background: #007acc; color: #fff; font-weight: bold;
-    }
-    #theme-list li:hover:not(.active) {
-      background: #007acc33;
-    }
-    nav { text-align: center; margin-bottom: 1.5rem; }
-    nav a {
-      margin: 0 .5rem; color: #007acc;
-      text-decoration: none; font-size: .9rem;
-    }
-    nav a:hover { text-decoration: underline; }
-
-    /* CSS editor widget */
-    .css-editor {
-      margin-bottom: 1.5rem;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .css-editor h2 {
-      font-size: 1rem;
-      margin-bottom: .5rem;
-      text-align: left;
-    }
-    #css-editor {
+    
+    /* Hero section for cinematic style */
+    .hero-section {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      font-family: monospace;
-      font-size: 0.9rem;
-      padding: .5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: #fdfdfd;
-      resize: none;
+      height: 100vh;
       overflow: hidden;
+      z-index: -1;
+      display: none; /* Hidden by default, shown in cinematic mode */
+    }
+    
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    #traffic_videos {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
       height: auto;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    
+    #traffic_videos video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    
+    .content-wrapper {
+      position: relative;
+      padding-top: 40vh;
+      color: #fff;
+      text-align: center;
+      display: none; /* Hidden by default, shown in cinematic mode */
+    }
+    
+    .header-content {
+      margin: 0 auto;
+      padding: 2rem;
+      background: rgba(0,0,0,0.5);
+      border-radius: 8px;
+      max-width: 600px;
+    }
+    
+    .header-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .header-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
 
     main {
@@ -106,6 +119,21 @@
   <style id="theme-style"></style>
 </head>
 <body>
+  <div class="hero-section">
+    <div class="video-background">
+      <div id="traffic_videos">
+        <video id="traffic_videos_1" muted playsinline webkit-playsinline></video>
+        <video id="traffic_videos_2" muted playsinline webkit-playsinline></video>
+      </div>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="thirds header-content" style="flex-basis:450px;">
+      <h1>Interactive Web Design Styles Showcase</h1>
+      <p>From then to now.</p>
+    </div>
+  </div>
+
   <header>
     <h1>Interactive Web Design Styles Showcase</h1>
     <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
@@ -498,11 +526,79 @@
       var $themeStyle    = $('#theme-style'),
           $currentTheme  = $('#current-theme'),
           $themeList     = $('#theme-list'),
-          $cssEditor     = $('#css-editor');
+          $cssEditor     = $('#css-editor'),
+          $heroSection   = $('.hero-section'),
+          $contentWrapper = $('.content-wrapper'),
+          $video1        = $('#traffic_videos_1'),
+          $video2        = $('#traffic_videos_2');
 
       if (!$themeStyle.length || !$currentTheme.length || !$themeList.length) {
         console.error('Essential elements missing, aborting initialization.');
         return;
+      }
+
+      // Video sources for cinematic mode
+      var videoSources = [
+        'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4',
+        'https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-from-above-at-night-10467-large.mp4'
+      ];
+
+      // Preload videos for cinematic mode
+      function preloadCinematicVideos() {
+        try {
+          console.log('Preloading cinematic videos...');
+          $video1.attr('src', videoSources[0]);
+          $video2.attr('src', videoSources[1]);
+          
+          $video1.on('loadeddata', function() {
+            console.log('Video 1 loaded successfully');
+          }).on('error', function(e) {
+            console.error('Error loading video 1:', e);
+          });
+          
+          $video2.on('loadeddata', function() {
+            console.log('Video 2 loaded successfully');
+          }).on('error', function(e) {
+            console.error('Error loading video 2:', e);
+          });
+        } catch (e) {
+          console.error('Failed to preload cinematic videos:', e);
+        }
+      }
+
+      // Initialize cinematic video playback
+      function startCinematicVideos() {
+        try {
+          console.log('Starting cinematic video playback');
+          
+          // Start with video 1
+          $video1.css('opacity', '1');
+          $video1[0].play().catch(function(e) {
+            console.error('Failed to play video 1:', e);
+          });
+          
+          // Set up video switching
+          $video1.on('ended', function() {
+            console.log('Video 1 ended, switching to video 2');
+            $video1.css('opacity', '0');
+            $video2.css('opacity', '1');
+            $video2[0].play().catch(function(e) {
+              console.error('Failed to play video 2:', e);
+            });
+          });
+          
+          $video2.on('ended', function() {
+            console.log('Video 2 ended, switching to video 1');
+            $video2.css('opacity', '0');
+            $video1.css('opacity', '1');
+            $video1[0].currentTime = 0;
+            $video1[0].play().catch(function(e) {
+              console.error('Failed to replay video 1:', e);
+            });
+          });
+        } catch (e) {
+          console.error('Failed to start cinematic videos:', e);
+        }
       }
 
       var themes = [
@@ -521,13 +617,13 @@
         { name:'Parallax',                    css:"body{background:#e8f5fd;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e88e5;transform:perspective(600px) translateZ(10px);}.style-title{color:#1e88e5;}" },
         { name:'Single-Page App',             css:"body{background:#fcf3cf;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #f39c12;}.style-title{color:#f39c12;}" },
         { name:'Progressive Web App',         css:"body{background:#e0f7fa;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #00acc1;}.style-title{color:#00acc1;}" },
-        { name:'Cinematic',                   css:"body{background:#000;font-family:Georgia,serif;color:#fff;}article.style-card{background:#111;border:2px solid #f00;}.style-title{color:#f00;}" },
+        { name:'Cinematic',                   css:".hero-section,.content-wrapper{display:block;}header,.theme-switcher,.css-editor,main{margin-top:100vh;}body{background:#000;font-family:Georgia,serif;color:#fff;}article.style-card{background:#111;border:2px solid #f00;}.style-title{color:#f00;}" },
         { name:'Brutalist',                   css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}article.style-card{background:#fff;border:3px solid #000;}.style-title{color:#000;}" },
         { name:'Neo-Brutalism',               css:"body{background:#000;font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#111;border:3px solid #0f0;}.style-title{color:#0f0;}" },
         { name:'Dark Mode',                   css:"body{background:#121212;font-family:Arial,sans-serif;color:#e0e0e0;}article.style-card{background:#1e1e1e;border:2px solid #444;}.style-title{color:#e0e0e0;}" },
         { name:'Neumorphism',                 css:"body{background:#e0e0e0;font-family:'Segoe UI',sans-serif;color:#333;}article.style-card{background:#e0e0e0;border-radius:12px;box-shadow:8px 8px 16px rgba(0,0,0,0.2),-8px -8px 16px rgba(255,255,255,0.7);}.style-title{color:#555;}" },
         { name:'Glassmorphism',               css:"body{background:rgba(255,255,255,0.3);backdrop-filter:blur(8px);font-family:Arial,sans-serif;color:#333;}article.style-card{background:rgba(255,255,255,0.5);border:2px solid rgba(255,255,255,0.8);backdrop-filter:blur(8px);}.style-title{color:#333;}" },
-        { name:'Corporate Memphis',           css:"body{background:#ff6f61;font-family:Helvetica,sans-serif;color:#fff;}article.style-card{background:#fff;border:2px solid #fff;}.style-title{color:#ff6f61;}" },
+        { name:'Corporate Memphis',           css:"body{background:#ff6f61 url('https://i.imgur.com/JKNPTiZ.png') center/cover;font-family:Helvetica,sans-serif;color:#666;}article.style-card{background:rgba(255,255,255,0.9);border:2px solid #fff;}.style-title{color:#ff6f61;}" },
         { name:'Retro Web',                   css:"body{background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px);font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#001;border:2px solid #0ff;}.style-title{color:#0ff;}" },
         { name:'Y2K Web',                     css:"body{background:linear-gradient(to right,#00f,#0ff);font-family:Arial,sans-serif;color:#000;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;}.style-title{color:#00f;}" },
         { name:'WebGL & 3D',                  css:"body{background:#001;font-family:'Courier New',monospace;color:#0f0;perspective:800px;}article.style-card{background:#002;border:2px solid #0f0;transform:rotateX(5deg);}.style-title{color:#0f0;}" },
@@ -536,13 +632,17 @@
 
       var current = 0;
 
+      // Preload cinematic videos on page load
+      preloadCinematicVideos();
+
       function formatCss(css) {
         try {
           return css
             .replace(/}/g, '}\n')
             .replace(/{/g, ' {\n')
             .replace(/;/g, ';\n')
-            .replace(/:/g, ':')
+            .replace(/:/g, ': ')
+            .replace(/,/g, ', ')
             .trim();
         } catch (e) {
           console.error('formatCss failed:', e);
