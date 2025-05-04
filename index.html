@@ -1,358 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dynamic Theme Switcher</title>
-
-  <!-- Static list styling -->
+  <title>Web Design Styles Through the Ages</title>
   <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f9f9f9;
+      color: #333;
+      padding: 1rem;
+    }
+    header { text-align: center; margin-bottom: 2rem; }
+    h1 { font-size: 2rem; }
+    main { max-width: 900px; margin: 0 auto; }
+    section { margin-bottom: 2rem; }
+    section > h2 {
+      font-size: 1.5rem;
+      border-left: 4px solid #007acc;
+      padding-left: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    dl { margin-left: 1rem; }
+    dt {
+      font-weight: bold;
+      margin-top: 0.75rem;
+    }
+    dd {
+      margin-left: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    small { color: #666; }
+    nav {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 0.5rem;
+      color: #007acc;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    /* Theme-switcher UI */
+    .theme-switcher {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .theme-switcher h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
     #theme-list {
       list-style: none;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 1rem 0;
+      gap: 0.5rem;
     }
     #theme-list li {
-      margin: 0 0.5rem;
-      padding: 0.25rem 0.5rem;
+      padding: 0.5rem 1rem;
       border-radius: 4px;
-      cursor: default;
-      transition: opacity 0.3s, background-color 0.3s;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      background: #e0e0e0;
     }
     #theme-list li.active {
-      font-weight: bold;
-      text-decoration: underline;
-      opacity: 1;
-    }
-    #theme-list li:not(.active) {
-      opacity: 0.6;
-    }
-  </style>
-
-  <!-- Theme CSS will be injected here -->
-  <style id="theme-style">
-    /* Flat Theme */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
-    }
-    .card {
-      background: #fff;
-      border-radius: 4px;
-      padding: 2rem;
-      max-width: 400px;
-      margin: 4rem auto;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    h1 { margin-top: 0; }
-    #theme-name {
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      background-color: #333;
+      background: #007acc;
       color: #fff;
-      display: inline-block;
       font-weight: bold;
-      margin-bottom: 1rem;
     }
+    #theme-list li:hover:not(.active) {
+      background: #007acc33;
+    }
+
+    /* Placeholder for injected theme */
+    <style id="theme-style">
+      /* default Flat theme will replace this */
+    </style>
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Dynamic Theme Switcher</h1>
-    <p id="theme-name">Current Theme: Flat</p>
-    <p>Press <strong>Ctrl + Shift + Space</strong> to cycle themes:</p>
+  <header>
+    <h1>Web Design Styles Through the Ages</h1>
+    <p><small>A survey of major design movements, grouped by era</small></p>
+  </header>
+
+  <div class="theme-switcher">
+    <h2>Select Theme</h2>
     <ul id="theme-list">
-      <li data-index="0">Neumorphic</li>
-      <li data-index="1" class="active">Flat</li>
+      <li data-index="0">Flat</li>
+      <li data-index="1">Neumorphic</li>
       <li data-index="2">Skeuomorphism</li>
       <li data-index="3">Brutalism</li>
       <li data-index="4">Maximalism</li>
       <li data-index="5">Semi-Flat</li>
       <li data-index="6">Y2K Aesthetic</li>
+      <li data-index="7">Retro Style</li>
+      <li data-index="8">Full-Page Headers</li>
+      <li data-index="9">Asymmetric Layouts</li>
+      <li data-index="10">Custom Illustrations</li>
+      <li data-index="11">Color Trends</li>
+      <li data-index="12">Micro-Interactions</li>
+      <li data-index="13">3D Elements</li>
+      <li data-index="14">Scrapbook-Style</li>
+      <li data-index="15">Dark Mode</li>
+      <li data-index="16">Experimental Nav</li>
+      <li data-index="17">Bold Minimalism</li>
     </ul>
   </div>
+
+  <nav aria-label="Jump to era">
+    <a href="#vernacular">Early Vernacular</a> |
+    <a href="#table-frames">Table & Frames</a> |
+    <a href="#flash">Flash</a> |
+    <a href="#web2">Web 2.0 & Skeuo</a> |
+    <a href="#swiss">Swiss & Minimalist</a> |
+    <a href="#responsive">Responsive & Mobile-First</a> |
+    <a href="#flat-era">Flat & Variations</a> |
+    <a href="#parallax">Parallax & SPAs</a> |
+    <a href="#pwa">PWAs</a> |
+    <a href="#cinematic">Cinematic</a> |
+    <a href="#brutalism-era">Brutalism</a> |
+    <a href="#darkmode-era">Dark Mode</a> |
+    <a href="#softui">Soft UI</a> |
+    <a href="#maximalism-era">Maximalism</a> |
+    <a href="#retro-era">Retro & Y2K</a> |
+    <a href="#webgl">3D & Immersive</a> |
+    <a href="#accessibility">Inclusive Design</a>
+  </nav>
+
+  <main>
+    <section id="vernacular">
+      <h2>Early Vernacular Web (1991–1995)</h2>
+      <dl>
+        <dt>Vernacular / Geocities Style</dt>
+        <dd>Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs & visitor counters.</dd>
+      </dl>
+    </section>
+
+    <section id="table-frames">
+      <h2>Table-Based & Frame-Based Layouts (1993–1998)</h2>
+      <dl>
+        <dt>Table-Based Design</dt>
+        <dd>Using HTML tables to approximate multi-column layouts before CSS adoption.</dd>
+        <dt>Framesets</dt>
+        <dd>Splitting the window into independent panes—navigation, content, etc.</dd>
+      </dl>
+    </section>
+
+    <section id="flash">
+      <h2>Flash-Based Design (1996–2008)</h2>
+      <dl>
+        <dt>Flash Animations & Intros</dt>
+        <dd>Rich animations and full-screen intros with Macromedia Flash.</dd>
+      </dl>
+    </section>
+
+    <section id="web2">
+      <h2>Web 2.0 Glossy & Skeuomorphic (2004–2013)</h2>
+      <dl>
+        <dt>Web 2.0</dt>
+        <dd>Glossy buttons, drop shadows, reflections and “beta” tags.</dd>
+        <dt>Skeuomorphic Design</dt>
+        <dd>Real-world textures (leather, paper, metal) in UI.</dd>
+      </dl>
+    </section>
+
+    <section id="swiss">
+      <h2>Swiss & Minimalist (2000s–present)</h2>
+      <dl>
+        <dt>Swiss Style</dt>
+        <dd>Grid-based layouts, strong typography, generous whitespace.</dd>
+        <dt>Minimalist Web Design</dt>
+        <dd>Essential-only interfaces with whitespace & high-contrast type.</dd>
+      </dl>
+    </section>
+
+    <section id="responsive">
+      <h2>Responsive & Mobile-First (2010–present)</h2>
+      <dl>
+        <dt>Responsive Web Design</dt>
+        <dd>Fluid grids, flexible images & CSS media queries.</dd>
+        <dt>Mobile-First Approach</dt>
+        <dd>Design for small screens first, then scale up.</dd>
+      </dl>
+    </section>
+
+    <section id="flat-era">
+      <h2>Flat Design & Variations (2010–present)</h2>
+      <dl>
+        <dt>Flat Design</dt>
+        <dd>Simple elements, flat colors, no ornamental textures.</dd>
+        <dt>Semi-Flat</dt>
+        <dd>Flat plus subtle shadows or minimal gradients.</dd>
+      </dl>
+    </section>
+
+    <section id="parallax">
+      <h2>Parallax & SPAs (2012–2016)</h2>
+      <dl>
+        <dt>Parallax Scrolling</dt>
+        <dd>Layered backgrounds move at different speeds for depth.</dd>
+        <dt>Single-Page Apps</dt>
+        <dd>JavaScript-driven sites dynamically loading one page.</dd>
+      </dl>
+    </section>
+
+    <section id="pwa">
+      <h2>Progressive Web Apps (2015–present)</h2>
+      <dl>
+        <dt>Progressive Web Design</dt>
+        <dd>App-like experiences with service workers & offline support.</dd>
+      </dl>
+    </section>
+
+    <section id="cinematic">
+      <h2>Cinematic & Video Backgrounds (2010s)</h2>
+      <dl>
+        <dt>Cinematic Design</dt>
+        <dd>Full-screen video headers & story-driven layouts.</dd>
+      </dl>
+    </section>
+
+    <section id="brutalism-era">
+      <h2>Brutalism (2015–present)</h2>
+      <dl>
+        <dt>Brutalist Web Design</dt>
+        <dd>Stark pages with raw HTML, plain fonts & bare-bones layouts.</dd>
+        <dt>Neo-Brutalism</dt>
+        <dd>Brutalist structure plus neon or saturated colors.</dd>
+      </dl>
+    </section>
+
+    <section id="darkmode-era">
+      <h2>Dark Mode (2020–present)</h2>
+      <dl>
+        <dt>Dark Mode</dt>
+        <dd>Light-on-dark color schemes for reduced eye strain.</dd>
+      </dl>
+    </section>
+
+    <section id="softui">
+      <h2>Neumorphism & Glassmorphism (2020)</h2>
+      <dl>
+        <dt>Neumorphism</dt>
+        <dd>Soft shadows for extruded/inset UI elements.</dd>
+        <dt>Glassmorphism</dt>
+        <dd>Translucent panels with backdrop blur.</dd>
+      </dl>
+    </section>
+
+    <section id="maximalism-era">
+      <h2>Maximalism & Corporate Memphis (2018–present)</h2>
+      <dl>
+        <dt>Corporate Memphis</dt>
+        <dd>Flat geometric illustrations with bright colors.</dd>
+      </dl>
+    </section>
+
+    <section id="retro-era">
+      <h2>Retro & Y2K Aesthetics (2020s)</h2>
+      <dl>
+        <dt>Retro Web Design</dt>
+        <dd>Pixel art, marquee text & neon 90s/00s motifs.</dd>
+        <dt>Y2K Web Design</dt>
+        <dd>Chrome buttons, metallic gradients & playful type.</dd>
+      </dl>
+    </section>
+
+    <section id="webgl">
+      <h2>3D & Immersive Web (2015–present)</h2>
+      <dl>
+        <dt>WebGL & 3D</dt>
+        <dd>Interactive 3D graphics & VR/AR in-browser.</dd>
+      </dl>
+    </section>
+
+    <section id="accessibility">
+      <h2>Inclusive & Accessible Design (Ongoing)</h2>
+      <dl>
+        <dt>Inclusive Design</dt>
+        <dd>ARIA roles, semantic HTML & user-centric accessibility.</dd>
+      </dl>
+    </section>
+  </main>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       try {
         const themeStyleEl = document.getElementById('theme-style');
-        const themeNameEl  = document.getElementById('theme-name');
-        const themeListEl  = document.getElementById('theme-list');
-
-        if (!themeStyleEl || !themeNameEl || !themeListEl) {
-          throw new Error('Missing required elements: #theme-style, #theme-name, or #theme-list');
+        const listItems = Array.from(document.querySelectorAll('#theme-list li'));
+        if (!themeStyleEl || listItems.length === 0) {
+          throw new Error('Missing theme-style element or theme-list items');
         }
-
-        const listItems = Array.from(themeListEl.querySelectorAll('li'));
 
         const themes = [
-          {
-            name: 'Neumorphic',
-            css: `
-              body {
-                margin: 0;
-                font-family: 'Segoe UI', sans-serif;
-                background: #e0e0e0;
-                color: #333;
-              }
-              .card {
-                background: #e0e0e0;
-                border-radius: 16px;
-                padding: 2rem;
-                max-width: 400px;
-                margin: 4rem auto;
-                box-shadow:
-                  8px 8px 16px rgba(0,0,0,0.2),
-                  -8px -8px 16px rgba(255,255,255,0.7);
-              }
-              h1 { margin-top: 0; }
-              #theme-name {
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                background: #e0e0e0;
-                box-shadow:
-                  inset 2px 2px 5px rgba(0,0,0,0.2),
-                  inset -2px -2px 5px rgba(255,255,255,0.7);
-                display: inline-block;
-                font-weight: bold;
-                margin-bottom: 1rem;
-              }
-            `
-          },
-          {
-            name: 'Flat',
-            css: `
-              body {
-                margin: 0;
-                font-family: Arial, sans-serif;
-                background: #f5f5f5;
-                color: #333;
-              }
-              .card {
-                background: #fff;
-                border-radius: 4px;
-                padding: 2rem;
-                max-width: 400px;
-                margin: 4rem auto;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-              }
-              h1 { margin-top: 0; }
-              #theme-name {
-                padding: 0.25rem 0.5rem;
-                border-radius: 4px;
-                background-color: #333;
-                color: #fff;
-                display: inline-block;
-                font-weight: bold;
-                margin-bottom: 1rem;
-              }
-            `
-          },
-          {
-            name: 'Skeuomorphism',
-            css: `
-              body {
-                margin: 0;
-                font-family: 'Times New Roman', serif;
-                background: #ddd;
-                color: #222;
-              }
-              .card {
-                background: #fafafa;
-                border: 1px solid #ccc;
-                padding: 2rem;
-                max-width: 400px;
-                margin: 4rem auto;
-                box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-              }
-              h1 { margin-top: 0; font-style: italic; }
-              #theme-name {
-                padding: 0.5rem;
-                border-radius: 4px;
-                background: #ccc;
-                border: 1px solid #999;
-                display: inline-block;
-                font-weight: bold;
-                margin-bottom: 1rem;
-              }
-            `
-          },
-          {
-            name: 'Brutalism',
-            css: `
-              body {
-                margin: 0;
-                font-family: monospace;
-                background: #fff;
-                color: #000;
-              }
-              .card {
-                background: #fff;
-                border: 3px solid #000;
-                padding: 2rem;
-                max-width: 400px;
-                margin: 4rem auto;
-              }
-              h1 { margin-top: 0; text-transform: uppercase; }
-              #theme-name {
-                padding: 0.5rem;
-                border-radius: 0;
-                background: #000;
-                color: #fff;
-                border: 2px solid #fff;
-                display: inline-block;
-                font-weight: bold;
-                margin-bottom: 1rem;
-              }
-            `
-          },
-          {
-            name: 'Maximalism',
-            css: `
-              body {
-                margin: 0;
-                font-family: 'Comic Sans MS', cursive, sans-serif;
-                background: repeating-linear-gradient(
-                  45deg,
-                  #ffe4e1,
-                  #ffe4e1 10px,
-                  #e6e6fa 10px,
-                  #e6e6fa 20px
-                );
-                color: #4b0082;
-              }
-              .card {
-                background: #ffeb3b;
-                border: 5px dotted #e91e63;
-                padding: 2rem;
-                max-width: 400px;
-                margin: 4rem auto;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                transform: rotate(-1deg);
-              }
-              h1 { margin-top: 0; font-size: 2rem; animation: wiggle 0.5s infinite alternate; }
-              @keyframes wiggle {
-                from { transform: rotate(-1deg); }
-                to   { transform: rotate(1deg); }
-              }
-              #theme-name {
-                padding: 0.5rem 1rem;
-                border-radius: 12px;
-                background: #e91e63;
-                color: #fff;
-                border: 3px dotted #ffeb3b;
-                display: inline-block;
-                font-weight: bold;
-                margin-bottom: 1rem;
-              }
-            `
-          },
-          {
-            name: 'Semi-Flat',
-            css: `
-              body {
-                margin: 0;
-                font-family: 'Helvetica Neue', sans-serif;
-                background: #f0f0f0;
-                color: #333;
-              }
-              .card {
-                background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-                border-radius: 8px;
-                padding: 2rem;
-                max-width: 400px;
-                margin: 4rem auto;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-              }
-              h1 { margin-top: 0; }
-              #theme-name {
-                padding: 0.25rem 0.75rem;
-                border-radius: 6px;
-                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-                color: #fff;
-                display: inline-block;
-                font-weight: bold;
-                margin-bottom: 1rem;
-              }
-            `
-          },
-          {
-            name: 'Y2K Aesthetic',
-            css: `
-              body {
-                margin: 0;
-                font-family: 'Verdana', sans-serif;
-                background: radial-gradient(circle at top left, #ff9a9e, #fad0c4);
-                color: #100023;
-              }
-              .card {
-                background: rgba(255,255,255,0.8);
-                border: 2px solid #00FFFF;
-                padding: 2rem;
-                max-width: 400px;
-                margin: 4rem auto;
-                box-shadow: 0 0 10px rgba(0,255,255,0.5), 0 0 20px rgba(255,0,255,0.5);
-                backdrop-filter: blur(5px);
-              }
-              h1 {
-                margin-top: 0;
-                text-shadow: 2px 2px 4px #ff00ff;
-                animation: glow 1s infinite alternate;
-              }
-              @keyframes glow {
-                from { text-shadow: 0 0 5px #ff00ff; }
-                to   { text-shadow: 0 0 20px #00ffff; }
-              }
-              #theme-name {
-                padding: 0.5rem 1rem;
-                border-radius: 12px;
-                background: linear-gradient(90deg, #ff00ff, #00ffff);
-                color: #fff;
-                display: inline-block;
-                font-weight: bold;
-                margin-bottom: 1rem;
-                text-shadow: 1px 1px 2px #000;
-              }
-            `
-          }
+          { name: 'Flat', css: `
+              body { background:#f5f5f5; color:#333; }
+              nav a, nav a:hover { color:#007acc; }
+            ` },
+          { name: 'Neumorphic', css: `
+              body { background:#e0e0e0; color:#333; }
+              .theme-switcher h2, nav a { color:#555; }
+            ` },
+          { name: 'Skeuomorphism', css: `
+              body { background:#ddd; color:#222; font-family:'Times New Roman', serif; }
+            ` },
+          { name: 'Brutalism', css: `
+              body { background:#fff; color:#000; font-family:monospace; }
+              nav a { text-decoration:none; }
+            ` },
+          { name: 'Maximalism', css: `
+              body { background:repeating-linear-gradient(45deg,#ffe4e1,#ffe4e1 10px,#e6e6fa 10px,#e6e6fa 20px);
+                     color:#4b0082; }
+            ` },
+          { name: 'Semi-Flat', css: `
+              body { background:#f0f0f0; color:#333; font-family:'Helvetica Neue',sans-serif; }
+            ` },
+          { name: 'Y2K Aesthetic', css: `
+              body { background:radial-gradient(circle at left,#ff9a9e,#fad0c4); color:#100023; }
+            ` },
+          { name: 'Retro Style', css: `
+              body { background:linear-gradient(45deg,#f4e2d8,#f0c27b); color:#2c3e50;
+                     font-family:'Courier New',monospace; }
+            ` },
+          { name: 'Full-Page Headers', css: `
+              header { background:linear-gradient(to bottom right,#6a11cb,#2575fc); color:#fff; }
+            ` },
+          { name: 'Asymmetric Layouts', css: `
+              main { display:grid; grid-template-columns:2fr 1fr; gap:1rem; }
+            ` },
+          { name: 'Custom Illustrations', css: `
+              body { font-family:'Brush Script MT',cursive; }
+            ` },
+          { name: 'Color Trends', css: `
+              section { background:linear-gradient(90deg,#ff9a9e,#fad0c4); padding:0.5rem; }
+            ` },
+          { name: 'Micro-Interactions', css: `
+              section:hover { transform:scale(1.02); transition:transform 0.3s; }
+            ` },
+          { name: '3D Elements', css: `
+              main { perspective:800px; }
+              section { transform:rotateX(5deg); }
+            ` },
+          { name: 'Scrapbook-Style', css: `
+              section { border:2px dashed #666; background:#fffbe6; padding:1rem; }
+            ` },
+          { name: 'Dark Mode', css: `
+              body { background:#121212; color:#e0e0e0; }
+            ` },
+          { name: 'Experimental Nav', css: `
+              nav { transform:skew(-10deg); }
+            ` },
+          { name: 'Bold Minimalism', css: `
+              body { background:#fff; color:#000; font-weight:900; }
+              h1 { font-size:2.5rem; }
+            ` }
         ];
 
-        let current = 1; // start on Flat
-        function updateActiveList() {
+        let current = 0;
+        function applyTheme(idx) {
+          if (!themes[idx]) {
+            console.error('Invalid theme index:', idx);
+            return;
+          }
+          themeStyleEl.textContent = themes[idx].css;
           listItems.forEach(li => {
-            const idx = parseInt(li.dataset.index, 10);
-            li.classList.toggle('active', idx === current);
+            li.classList.toggle('active', parseInt(li.dataset.index, 10) === idx);
           });
+          console.log(`Applied theme: ${themes[idx].name}`);
         }
 
-        // Initialize display
-        themeStyleEl.textContent = themes[current].css;
-        themeNameEl.textContent = `Current Theme: ${themes[current].name}`;
-        updateActiveList();
-        console.log(`Initial theme: ${themes[current].name}`);
+        // initialize
+        applyTheme(current);
 
-        document.addEventListener('keydown', (e) => {
-          if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
-            e.preventDefault();
-            try {
-              current = (current + 1) % themes.length;
-              themeStyleEl.textContent = themes[current].css;
-              themeNameEl.textContent = `Current Theme: ${themes[current].name}`;
-              updateActiveList();
-              console.log(`Theme switched to: ${themes[current].name}`);
-            } catch (err) {
-              console.error('Failed to apply theme:', err);
-            }
-          }
+        // click to select
+        listItems.forEach(li => {
+          li.addEventListener('click', () => {
+            const idx = parseInt(li.dataset.index, 10);
+            try { applyTheme(idx); }
+            catch (e) { console.error('Theme apply failed:', e); }
+          });
         });
 
+        // Ctrl+Shift+Space to cycle
+        document.addEventListener('keydown', e => {
+          if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
+            e.preventDefault();
+            applyTheme((current = (current + 1) % themes.length));
+          }
+        });
       } catch (initErr) {
-        console.error('Theme switcher initialization failed:', initErr);
+        console.error('Theme switcher init failed:', initErr);
       }
     });
   </script>
