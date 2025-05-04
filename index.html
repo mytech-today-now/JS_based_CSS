@@ -44,49 +44,32 @@
       text-decoration: none; font-size: .9rem;
     }
     nav a:hover { text-decoration: underline; }
-    /* Demo widgets */
-    .demo-widgets {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+
+    /* CSS editor widget */
+    .css-editor {
       margin-bottom: 1.5rem;
-      justify-content: center;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .widget {
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .widget h2 {
+    .css-editor h2 {
       font-size: 1rem;
       margin-bottom: .5rem;
-      text-align: center;
+      text-align: left;
     }
-    .iframe-container {
-      flex: 1 1 300px;
-      resize: both;
-      overflow: auto;
-    }
-    .iframe-container iframe {
+    #css-editor {
       width: 100%;
-      height: 200px;
-      border: none;
+      font-family: monospace;
+      font-size: 0.9rem;
+      padding: .5rem;
+      border: 1px solid #ccc;
       border-radius: 4px;
-    }
-    .video-demo {
-      flex: 1 1 300px;
-    }
-    .video-demo .video-background {
-      display: flex;
-      gap: .5rem;
-    }
-    .video-demo .video-background video {
-      width: 48%;
+      background: #fdfdfd;
+      resize: none;
+      overflow: hidden;
       height: auto;
-      border-radius: 4px;
     }
+
     main {
       max-width: 900px; margin: 0 auto;
       position: relative;
@@ -110,33 +93,12 @@
     .style-era { font-style: italic; margin-bottom: .5rem; }
     .style-description { margin-bottom: .5rem; }
     .style-links a { margin-right: .5rem; color: #007acc; }
-    /* Extras */
-    .extra-under { display:block; margin:.5rem auto; width:150px; }
-    .extra-counter { text-align:center; margin-bottom:1rem; font-weight:bold; }
-    .extra-flash-intro {
-      position:absolute; top:40%; left:50%;
-      transform:translate(-50%,-50%);
-      background:#000; color:#fff; padding:2rem;
-      font-size:2rem; opacity:.9; z-index:1000;
-    }
-    #main-table { width:100%; border-collapse:collapse; margin-bottom:1rem; }
-    #main-table td { border:2px solid #000; padding:.5rem; }
-    .beta-badge {
-      background:#ff0; color:#000;
-      padding:.2em .5em; margin-left:1em;
-      font-weight:bold;
-    }
-    .card-texture {
-      background-image:url('https://www.publicdomainpictures.net/pictures/270000/velka/paper-texture-background.jpg');
-      background-size:cover;
-    }
-    .grid-overlay {
-      position:absolute; top:0; left:0; right:0; bottom:0;
-      pointer-events:none;
-      background:
-        linear-gradient(#000 1px, transparent 1px) 0 0,
-        linear-gradient(90deg,#000 1px, transparent 1px) 0 0;
-      background-size:50px 50px;
+
+    /* Hide legacy extras */
+    .extra-under, .extra-counter, .extra-flash-intro,
+    #main-table, .frame-nav, .frame-content,
+    .beta-badge, .card-texture, .grid-overlay {
+      display: none !important;
     }
   </style>
 
@@ -205,20 +167,9 @@
     <a href="#inclusive-design">Ongoing</a>
   </nav>
 
-  <section class="demo-widgets">
-    <div class="widget iframe-container">
-      <h2>Live Site Preview</h2>
-      <iframe src="https://mytech.today" title="myTech.Today Preview"></iframe>
-    </div>
-    <div class="widget video-demo">
-      <h2>Traffic Video Playback</h2>
-      <div class="video-background">
-        <div id="traffic_videos">
-          <video id="traffic_videos_1" muted playsinline webkit-playsinline autoplay loop></video>
-          <video id="traffic_videos_2" muted playsinline webkit-playsinline autoplay loop></video>
-        </div>
-      </div>
-    </div>
+  <section class="css-editor">
+    <h2>Current CSS</h2>
+    <textarea id="css-editor" readonly></textarea>
   </section>
 
   <main>
@@ -540,114 +491,87 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
 
-  <!-- Theme-switcher + dynamic extras + demo widgets init -->
+  <!-- Theme-switcher + CSS editor init -->
   <script>
   jQuery(function($) {
     try {
-      var $themeStyle   = $('#theme-style'),
+      var $themeStyle = $('#theme-style'),
           $currentTheme = $('#current-theme'),
-          $themeList    = $('#theme-list'),
-          $cards        = $('article.style-card'),
-          $headerElems  = $('header, .theme-switcher, nav, main');
+          $themeList = $('#theme-list'),
+          $cards = $('article.style-card'),
+          $cssEditor = $('#css-editor');
 
       if (!$themeStyle.length || !$currentTheme.length || !$themeList.length || !$cards.length) {
-        console.warn('Theme switcher elements missing – skipping initialization.');
+        console.error('Essential elements missing, aborting initialization.');
         return;
       }
-
-      function clearExtras() {
-        $('.extra-under, .extra-counter, .extra-flash-intro').remove();
-        $('#main-table, .frame-nav, .frame-content, .beta-badge, .card-texture, .grid-overlay').remove();
-        $headerElems.show();
-      }
-
-      var extrasMap = {
-        0: null,
-        1: function() {
-          console.log('GeoCities extras');
-          $('<img class="extra-under" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Under_construction.gif" alt="Under Construction">').prependTo('main');
-          $('<div class="extra-counter">Visitor Count: ' + Math.floor(Math.random()*10000) + '</div>').prependTo('main');
-        },
-        2: function() {
-          console.log('Table layout extras');
-          $('<table id="main-table"><tr><td>Main Content</td><td>Sidebar</td></tr></table>').prependTo('main');
-        },
-        3: function() {
-          console.log('Framesets extras');
-          var $navFrame = $('<div class="frame-nav"></div>').appendTo('body');
-          $('.theme-switcher').appendTo($navFrame);
-          var $contentFrame = $('<div class="frame-content"></div>').appendTo('body');
-          $('main').appendTo($contentFrame);
-        },
-        4: function() {
-          console.log('Flash intro started');
-          $headerElems.hide();
-          var $intro = $('<div class="extra-flash-intro">FLASH INTRO</div>').appendTo('body');
-          setTimeout(function() {
-            $intro.fadeOut(800, function() {
-              $intro.remove();
-              $headerElems.show();
-              console.log('Flash intro ended, UI restored');
-            });
-          }, 2000);
-        },
-        5: function() {
-          console.log('Web 2.0 extras');
-          $('<span class="beta-badge">BETA</span>').insertAfter('header h1');
-        },
-        6: function() {
-          console.log('Skeuomorphic extras');
-          $cards.addClass('card-texture');
-        },
-        7: function() {
-          console.log('Swiss grid overlay extras');
-          $('<div class="grid-overlay"></div>').prependTo('main');
-        }
-      };
 
       var themes = [
         { name:'Vernacular / Geocities',     css:"body{background:repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px);font-family:'Comic Sans MS',cursive;color:#000;}article.style-card{background:#fff2f2;border-color:#cc0000;}.style-title{color:#cc0000;}" },
         { name:'Table-Based Design',          css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}main{display:table;width:100%;}article.style-card{display:table-cell;border:2px solid #000;background:#fff;}.style-title{color:#000;}" },
-        { name:'Framesets',                    css:"body{background:#eee;font-family:Tahoma,sans-serif;color:#333;}article.style-card{background:#f9f9f9;border:2px solid #333;}.style-title{color:#333;}" },
-        { name:'Flash-Based Design',           css:"body{background:#000;font-family:'Arial Black',sans-serif;color:#fff;}article.style-card{background:#111;border:2px solid #f0f;}.style-title{color:#f0f;}" },
-        { name:'Web 2.0 Glossy',               css:"body{background:#f0f8ff;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e90ff;box-shadow:0 0 10px rgba(30,144,255,.5);}.style-title{color:#1e90ff;}" },
-        { name:'Skeuomorphic',                 css:"body{background:#ddd;font-family:'Times New Roman',serif;color:#222;}article.style-card{background:#f9f9f4;border:2px inset #ccc;}.style-title{color:#875f3a;}" },
-        { name:'Swiss Style',                  css:"body{background:#fff;font-family:'Helvetica Neue',sans-serif;color:#000;}article.style-card{background:#fafafa;border:2px solid #000;}.style-title{color:#000;}" },
-        { name:'Minimalist',                   css:"body{background:#fff;font-family:Arial,sans-serif;color:#000;}article.style-card{background:#fff;border:1px solid #666;}.style-title{color:#666;}" },
-        { name:'Responsive',                   css:"body{background:#f9f9f9;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #009879;}.style-title{color:#009879;}" },
-        { name:'Mobile-First',                 css:"body{background:#fff;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #ff6f61;}.style-title{color:#ff6f61;}" },
-        { name:'Flat Design',                  css:"body{background:#f5f5f5;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #333;}.style-title{color:#333;}" },
-        { name:'Semi-Flat',                    css:"body{background:#f0f0f0;font-family:'Helvetica Neue',sans-serif;color:#333;}article.style-card{background:linear-gradient(135deg,#fff,#f8f8f8);border:2px solid #4facfe;}.style-title{color:#4facfe;}" },
-        { name:'Parallax',                     css:"body{background:#e8f5fd;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e88e5;transform:perspective(600px) translateZ(10px);}.style-title{color:#1e88e5;}" },
-        { name:'Single-Page App',              css:"body{background:#fcf3cf;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #f39c12;}.style-title{color:#f39c12;}" },
-        { name:'Progressive Web App',          css:"body{background:#e0f7fa;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #00acc1;}.style-title{color:#00acc1;}" },
-        { name:'Cinematic',                    css:"body{background:#000;font-family:Georgia,serif;color:#fff;}article.style-card{background:#111;border:2px solid #f00;}.style-title{color:#f00;}" },
-        { name:'Brutalist',                    css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}article.style-card{background:#fff;border:3px solid #000;}.style-title{color:#000;}" },
-        { name:'Neo-Brutalism',                css:"body{background:#000;font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#111;border:3px solid #0f0;}.style-title{color:#0f0;}" },
-        { name:'Dark Mode',                    css:"body{background:#121212;font-family:Arial,sans-serif;color:#e0e0e0;}article.style-card{background:#1e1e1e;border:2px solid #444;}.style-title{color:#e0e0e0;}" },
-        { name:'Neumorphism',                  css:"body{background:#e0e0e0;font-family:'Segoe UI',sans-serif;color:#333;}article.style-card{background:#e0e0e0;border-radius:12px;box-shadow:8px 8px 16px rgba(0,0,0,0.2),-8px -8px 16px rgba(255,255,255,0.7);}.style-title{color:#555;}" },
-        { name:'Glassmorphism',                css:"body{background:rgba(255,255,255,0.3);backdrop-filter:blur(8px);font-family:Arial,sans-serif;color:#333;}article.style-card{background:rgba(255,255,255,0.5);border:2px solid rgba(255,255,255,0.8);backdrop-filter:blur(8px);}.style-title{color:#333;}" },
-        { name:'Corporate Memphis',            css:"body{background:#ff6f61;font-family:Helvetica,sans-serif;color:#fff;}article.style-card{background:#fff;border:2px solid #fff;}.style-title{color:#ff6f61;}" },
-        { name:'Retro Web',                    css:"body{background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px);font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#001;border:2px solid #0ff;}.style-title{color:#0ff;}" },
-        { name:'Y2K Web',                      css:"body{background:linear-gradient(to right,#00f,#0ff);font-family:Arial,sans-serif;color:#000;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;}.style-title{color:#00f;}" },
-        { name:'WebGL & 3D',                   css:"body{background:#001;font-family:'Courier New',monospace;color:#0f0;perspective:800px;}article.style-card{background:#002;border:2px solid #0f0;transform:rotateX(5deg);}.style-title{color:#0f0;}" },
-        { name:'Modern 3D Inclusive Memphis',  css:"body{background:linear-gradient(135deg,#ff6f61,#ff9a76);font-family:'Helvetica Neue',sans-serif;color:#fff;perspective:1000px;transform-style:preserve-3d;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);transform:rotateX(5deg) rotateY(-5deg);} .style-title{color:#ffeb3b;text-shadow:0 2px 5px rgba(0,0,0,0.5);} .iframe-container iframe{box-shadow:0 2px 10px rgba(0,0,0,0.3);} .video-demo .video-background video{border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.3);}" }
+        { name:'Framesets',                   css:"body{background:#eee;font-family:Tahoma,sans-serif;color:#333;}article.style-card{background:#f9f9f9;border:2px solid #333;}.style-title{color:#333;}" },
+        { name:'Flash-Based Design',          css:"body{background:#000;font-family:'Arial Black',sans-serif;color:#fff;}article.style-card{background:#111;border:2px solid #f0f;}.style-title{color:#f0f;}" },
+        { name:'Web 2.0 Glossy',              css:"body{background:#f0f8ff;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e90ff;box-shadow:0 0 10px rgba(30,144,255,.5);}.style-title{color:#1e90ff;}" },
+        { name:'Skeuomorphic',                css:"body{background:#ddd;font-family:'Times New Roman',serif;color:#222;}article.style-card{background:#f9f9f4;border:2px inset #ccc;}.style-title{color:#875f3a;}" },
+        { name:'Swiss Style',                 css:"body{background:#fff;font-family:'Helvetica Neue',sans-serif;color:#000;}article.style-card{background:#fafafa;border:2px solid #000;}.style-title{color:#000;}" },
+        { name:'Minimalist',                  css:"body{background:#fff;font-family:Arial,sans-serif;color:#000;}article.style-card{background:#f9f9f9;border:1px solid #ddd;box-shadow:0 1px 3px rgba(0,0,0,0.1);} .style-title{color:#666;}" },
+        { name:'Responsive',                  css:"body{background:#f9f9f9;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #009879;}.style-title{color:#009879;}" },
+        { name:'Mobile-First',                css:"body{background:#fff;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #ff6f61;}.style-title{color:#ff6f61;}" },
+        { name:'Flat Design',                 css:"body{background:#f5f5f5;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #333;}.style-title{color:#333;}" },
+        { name:'Semi-Flat',                   css:"body{background:#f0f0f0;font-family:'Helvetica Neue',sans-serif;color:#333;}article.style-card{background:linear-gradient(135deg,#fff,#f8f8f8);border:2px solid #4facfe;}.style-title{color:#4facfe;}" },
+        { name:'Parallax',                    css:"body{background:#e8f5fd;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e88e5;transform:perspective(600px) translateZ(10px);}.style-title{color:#1e88e5;}" },
+        { name:'Single-Page App',             css:"body{background:#fcf3cf;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #f39c12;}.style-title{color:#f39c12;}" },
+        { name:'Progressive Web App',         css:"body{background:#e0f7fa;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #00acc1;}.style-title{color:#00acc1;}" },
+        { name:'Cinematic',                   css:"body{background:#000;font-family:Georgia,serif;color:#fff;}article.style-card{background:#111;border:2px solid #f00;}.style-title{color:#f00;}" },
+        { name:'Brutalist',                   css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}article.style-card{background:#fff;border:3px solid #000;}.style-title{color:#000;}" },
+        { name:'Neo-Brutalism',               css:"body{background:#000;font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#111;border:3px solid #0f0;}.style-title{color:#0f0;}" },
+        { name:'Dark Mode',                   css:"body{background:#121212;font-family:Arial,sans-serif;color:#e0e0e0;}article.style-card{background:#1e1e1e;border:2px solid #444;}.style-title{color:#e0e0e0;}" },
+        { name:'Neumorphism',                 css:"body{background:#e0e0e0;font-family:'Segoe UI',sans-serif;color:#333;}article.style-card{background:#e0e0e0;border-radius:12px;box-shadow:8px 8px 16px rgba(0,0,0,0.2),-8px -8px 16px rgba(255,255,255,0.7);}.style-title{color:#555;}" },
+        { name:'Glassmorphism',               css:"body{background:rgba(255,255,255,0.3);backdrop-filter:blur(8px);font-family:Arial,sans-serif;color:#333;}article.style-card{background:rgba(255,255,255,0.5);border:2px solid rgba(255,255,255,0.8);backdrop-filter:blur(8px);}.style-title{color:#333;}" },
+        { name:'Corporate Memphis',           css:"body{background:#ff6f61;font-family:Helvetica,sans-serif;color:#fff;}article.style-card{background:#fff;border:2px solid #fff;}.style-title{color:#ff6f61;}" },
+        { name:'Retro Web',                   css:"body{background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px);font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#001;border:2px solid #0ff;}.style-title{color:#0ff;}" },
+        { name:'Y2K Web',                     css:"body{background:linear-gradient(to right,#00f,#0ff);font-family:Arial,sans-serif;color:#000;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;}.style-title{color:#00f;}" },
+        { name:'WebGL & 3D',                  css:"body{background:#001;font-family:'Courier New',monospace;color:#0f0;perspective:800px;}article.style-card{background:#002;border:2px solid #0f0;transform:rotateX(5deg);}.style-title{color:#0f0;}" },
+        { name:'Modern 3D Inclusive Memphis', css:"body{background:linear-gradient(135deg,#ff6f61,#ff9a76);font-family:'Helvetica Neue',sans-serif;color:#fff;perspective:1000px;transform-style:preserve-3d;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);transform:rotateX(5deg) rotateY(-5deg);} .style-title{color:#ffeb3b;text-shadow:0 2px 5px rgba(0,0,0,0.5);}" }
       ];
 
-      var current = 25;
+      var current = 0;
+
+      function formatCss(css) {
+        return css.split(';').map(function(line){
+          return line.trim() ? line.trim() + ';' : '';
+        }).join('\n');
+      }
+
+      function autosizeTextarea(el) {
+        try {
+          el.style.height = 'auto';
+          el.style.height = el.scrollHeight + 'px';
+        } catch(e) {
+          console.error('Textarea autosize failed:', e);
+        }
+      }
+
       function applyTheme(idx) {
         if (!themes[idx]) {
           console.error('Invalid theme index:', idx);
           return;
         }
-        clearExtras();
         $themeStyle.text(themes[idx].css);
         $currentTheme.text('Current Style: ' + themes[idx].name);
         $themeList.children().removeClass('active').eq(idx).addClass('active');
-        if (extrasMap[idx]) {
-          try { extrasMap[idx](); }
-          catch (e) { console.error('Extras failed for theme', idx, e); }
+
+        if ($cssEditor.length) {
+          var formatted = formatCss(themes[idx].css);
+          try {
+            $cssEditor.val(formatted);
+            autosizeTextarea($cssEditor.get(0));
+          } catch(e) {
+            console.error('Failed to update CSS editor:', e);
+          }
         }
+
+        current = idx;
         console.log('Applied theme:', themes[idx].name);
       }
 
@@ -669,19 +593,6 @@
           applyTheme((current + 1) % themes.length);
         }
       });
-
-      // Initialize traffic videos
-      try {
-        var trafficVideos = [
-          'https://mytech.today/wp-content/uploads/2025/04/Skyline.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/River.mp4'
-        ];
-        $('#traffic_videos_1').attr('src', trafficVideos[0]);
-        $('#traffic_videos_2').attr('src', trafficVideos[1]);
-        console.log('Traffic videos initialized');
-      } catch (e) {
-        console.error('Traffic video initialization failed:', e);
-      }
 
     } catch (err) {
       console.error('Initialization failed:', err);
