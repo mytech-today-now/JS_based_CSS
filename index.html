@@ -540,8 +540,9 @@
         try {
           return css
             .replace(/}/g, '}\n')
+            .replace(/{/g, ' {\n')
             .replace(/;/g, ';\n')
-            .replace(/\n+/g, '\n')
+            .replace(/:/g, ':')
             .trim();
         } catch (e) {
           console.error('formatCss failed:', e);
