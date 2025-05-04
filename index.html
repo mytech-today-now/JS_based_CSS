@@ -137,6 +137,82 @@
     .beta-badge, .card-texture, .grid-overlay {
       display: none !important;
     }
+
+    /* Gantt chart interactive styles */
+    .mermaid .task, .mermaid text.taskText, .mermaid text.sectionTitle {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .mermaid .task:hover {
+      opacity: 0.8;
+      transform: translateY(-2px);
+    }
+    
+    .mermaid text.taskText:hover {
+      font-weight: bold;
+    }
+    
+    .mermaid text.sectionTitle:hover {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    
+    /* Style cards interactive styles */
+    .style-card {
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .style-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* CSS editor styles */
+    #css-editor {
+      font-family: 'Courier New', monospace;
+      line-height: 1.5;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    body.dark-mode #css-editor {
+      background-color: #2a2a2a;
+      color: #e0e0e0;
+      border-color: #444;
+    }
+    
+    /* Tooltip to indicate clickable elements */
+    [data-tooltip]:before {
+      content: attr(data-tooltip);
+      position: absolute;
+      opacity: 0;
+      transition: all 0.15s ease;
+      padding: 5px 10px;
+      color: #fff;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 10;
+      white-space: nowrap;
+      transform: translateY(10px);
+    }
+    
+    [data-tooltip]:hover:before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Add tooltips to Gantt elements */
+    .mermaid .task, .mermaid text.taskText {
+      position: relative;
+    }
   </style>
 
   <!-- Dynamic theme CSS will be injected here -->
@@ -540,31 +616,12 @@ gantt
   <script>
   jQuery(function($) {
     try {
-      var $themeStyle    = $('#theme-style'),
-          $currentTheme  = $('#current-theme'),
-          $cssEditor     = $('#css-editor'),
-          $heroSection   = $('.hero-section'),
+      var $themeStyle = $('#theme-style'),
+          $cssEditor = $('#css-editor'),
+          $heroSection = $('.hero-section'),
           $contentWrapper = $('.content-wrapper'),
-          $video1        = $('#traffic_videos_1'),
-          $video2        = $('#traffic_videos_2');
-
-      if (!$themeStyle.length || !$currentTheme.length) {
-        console.error('Essential elements missing, aborting initialization.');
-        return;
-      }
-
-      // Video sources for cinematic mode
-      var videoSources = [
-          'https://mytech.today/wp-content/uploads/2025/04/tTrucks.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/Notgridlock.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/Gridlock.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/RTA_bus-2-12043240-3840-2160-24Fps.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/lsd-01-12057787-3840-2160-24Fps.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/lsd-02-.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/DanRyan-2-6138427-Hd-1920-1080-24Fps.mp4',
-          'https://mytech.today/wp-content/uploads/2025/04/lsd-03-.mp4',
-        	'https://mytech.today/wp-content/uploads/2025/04/lower-waker-bridge-2-2005974-Hd-1920-1080-24Fps.mp4'
-      ];
+          $video1 = $('#traffic_videos_1'),
+          $video2 = $('#traffic_videos_2');
 
       // Preload videos for cinematic mode
       function preloadCinematicVideos() {
@@ -624,35 +681,6 @@ gantt
         }
       }
 
-      var themes = [
-        { name:'Vernacular / Geocities',     css:"body{background:repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px);font-family:'Comic Sans MS',cursive;color:#000;}article.style-card{background:#fff2f2;border-color:#cc0000;}.style-title{color:#cc0000;}" },
-        { name:'Table-Based Design',          css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}main{display:table;width:100%;}article.style-card{display:table-cell;border:2px solid #000;background:#fff;}.style-title{color:#000;}" },
-        { name:'Framesets',                   css:"body{background:#eee;font-family:Tahoma,sans-serif;color:#333;}article.style-card{background:#f9f9f9;border:2px solid #333;}.style-title{color:#333;}" },
-        { name:'Flash-Based Design',          css:"body{background:#000;font-family:'Arial Black',sans-serif;color:#fff;}article.style-card{background:#111;border:2px solid #f0f;}.style-title{color:#f0f;}" },
-        { name:'Web 2.0 Glossy',              css:"body{background:#f0f8ff;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e90ff;box-shadow:0 0 10px rgba(30,144,255,.5);}.style-title{color:#1e90ff;}" },
-        { name:'Skeuomorphic',                css:"body{background:#ddd;font-family:'Times New Roman',serif;color:#222;}article.style-card{background:#f9f9f4;border:2px inset #ccc;}.style-title{color:#875f3a;}" },
-        { name:'Swiss Style',                 css:"body{background:#fff;font-family:'Helvetica Neue',sans-serif;color:#000;}article.style-card{background:#fafafa;border:2px solid #000;}.style-title{color:#000;}" },
-        { name:'Minimalist',                  css:"body{background:#fff;font-family:Arial,sans-serif;color:#000;}article.style-card{background:#f9f9f9;border:1px solid #ddd;box-shadow:0 1px 3px rgba(0,0,0,0.1);} .style-title{color:#666;}" },
-        { name:'Responsive',                  css:"body{background:#f9f9f9;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #009879;}.style-title{color:#009879;}" },
-        { name:'Mobile-First',                css:"body{background:#fff;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #ff6f61;}.style-title{color:#ff6f61;}" },
-        { name:'Flat Design',                 css:"body{background:#f5f5f5;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #333;}.style-title{color:#333;}" },
-        { name:'Semi-Flat',                   css:"body{background:#f0f0f0;font-family:'Helvetica Neue',sans-serif;color:#333;}article.style-card{background:linear-gradient(135deg,#fff,#f8f8f8);border:2px solid #4facfe;}.style-title{color:#4facfe;}" },
-        { name:'Parallax',                    css:"body{background:#e8f5fd;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e88e5;transform:perspective(600px) translateZ(10px);}.style-title{color:#1e88e5;}" },
-        { name:'Single-Page App',             css:"body{background:#fcf3cf;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #f39c12;}.style-title{color:#f39c12;}" },
-        { name:'Progressive Web App',         css:"body{background:#e0f7fa;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #00acc1;}.style-title{color:#00acc1;}" },
-        { name:'Cinematic',                   css:".hero-section,.content-wrapper{display:block;}header,.theme-switcher,.css-editor,main{margin-top:100vh;}body{background:#000;font-family:Georgia,serif;color:#fff;}article.style-card{background:#111;border:2px solid #f00;}.style-title{color:#f00;}" },
-        { name:'Brutalist',                   css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}article.style-card{background:#fff;border:3px solid #000;}.style-title{color:#000;}" },
-        { name:'Neo-Brutalism',               css:"body{background:#000;font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#111;border:3px solid #0f0;}.style-title{color:#0f0;}" },
-        { name:'Dark Mode',                   css:"body{background:#121212;font-family:Arial,sans-serif;color:#e0e0e0;}article.style-card{background:#1e1e1e;border:2px solid #444;}.style-title{color:#e0e0e0;}" },
-        { name:'Neumorphism',                 css:"body{background:#e0e0e0;font-family:'Segoe UI',sans-serif;color:#333;}article.style-card{background:#e0e0e0;border-radius:12px;box-shadow:8px 8px 16px rgba(0,0,0,0.2),-8px -8px 16px rgba(255,255,255,0.7);}.style-title{color:#555;}" },
-        { name:'Glassmorphism',               css:"body{background:rgba(255,255,255,0.3);backdrop-filter:blur(8px);font-family:Arial,sans-serif;color:#333;}article.style-card{background:rgba(255,255,255,0.5);border:2px solid rgba(255,255,255,0.8);backdrop-filter:blur(8px);}.style-title{color:#333;}" },
-        { name:'Corporate Memphis',           css:"body{background:#ff6f61 url('https://i.imgur.com/JKNPTiZ.png') center/cover;font-family:Helvetica,sans-serif;color:#666;}article.style-card{background:rgba(255,255,255,0.9);border:2px solid #fff;}.style-title{color:#ff6f61;}" },
-        { name:'Retro Web',                   css:"body{background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px);font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#001;border:2px solid #0ff;}.style-title{color:#0ff;}" },
-        { name:'Y2K Web',                     css:"body{background:linear-gradient(to right,#00f,#0ff);font-family:Arial,sans-serif;color:#000;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;}.style-title{color:#00f;}" },
-        { name:'WebGL & 3D',                  css:"body{background:#001;font-family:'Courier New',monospace;color:#0f0;perspective:800px;}article.style-card{background:#002;border:2px solid #0f0;transform:rotateX(5deg);}.style-title{color:#0f0;}" },
-        { name:'Modern 3D Inclusive Memphis', css:"body{background:linear-gradient(135deg,#ff6f61,#ff9a76);font-family:'Helvetica Neue',sans-serif;color:#fff;perspective:1000px;transform-style:preserve-3d;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);transform:rotateX(5deg) rotateY(-5deg);} .style-title{color:#ffeb3b;text-shadow:0 2px 5px rgba(0,0,0,0.5);}" }
-      ];
-
       var current = 0;
 
       // Preload cinematic videos on page load
@@ -682,856 +710,145 @@ gantt
         }
       }
 
-      // Theme-specific Gantt chart styles
-      var ganttThemes = {
-        // Vernacular / Geocities
-        vernacular: {
-          background: '#ffeeee',
-          fontFamily: "'Comic Sans MS', cursive",
-          sectionBg: '#ffcccc',
-          sectionColor: '#cc0000',
-          taskBg: '#ff9999',
-          taskBorder: '#cc0000',
-          gridColor: '#cc0000',
-          textColor: '#990000',
-          todayMarker: '#cc0000',
-          // Additional CSS elements
-          titleFont: "'Comic Sans MS', cursive",
-          titleColor: '#cc0000',
-          titleSize: '24px',
-          titleDecoration: 'underline wavy #cc0000',
-          axisFont: "'Comic Sans MS', cursive",
-          axisColor: '#990000',
-          axisWeight: 'bold',
-          taskRadius: '10px',
-          taskAnimation: 'bounce 2s infinite',
-          extraCSS: `
-            .mermaid { border: 3px dashed #cc0000; padding: 10px; }
-            .mermaid .titleText { font-weight: bold; text-shadow: 2px 2px #ffcccc; }
-            .mermaid .task { transform-origin: center; animation: wiggle 2s infinite; }
-            @keyframes wiggle { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-          `
-        },
+      // Apply theme by index
+      function applyTheme(index) {
+        try {
+          if (index < 0 || index >= themes.length) {
+            console.error('Invalid theme index:', index);
+            return;
+          }
+          
+          current = index;
+          var theme = themes[current];
+          
+          console.log('Applying theme:', theme.name);
+          
+          // Remove all theme-related classes from body
+          $('body').removeClass(function(index, className) {
+            return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
+          });
+          
+          // Add current theme class to body
+          $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
+          
+          // Apply CSS
+          $themeStyle.html(theme.css);
+          
+          // Update CSS editor
+          $cssEditor.val(formatCss(theme.css));
+          autosizeTextarea($cssEditor[0]);
+          
+          // Handle cinematic mode
+          if (theme.name === 'Cinematic') {
+            $heroSection.show();
+            startCinematicVideos();
+          } else {
+            $heroSection.hide();
+          }
+          
+          // Update theme name display
+          $('#current-theme').text(theme.name);
+          
+          // Update Gantt chart styling based on theme
+          updateGanttStyling(theme.name.toLowerCase().replace(/\s+/g, '-'));
+          
+        } catch (e) {
+          console.error('applyTheme failed:', e);
+        }
+      }
+      
+      // Update Gantt chart styling based on current theme
+      function updateGanttStyling(themeName) {
+        try {
+          // Re-initialize Mermaid with theme-specific config
+          mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            gantt: {
+              titleTopMargin: 25,
+              barHeight: 20,
+              barGap: 4,
+              topPadding: 50,
+              sidePadding: 50
+            }
+          });
+          
+          // Re-render the Gantt chart
+          mermaid.init(undefined, '.mermaid');
+          
+        } catch (e) {
+          console.error('Failed to update Gantt styling:', e);
+        }
+      }
+
+      // Initialize with first theme
+      applyTheme(0);
+
+      // Click handler for style cards
+      $('.style-card').on('click', function() {
+        var index = $(this).data('index');
+        applyTheme(index);
+      });
+
+      // Click handler for timeline elements
+      $('.mermaid').on('click', '.task, .taskText', function() {
+        var taskId = $(this).attr('id') || '';
         
-        // Table-Based Design
-        'table-based': {
-          background: '#ffffff',
-          fontFamily: "'Courier New', monospace",
-          sectionBg: '#eeeeee',
-          sectionColor: '#000000',
-          taskBg: '#cccccc',
-          taskBorder: '#000000',
-          gridColor: '#000000',
-          textColor: '#000000',
-          todayMarker: '#000000',
-          // Additional CSS elements
-          titleFont: "'Courier New', monospace",
-          titleColor: '#000000',
-          titleSize: '20px',
-          titleDecoration: 'none',
-          axisFont: "'Courier New', monospace",
-          axisColor: '#000000',
-          axisWeight: 'normal',
-          taskRadius: '0px',
-          extraCSS: `
-            .mermaid { border: 2px solid #000000; }
-            .mermaid .grid .tick line { stroke-width: 1px; }
-            .mermaid .task { border-collapse: collapse; }
-            .mermaid .section { border-bottom: 1px solid #000000; }
-          `
-        },
+        // Extract theme ID from task ID
+        var themeId = taskId.split('-')[0];
         
-        // Framesets
-        framesets: {
-          background: '#f9f9f9',
-          fontFamily: "Tahoma, sans-serif",
-          sectionBg: '#eeeeee',
-          sectionColor: '#333333',
-          taskBg: '#dddddd',
-          taskBorder: '#333333',
-          gridColor: '#666666',
-          textColor: '#333333',
-          todayMarker: '#333333',
-          // Additional CSS elements
-          titleFont: "Tahoma, sans-serif",
-          titleColor: '#333333',
-          titleSize: '18px',
-          titleDecoration: 'none',
-          axisFont: "Tahoma, sans-serif",
-          axisColor: '#333333',
-          axisWeight: 'normal',
-          taskRadius: '0px',
-          extraCSS: `
-            .mermaid { border: 2px outset #cccccc; padding: 5px; }
-            .mermaid .grid { border-right: 1px solid #999999; }
-            .mermaid .section { border-bottom: 1px solid #999999; }
-          `
-        },
+        // Find matching theme index
+        var themeIndex = themes.findIndex(function(theme) {
+          return theme.name.toLowerCase().replace(/\s+/g, '-') === themeId;
+        });
         
-        // Flash-Based Design
-        flash: {
-          background: '#000000',
-          fontFamily: "'Arial Black', sans-serif",
-          sectionBg: '#222222',
-          sectionColor: '#ff00ff',
-          taskBg: '#440044',
-          taskBorder: '#ff00ff',
-          gridColor: '#333333',
-          textColor: '#ffffff',
-          todayMarker: '#ff00ff',
-          // Additional CSS elements
-          titleFont: "'Arial Black', sans-serif",
-          titleColor: '#ff00ff',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Arial Black', sans-serif",
-          axisColor: '#ffffff',
-          axisWeight: 'bold',
-          taskRadius: '5px',
-          taskAnimation: 'glow 1.5s infinite alternate',
-          extraCSS: `
-            .mermaid { border: 2px solid #ff00ff; box-shadow: 0 0 15px #ff00ff; }
-            .mermaid .titleText { text-shadow: 0 0 10px #ff00ff; }
-            .mermaid .task { box-shadow: 0 0 8px #ff00ff; }
-            @keyframes glow { from { filter: brightness(1); } to { filter: brightness(1.5); } }
-          `
-        },
-        
-        // Web 2.0 Glossy
-        web2: {
-          background: '#f0f8ff',
-          fontFamily: "Verdana, sans-serif",
-          sectionBg: '#e6f2ff',
-          sectionColor: '#1e90ff',
-          taskBg: 'linear-gradient(to bottom, #7abcff 0%, #1e90ff 100%)',
-          taskBorder: '#1e90ff',
-          gridColor: '#a9d6ff',
-          textColor: '#333333',
-          todayMarker: '#1e90ff',
-          // Additional CSS elements
-          titleFont: "Verdana, sans-serif",
-          titleColor: '#1e90ff',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Verdana, sans-serif",
-          axisColor: '#333333',
-          axisWeight: 'bold',
-          taskRadius: '15px',
-          extraCSS: `
-            .mermaid { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-            .mermaid .titleText { font-weight: bold; text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
-            .mermaid .task { 
-              background: linear-gradient(to bottom, #7abcff 0%, #1e90ff 100%);
-              box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-            }
-            .mermaid .section { border-bottom: 1px solid #d0e4ff; }
-          `
-        },
-        
-        // Skeuomorphic
-        skeuomorphic: {
-          background: '#f9f9f4 url("https://i.imgur.com/JY7Yv9p.png")',
-          fontFamily: "'Times New Roman', serif",
-          sectionBg: 'rgba(240, 235, 220, 0.9)',
-          sectionColor: '#875f3a',
-          taskBg: 'linear-gradient(to bottom, #d5cea6 0%, #b7a57a 100%)',
-          taskBorder: '#875f3a',
-          gridColor: '#c8c0a8',
-          textColor: '#5a3d1b',
-          todayMarker: '#875f3a',
-          // Additional CSS elements
-          titleFont: "'Times New Roman', serif",
-          titleColor: '#5a3d1b',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Times New Roman', serif",
-          axisColor: '#5a3d1b',
-          axisWeight: 'bold',
-          taskRadius: '5px',
-          extraCSS: `
-            .mermaid { 
-              border: 8px solid #b7a57a; 
-              border-radius: 5px;
-              box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-              background-image: url("https://i.imgur.com/JY7Yv9p.png");
-            }
-            .mermaid .titleText { 
-              font-weight: bold; 
-              text-shadow: 0 1px 1px rgba(255,255,255,0.5);
-            }
-            .mermaid .task { 
-              box-shadow: inset 0 1px 3px rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.2);
-            }
-            .mermaid .grid .tick line { 
-              stroke-dasharray: 2,2; 
-            }
-          `
-        },
-        
-        // Swiss Style
-        swiss: {
-          background: '#ffffff',
-          fontFamily: "'Helvetica Neue', sans-serif",
-          sectionBg: '#f5f5f5',
-          sectionColor: '#000000',
-          taskBg: '#e6e6e6',
-          taskBorder: '#000000',
-          gridColor: '#cccccc',
-          textColor: '#000000',
-          todayMarker: '#ff0000',
-          // Additional CSS elements
-          titleFont: "'Helvetica Neue', sans-serif",
-          titleColor: '#000000',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Helvetica Neue', sans-serif",
-          axisColor: '#000000',
-          axisWeight: 'normal',
-          taskRadius: '0px',
-          extraCSS: `
-            .mermaid { border: 1px solid #000000; }
-            .mermaid .titleText { font-weight: 300; letter-spacing: 1px; }
-            .mermaid .sectionTitle { font-weight: bold; letter-spacing: 0.5px; }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-          `
-        },
-        
-        // Minimalist
-        minimalist: {
-          background: '#ffffff',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: '#fafafa',
-          sectionColor: '#666666',
-          taskBg: '#f0f0f0',
-          taskBorder: '#dddddd',
-          gridColor: '#eeeeee',
-          textColor: '#666666',
-          todayMarker: '#999999',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#666666',
-          titleSize: '20px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#999999',
-          axisWeight: 'normal',
-          taskRadius: '2px',
-          extraCSS: `
-            .mermaid { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-            .mermaid .titleText { font-weight: 300; }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-            .mermaid .task { transition: opacity 0.3s; }
-            .mermaid .task:hover { opacity: 0.8; }
-          `
-        },
-        
-        // Dark Mode
-        'dark-mode': {
-          background: '#121212',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: '#1e1e1e',
-          sectionColor: '#e0e0e0',
-          taskBg: '#333333',
-          taskBorder: '#444444',
-          gridColor: '#2a2a2a',
-          textColor: '#e0e0e0',
-          todayMarker: '#0078d7',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#e0e0e0',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#999999',
-          axisWeight: 'normal',
-          taskRadius: '4px',
-          extraCSS: `
-            .mermaid { border: 1px solid #333333; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
-            .mermaid .titleText { font-weight: 300; }
-            .mermaid .task { transition: transform 0.2s, box-shadow 0.2s; }
-            .mermaid .task:hover { 
-              transform: translateY(-2px); 
-              box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            }
-          `
-        },
-        
-        // Neumorphism
-        neumorphism: {
-          background: '#e0e0e0',
-          fontFamily: "'Segoe UI', sans-serif",
-          sectionBg: '#e0e0e0',
-          sectionColor: '#555555',
-          taskBg: '#e0e0e0',
-          taskBorder: 'none',
-          taskShadow: '5px 5px 10px rgba(0,0,0,0.2), -5px -5px 10px rgba(255,255,255,0.7)',
-          gridColor: '#cccccc',
-          textColor: '#555555',
-          todayMarker: '#555555',
-          // Additional CSS elements
-          titleFont: "'Segoe UI', sans-serif",
-          titleColor: '#555555',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "'Segoe UI', sans-serif",
-          axisColor: '#777777',
-          axisWeight: 'normal',
-          taskRadius: '10px',
-          extraCSS: `
-            .mermaid { 
-              border-radius: 20px; 
-              box-shadow: 10px 10px 20px rgba(0,0,0,0.1), -10px -10px 20px rgba(255,255,255,0.7);
-              padding: 20px;
-            }
-            .mermaid .titleText { font-weight: 500; }
-            .mermaid .task { 
-              box-shadow: inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,0.7);
-            }
-            .mermaid .grid .tick line { opacity: 0.5; }
-          `
-        },
-        
-        // Glassmorphism
-        glassmorphism: {
-          background: 'rgba(255,255,255,0.3)',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: 'rgba(255,255,255,0.3)',
-          sectionColor: '#333333',
-          taskBg: 'rgba(255,255,255,0.5)',
-          taskBorder: 'rgba(255,255,255,0.8)',
-          backdropFilter: 'blur(8px)',
-          gridColor: 'rgba(0,0,0,0.1)',
-          textColor: '#333333',
-          todayMarker: '#0078d7',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#333333',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#555555',
-          axisWeight: 'normal',
-          taskRadius: '8px',
-          extraCSS: `
-            .mermaid { 
-              border-radius: 15px; 
-              border: 1px solid rgba(255,255,255,0.5);
-              box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-              backdrop-filter: blur(8px);
-            }
-            .mermaid .titleText { font-weight: 400; }
-            .mermaid .task { 
-              backdrop-filter: blur(4px);
-              border: 1px solid rgba(255,255,255,0.7);
-              box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-          `
-        },
-        
-        // Brutalist
-        brutalist: {
-          background: '#ffffff',
-          fontFamily: "'Courier New', monospace",
-          sectionBg: '#ffffff',
-          sectionColor: '#000000',
-          taskBg: '#ffffff',
-          taskBorder: '#000000',
-          borderWidth: '3px',
-          gridColor: '#000000',
-          textColor: '#000000',
-          todayMarker: '#000000',
-          // Additional CSS elements
-          titleFont: "'Courier New', monospace",
-          titleColor: '#000000',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Courier New', monospace",
-          axisColor: '#000000',
-          axisWeight: 'bold',
-          taskRadius: '0px',
-          extraCSS: `
-            .mermaid { 
-              border: 3px
-        // Flash-Based Design
-        flash: {
-          background: '#000000',
-          fontFamily: "'Arial Black', sans-serif",
-          sectionBg: '#222222',
-          sectionColor: '#ff00ff',
-          taskBg: '#440044',
-          taskBorder: '#ff00ff',
-          gridColor: '#333333',
-          textColor: '#ffffff',
-          todayMarker: '#ff00ff',
-          // Additional CSS elements
-          titleFont: "'Arial Black', sans-serif",
-          titleColor: '#ff00ff',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Arial Black', sans-serif",
-          axisColor: '#ffffff',
-          axisWeight: 'bold',
-          taskRadius: '5px',
-          taskAnimation: 'glow 1.5s infinite alternate',
-          extraCSS: `
-            .mermaid { border: 2px solid #ff00ff; box-shadow: 0 0 15px #ff00ff; }
-            .mermaid .titleText { text-shadow: 0 0 10px #ff00ff; }
-            .mermaid .task { box-shadow: 0 0 8px #ff00ff; }
-            @keyframes glow { from { filter: brightness(1); } to { filter: brightness(1.5); } }
-          `
-        },
-        
-        // Web 2.0 Glossy
-        web2: {
-          background: '#f0f8ff',
-          fontFamily: "Verdana, sans-serif",
-          sectionBg: '#e6f2ff',
-          sectionColor: '#1e90ff',
-          taskBg: 'linear-gradient(to bottom, #7abcff 0%, #1e90ff 100%)',
-          taskBorder: '#1e90ff',
-          gridColor: '#a9d6ff',
-          textColor: '#333333',
-          todayMarker: '#1e90ff',
-          // Additional CSS elements
-          titleFont: "Verdana, sans-serif",
-          titleColor: '#1e90ff',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Verdana, sans-serif",
-          axisColor: '#333333',
-          axisWeight: 'bold',
-          taskRadius: '15px',
-          extraCSS: `
-            .mermaid { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-            .mermaid .titleText { font-weight: bold; text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
-            .mermaid .task { 
-              background: linear-gradient(to bottom, #7abcff 0%, #1e90ff 100%);
-              box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-            }
-            .mermaid .section { border-bottom: 1px solid #d0e4ff; }
-          `
-        },
-        
-        // Skeuomorphic
-        skeuomorphic: {
-          background: '#f9f9f4 url("https://i.imgur.com/JY7Yv9p.png")',
-          fontFamily: "'Times New Roman', serif",
-          sectionBg: 'rgba(240, 235, 220, 0.9)',
-          sectionColor: '#875f3a',
-          taskBg: 'linear-gradient(to bottom, #d5cea6 0%, #b7a57a 100%)',
-          taskBorder: '#875f3a',
-          gridColor: '#c8c0a8',
-          textColor: '#5a3d1b',
-          todayMarker: '#875f3a',
-          // Additional CSS elements
-          titleFont: "'Times New Roman', serif",
-          titleColor: '#5a3d1b',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Times New Roman', serif",
-          axisColor: '#5a3d1b',
-          axisWeight: 'bold',
-          taskRadius: '5px',
-          extraCSS: `
-            .mermaid { 
-              border: 8px solid #b7a57a; 
-              border-radius: 5px;
-              box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-              background-image: url("https://i.imgur.com/JY7Yv9p.png");
-            }
-            .mermaid .titleText { 
-              font-weight: bold; 
-              text-shadow: 0 1px 1px rgba(255,255,255,0.5);
-            }
-            .mermaid .task { 
-              box-shadow: inset 0 1px 3px rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.2);
-            }
-            .mermaid .grid .tick line { 
-              stroke-dasharray: 2,2; 
-            }
-          `
-        },
-        
-        // Swiss Style
-        swiss: {
-          background: '#ffffff',
-          fontFamily: "'Helvetica Neue', sans-serif",
-          sectionBg: '#f5f5f5',
-          sectionColor: '#000000',
-          taskBg: '#e6e6e6',
-          taskBorder: '#000000',
-          gridColor: '#cccccc',
-          textColor: '#000000',
-          todayMarker: '#ff0000',
-          // Additional CSS elements
-          titleFont: "'Helvetica Neue', sans-serif",
-          titleColor: '#000000',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Helvetica Neue', sans-serif",
-          axisColor: '#000000',
-          axisWeight: 'normal',
-          taskRadius: '0px',
-          extraCSS: `
-            .mermaid { border: 1px solid #000000; }
-            .mermaid .titleText { font-weight: 300; letter-spacing: 1px; }
-            .mermaid .sectionTitle { font-weight: bold; letter-spacing: 0.5px; }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-          `
-        },
-        
-        // Minimalist
-        minimalist: {
-          background: '#ffffff',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: '#fafafa',
-          sectionColor: '#666666',
-          taskBg: '#f0f0f0',
-          taskBorder: '#dddddd',
-          gridColor: '#eeeeee',
-          textColor: '#666666',
-          todayMarker: '#999999',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#666666',
-          titleSize: '20px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#999999',
-          axisWeight: 'normal',
-          taskRadius: '2px',
-          extraCSS: `
-            .mermaid { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-            .mermaid .titleText { font-weight: 300; }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-            .mermaid .task { transition: opacity 0.3s; }
-            .mermaid .task:hover { opacity: 0.8; }
-          `
-        },
-        
-        // Dark Mode
-        'dark-mode': {
-          background: '#121212',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: '#1e1e1e',
-          sectionColor: '#e0e0e0',
-          taskBg: '#333333',
-          taskBorder: '#444444',
-          gridColor: '#2a2a2a',
-          textColor: '#e0e0e0',
-          todayMarker: '#0078d7',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#e0e0e0',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#999999',
-          axisWeight: 'normal',
-          taskRadius: '4px',
-          extraCSS: `
-            .mermaid { border: 1px solid #333333; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
-            .mermaid .titleText { font-weight: 300; }
-            .mermaid .task { transition: transform 0.2s, box-shadow 0.2s; }
-            .mermaid .task:hover { 
-              transform: translateY(-2px); 
-              box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            }
-          `
-        },
-        
-        // Neumorphism
-        neumorphism: {
-          background: '#e0e0e0',
-          fontFamily: "'Segoe UI', sans-serif",
-          sectionBg: '#e0e0e0',
-          sectionColor: '#555555',
-          taskBg: '#e0e0e0',
-          taskBorder: 'none',
-          taskShadow: '5px 5px 10px rgba(0,0,0,0.2), -5px -5px 10px rgba(255,255,255,0.7)',
-          gridColor: '#cccccc',
-          textColor: '#555555',
-          todayMarker: '#555555',
-          // Additional CSS elements
-          titleFont: "'Segoe UI', sans-serif",
-          titleColor: '#555555',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "'Segoe UI', sans-serif",
-          axisColor: '#777777',
-          axisWeight: 'normal',
-          taskRadius: '10px',
-          extraCSS: `
-            .mermaid { 
-              border-radius: 20px; 
-              box-shadow: 10px 10px 20px rgba(0,0,0,0.1), -10px -10px 20px rgba(255,255,255,0.7);
-              padding: 20px;
-            }
-            .mermaid .titleText { font-weight: 500; }
-            .mermaid .task { 
-              box-shadow: inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,0.7);
-            }
-            .mermaid .grid .tick line { opacity: 0.5; }
-          `
-        },
-        
-        // Glassmorphism
-        glassmorphism: {
-          background: 'rgba(255,255,255,0.3)',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: 'rgba(255,255,255,0.3)',
-          sectionColor: '#333333',
-          taskBg: 'rgba(255,255,255,0.5)',
-          taskBorder: 'rgba(255,255,255,0.8)',
-          backdropFilter: 'blur(8px)',
-          gridColor: 'rgba(0,0,0,0.1)',
-          textColor: '#333333',
-          todayMarker: '#0078d7',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#333333',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#555555',
-          axisWeight: 'normal',
-          taskRadius: '8px',
-          extraCSS: `
-            .mermaid { 
-              border-radius: 15px; 
-              border: 1px solid rgba(255,255,255,0.5);
-              box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-              backdrop-filter: blur(8px);
-            }
-            .mermaid .titleText { font-weight: 400; }
-            .mermaid .task { 
-              backdrop-filter: blur(4px);
-              border: 1px solid rgba(255,255,255,0.7);
-              box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-          `
-        },
-        
-        // Brutalist
-        brutalist: {
-          background: '#ffffff',
-          fontFamily: "'Courier New', monospace",
-          sectionBg: '#ffffff',
-          sectionColor: '#000000',
-          taskBg: '#ffffff',
-          taskBorder: '#000000',
-          borderWidth: '3px',
-          gridColor: '#000000',
-          textColor: '#000000',
-          todayMarker: '#000000',
-          // Additional CSS elements
-          titleFont: "'Courier New', monospace",
-          titleColor: '#000000',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Courier New', monospace",
-          axisColor: '#000000',
-          axisWeight: 'bold',
-          taskRadius: '0px',
-          extraCSS: `
-            .mermaid { 
-              border: 3px
-        // Flash-Based Design
-        flash: {
-          background: '#000000',
-          fontFamily: "'Arial Black', sans-serif",
-          sectionBg: '#222222',
-          sectionColor: '#ff00ff',
-          taskBg: '#440044',
-          taskBorder: '#ff00ff',
-          gridColor: '#333333',
-          textColor: '#ffffff',
-          todayMarker: '#ff00ff',
-          // Additional CSS elements
-          titleFont: "'Arial Black', sans-serif",
-          titleColor: '#ff00ff',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Arial Black', sans-serif",
-          axisColor: '#ffffff',
-          axisWeight: 'bold',
-          taskRadius: '5px',
-          taskAnimation: 'glow 1.5s infinite alternate',
-          extraCSS: `
-            .mermaid { border: 2px solid #ff00ff; box-shadow: 0 0 15px #ff00ff; }
-            .mermaid .titleText { text-shadow: 0 0 10px #ff00ff; }
-            .mermaid .task { box-shadow: 0 0 8px #ff00ff; }
-            @keyframes glow { from { filter: brightness(1); } to { filter: brightness(1.5); } }
-          `
-        },
-        
-        // Web 2.0 Glossy
-        web2: {
-          background: '#f0f8ff',
-          fontFamily: "Verdana, sans-serif",
-          sectionBg: '#e6f2ff',
-          sectionColor: '#1e90ff',
-          taskBg: 'linear-gradient(to bottom, #7abcff 0%, #1e90ff 100%)',
-          taskBorder: '#1e90ff',
-          gridColor: '#a9d6ff',
-          textColor: '#333333',
-          todayMarker: '#1e90ff',
-          // Additional CSS elements
-          titleFont: "Verdana, sans-serif",
-          titleColor: '#1e90ff',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Verdana, sans-serif",
-          axisColor: '#333333',
-          axisWeight: 'bold',
-          taskRadius: '15px',
-          extraCSS: `
-            .mermaid { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-            .mermaid .titleText { font-weight: bold; text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
-            .mermaid .task { 
-              background: linear-gradient(to bottom, #7abcff 0%, #1e90ff 100%);
-              box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-            }
-            .mermaid .section { border-bottom: 1px solid #d0e4ff; }
-          `
-        },
-        
-        // Skeuomorphic
-        skeuomorphic: {
-          background: '#f9f9f4 url("https://i.imgur.com/JY7Yv9p.png")',
-          fontFamily: "'Times New Roman', serif",
-          sectionBg: 'rgba(240, 235, 220, 0.9)',
-          sectionColor: '#875f3a',
-          taskBg: 'linear-gradient(to bottom, #d5cea6 0%, #b7a57a 100%)',
-          taskBorder: '#875f3a',
-          gridColor: '#c8c0a8',
-          textColor: '#5a3d1b',
-          todayMarker: '#875f3a',
-          // Additional CSS elements
-          titleFont: "'Times New Roman', serif",
-          titleColor: '#5a3d1b',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Times New Roman', serif",
-          axisColor: '#5a3d1b',
-          axisWeight: 'bold',
-          taskRadius: '5px',
-          extraCSS: `
-            .mermaid { 
-              border: 8px solid #b7a57a; 
-              border-radius: 5px;
-              box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-              background-image: url("https://i.imgur.com/JY7Yv9p.png");
-            }
-            .mermaid .titleText { 
-              font-weight: bold; 
-              text-shadow: 0 1px 1px rgba(255,255,255,0.5);
-            }
-            .mermaid .task { 
-              box-shadow: inset 0 1px 3px rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.2);
-            }
-            .mermaid .grid .tick line { 
-              stroke-dasharray: 2,2; 
-            }
-          `
-        },
-        
-        // Swiss Style
-        swiss: {
-          background: '#ffffff',
-          fontFamily: "'Helvetica Neue', sans-serif",
-          sectionBg: '#f5f5f5',
-          sectionColor: '#000000',
-          taskBg: '#e6e6e6',
-          taskBorder: '#000000',
-          gridColor: '#cccccc',
-          textColor: '#000000',
-          todayMarker: '#ff0000',
-          // Additional CSS elements
-          titleFont: "'Helvetica Neue', sans-serif",
-          titleColor: '#000000',
-          titleSize: '24px',
-          titleDecoration: 'none',
-          axisFont: "'Helvetica Neue', sans-serif",
-          axisColor: '#000000',
-          axisWeight: 'normal',
-          taskRadius: '0px',
-          extraCSS: `
-            .mermaid { border: 1px solid #000000; }
-            .mermaid .titleText { font-weight: 300; letter-spacing: 1px; }
-            .mermaid .sectionTitle { font-weight: bold; letter-spacing: 0.5px; }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-          `
-        },
-        
-        // Minimalist
-        minimalist: {
-          background: '#ffffff',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: '#fafafa',
-          sectionColor: '#666666',
-          taskBg: '#f0f0f0',
-          taskBorder: '#dddddd',
-          gridColor: '#eeeeee',
-          textColor: '#666666',
-          todayMarker: '#999999',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#666666',
-          titleSize: '20px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#999999',
-          axisWeight: 'normal',
-          taskRadius: '2px',
-          extraCSS: `
-            .mermaid { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-            .mermaid .titleText { font-weight: 300; }
-            .mermaid .grid .tick line { stroke-width: 0.5px; }
-            .mermaid .task { transition: opacity 0.3s; }
-            .mermaid .task:hover { opacity: 0.8; }
-          `
-        },
-        
-        // Dark Mode
-        'dark-mode': {
-          background: '#121212',
-          fontFamily: "Arial, sans-serif",
-          sectionBg: '#1e1e1e',
-          sectionColor: '#e0e0e0',
-          taskBg: '#333333',
-          taskBorder: '#444444',
-          gridColor: '#2a2a2a',
-          textColor: '#e0e0e0',
-          todayMarker: '#0078d7',
-          // Additional CSS elements
-          titleFont: "Arial, sans-serif",
-          titleColor: '#e0e0e0',
-          titleSize: '22px',
-          titleDecoration: 'none',
-          axisFont: "Arial, sans-serif",
-          axisColor: '#999999',
-          axisWeight: 'normal',
-          taskRadius: '4px',
-          extraCSS: `
-            .mermaid { border: 1px solid #333333; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
-            .mermaid .titleText { font-weight: 300; }
-            .mermaid .task { transition: transform 0.2s, box-shadow 0.2s; }
-            .mermaid .task:hover { 
-              transform: translateY(-2px); 
-              box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            }
-          `
-        },
-        
-        // Neumorphism
-        neumorphism: {
-          background: '#e0e0e0',
-          fontFamily: "'Segoe UI', sans-serif",
-          sectionBg: '#e0e0e0',
-          sectionColor: '#555555',
-          taskBg: '#e0e0e0',
-          taskBorder: 'none',
-</style>
+        if (themeIndex >= 0) {
+          applyTheme(themeIndex);
+        }
+      });
+
+      // Keyboard shortcut to cycle through themes
+      $(document).on('keydown', function(e) {
+        // Ctrl + Shift + Space
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
+          var nextIndex = (current + 1) % themes.length;
+          applyTheme(nextIndex);
+          e.preventDefault();
+        }
+      });
+
+      // CSS Editor functionality
+      $('#reload-css').on('click', function() {
+        $cssEditor.val(formatCss(themes[current].css));
+        autosizeTextarea($cssEditor[0]);
+      });
+
+      $('#apply-css').on('click', function() {
+        try {
+          var customCss = $cssEditor.val();
+          $themeStyle.html(customCss);
+        } catch (e) {
+          console.error('Failed to apply custom CSS:', e);
+        }
+      });
+
+      // Initialize Mermaid
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        gantt: {
+          titleTopMargin: 25,
+          barHeight: 20,
+          barGap: 4,
+          topPadding: 50,
+          sidePadding: 50
+        }
+      });
+
+    } catch (e) {
+      console.error('Initialization failed:', e);
+    }
+  });
+  </script>
+</body>
+</html>
