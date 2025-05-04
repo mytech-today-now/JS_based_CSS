@@ -518,6 +518,7 @@
   <!-- jQuery & Migrate -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
+  <script src="https://mytech.today/wp-content/uploads/custom-css-js/12419.js"></script>
 
   <!-- Theme-switcher + CSS editor init -->
   <script>
@@ -528,77 +529,11 @@
           $themeList     = $('#theme-list'),
           $cssEditor     = $('#css-editor'),
           $heroSection   = $('.hero-section'),
-          $contentWrapper = $('.content-wrapper'),
-          $video1        = $('#traffic_videos_1'),
-          $video2        = $('#traffic_videos_2');
+          $contentWrapper = $('.content-wrapper');
 
       if (!$themeStyle.length || !$currentTheme.length || !$themeList.length) {
         console.error('Essential elements missing, aborting initialization.');
         return;
-      }
-
-      // Video sources for cinematic mode
-      var videoSources = [
-        'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4',
-        'https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-from-above-at-night-10467-large.mp4'
-      ];
-
-      // Preload videos for cinematic mode
-      function preloadCinematicVideos() {
-        try {
-          console.log('Preloading cinematic videos...');
-          $video1.attr('src', videoSources[0]);
-          $video2.attr('src', videoSources[1]);
-          
-          $video1.on('loadeddata', function() {
-            console.log('Video 1 loaded successfully');
-          }).on('error', function(e) {
-            console.error('Error loading video 1:', e);
-          });
-          
-          $video2.on('loadeddata', function() {
-            console.log('Video 2 loaded successfully');
-          }).on('error', function(e) {
-            console.error('Error loading video 2:', e);
-          });
-        } catch (e) {
-          console.error('Failed to preload cinematic videos:', e);
-        }
-      }
-
-      // Initialize cinematic video playback
-      function startCinematicVideos() {
-        try {
-          console.log('Starting cinematic video playback');
-          
-          // Start with video 1
-          $video1.css('opacity', '1');
-          $video1[0].play().catch(function(e) {
-            console.error('Failed to play video 1:', e);
-          });
-          
-          // Set up video switching
-          $video1.on('ended', function() {
-            console.log('Video 1 ended, switching to video 2');
-            $video1.css('opacity', '0');
-            $video2.css('opacity', '1');
-            $video2[0].play().catch(function(e) {
-              console.error('Failed to play video 2:', e);
-            });
-          });
-          
-          $video2.on('ended', function() {
-            console.log('Video 2 ended, switching to video 1');
-            $video2.css('opacity', '0');
-            $video1.css('opacity', '1');
-            $video1[0].currentTime = 0;
-            $video1[0].play().catch(function(e) {
-              console.error('Failed to replay video 1:', e);
-            });
-          });
-        } catch (e) {
-          console.error('Failed to start cinematic videos:', e);
-        }
       }
 
       var themes = [
@@ -632,9 +567,6 @@
 
       var current = 0;
 
-      // Preload cinematic videos on page load
-      preloadCinematicVideos();
-
       function formatCss(css) {
         try {
           return css
@@ -664,6 +596,7 @@
           console.error('Invalid theme index:', idx);
           return;
         }
+        
         $themeStyle.text(themes[idx].css);
         $currentTheme.text('Current Style: ' + themes[idx].name);
         $themeList.children().removeClass('active').eq(idx).addClass('active');
@@ -677,88 +610,26 @@
             console.error('Failed to update CSS editor:', e);
           }
         }
-
-        // Flash intro simulation for Flash-Based Design
-        if (idx === 3) { // Flash-Based Design index
-          // Create and show flash intro overlay
-          var $flashIntro = $('<div class="flash-intro">Flash Intro</div>');
-          $flashIntro.css({
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: '#000',
-            color: '#fff',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontSize: '3rem',
-            zIndex: 9999
-          });
-          $('body').append($flashIntro);
-          
-          // After 2 seconds, fade out the intro and make content more visible
-          setTimeout(function() {
-            $flashIntro.fadeOut(500, function() {
-              $(this).remove();
-              // Apply more readable styles after intro
-              $themeStyle.append("body{background:#222;} article.style-card{background:#333; border-color:#f0f; box-shadow:0 0 15px rgba(255,0,255,0.5);} main{background:rgba(0,0,0,0.7);}");
-            });
-          }, 2000);
-        }
-
-        // Frameset simulation for Framesets Design
-        if (idx === 2) { // Framesets index
-          // Create frame-like structure
-          var $frameNav = $('<div class="frame-nav"></div>');
-          var $frameContent = $('<div class="frame-content"></div>');
-          
-          // Style the frames
-          $frameNav.css({
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '200px',
-            height: '100%',
-            background: '#eee',
-            border: '2px solid #333',
-            padding: '10px',
-            overflowY: 'auto',
-            display: 'block'
-          });
-          
-          $frameContent.css({
-            position: 'fixed',
-            top: 0,
-            left: '200px',
-            width: 'calc(100% - 200px)',
-            height: '100%',
-            background: '#f9f9f9',
-            border: '2px solid #333',
-            padding: '10px',
-            overflowY: 'auto',
-            display: 'block'
-          });
-          
-          // Move navigation to the nav frame
-          $frameNav.append($('nav').clone());
-          
-          // Add frames to body
-          $('body').append($frameNav).append($frameContent);
-          
-          // Move main content to content frame
-          $frameContent.append($('header').clone())
-                       .append($('.theme-switcher').clone())
-                       .append($('.css-editor').clone())
-                       .append($('main').clone());
-          
-          // Hide original content
-          $('header, .theme-switcher, nav, .css-editor, main').css('display', 'none');
+        
+        // Special handling for cinematic mode
+        if (themes[idx].name === 'Cinematic') {
+          console.log('Activating cinematic mode');
+          // The external JS will handle video playback automatically
+          // since the video elements are already in the DOM
         } else {
-          // Remove frames if they exist and restore original content
-          $('.frame-nav, .frame-content').remove();
-          $('header, .theme-switcher, nav, .css-editor, main').css('display', '');
+          // If switching from cinematic mode, ensure videos are paused
+          if (current === 15) { // Index of Cinematic theme
+            try {
+              $('#traffic_videos_1, #traffic_videos_2').each(function() {
+                if (!this.paused) {
+                  console.log('Pausing video playback');
+                  this.pause();
+                }
+              });
+            } catch (e) {
+              console.error('Failed to pause videos:', e);
+            }
+          }
         }
 
         current = idx;
