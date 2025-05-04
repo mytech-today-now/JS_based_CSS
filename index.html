@@ -18,9 +18,10 @@
       background: #f9f9f9;
       color: #333;
       padding: 1rem;
+      position: relative;
     }
     header { text-align: center; margin-bottom: 1.5rem; }
-    h1 { font-size: 2rem; margin-bottom: .5rem; }
+    h1 { font-size: 2rem; margin-bottom: .5rem; display: inline-block; }
     .theme-switcher { text-align: center; margin-bottom: 1.5rem; }
     .theme-switcher h2 { font-size: 1.25rem; margin-bottom: .5rem; }
     .theme-switcher p { margin-bottom: 1rem; font-weight: bold; }
@@ -61,6 +62,7 @@
     main {
       max-width: 900px;
       margin: 0 auto;
+      position: relative;
     }
     article.style-card {
       border: 2px solid #ccc;
@@ -76,14 +78,28 @@
       margin-bottom: .25rem;
       cursor: pointer;
       color: #007acc;
+      display: inline-block;
     }
     .style-era { font-style: italic; margin-bottom: .5rem; }
     .style-description { margin-bottom: .5rem; }
     .style-links a { margin-right: .5rem; color: #007acc; }
+    .extra-banner, .extra-under, .extra-counter, .extra-flash-intro {
+      margin: .5rem auto;
+      text-align: center;
+    }
+    .extra-flash-intro {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #000;
+      color: #fff;
+      padding: 2rem;
+      font-size: 2rem;
+      opacity: .9;
+      z-index: 1000;
+    }
   </style>
-
-  <!-- Dynamic theme CSS will be injected here -->
-  <style id="theme-style"></style>
 </head>
 
 <body>
@@ -439,273 +455,163 @@
   </main>
 <!-- Include this after loading jQuery and jQuery Migrate -->
 <script>
-jQuery(function($) {
-  try {
-    // 1. Guard theme‐switcher elements
-    var $themeStyle   = $('#theme-style');
-    var $currentTheme = $('#current-theme');
-    var $themeList    = $('#theme-list');
-    if (!$themeStyle.length || !$currentTheme.length || !$themeList.length) {
-      console.warn('Theme switcher elements missing – skipping initialization.');
-      return;
-    }
+  jQuery(function($) {
+    try {
+      // Guard elements
+      var $themeStyle   = $('#theme-style'),
+          $currentTheme = $('#current-theme'),
+          $themeList    = $('#theme-list'),
+          $cards        = $('article.style-card');
 
-    // 2. Define all themes in chronological order
-    var themes = [
-      {
-        name: 'Vernacular / Geocities',
-        css: "\
-body { background: repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px); font-family:'Comic Sans MS',cursive; color:#000; }\
-article.style-card { background:#fff2f2; border-color:#cc0000; }\
-.style-title { color:#cc0000; }\
-nav a, #theme-list li.active { color:#cc0000; background:#ffcccc; }"
-      },
-      {
-        name: 'Table-Based Design',
-        css: "\
-body { background:#fff; font-family:'Courier New',monospace; color:#000; }\
-main { display:table; width:100%; }\
-article.style-card { display:table-cell; border:2px solid #000; background:#fff; }\
-.style-title { color:#000; }\
-nav a, #theme-list li.active { color:#000; background:#ccc; }"
-      },
-      {
-        name: 'Framesets',
-        css: "\
-body { background:#eee; font-family:Tahoma,sans-serif; color:#333; }\
-nav { position:fixed; top:0; left:0; width:20%; height:100%; background:#ddd; }\
-main { margin-left:20%; }\
-article.style-card { background:#f9f9f9; border:2px solid #333; }\
-.style-title { color:#333; }\
-nav a, #theme-list li.active { color:#333; background:#ddd; }"
-      },
-      {
-        name: 'Flash-Based Design',
-        css: "\
-body { background:#000; font-family:'Arial Black',sans-serif; color:#fff; }\
-article.style-card { background:#111; border:2px solid #f0f; }\
-.style-title { color:#f0f; }\
-nav a, #theme-list li.active { color:#f0f; background:#220022; }"
-      },
-      {
-        name: 'Web 2.0 Glossy',
-        css: "\
-body { background:#f0f8ff; font-family:Verdana,sans-serif; color:#333; }\
-article.style-card { background:#fff; border:2px solid #1e90ff; box-shadow:0 0 10px rgba(30,144,255,.5); }\
-.style-title { color:#1e90ff; }\
-nav a, #theme-list li.active { color:#1e90ff; background:#d0e8ff; }"
-      },
-      {
-        name: 'Skeuomorphic',
-        css: "\
-body { background:#ddd; font-family:'Times New Roman',serif; color:#222; }\
-article.style-card { background:#f9f9f4; border:2px inset #ccc; }\
-.style-title { color:#875f3a; }\
-nav a, #theme-list li.active { color:#875f3a; background:#eee2d0; }"
-      },
-      {
-        name: 'Swiss Style',
-        css: "\
-body { background:#fff; font-family:'Helvetica Neue',sans-serif; color:#000; }\
-article.style-card { background:#fafafa; border:2px solid #000; }\
-.style-title { color:#000; }\
-nav a, #theme-list li.active { color:#000; background:#ccc; }"
-      },
-      {
-        name: 'Minimalist',
-        css: "\
-body { background:#fff; font-family:Arial,sans-serif; color:#000; }\
-article.style-card { background:#fff; border:1px solid #666; }\
-.style-title { color:#666; }\
-nav a, #theme-list li.active { color:#666; background:#e0e0e0; }"
-      },
-      {
-        name: 'Responsive',
-        css: "\
-body { background:#f9f9f9; font-family:Arial,sans-serif; color:#333; }\
-article.style-card { background:#fff; border:2px solid #009879; }\
-.style-title { color:#009879; }\
-nav a, #theme-list li.active { color:#009879; background:#d0f7ec; }"
-      },
-      {
-        name: 'Mobile-First',
-        css: "\
-body { background:#fff; font-family:Arial,sans-serif; color:#333; }\
-article.style-card { background:#fff; border:2px solid #ff6f61; }\
-.style-title { color:#ff6f61; }\
-nav a, #theme-list li.active { color:#ff6f61; background:#ffe6e2; }"
-      },
-      {
-        name: 'Flat Design',
-        css: "\
-body { background:#f5f5f5; font-family:Arial,sans-serif; color:#333; }\
-article.style-card { background:#fff; border:2px solid #333; }\
-.style-title { color:#333; }\
-nav a, #theme-list li.active { color:#333; background:#cccccc; }"
-      },
-      {
-        name: 'Semi-Flat',
-        css: "\
-body { background:#f0f0f0; font-family:'Helvetica Neue',sans-serif; color:#333; }\
-article.style-card { background:linear-gradient(135deg,#fff,#f8f8f8); border:2px solid #4facfe; }\
-.style-title { color:#4facfe; }\
-nav a, #theme-list li.active { color:#4facfe; background:#e7f5ff; }"
-      },
-      {
-        name: 'Parallax',
-        css: "\
-body { background:#e8f5fd; font-family:Arial,sans-serif; color:#333; }\
-article.style-card { background:#fff; border:2px solid #1e88e5; transform:perspective(600px) translateZ(10px); }\
-.style-title { color:#1e88e5; }\
-nav a, #theme-list li.active { color:#1e88e5; background:#d0e8fe; }"
-      },
-      {
-        name: 'Single-Page App',
-        css: "\
-body { background:#fcf3cf; font-family:Verdana,sans-serif; color:#333; }\
-article.style-card { background:#fff; border:2px solid #f39c12; }\
-.style-title { color:#f39c12; }\
-nav a, #theme-list li.active { color:#f39c12; background:#fde8cf; }"
-      },
-      {
-        name: 'Progressive Web App',
-        css: "\
-body { background:#e0f7fa; font-family:Arial,sans-serif; color:#333; }\
-article.style-card { background:#fff; border:2px solid #00acc1; }\
-.style-title { color:#00acc1; }\
-nav a, #theme-list li.active { color:#00acc1; background:#d4f1f9; }"
-      },
-      {
-        name: 'Cinematic',
-        css: "\
-body { background:#000; font-family:Georgia,serif; color:#fff; }\
-article.style-card { background:#111; border:2px solid #f00; }\
-.style-title { color:#f00; }\
-nav a, #theme-list li.active { color:#f00; background:#300; }"
-      },
-      {
-        name: 'Brutalist',
-        css: "\
-body { background:#fff; font-family:'Courier New',monospace; color:#000; }\
-article.style-card { background:#fff; border:3px solid #000; }\
-.style-title { color:#000; }\
-nav a, #theme-list li.active { color:#000; background:#ccc; }"
-      },
-      {
-        name: 'Neo-Brutalism',
-        css: "\
-body { background:#000; font-family:'Courier New',monospace; color:#0f0; }\
-article.style-card { background:#111; border:3px solid #0f0; }\
-.style-title { color:#0f0; }\
-nav a, #theme-list li.active { color:#0f0; background:#030; }"
-      },
-      {
-        name: 'Dark Mode',
-        css: "\
-body { background:#121212; font-family:Arial,sans-serif; color:#e0e0e0; }\
-article.style-card { background:#1e1e1e; border:2px solid #444; }\
-.style-title { color:#e0e0e0; }\
-nav a, #theme-list li.active { color:#e0e0e0; background:#444; }"
-      },
-      {
-        name: 'Neumorphism',
-        css: "\
-body { background:#e0e0e0; font-family:'Segoe UI',sans-serif; color:#333; }\
-article.style-card { background:#e0e0e0; border-radius:12px; box-shadow:8px 8px 16px rgba(0,0,0,0.2), -8px -8px 16px rgba(255,255,255,0.7); }\
-.style-title { color:#555; }\
-nav a, #theme-list li.active { color:#555; background:#d0d0d0; }"
-      },
-      {
-        name: 'Glassmorphism',
-        css: "\
-body { background:rgba(255,255,255,0.3); backdrop-filter:blur(8px); font-family:Arial,sans-serif; color:#333; }\
-article.style-card { background:rgba(255,255,255,0.5); border:2px solid rgba(255,255,255,0.8); backdrop-filter:blur(8px); }\
-.style-title { color:#333; }\
-nav a, #theme-list li.active { color:#333; background:rgba(255,255,255,0.6); }"
-      },
-      {
-        name: 'Corporate Memphis',
-        css: "\
-body { background:#ff6f61; font-family:Helvetica,sans-serif; color:#fff; }\
-article.style-card { background:#fff; border:2px solid #fff; }\
-.style-title { color:#ff6f61; }\
-nav a, #theme-list li.active { color:#ff6f61; background:#fff; }"
-      },
-      {
-        name: 'Retro Web',
-        css: "\
-body { background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px); font-family:'Courier New',monospace; color:#0f0; }\
-article.style-card { background:#001; border:2px solid #0ff; }\
-.style-title { color:#0ff; }\
-nav a, #theme-list li.active { color:#0ff; background:#003; }"
-      },
-      {
-        name: 'Y2K Web',
-        css: "\
-body { background:linear-gradient(to right,#00f,#0ff); font-family:Arial,sans-serif; color:#000; }\
-article.style-card { background:rgba(255,255,255,0.8); border:2px solid #fff; }\
-.style-title { color:#00f; }\
-nav a, #theme-list li.active { color:#00f; background:#fff; }"
-      },
-      {
-        name: 'WebGL & 3D',
-        css: "\
-body { background:#001; font-family:'Courier New',monospace; color:#0f0; perspective:800px; }\
-article.style-card { background:#002; border:2px solid #0f0; transform:rotateX(5deg); }\
-.style-title { color:#0f0; }\
-nav a, #theme-list li.active { color:#0f0; background:#003; }"
-      },
-      {
-        name: 'Inclusive Design',
-        css: "\
-body { background:#fff; font-family:Arial,sans-serif; color:#000; }\
-article.style-card { background:#f9f9f9; border:2px solid #007acc; }\
-.style-title { color:#007acc; }\
-nav a, #theme-list li.active { color:#007acc; background:#e0f0ff; }"
-      }
-    ];
-
-    // 3. Theme application function
-    var current = 0;
-    function applyTheme(idx) {
-      if (!themes[idx]) {
-        console.error('Invalid theme index:', idx);
+      if (!$themeStyle.length || !$currentTheme.length || !$themeList.length || !$cards.length) {
+        console.warn('Theme switcher elements missing – skipping initialization.');
         return;
       }
-      $themeStyle.text(themes[idx].css);
-      $currentTheme.text('Current Style: ' + themes[idx].name);
-      $themeList.children()
-        .removeClass('active')
-        .eq(idx).addClass('active');
-      current = idx;
-      console.log('Applied theme:', themes[idx].name);
-    }
 
-    // 4. Initialize
-    applyTheme(current);
-
-    // 5. Click handlers
-    $themeList.on('click', 'li', function() {
-      applyTheme(parseInt($(this).data('index'), 10));
-    });
-    $('.style-title').on('click', function() {
-      var idx = parseInt($(this).closest('article').data('index'), 10);
-      applyTheme(idx);
-    });
-
-    // 6. Keyboard cycle
-    $(document).on('keydown', function(e) {
-      if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
-        e.preventDefault();
-        applyTheme((current + 1) % themes.length);
+      // Remove any previous extras
+      function clearExtras() {
+        $('.extra-under, .extra-counter, .extra-banner, .extra-flash-intro').remove();
+        $('#main-table, .frame-nav, .frame-content, .beta-badge').remove();
+        $('.card-texture, .grid-overlay').remove();
       }
-    });
 
-  } catch (err) {
-    console.error('Initialization failed:', err);
-  }
-});
-</script>
+      // Dynamic extras per style
+      var extrasMap = {
+        0: function() {
+          // Under Construction GIF + random visitor counter
+          $('<img class="extra-under" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Under_construction.gif" alt="Under Construction">')
+            .prependTo('main');
+          $('<div class="extra-counter">Visitor Count: ' + Math.floor(Math.random()*10000) + '</div>')
+            .prependTo('main');
+        },
+        1: function() {
+          // Table layout demo
+          var $tbl = $('<table id="main-table"><tr><td>Main Content</td><td>Sidebar</td></tr></table>')
+            .css({ width:'100%', border:'2px solid #000', 'margin-bottom':'.5rem' });
+          $('main').prepend($tbl);
+        },
+        2: function() {
+          // Frameset simulation
+          $('<div class="frame-nav">NAVIGATION</div>').css({
+            position:'fixed', top:0, left:0, width:'20%', height:'100%', background:'#ddd', padding:'1rem'
+          }).appendTo('body');
+          $('<div class="frame-content">CONTENT AREA</div>').css({
+            marginLeft:'20%', padding:'1rem'
+          }).appendTo('body');
+        },
+        3: function() {
+          // Flash intro simulation
+          var $intro = $('<div class="extra-flash-intro">FLASH INTRO</div>');
+          $('body').append($intro);
+          setTimeout(function(){
+            $intro.fadeOut(1000, function(){ $intro.remove(); });
+          }, 2000);
+        },
+        4: function() {
+          // BETA badge
+          $('<span class="beta-badge">BETA</span>').css({
+            background:'#ff0', color:'#000', padding:'.2em', marginLeft:'1em'
+          }).insertAfter('header h1');
+        },
+        5: function() {
+          // Paper texture on cards
+          $('article.style-card').addClass('card-texture').css({
+            backgroundImage:'url(https://www.publicdomainpictures.net/pictures/270000/velka/paper-texture-background.jpg)',
+            backgroundSize:'cover'
+          });
+        },
+        6: function() {
+          // Swiss style grid overlay
+          $('<div class="grid-overlay"></div>').css({
+            position:'absolute', top:0, left:0, right:0, bottom:0,
+            background:'linear-gradient(#000 1px, transparent 1px) 0 0, linear-gradient(90deg,#000 1px, transparent 1px) 0 0',
+            backgroundSize:'50px 50px', pointerEvents:'none'
+          }).prependTo('main');
+        }
+        // [add additional extras for indices 7–25 similarly if desired]
+      };
 
+      // Theme definitions
+      var themes = [
+        { name:'Vernacular / Geocities', css:"body{background:repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px);font-family:'Comic Sans MS',cursive;color:#000;}" },
+        { name:'Table-Based Design',      css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}main{display:table;width:100%;}article.style-card{display:table-cell;border:2px solid #000;background:#fff;}.style-title{color:#000;}" },
+        { name:'Framesets',                css:"body{background:#eee;font-family:Tahoma,sans-serif;color:#333;}nav{position:fixed;top:0;left:0;width:20%;height:100%;background:#ddd;}main{margin-left:20%;}article.style-card{background:#f9f9f9;border:2px solid #333;}.style-title{color:#333;}" },
+        { name:'Flash-Based Design',       css:"body{background:#000;font-family:'Arial Black',sans-serif;color:#fff;}article.style-card{background:#111;border:2px solid #f0f;}.style-title{color:#f0f;}" },
+        { name:'Web 2.0 Glossy',           css:"body{background:#f0f8ff;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e90ff;box-shadow:0 0 10px rgba(30,144,255,.5);}.style-title{color:#1e90ff;}" },
+        { name:'Skeuomorphic',             css:"body{background:#ddd;font-family:'Times New Roman',serif;color:#222;}article.style-card{background:#f9f9f4;border:2px inset #ccc;}.style-title{color:#875f3a;}" },
+        { name:'Swiss Style',              css:"body{background:#fff;font-family:'Helvetica Neue',sans-serif;color:#000;}article.style-card{background:#fafafa;border:2px solid #000;}.style-title{color:#000;}" },
+        { name:'Minimalist',               css:"body{background:#fff;font-family:Arial,sans-serif;color:#000;}article.style-card{background:#fff;border:1px solid #666;}.style-title{color:#666;}" },
+        { name:'Responsive',               css:"body{background:#f9f9f9;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #009879;}.style-title{color:#009879;}" },
+        { name:'Mobile-First',             css:"body{background:#fff;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #ff6f61;}.style-title{color:#ff6f61;}" },
+        { name:'Flat Design',              css:"body{background:#f5f5f5;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #333;}.style-title{color:#333;}" },
+        { name:'Semi-Flat',                css:"body{background:#f0f0f0;font-family:'Helvetica Neue',sans-serif;color:#333;}article.style-card{background:linear-gradient(135deg,#fff,#f8f8f8);border:2px solid #4facfe;}.style-title{color:#4facfe;}" },
+        { name:'Parallax',                 css:"body{background:#e8f5fd;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #1e88e5;transform:perspective(600px) translateZ(10px);}.style-title{color:#1e88e5;}" },
+        { name:'Single-Page App',          css:"body{background:#fcf3cf;font-family:Verdana,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #f39c12;}.style-title{color:#f39c12;}" },
+        { name:'Progressive Web App',      css:"body{background:#e0f7fa;font-family:Arial,sans-serif;color:#333;}article.style-card{background:#fff;border:2px solid #00acc1;}.style-title{color:#00acc1;}" },
+        { name:'Cinematic',                css:"body{background:#000;font-family:Georgia,serif;color:#fff;}article.style-card{background:#111;border:2px solid #f00;}.style-title{color:#f00;}" },
+        { name:'Brutalist',                css:"body{background:#fff;font-family:'Courier New',monospace;color:#000;}article.style-card{background:#fff;border:3px solid #000;}.style-title{color:#000;}" },
+        { name:'Neo-Brutalism',            css:"body{background:#000;font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#111;border:3px solid #0f0;}.style-title{color:#0f0;}" },
+        { name:'Dark Mode',                css:"body{background:#121212;font-family:Arial,sans-serif;color:#e0e0e0;}article.style-card{background:#1e1e1e;border:2px solid #444;}.style-title{color:#e0e0e0;}" },
+        { name:'Neumorphism',              css:"body{background:#e0e0e0;font-family:'Segoe UI',sans-serif;color:#333;}article.style-card{background:#e0e0e0;border-radius:12px;box-shadow:8px 8px 16px rgba(0,0,0,0.2),-8px -8px 16px rgba(255,255,255,0.7);}.style-title{color:#555;}" },
+        { name:'Glassmorphism',            css:"body{background:rgba(255,255,255,0.3);backdrop-filter:blur(8px);font-family:Arial,sans-serif;color:#333;}article.style-card{background:rgba(255,255,255,0.5);border:2px solid rgba(255,255,255,0.8);backdrop-filter:blur(8px);}.style-title{color:#333;}" },
+        { name:'Corporate Memphis',        css:"body{background:#ff6f61;font-family:Helvetica,sans-serif;color:#fff;}article.style-card{background:#fff;border:2px solid #fff;}.style-title{color:#ff6f61;}" },
+        { name:'Retro Web',                css:"body{background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px);font-family:'Courier New',monospace;color:#0f0;}article.style-card{background:#001;border:2px solid #0ff;}.style-title{color:#0ff;}" },
+        { name:'Y2K Web',                  css:"body{background:linear-gradient(to right,#00f,#0ff);font-family:Arial,sans-serif;color:#000;}article.style-card{background:rgba(255,255,255,0.8);border:2px solid #fff;}.style-title{color:#00f;}" },
+        { name:'WebGL & 3D',               css:"body{background:#001;font-family:'Courier New',monospace;color:#0f0;perspective:800px;}article.style-card{background:#002;border:2px solid #0f0;transform:rotateX(5deg);}.style-title{color:#0f0;}" },
+        { name:'Inclusive Design',         css:"body{background:#fff;font-family:Arial,sans-serif;color:#000;}article.style-card{background:#f9f9f9;border:2px solid #007acc;}.style-title{color:#007acc;}" }
+      ];
+
+      var current = 0;
+
+      function applyTheme(idx) {
+        if (!themes[idx]) {
+          console.error('Invalid theme index:', idx);
+          return;
+        }
+        // clear old extras
+        clearExtras();
+        // inject CSS
+        $themeStyle.text(themes[idx].css);
+        // update header
+        $currentTheme.text('Current Style: ' + themes[idx].name);
+        // highlight list
+        $themeList.children().removeClass('active').eq(idx).addClass('active');
+        // run extras if defined
+        if (typeof extrasMap[idx] === 'function') {
+          try {
+            extrasMap[idx]();
+          } catch (e) {
+            console.error('Extras for theme ' + idx + ' failed:', e);
+          }
+        }
+        current = idx;
+        console.log('Applied theme:', themes[idx].name);
+      }
+
+      // initialize
+      applyTheme(current);
+
+      // click handlers
+      $themeList.on('click', 'li', function() {
+        applyTheme(parseInt($(this).data('index'), 10));
+      });
+      $('.style-title').on('click', function() {
+        var idx = parseInt($(this).closest('article').data('index'), 10);
+        applyTheme(idx);
+      });
+
+      // keyboard cycle
+      $(document).on('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
+          e.preventDefault();
+          applyTheme((current + 1) % themes.length);
+        }
+      });
+
+    } catch (err) {
+      console.error('Initialization failed:', err);
+    }
+  });
+  </script>
 </body>
 </html>
