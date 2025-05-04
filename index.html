@@ -3,71 +3,35 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Web Design Styles Through the Ages</title>
-  <style>
-    /* Reset & Base */
+  <title>Interactive Web Design Styles Showcase</title>
+
+  <!-- Base layout & controls -->
+  <style id="base-style">
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
-      line-height: 1.6;
       background: #f9f9f9;
       color: #333;
       padding: 1rem;
     }
-    header { text-align: center; margin-bottom: 2rem; }
-    h1 { font-size: 2rem; }
-    main { max-width: 900px; margin: 0 auto; }
-    section { margin-bottom: 2rem; }
-    section > h2 {
-      font-size: 1.5rem;
-      border-left: 4px solid #007acc;
-      padding-left: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    dl { margin-left: 1rem; }
-    dt {
-      font-weight: bold;
-      margin-top: 0.75rem;
-    }
-    dd {
-      margin-left: 1rem;
-      margin-bottom: 0.5rem;
-    }
-    small { color: #666; }
-    nav {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    nav a {
-      margin: 0 0.5rem;
-      color: #007acc;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    nav a:hover { text-decoration: underline; }
-
-    /* Theme-switcher UI */
-    .theme-switcher {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .theme-switcher h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-    }
+    header { text-align: center; margin-bottom: 1.5rem; }
+    h1 { font-size: 2rem; margin-bottom: .5rem; }
+    .theme-switcher { text-align: center; margin-bottom: 1.5rem; }
+    .theme-switcher h2 { font-size: 1.25rem; margin-bottom: .5rem; }
+    .theme-switcher p { margin-bottom: 1rem; font-weight: bold; }
     #theme-list {
       list-style: none;
-      padding: 0;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.5rem;
+      gap: .5rem;
     }
     #theme-list li {
-      padding: 0.5rem 1rem;
+      padding: .5rem 1rem;
+      border: 1px solid #ccc;
       border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
+      transition: background-color .3s, color .3s;
       background: #e0e0e0;
     }
     #theme-list li.active {
@@ -78,61 +42,95 @@
     #theme-list li:hover:not(.active) {
       background: #007acc33;
     }
-
-    /* Placeholder for injected theme */
-    <style id="theme-style">
-      /* default Flat theme will replace this */
-    </style>
+    nav {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    nav a {
+      margin: 0 .5rem;
+      color: #007acc;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    nav a:hover { text-decoration: underline; }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    section {
+      margin-bottom: 1.5rem;
+    }
+    section > h2 {
+      font-size: 1.5rem;
+      border-left: 4px solid #007acc;
+      padding-left: .5rem;
+      margin-bottom: .75rem;
+    }
+    dl { margin-left: 1rem; }
+    dt { font-weight: bold; margin-top: .5rem; }
+    dd { margin-left: 1.5rem; margin-bottom: .5rem; }
   </style>
+
+  <!-- This is where the selected theme's CSS will go -->
+  <style id="theme-style"></style>
 </head>
 <body>
   <header>
-    <h1>Web Design Styles Through the Ages</h1>
-    <p><small>A survey of major design movements, grouped by era</small></p>
+    <h1>Interactive Web Design Styles Showcase</h1>
+    <p><small>Use the controls below or press <strong>Ctrl + Shift + Space</strong> to cycle</small></p>
   </header>
 
   <div class="theme-switcher">
-    <h2>Select Theme</h2>
+    <h2>Select Style</h2>
+    <p id="current-theme">Current Style: Vernacular / Geocities</p>
     <ul id="theme-list">
-      <li data-index="0">Flat</li>
-      <li data-index="1">Neumorphic</li>
-      <li data-index="2">Skeuomorphism</li>
-      <li data-index="3">Brutalism</li>
-      <li data-index="4">Maximalism</li>
-      <li data-index="5">Semi-Flat</li>
-      <li data-index="6">Y2K Aesthetic</li>
-      <li data-index="7">Retro Style</li>
-      <li data-index="8">Full-Page Headers</li>
-      <li data-index="9">Asymmetric Layouts</li>
-      <li data-index="10">Custom Illustrations</li>
-      <li data-index="11">Color Trends</li>
-      <li data-index="12">Micro-Interactions</li>
-      <li data-index="13">3D Elements</li>
-      <li data-index="14">Scrapbook-Style</li>
-      <li data-index="15">Dark Mode</li>
-      <li data-index="16">Experimental Nav</li>
-      <li data-index="17">Bold Minimalism</li>
+      <li data-index="0" class="active">Vernacular / Geocities</li>
+      <li data-index="1">Table-Based Design</li>
+      <li data-index="2">Framesets</li>
+      <li data-index="3">Flash-Based Design</li>
+      <li data-index="4">Web 2.0 Glossy</li>
+      <li data-index="5">Skeuomorphic</li>
+      <li data-index="6">Swiss Style</li>
+      <li data-index="7">Minimalist</li>
+      <li data-index="8">Responsive</li>
+      <li data-index="9">Mobile-First</li>
+      <li data-index="10">Flat Design</li>
+      <li data-index="11">Semi-Flat</li>
+      <li data-index="12">Parallax</li>
+      <li data-index="13">Single-Page App</li>
+      <li data-index="14">Progressive Web App</li>
+      <li data-index="15">Cinematic</li>
+      <li data-index="16">Brutalist</li>
+      <li data-index="17">Neo-Brutalism</li>
+      <li data-index="18">Dark Mode</li>
+      <li data-index="19">Neumorphism</li>
+      <li data-index="20">Glassmorphism</li>
+      <li data-index="21">Corporate Memphis</li>
+      <li data-index="22">Retro Web</li>
+      <li data-index="23">Y2K Web</li>
+      <li data-index="24">WebGL & 3D</li>
+      <li data-index="25">Inclusive Design</li>
     </ul>
   </div>
 
   <nav aria-label="Jump to era">
-    <a href="#vernacular">Early Vernacular</a> |
-    <a href="#table-frames">Table & Frames</a> |
-    <a href="#flash">Flash</a> |
-    <a href="#web2">Web 2.0 & Skeuo</a> |
-    <a href="#swiss">Swiss & Minimalist</a> |
-    <a href="#responsive">Responsive & Mobile-First</a> |
-    <a href="#flat-era">Flat & Variations</a> |
-    <a href="#parallax">Parallax & SPAs</a> |
-    <a href="#pwa">PWAs</a> |
-    <a href="#cinematic">Cinematic</a> |
-    <a href="#brutalism-era">Brutalism</a> |
-    <a href="#darkmode-era">Dark Mode</a> |
-    <a href="#softui">Soft UI</a> |
-    <a href="#maximalism-era">Maximalism</a> |
-    <a href="#retro-era">Retro & Y2K</a> |
-    <a href="#webgl">3D & Immersive</a> |
-    <a href="#accessibility">Inclusive Design</a>
+    <a href="#vernacular">1991–1995</a> |
+    <a href="#table-frames">1993–1998</a> |
+    <a href="#flash">1996–2008</a> |
+    <a href="#web2">2004–2013</a> |
+    <a href="#swiss">2000s–present</a> |
+    <a href="#responsive">2010–present</a> |
+    <a href="#flat-era">2010–present</a> |
+    <a href="#parallax">2012–2016</a> |
+    <a href="#pwa">2015–present</a> |
+    <a href="#cinematic">2010s</a> |
+    <a href="#brutalism-era">2015–present</a> |
+    <a href="#darkmode-era">2020–present</a> |
+    <a href="#softui">2020</a> |
+    <a href="#maximalism-era">2018–present</a> |
+    <a href="#retro-era">2020s</a> |
+    <a href="#webgl">2015–present</a> |
+    <a href="#accessibility">Ongoing</a>
   </nav>
 
   <main>
@@ -140,7 +138,7 @@
       <h2>Early Vernacular Web (1991–1995)</h2>
       <dl>
         <dt>Vernacular / Geocities Style</dt>
-        <dd>Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs & visitor counters.</dd>
+        <dd>Amateur pages with tiled backgrounds, animated GIFs, “Under Construction” signs & visitor counters.</dd>
       </dl>
     </section>
 
@@ -148,9 +146,9 @@
       <h2>Table-Based & Frame-Based Layouts (1993–1998)</h2>
       <dl>
         <dt>Table-Based Design</dt>
-        <dd>Using HTML tables to approximate multi-column layouts before CSS adoption.</dd>
+        <dd>Using HTML tables for multi-column layouts before CSS adoption.</dd>
         <dt>Framesets</dt>
-        <dd>Splitting the window into independent panes—navigation, content, etc.</dd>
+        <dd>Splitting the window into independent panes (navigation, content, etc.).</dd>
       </dl>
     </section>
 
@@ -158,7 +156,7 @@
       <h2>Flash-Based Design (1996–2008)</h2>
       <dl>
         <dt>Flash Animations & Intros</dt>
-        <dd>Rich animations and full-screen intros with Macromedia Flash.</dd>
+        <dd>Rich animations and full-screen intros via Macromedia Flash.</dd>
       </dl>
     </section>
 
@@ -166,19 +164,19 @@
       <h2>Web 2.0 Glossy & Skeuomorphic (2004–2013)</h2>
       <dl>
         <dt>Web 2.0</dt>
-        <dd>Glossy buttons, drop shadows, reflections and “beta” tags.</dd>
+        <dd>Glossy buttons, reflections, stock-photo headers & “beta” tags.</dd>
         <dt>Skeuomorphic Design</dt>
         <dd>Real-world textures (leather, paper, metal) in UI.</dd>
       </dl>
     </section>
 
     <section id="swiss">
-      <h2>Swiss & Minimalist (2000s–present)</h2>
+      <h2>Swiss & Minimalist Influences (2000s–present)</h2>
       <dl>
-        <dt>Swiss Style</dt>
-        <dd>Grid-based layouts, strong typography, generous whitespace.</dd>
+        <dt>International Typographic (Swiss) Style</dt>
+        <dd>Grid-based layouts, strong typography & generous whitespace.</dd>
         <dt>Minimalist Web Design</dt>
-        <dd>Essential-only interfaces with whitespace & high-contrast type.</dd>
+        <dd>Interfaces stripped to essentials: whitespace & high-contrast type.</dd>
       </dl>
     </section>
 
@@ -186,9 +184,9 @@
       <h2>Responsive & Mobile-First (2010–present)</h2>
       <dl>
         <dt>Responsive Web Design</dt>
-        <dd>Fluid grids, flexible images & CSS media queries.</dd>
+        <dd>Fluid grids, flexible images & media queries.</dd>
         <dt>Mobile-First Approach</dt>
-        <dd>Design for small screens first, then scale up.</dd>
+        <dd>Design small first, then scale up for larger screens.</dd>
       </dl>
     </section>
 
@@ -203,12 +201,12 @@
     </section>
 
     <section id="parallax">
-      <h2>Parallax & SPAs (2012–2016)</h2>
+      <h2>Parallax & Single-Page Apps (2012–2016)</h2>
       <dl>
         <dt>Parallax Scrolling</dt>
         <dd>Layered backgrounds move at different speeds for depth.</dd>
-        <dt>Single-Page Apps</dt>
-        <dd>JavaScript-driven sites dynamically loading one page.</dd>
+        <dt>Single-Page Applications</dt>
+        <dd>JavaScript-driven sites loading content dynamically on one page.</dd>
       </dl>
     </section>
 
@@ -216,7 +214,7 @@
       <h2>Progressive Web Apps (2015–present)</h2>
       <dl>
         <dt>Progressive Web Design</dt>
-        <dd>App-like experiences with service workers & offline support.</dd>
+        <dd>App-like experiences with service workers, offline support & push notifications.</dd>
       </dl>
     </section>
 
@@ -232,7 +230,7 @@
       <h2>Brutalism (2015–present)</h2>
       <dl>
         <dt>Brutalist Web Design</dt>
-        <dd>Stark pages with raw HTML, plain fonts & bare-bones layouts.</dd>
+        <dd>Stark pages with raw HTML & plain fonts.</dd>
         <dt>Neo-Brutalism</dt>
         <dd>Brutalist structure plus neon or saturated colors.</dd>
       </dl>
@@ -242,7 +240,7 @@
       <h2>Dark Mode (2020–present)</h2>
       <dl>
         <dt>Dark Mode</dt>
-        <dd>Light-on-dark color schemes for reduced eye strain.</dd>
+        <dd>Light-on-dark color schemes to reduce eye strain.</dd>
       </dl>
     </section>
 
@@ -250,9 +248,9 @@
       <h2>Neumorphism & Glassmorphism (2020)</h2>
       <dl>
         <dt>Neumorphism</dt>
-        <dd>Soft shadows for extruded/inset UI elements.</dd>
+        <dd>Soft shadows for elements that appear extruded or inset.</dd>
         <dt>Glassmorphism</dt>
-        <dd>Translucent panels with backdrop blur.</dd>
+        <dd>Translucent, frosted panels with backdrop blur.</dd>
       </dl>
     </section>
 
@@ -260,7 +258,7 @@
       <h2>Maximalism & Corporate Memphis (2018–present)</h2>
       <dl>
         <dt>Corporate Memphis</dt>
-        <dd>Flat geometric illustrations with bright colors.</dd>
+        <dd>Flat, geometric illustrations with bendy-limbed characters.</dd>
       </dl>
     </section>
 
@@ -275,18 +273,18 @@
     </section>
 
     <section id="webgl">
-      <h2>3D & Immersive Web (2015–present)</h2>
+      <h2>WebGL & Immersive 3D (2015–present)</h2>
       <dl>
-        <dt>WebGL & 3D</dt>
-        <dd>Interactive 3D graphics & VR/AR in-browser.</dd>
+        <dt>WebGL & 3D Design</dt>
+        <dd>Interactive 3D graphics & VR/AR experiences in the browser.</dd>
       </dl>
     </section>
 
     <section id="accessibility">
-      <h2>Inclusive & Accessible Design (Ongoing)</h2>
+      <h2>Accessibility-First & Inclusive (Ongoing)</h2>
       <dl>
         <dt>Inclusive Design</dt>
-        <dd>ARIA roles, semantic HTML & user-centric accessibility.</dd>
+        <dd>ARIA roles, semantic HTML & user-centric accessibility choices.</dd>
       </dl>
     </section>
   </main>
@@ -294,87 +292,166 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       try {
-        const themeStyleEl = document.getElementById('theme-style');
-        const listItems = Array.from(document.querySelectorAll('#theme-list li'));
-        if (!themeStyleEl || listItems.length === 0) {
-          throw new Error('Missing theme-style element or theme-list items');
+        const themeStyleEl   = document.getElementById('theme-style');
+        const currentThemeEl = document.getElementById('current-theme');
+        const listItems      = Array.from(document.querySelectorAll('#theme-list li'));
+
+        if (!themeStyleEl || !currentThemeEl || listItems.length === 0) {
+          throw new Error('Theme switcher elements missing');
         }
 
         const themes = [
-          { name: 'Flat', css: `
-              body { background:#f5f5f5; color:#333; }
-              nav a, nav a:hover { color:#007acc; }
+          { name: 'Vernacular / Geocities', css: `
+              body { background: repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px);
+                     font-family: 'Comic Sans MS', cursive; color: #000; }
+              section > h2 { border-left-color: #cc0000; }
+              nav a, #theme-list li.active { color: #ff0000; background-color: #ff0000; }
             ` },
-          { name: 'Neumorphic', css: `
-              body { background:#e0e0e0; color:#333; }
-              .theme-switcher h2, nav a { color:#555; }
+          { name: 'Table-Based Design', css: `
+              body { background: #fff; font-family: 'Courier New', monospace; color: #000; }
+              main { display: table; width: 100%; }
+              section { display: table-cell; border: 1px solid #000; padding: 1rem; }
+              section > h2 { border-left-color: #000; }
+              nav a, #theme-list li.active { color: #000; background-color: #000; }
             ` },
-          { name: 'Skeuomorphism', css: `
-              body { background:#ddd; color:#222; font-family:'Times New Roman', serif; }
+          { name: 'Framesets', css: `
+              body { background: #eee; font-family: Tahoma, sans-serif; color: #333; }
+              nav { position: fixed; top: 0; left: 0; width: 20%; height: 100%; background: #ddd; }
+              main { margin-left: 20%; }
+              section > h2 { border-left-color: #333; }
+              nav a, #theme-list li.active { color: #333; background-color: #333; }
             ` },
-          { name: 'Brutalism', css: `
-              body { background:#fff; color:#000; font-family:monospace; }
-              nav a { text-decoration:none; }
+          { name: 'Flash-Based Design', css: `
+              body { background: #000; font-family: 'Arial Black', sans-serif; color: #fff; }
+              section > h2 { border-left-color: #ff00ff; }
+              nav a, #theme-list li.active { color: #ff00ff; background-color: #ff00ff; color: #000; }
             ` },
-          { name: 'Maximalism', css: `
-              body { background:repeating-linear-gradient(45deg,#ffe4e1,#ffe4e1 10px,#e6e6fa 10px,#e6e6fa 20px);
-                     color:#4b0082; }
+          { name: 'Web 2.0 Glossy', css: `
+              body { background: #f0f8ff; font-family: Verdana, sans-serif; color: #333; }
+              section > h2 { border-left-color: #1e90ff; }
+              nav a, #theme-list li.active { color: #1e90ff; background-color: #1e90ff; }
+            ` },
+          { name: 'Skeuomorphic', css: `
+              body { background: #ddd; font-family: 'Times New Roman', serif; color: #222; }
+              section > h2 { border-left-color: #875f3a; }
+              nav a, #theme-list li.active { color: #875f3a; background-color: #875f3a; }
+            ` },
+          { name: 'Swiss Style', css: `
+              body { background: #fff; font-family: 'Helvetica Neue', sans-serif; color: #000; }
+              section > h2 { border-left-color: #000; }
+              nav a, #theme-list li.active { color: #000; background-color: #000; }
+            ` },
+          { name: 'Minimalist', css: `
+              body { background: #fff; font-family: Arial, sans-serif; color: #000; }
+              section > h2 { border-left-color: #666; }
+              nav a, #theme-list li.active { color: #666; background-color: #666; }
+            ` },
+          { name: 'Responsive', css: `
+              body { background: #f9f9f9; font-family: Arial, sans-serif; color: #333; }
+              section > h2 { border-left-color: #009879; }
+              nav a, #theme-list li.active { color: #009879; background-color: #009879; }
+            ` },
+          { name: 'Mobile-First', css: `
+              body { background: #fff; font-family: Arial, sans-serif; color: #333; }
+              section > h2 { border-left-color: #ff6f61; }
+              nav a, #theme-list li.active { color: #ff6f61; background-color: #ff6f61; }
+            ` },
+          { name: 'Flat Design', css: `
+              body { background: #f5f5f5; font-family: Arial, sans-serif; color: #333; }
+              section > h2 { border-left-color: #333; }
+              nav a, #theme-list li.active { color: #333; background-color: #333; }
             ` },
           { name: 'Semi-Flat', css: `
-              body { background:#f0f0f0; color:#333; font-family:'Helvetica Neue',sans-serif; }
+              body { background: #f0f0f0; font-family: 'Helvetica Neue', sans-serif; color: #333; }
+              section > h2 { border-left-color: #4facfe; }
+              nav a, #theme-list li.active { color: #4facfe; background-color: #4facfe; }
             ` },
-          { name: 'Y2K Aesthetic', css: `
-              body { background:radial-gradient(circle at left,#ff9a9e,#fad0c4); color:#100023; }
+          { name: 'Parallax', css: `
+              body { background: #e8f5fd; font-family: Arial, sans-serif; color: #333; }
+              section > h2 { border-left-color: #1e88e5; }
+              nav a, #theme-list li.active { color: #1e88e5; background-color: #1e88e5; }
             ` },
-          { name: 'Retro Style', css: `
-              body { background:linear-gradient(45deg,#f4e2d8,#f0c27b); color:#2c3e50;
-                     font-family:'Courier New',monospace; }
+          { name: 'Single-Page App', css: `
+              body { background: #fcf3cf; font-family: Verdana, sans-serif; color: #333; }
+              section > h2 { border-left-color: #f39c12; }
+              nav a, #theme-list li.active { color: #f39c12; background-color: #f39c12; }
             ` },
-          { name: 'Full-Page Headers', css: `
-              header { background:linear-gradient(to bottom right,#6a11cb,#2575fc); color:#fff; }
+          { name: 'Progressive Web App', css: `
+              body { background: #e0f7fa; font-family: Arial, sans-serif; color: #333; }
+              section > h2 { border-left-color: #00acc1; }
+              nav a, #theme-list li.active { color: #00acc1; background-color: #00acc1; }
             ` },
-          { name: 'Asymmetric Layouts', css: `
-              main { display:grid; grid-template-columns:2fr 1fr; gap:1rem; }
+          { name: 'Cinematic', css: `
+              body { background: #000; font-family: Georgia, serif; color: #fff; }
+              section > h2 { border-left-color: #ff0000; }
+              nav a, #theme-list li.active { color: #ff0000; background-color: #ff0000; }
             ` },
-          { name: 'Custom Illustrations', css: `
-              body { font-family:'Brush Script MT',cursive; }
+          { name: 'Brutalist', css: `
+              body { background: #fff; font-family: 'Courier New', monospace; color: #000; }
+              section > h2 { border-left-color: #000; }
+              nav a, #theme-list li.active { color: #000; background-color: #000; }
             ` },
-          { name: 'Color Trends', css: `
-              section { background:linear-gradient(90deg,#ff9a9e,#fad0c4); padding:0.5rem; }
-            ` },
-          { name: 'Micro-Interactions', css: `
-              section:hover { transform:scale(1.02); transition:transform 0.3s; }
-            ` },
-          { name: '3D Elements', css: `
-              main { perspective:800px; }
-              section { transform:rotateX(5deg); }
-            ` },
-          { name: 'Scrapbook-Style', css: `
-              section { border:2px dashed #666; background:#fffbe6; padding:1rem; }
+          { name: 'Neo-Brutalism', css: `
+              body { background: #000; font-family: 'Courier New', monospace; color: #0f0; }
+              section > h2 { border-left-color: #0f0; }
+              nav a, #theme-list li.active { color: #0f0; background-color: #0f0; }
             ` },
           { name: 'Dark Mode', css: `
-              body { background:#121212; color:#e0e0e0; }
+              body { background: #121212; font-family: Arial, sans-serif; color: #e0e0e0; }
+              section > h2 { border-left-color: #e0e0e0; }
+              nav a, #theme-list li.active { color: #e0e0e0; background-color: #e0e0e0; }
             ` },
-          { name: 'Experimental Nav', css: `
-              nav { transform:skew(-10deg); }
+          { name: 'Neumorphism', css: `
+              body { background: #e0e0e0; font-family: 'Segoe UI', sans-serif; color: #333; }
+              section > h2 { border-left-color: #ccc; }
+              nav a, #theme-list li.active { color: #888; background-color: #e0e0e0; }
             ` },
-          { name: 'Bold Minimalism', css: `
-              body { background:#fff; color:#000; font-weight:900; }
-              h1 { font-size:2.5rem; }
+          { name: 'Glassmorphism', css: `
+              body { background: rgba(255,255,255,0.3); backdrop-filter: blur(8px); font-family: Arial, sans-serif; color: #333; }
+              section > h2 { border-left-color: #999; }
+              nav a, #theme-list li.active { color: #555; background-color: rgba(255,255,255,0.5); }
+            ` },
+          { name: 'Corporate Memphis', css: `
+              body { background: #ff6f61; font-family: Helvetica, sans-serif; color: #fff; }
+              section > h2 { border-left-color: #fff; }
+              nav a, #theme-list li.active { color: #fff; background-color: #fff; color: #ff6f61; }
+            ` },
+          { name: 'Retro Web', css: `
+              body { background: repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px); font-family: 'Courier New', monospace; color: #0f0; }
+              section > h2 { border-left-color: #0ff; }
+              nav a, #theme-list li.active { color: #0ff; background-color: #0ff; }
+            ` },
+          { name: 'Y2K Web', css: `
+              body { background: linear-gradient(to right,#00f,#0ff); font-family: Arial, sans-serif; color: #000; }
+              section > h2 { border-left-color: #fff; }
+              nav a, #theme-list li.active { color: #fff; background-color: #fff; color: #00f; }
+            ` },
+          { name: 'WebGL & 3D', css: `
+              body { background: #001; font-family: 'Courier New', monospace; color: #0f0; }
+              section > h2 { border-left-color: #0f0; }
+              nav a, #theme-list li.active { color: #0f0; background-color: #0f0; }
+            ` },
+          { name: 'Inclusive Design', css: `
+              body { background: #fff; font-family: Arial, sans-serif; color: #000; }
+              section > h2 { border-left-color: #007acc; }
+              nav a, #theme-list li.active { color: #007acc; background-color: #007acc; }
             ` }
         ];
 
         let current = 0;
+
         function applyTheme(idx) {
           if (!themes[idx]) {
             console.error('Invalid theme index:', idx);
             return;
           }
-          themeStyleEl.textContent = themes[idx].css;
+          themeStyleEl.textContent   = themes[idx].css;
+          currentThemeEl.textContent = 'Current Style: ' + themes[idx].name;
           listItems.forEach(li => {
             li.classList.toggle('active', parseInt(li.dataset.index, 10) === idx);
           });
-          console.log(`Applied theme: ${themes[idx].name}`);
+          current = idx;
+          console.log('Applied theme:', themes[idx].name);
         }
 
         // initialize
@@ -383,9 +460,11 @@
         // click to select
         listItems.forEach(li => {
           li.addEventListener('click', () => {
-            const idx = parseInt(li.dataset.index, 10);
-            try { applyTheme(idx); }
-            catch (e) { console.error('Theme apply failed:', e); }
+            try {
+              applyTheme(parseInt(li.dataset.index, 10));
+            } catch (err) {
+              console.error('Theme selection failed:', err);
+            }
           });
         });
 
@@ -393,11 +472,11 @@
         document.addEventListener('keydown', e => {
           if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
             e.preventDefault();
-            applyTheme((current = (current + 1) % themes.length));
+            applyTheme((current + 1) % themes.length);
           }
         });
       } catch (initErr) {
-        console.error('Theme switcher init failed:', initErr);
+        console.error('Initialization failed:', initErr);
       }
     });
   </script>
