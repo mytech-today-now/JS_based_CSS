@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,32 +58,38 @@
       max-width: 900px;
       margin: 0 auto;
     }
-    section {
-      margin-bottom: 1.5rem;
+    article.style-card {
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #fff;
+      transition: transform .2s;
     }
-    section > h2 {
-      font-size: 1.5rem;
-      border-left: 4px solid #007acc;
-      padding-left: .5rem;
-      margin-bottom: .75rem;
+    article.style-card:hover { transform: scale(1.02); }
+    .style-title {
+      font-size: 1.25rem;
+      margin-bottom: .25rem;
+      cursor: pointer;
+      color: #007acc;
     }
-    dl { margin-left: 1rem; }
-    dt { font-weight: bold; margin-top: .5rem; }
-    dd { margin-left: 1.5rem; margin-bottom: .5rem; }
+    .style-era { font-style: italic; margin-bottom: .5rem; }
+    .style-description { margin-bottom: .5rem; }
+    .style-links a { margin-right: .5rem; color: #007acc; }
   </style>
 
-  <!-- This is where the selected theme's CSS will go -->
+  <!-- Dynamic theme CSS will be injected here -->
   <style id="theme-style"></style>
 </head>
+
 <body>
   <header>
     <h1>Interactive Web Design Styles Showcase</h1>
-    <p><small>Use the controls below or press <strong>Ctrl + Shift + Space</strong> to cycle</small></p>
+    <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
   </header>
 
   <div class="theme-switcher">
-    <h2>Select Style</h2>
-    <p id="current-theme">Current Style: Vernacular / Geocities</p>
+    <h2 id="current-theme">Current Style: Vernacular / Geocities</h2>
     <ul id="theme-list">
       <li data-index="0" class="active">Vernacular / Geocities</li>
       <li data-index="1">Table-Based Design</li>
@@ -113,372 +120,611 @@
     </ul>
   </div>
 
-  <nav aria-label="Jump to era">
-    <a href="#vernacular">1991–1995</a> |
-    <a href="#table-frames">1993–1998</a> |
-    <a href="#flash">1996–2008</a> |
-    <a href="#web2">2004–2013</a> |
-    <a href="#swiss">2000s–present</a> |
-    <a href="#responsive">2010–present</a> |
-    <a href="#flat-era">2010–present</a> |
-    <a href="#parallax">2012–2016</a> |
-    <a href="#pwa">2015–present</a> |
-    <a href="#cinematic">2010s</a> |
-    <a href="#brutalism-era">2015–present</a> |
-    <a href="#darkmode-era">2020–present</a> |
-    <a href="#softui">2020</a> |
-    <a href="#maximalism-era">2018–present</a> |
-    <a href="#retro-era">2020s</a> |
-    <a href="#webgl">2015–present</a> |
-    <a href="#accessibility">Ongoing</a>
-  </nav>
-
   <main>
-    <section id="vernacular">
-      <h2>Early Vernacular Web (1991–1995)</h2>
-      <dl>
-        <dt>Vernacular / Geocities Style</dt>
-        <dd>Amateur pages with tiled backgrounds, animated GIFs, “Under Construction” signs & visitor counters.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="0">
+      <h3 class="style-title">Vernacular / Geocities</h3>
+      <p class="style-era">1991–1995</p>
+      <p class="style-description">
+        Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs, and visitor counters.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/GeoCities" target="_blank">GeoCities (Wikipedia)</a>
+        <a href="https://en.wikipedia.org/wiki/Under_Construction" target="_blank">Under Construction (Wikipedia)</a>
+      </p>
+    </article>
 
-    <section id="table-frames">
-      <h2>Table-Based & Frame-Based Layouts (1993–1998)</h2>
-      <dl>
-        <dt>Table-Based Design</dt>
-        <dd>Using HTML tables for multi-column layouts before CSS adoption.</dd>
-        <dt>Framesets</dt>
-        <dd>Splitting the window into independent panes (navigation, content, etc.).</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="1">
+      <h3 class="style-title">Table-Based Design</h3>
+      <p class="style-era">1993–1998</p>
+      <p class="style-description">
+        Using HTML tables to approximate multi-column layouts before CSS adoption.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/HTML_table" target="_blank">HTML Tables</a>
+        <a href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS (Wikipedia)</a>
+      </p>
+    </article>
 
-    <section id="flash">
-      <h2>Flash-Based Design (1996–2008)</h2>
-      <dl>
-        <dt>Flash Animations & Intros</dt>
-        <dd>Rich animations and full-screen intros via Macromedia Flash.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="2">
+      <h3 class="style-title">Framesets</h3>
+      <p class="style-era">1993–1998</p>
+      <p class="style-description">
+        Splitting the browser window into independent panes (navigation, content, etc.), often leading to usability challenges.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/HTML_frame" target="_blank">HTML Frames</a>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/frame" target="_blank">MDN Frames</a>
+      </p>
+    </article>
 
-    <section id="web2">
-      <h2>Web 2.0 Glossy & Skeuomorphic (2004–2013)</h2>
-      <dl>
-        <dt>Web 2.0</dt>
-        <dd>Glossy buttons, reflections, stock-photo headers & “beta” tags.</dd>
-        <dt>Skeuomorphic Design</dt>
-        <dd>Real-world textures (leather, paper, metal) in UI.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="3">
+      <h3 class="style-title">Flash-Based Design</h3>
+      <p class="style-era">1996–2008</p>
+      <p class="style-description">
+        Rich animations, interactive menus, and full-screen intros created with Macromedia Flash.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Adobe_Flash" target="_blank">Adobe Flash</a>
+        <a href="https://en.wikipedia.org/wiki/Adobe_Animate" target="_blank">Adobe Animate</a>
+      </p>
+    </article>
 
-    <section id="swiss">
-      <h2>Swiss & Minimalist Influences (2000s–present)</h2>
-      <dl>
-        <dt>International Typographic (Swiss) Style</dt>
-        <dd>Grid-based layouts, strong typography & generous whitespace.</dd>
-        <dt>Minimalist Web Design</dt>
-        <dd>Interfaces stripped to essentials: whitespace & high-contrast type.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="4">
+      <h3 class="style-title">Web 2.0 Glossy</h3>
+      <p class="style-era">2004–2013</p>
+      <p class="style-description">
+        Glossy buttons, drop shadows, reflections, stock-photo headers, and “beta” tags characterized this era.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Web_2.0" target="_blank">Web 2.0</a>
+        <a href="https://www.wired.com/" target="_blank">WIRED Magazine</a>
+      </p>
+    </article>
 
-    <section id="responsive">
-      <h2>Responsive & Mobile-First (2010–present)</h2>
-      <dl>
-        <dt>Responsive Web Design</dt>
-        <dd>Fluid grids, flexible images & media queries.</dd>
-        <dt>Mobile-First Approach</dt>
-        <dd>Design small first, then scale up for larger screens.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="5">
+      <h3 class="style-title">Skeuomorphic</h3>
+      <p class="style-era">2004–2013</p>
+      <p class="style-description">
+        Interfaces mimicking real-world textures (leather, paper, metal), popularized by early iOS UIs.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Skeuomorph" target="_blank">Skeuomorph</a>
+        <a href="https://en.wikipedia.org/wiki/Apple_Human_Interface_Guidelines#Skeuomorphism" target="_blank">iOS Skeuomorphism</a>
+      </p>
+    </article>
 
-    <section id="flat-era">
-      <h2>Flat Design & Variations (2010–present)</h2>
-      <dl>
-        <dt>Flat Design</dt>
-        <dd>Simple elements, flat colors, no ornamental textures.</dd>
-        <dt>Semi-Flat</dt>
-        <dd>Flat plus subtle shadows or minimal gradients.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="6">
+      <h3 class="style-title">Swiss Style</h3>
+      <p class="style-era">2000s–present</p>
+      <p class="style-description">
+        Grid-based layouts, strong use of typography, and generous whitespace.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Swiss_Style" target="_blank">International Typographic Style</a>
+        <a href="https://en.wikipedia.org/wiki/Helvetica" target="_blank">Helvetica</a>
+      </p>
+    </article>
 
-    <section id="parallax">
-      <h2>Parallax & Single-Page Apps (2012–2016)</h2>
-      <dl>
-        <dt>Parallax Scrolling</dt>
-        <dd>Layered backgrounds move at different speeds for depth.</dd>
-        <dt>Single-Page Applications</dt>
-        <dd>JavaScript-driven sites loading content dynamically on one page.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="7">
+      <h3 class="style-title">Minimalist</h3>
+      <p class="style-era">2000s–present</p>
+      <p class="style-description">
+        Stripping interfaces to essentials—white space, high-contrast typography, and minimal UI elements.
+      </p>
+      <p class="style-links">
+        <a href="https://www.nngroup.com/articles/minimalist-web-design/" target="_blank">NNG: Minimalist Design</a>
+        <a href="https://en.wikipedia.org/wiki/Minimalism" target="_blank">Minimalism</a>
+      </p>
+    </article>
 
-    <section id="pwa">
-      <h2>Progressive Web Apps (2015–present)</h2>
-      <dl>
-        <dt>Progressive Web Design</dt>
-        <dd>App-like experiences with service workers, offline support & push notifications.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="8">
+      <h3 class="style-title">Responsive</h3>
+      <p class="style-era">2010–present</p>
+      <p class="style-description">
+        Fluid grids, flexible images, and CSS media queries ensure layouts adapt to any screen size.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Responsive_web_design" target="_blank">Responsive Web Design</a>
+        <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries" target="_blank">MDN Media Queries</a>
+      </p>
+    </article>
 
-    <section id="cinematic">
-      <h2>Cinematic & Video Backgrounds (2010s)</h2>
-      <dl>
-        <dt>Cinematic Design</dt>
-        <dd>Full-screen video headers & story-driven layouts.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="9">
+      <h3 class="style-title">Mobile-First</h3>
+      <p class="style-era">2010–present</p>
+      <p class="style-description">
+        Designing for small screens first, then enhancing for larger viewports.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Mobile-first_design" target="_blank">Mobile-First Design</a>
+        <a href="https://www.smashingmagazine.com/2011/01/guidelines-for-responsive-web-design/" target="_blank">Smashing Magazine</a>
+      </p>
+    </article>
 
-    <section id="brutalism-era">
-      <h2>Brutalism (2015–present)</h2>
-      <dl>
-        <dt>Brutalist Web Design</dt>
-        <dd>Stark pages with raw HTML & plain fonts.</dd>
-        <dt>Neo-Brutalism</dt>
-        <dd>Brutalist structure plus neon or saturated colors.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="10">
+      <h3 class="style-title">Flat Design</h3>
+      <p class="style-era">2010–present</p>
+      <p class="style-description">
+        Minimalist UI with simple elements, flat colors, and no ornamental textures.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Flat_design" target="_blank">Flat Design</a>
+        <a href="https://en.wikipedia.org/wiki/Metro_(design_language)" target="_blank">Metro UI</a>
+      </p>
+    </article>
 
-    <section id="darkmode-era">
-      <h2>Dark Mode (2020–present)</h2>
-      <dl>
-        <dt>Dark Mode</dt>
-        <dd>Light-on-dark color schemes to reduce eye strain.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="11">
+      <h3 class="style-title">Semi-Flat</h3>
+      <p class="style-era">2010–present</p>
+      <p class="style-description">
+        Flat foundations augmented with subtle shadows or minimal gradients to enhance hierarchy.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Flat_design#Flat_2.0" target="_blank">Flat 2.0 (Semi-Flat)</a>
+        <a href="https://uxplanet.org/semi-flat-design-principles-and-examples-6d1d90d82469" target="_blank">Semi-Flat Principles</a>
+      </p>
+    </article>
 
-    <section id="softui">
-      <h2>Neumorphism & Glassmorphism (2020)</h2>
-      <dl>
-        <dt>Neumorphism</dt>
-        <dd>Soft shadows for elements that appear extruded or inset.</dd>
-        <dt>Glassmorphism</dt>
-        <dd>Translucent, frosted panels with backdrop blur.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="12">
+      <h3 class="style-title">Parallax</h3>
+      <p class="style-era">2012–2016</p>
+      <p class="style-description">
+        Layered backgrounds move at different speeds for a 3D effect.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Parallax_scrolling" target="_blank">Parallax Scrolling</a>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Parallax" target="_blank">MDN Parallax</a>
+      </p>
+    </article>
 
-    <section id="maximalism-era">
-      <h2>Maximalism & Corporate Memphis (2018–present)</h2>
-      <dl>
-        <dt>Corporate Memphis</dt>
-        <dd>Flat, geometric illustrations with bendy-limbed characters.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="13">
+      <h3 class="style-title">Single-Page App</h3>
+      <p class="style-era">2012–2016</p>
+      <p class="style-description">
+        JavaScript-driven sites loading content dynamically on one page.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Single-page_application" target="_blank">SPA</a>
+        <a href="https://angular.io/guide/architecture" target="_blank">Angular SPA Guide</a>
+      </p>
+    </article>
 
-    <section id="retro-era">
-      <h2>Retro & Y2K Aesthetics (2020s)</h2>
-      <dl>
-        <dt>Retro Web Design</dt>
-        <dd>Pixel art, marquee text & neon 90s/00s motifs.</dd>
-        <dt>Y2K Web Design</dt>
-        <dd>Chrome buttons, metallic gradients & playful type.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="14">
+      <h3 class="style-title">Progressive Web App</h3>
+      <p class="style-era">2015–present</p>
+      <p class="style-description">
+        App-like experiences with service workers, offline support, and push notifications.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Progressive_web_app" target="_blank">PWA</a>
+        <a href="https://web.dev/what-are-pwas/" target="_blank">web.dev guide</a>
+      </p>
+    </article>
 
-    <section id="webgl">
-      <h2>WebGL & Immersive 3D (2015–present)</h2>
-      <dl>
-        <dt>WebGL & 3D Design</dt>
-        <dd>Interactive 3D graphics & VR/AR experiences in the browser.</dd>
-      </dl>
-    </section>
+    <article class="style-card" data-index="15">
+      <h3 class="style-title">Cinematic</h3>
+      <p class="style-era">2010s</p>
+      <p class="style-description">
+        Full-screen video headers, ambient soundscapes, and story-driven layouts.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Video_background" target="_blank">Video Background</a>
+        <a href="https://webflow.com/blog/video-backgrounds" target="_blank">Webflow guide</a>
+      </p>
+    </article>
 
-    <section id="accessibility">
-      <h2>Accessibility-First & Inclusive (Ongoing)</h2>
-      <dl>
-        <dt>Inclusive Design</dt>
-        <dd>ARIA roles, semantic HTML & user-centric accessibility choices.</dd>
-      </dl>
-    </section>
-  </main>
+    <article class="style-card" data-index="16">
+      <h3 class="style-title">Brutalist</h3>
+      <p class="style-era">2015–present</p>
+      <p class="style-description">
+        Stark, unstyled pages emphasizing raw HTML, plain fonts, and bare-bones layouts.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Brutalist_Web_Design" target="_blank">Brutalist Web Design</a>
+        <a href="https://verpex.com/blog/brutalist-web-design/" target="_blank">Verpex Brutalism</a>
+      </p>
+    </article>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        const themeStyleEl   = document.getElementById('theme-style');
-        const currentThemeEl = document.getElementById('current-theme');
-        const listItems      = Array.from(document.querySelectorAll('#theme-list li'));
+    <article class="style-card" data-index="17">
+      <h3 class="style-title">Neo-Brutalism</h3>
+      <p class="style-era">2015–present</p>
+      <p class="style-description">
+        Modern spin combining brutalist structure with bright neon or saturated colors.
+      </p>
+      <p class="style-links">
+        <a href="https://web.dev/neo-brutalism/" target="_blank">Neo-Brutalism</a>
+        <a href="https://fireart.studio/blog/neo-brutalism/" target="_blank">Fireart Neo-Brutalism</a>
+      </p>
+    </article>
 
-        if (!themeStyleEl || !currentThemeEl || listItems.length === 0) {
-          throw new Error('Theme switcher elements missing');
-        }
+    <article class="style-card" data-index="18">
+      <h3 class="style-title">Dark Mode</h3>
+      <p class="style-era">2020–present</p>
+      <p class="style-description">
+        Light-on-dark color schemes reduce eye strain and feel sleek and modern.
+      </p>
+      <p class="style-links">
+        <a href="https://bluecompass.com/articles/dark-mode-web-design/" target="_blank">Dark Mode Guide</a>
+        <a href="https://css-tricks.com/dark-modes-with-css/" target="_blank">CSS-Tricks Dark Mode</a>
+      </p>
+    </article>
 
-        const themes = [
-          { name: 'Vernacular / Geocities', css: `
-              body { background: repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px);
-                     font-family: 'Comic Sans MS', cursive; color: #000; }
-              section > h2 { border-left-color: #cc0000; }
-              nav a, #theme-list li.active { color: #ff0000; background-color: #ff0000; }
-            ` },
-          { name: 'Table-Based Design', css: `
-              body { background: #fff; font-family: 'Courier New', monospace; color: #000; }
-              main { display: table; width: 100%; }
-              section { display: table-cell; border: 1px solid #000; padding: 1rem; }
-              section > h2 { border-left-color: #000; }
-              nav a, #theme-list li.active { color: #000; background-color: #000; }
-            ` },
-          { name: 'Framesets', css: `
-              body { background: #eee; font-family: Tahoma, sans-serif; color: #333; }
-              nav { position: fixed; top: 0; left: 0; width: 20%; height: 100%; background: #ddd; }
-              main { margin-left: 20%; }
-              section > h2 { border-left-color: #333; }
-              nav a, #theme-list li.active { color: #333; background-color: #333; }
-            ` },
-          { name: 'Flash-Based Design', css: `
-              body { background: #000; font-family: 'Arial Black', sans-serif; color: #fff; }
-              section > h2 { border-left-color: #ff00ff; }
-              nav a, #theme-list li.active { color: #ff00ff; background-color: #ff00ff; color: #000; }
-            ` },
-          { name: 'Web 2.0 Glossy', css: `
-              body { background: #f0f8ff; font-family: Verdana, sans-serif; color: #333; }
-              section > h2 { border-left-color: #1e90ff; }
-              nav a, #theme-list li.active { color: #1e90ff; background-color: #1e90ff; }
-            ` },
-          { name: 'Skeuomorphic', css: `
-              body { background: #ddd; font-family: 'Times New Roman', serif; color: #222; }
-              section > h2 { border-left-color: #875f3a; }
-              nav a, #theme-list li.active { color: #875f3a; background-color: #875f3a; }
-            ` },
-          { name: 'Swiss Style', css: `
-              body { background: #fff; font-family: 'Helvetica Neue', sans-serif; color: #000; }
-              section > h2 { border-left-color: #000; }
-              nav a, #theme-list li.active { color: #000; background-color: #000; }
-            ` },
-          { name: 'Minimalist', css: `
-              body { background: #fff; font-family: Arial, sans-serif; color: #000; }
-              section > h2 { border-left-color: #666; }
-              nav a, #theme-list li.active { color: #666; background-color: #666; }
-            ` },
-          { name: 'Responsive', css: `
-              body { background: #f9f9f9; font-family: Arial, sans-serif; color: #333; }
-              section > h2 { border-left-color: #009879; }
-              nav a, #theme-list li.active { color: #009879; background-color: #009879; }
-            ` },
-          { name: 'Mobile-First', css: `
-              body { background: #fff; font-family: Arial, sans-serif; color: #333; }
-              section > h2 { border-left-color: #ff6f61; }
-              nav a, #theme-list li.active { color: #ff6f61; background-color: #ff6f61; }
-            ` },
-          { name: 'Flat Design', css: `
-              body { background: #f5f5f5; font-family: Arial, sans-serif; color: #333; }
-              section > h2 { border-left-color: #333; }
-              nav a, #theme-list li.active { color: #333; background-color: #333; }
-            ` },
-          { name: 'Semi-Flat', css: `
-              body { background: #f0f0f0; font-family: 'Helvetica Neue', sans-serif; color: #333; }
-              section > h2 { border-left-color: #4facfe; }
-              nav a, #theme-list li.active { color: #4facfe; background-color: #4facfe; }
-            ` },
-          { name: 'Parallax', css: `
-              body { background: #e8f5fd; font-family: Arial, sans-serif; color: #333; }
-              section > h2 { border-left-color: #1e88e5; }
-              nav a, #theme-list li.active { color: #1e88e5; background-color: #1e88e5; }
-            ` },
-          { name: 'Single-Page App', css: `
-              body { background: #fcf3cf; font-family: Verdana, sans-serif; color: #333; }
-              section > h2 { border-left-color: #f39c12; }
-              nav a, #theme-list li.active { color: #f39c12; background-color: #f39c12; }
-            ` },
-          { name: 'Progressive Web App', css: `
-              body { background: #e0f7fa; font-family: Arial, sans-serif; color: #333; }
-              section > h2 { border-left-color: #00acc1; }
-              nav a, #theme-list li.active { color: #00acc1; background-color: #00acc1; }
-            ` },
-          { name: 'Cinematic', css: `
-              body { background: #000; font-family: Georgia, serif; color: #fff; }
-              section > h2 { border-left-color: #ff0000; }
-              nav a, #theme-list li.active { color: #ff0000; background-color: #ff0000; }
-            ` },
-          { name: 'Brutalist', css: `
-              body { background: #fff; font-family: 'Courier New', monospace; color: #000; }
-              section > h2 { border-left-color: #000; }
-              nav a, #theme-list li.active { color: #000; background-color: #000; }
-            ` },
-          { name: 'Neo-Brutalism', css: `
-              body { background: #000; font-family: 'Courier New', monospace; color: #0f0; }
-              section > h2 { border-left-color: #0f0; }
-              nav a, #theme-list li.active { color: #0f0; background-color: #0f0; }
-            ` },
-          { name: 'Dark Mode', css: `
-              body { background: #121212; font-family: Arial, sans-serif; color: #e0e0e0; }
-              section > h2 { border-left-color: #e0e0e0; }
-              nav a, #theme-list li.active { color: #e0e0e0; background-color: #e0e0e0; }
-            ` },
-          { name: 'Neumorphism', css: `
-              body { background: #e0e0e0; font-family: 'Segoe UI', sans-serif; color: #333; }
-              section > h2 { border-left-color: #ccc; }
-              nav a, #theme-list li.active { color: #888; background-color: #e0e0e0; }
-            ` },
-          { name: 'Glassmorphism', css: `
-              body { background: rgba(255,255,255,0.3); backdrop-filter: blur(8px); font-family: Arial, sans-serif; color: #333; }
-              section > h2 { border-left-color: #999; }
-              nav a, #theme-list li.active { color: #555; background-color: rgba(255,255,255,0.5); }
-            ` },
-          { name: 'Corporate Memphis', css: `
-              body { background: #ff6f61; font-family: Helvetica, sans-serif; color: #fff; }
-              section > h2 { border-left-color: #fff; }
-              nav a, #theme-list li.active { color: #fff; background-color: #fff; color: #ff6f61; }
-            ` },
-          { name: 'Retro Web', css: `
-              body { background: repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px); font-family: 'Courier New', monospace; color: #0f0; }
-              section > h2 { border-left-color: #0ff; }
-              nav a, #theme-list li.active { color: #0ff; background-color: #0ff; }
-            ` },
-          { name: 'Y2K Web', css: `
-              body { background: linear-gradient(to right,#00f,#0ff); font-family: Arial, sans-serif; color: #000; }
-              section > h2 { border-left-color: #fff; }
-              nav a, #theme-list li.active { color: #fff; background-color: #fff; color: #00f; }
-            ` },
-          { name: 'WebGL & 3D', css: `
-              body { background: #001; font-family: 'Courier New', monospace; color: #0f0; }
-              section > h2 { border-left-color: #0f0; }
-              nav a, #theme-list li.active { color: #0f0; background-color: #0f0; }
-            ` },
-          { name: 'Inclusive Design', css: `
-              body { background: #fff; font-family: Arial, sans-serif; color: #000; }
-              section > h2 { border-left-color: #007acc; }
-              nav a, #theme-list li.active { color: #007acc; background-color: #007acc; }
-            ` }
-        ];
+    <article class="style-card" data-index="19">
+      <h3 class="style-title">Neumorphism</h3>
+      <p class="style-era">2020</p>
+      <p class="style-description">
+        Soft inner/outer shadows create elements that appear extruded or inset into the background.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Neumorphism" target="_blank">Neumorphism</a>
+        <a href="https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6" target="_blank">Neumorphism UI</a>
+      </p>
+    </article>
 
-        let current = 0;
+    <article class="style-card" data-index="20">
+      <h3 class="style-title">Glassmorphism</h3>
+      <p class="style-era">2020</p>
+      <p class="style-description">
+        Translucent, frosted-glass panels with backdrop blur to convey depth and layering.
+      </p>
+      <p class="style-links">
+        <a href="https://www.nngroup.com/articles/glassmorphism/" target="_blank">Glassmorphism (NNG)</a>
+        <a href="https://css-tricks.com/glassmorphism-using-backdrop-filter/" target="_blank">CSS-Tricks</a>
+      </p>
+    </article>
 
-        function applyTheme(idx) {
-          if (!themes[idx]) {
-            console.error('Invalid theme index:', idx);
-            return;
-          }
-          themeStyleEl.textContent   = themes[idx].css;
-          currentThemeEl.textContent = 'Current Style: ' + themes[idx].name;
-          listItems.forEach(li => {
-            li.classList.toggle('active', parseInt(li.dataset.index, 10) === idx);
-          });
-          current = idx;
-          console.log('Applied theme:', themes[idx].name);
-        }
+    <article class="style-card" data-index="21">
+      <h3 class="style-title">Corporate Memphis</h3>
+      <p class="style-era">2018–present</p>
+      <p class="style-description">
+        Flat, geometric illustrations featuring bendy-limbed characters and bright colors.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Corporate_Memphis" target="_blank">Corporate Memphis</a>
+        <a href="https://medium.com/corporate-memphis" target="_blank">Medium: Corporate Memphis</a>
+      </p>
+    </article>
 
-        // initialize
-        applyTheme(current);
+    <article class="style-card" data-index="22">
+      <h3 class="style-title">Retro Web</h3>
+      <p class="style-era">2020s</p>
+      <p class="style-description">
+        Nostalgic callbacks to 90s/00s motifs—pixel art, marquee text, neon color palettes.
+      </p>
+      <p class="style-links">
+        <a href="https://fireart.studio/blog/retro-web-design/" target="_blank">Retro Web Design</a>
+        <a href="https://99designs.com/blog/web-design/trends/nostalgic-web-design-trends/" target="_blank">99designs Nostalgia</a>
+      </p>
+    </article>
 
-        // click to select
-        listItems.forEach(li => {
-          li.addEventListener('click', () => {
-            try {
-              applyTheme(parseInt(li.dataset.index, 10));
-            } catch (err) {
-              console.error('Theme selection failed:', err);
-            }
-          });
-        });
+    <article class="style-card" data-index="23">
+      <h3 class="style-title">Y2K Web</h3>
+      <p class="style-era">2020s</p>
+      <p class="style-description">
+        Early-2000s chrome buttons, metallic gradients, and playful typography.
+      </p>
+      <p class="style-links">
+        <a href="https://fireart.studio/blog/y2k-web-design/" target="_blank">Y2K Web Design</a>
+        <a href="https://medium.com/y2k-web" target="_blank">Medium: Y2K Web</a>
+      </p>
+    </article>
 
-        // Ctrl+Shift+Space to cycle
-        document.addEventListener('keydown', e => {
-          if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
-            e.preventDefault();
-            applyTheme((current + 1) % themes.length);
-          }
-        });
-      } catch (initErr) {
-        console.error('Initialization failed:', initErr);
+    <article class="style-card" data-index="24">
+      <h3 class="style-title">WebGL & 3D</h3>
+      <p class="style-era">2015–present</p>
+      <p class="style-description">
+        Interactive 3D graphics, model viewers, and VR/AR experiences directly in the browser.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a>
+        <a href="https://threejs.org/" target="_blank">three.js</a>
+      </p>
+    </article>
+
+    <article class="style-card" data-index="25">
+      <h3 class="style-title">Inclusive Design</h3>
+      <p class="style-era">Ongoing</p>
+      <p class="style-description">
+        Prioritizing ARIA roles, semantic HTML, and user-centric considerations for all abilities.
+      </p>
+      <p class="style-links">
+        <a href="https://en.wikipedia.org/wiki/Accessible_design" target="_blank">Accessible Design</a>
+        <a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">W3C Accessibility</a>
+      </p>
+    </article>
+  </main><script>
+jQuery(function($) {
+  try {
+    // 1. Migrate any legacy .load(fn) calls to .on('load', fn):
+    //    Example: $('img.lazy').on('load', function(){ /* … */ });
+
+    // 2. Guard theme‐switcher elements
+    const $themeStyle   = $('#theme-style');
+    const $currentTheme = $('#current-theme');
+    const $themeList    = $('#theme-list');
+    if (!$themeStyle.length || !$currentTheme.length || !$themeList.length) {
+      console.warn('Theme switcher not detected on this page; skipping initialization.');
+      return;
+    }
+
+    // 3. Define all themes (chronological)
+    const themes = [
+      {
+        name: 'Vernacular / Geocities',
+        css: `
+          body { background: repeating-linear-gradient(45deg,#ffcccc,#ffcccc 10px,#ffeeee 10px,#ffeeee 20px); font-family:'Comic Sans MS',cursive; color:#000; }
+          article.style-card { background:#fff2f2; border-color:#cc0000; }
+          .style-title { color:#cc0000; }
+          nav a, #theme-list li.active { color:#cc0000; background:#ffcccc; }
+        `
+      },
+      {
+        name: 'Table-Based Design',
+        css: `
+          body { background:#fff; font-family:'Courier New',monospace; color:#000; }
+          main { display:table; width:100%; }
+          article.style-card { display:table-cell; border:2px solid #000; background:#fff; }
+          .style-title { color:#000; }
+          nav a, #theme-list li.active { color:#000; background:#ccc; }
+        `
+      },
+      {
+        name: 'Framesets',
+        css: `
+          body { background:#eee; font-family:Tahoma,sans-serif; color:#333; }
+          nav { position:fixed; top:0; left:0; width:20%; height:100%; background:#ddd; }
+          main { margin-left:20%; }
+          article.style-card { background:#f9f9f9; border:2px solid #333; }
+          .style-title { color:#333; }
+          nav a, #theme-list li.active { color:#333; background:#ddd; }
+        `
+      },
+      {
+        name: 'Flash-Based Design',
+        css: `
+          body { background:#000; font-family:'Arial Black',sans-serif; color:#fff; }
+          article.style-card { background:#111; border:2px solid #f0f; }
+          .style-title { color:#f0f; }
+          nav a, #theme-list li.active { color:#f0f; background:#220022; }
+        `
+      },
+      {
+        name: 'Web 2.0 Glossy',
+        css: `
+          body { background:#f0f8ff; font-family:Verdana,sans-serif; color:#333; }
+          article.style-card { background:#fff; border:2px solid #1e90ff; box-shadow:0 0 10px rgba(30,144,255,.5); }
+          .style-title { color:#1e90ff; }
+          nav a, #theme-list li.active { color:#1e90ff; background:#d0e8ff; }
+        `
+      },
+      {
+        name: 'Skeuomorphic',
+        css: `
+          body { background:#ddd; font-family:'Times New Roman',serif; color:#222; }
+          article.style-card { background:#f9f9f4; border:2px inset #ccc; }
+          .style-title { color:#875f3a; }
+          nav a, #theme-list li.active { color:#875f3a; background:#eee2d0; }
+        `
+      },
+      {
+        name: 'Swiss Style',
+        css: `
+          body { background:#fff; font-family:'Helvetica Neue',sans-serif; color:#000; }
+          article.style-card { background:#fafafa; border:2px solid #000; }
+          .style-title { color:#000; }
+          nav a, #theme-list li.active { color:#000; background:#ccc; }
+        `
+      },
+      {
+        name: 'Minimalist',
+        css: `
+          body { background:#fff; font-family:Arial,sans-serif; color:#000; }
+          article.style-card { background:#fff; border:1px solid #666; }
+          .style-title { color:#666; }
+          nav a, #theme-list li.active { color:#666; background:#e0e0e0; }
+        `
+      },
+      {
+        name: 'Responsive',
+        css: `
+          body { background:#f9f9f9; font-family:Arial,sans-serif; color:#333; }
+          article.style-card { background:#fff; border:2px solid #009879; }
+          .style-title { color:#009879; }
+          nav a, #theme-list li.active { color:#009879; background:#d0f7ec; }
+        `
+      },
+      {
+        name: 'Mobile-First',
+        css: `
+          body { background:#fff; font-family:Arial,sans-serif; color:#333; }
+          article.style-card { background:#fff; border:2px solid #ff6f61; }
+          .style-title { color:#ff6f61; }
+          nav a, #theme-list li.active { color:#ff6f61; background:#ffe6e2; }
+        `
+      },
+      {
+        name: 'Flat Design',
+        css: `
+          body { background:#f5f5f5; font-family:Arial,sans-serif; color:#333; }
+          article.style-card { background:#fff; border:2px solid #333; }
+          .style-title { color:#333; }
+          nav a, #theme-list li.active { color:#333; background:#cccccc; }
+        `
+      },
+      {
+        name: 'Semi-Flat',
+        css: `
+          body { background:#f0f0f0; font-family:'Helvetica Neue',sans-serif; color:#333; }
+          article.style-card { background:linear-gradient(135deg,#fff,#f8f8f8); border:2px solid #4facfe; }
+          .style-title { color:#4facfe; }
+          nav a, #theme-list li.active { color:#4facfe; background:#e7f5ff; }
+        `
+      },
+      {
+        name: 'Parallax',
+        css: `
+          body { background:#e8f5fd; font-family:Arial,sans-serif; color:#333; }
+          article.style-card { background:#fff; border:2px solid #1e88e5; transform:perspective(600px) translateZ(10px); }
+          .style-title { color:#1e88e5; }
+          nav a, #theme-list li.active { color:#1e88e5; background:#d0e8fe; }
+        `
+      },
+      {
+        name: 'Single-Page App',
+        css: `
+          body { background:#fcf3cf; font-family:Verdana,sans-serif; color:#333; }
+          article.style-card { background:#fff; border:2px solid #f39c12; }
+          .style-title { color:#f39c12; }
+          nav a, #theme-list li.active { color:#f39c12; background:#fde8cf; }
+        `
+      },
+      {
+        name: 'Progressive Web App',
+        css: `
+          body { background:#e0f7fa; font-family:Arial,sans-serif; color:#333; }
+          article.style-card { background:#fff; border:2px solid #00acc1; }
+          .style-title { color:#00acc1; }
+          nav a, #theme-list li.active { color:#00acc1; background:#d4f1f9; }
+        `
+      },
+      {
+        name: 'Cinematic',
+        css: `
+          body { background:#000; font-family:Georgia,serif; color:#fff; }
+          article.style-card { background:#111; border:2px solid #f00; }
+          .style-title { color:#f00; }
+          nav a, #theme-list li.active { color:#f00; background:#300; }
+        `
+      },
+      {
+        name: 'Brutalist',
+        css: `
+          body { background:#fff; font-family:'Courier New',monospace; color:#000; }
+          article.style-card { background:#fff; border:3px solid #000; }
+          .style-title { color:#000; }
+          nav a, #theme-list li.active { color:#000; background:#ccc; }
+        `
+      },
+      {
+        name: 'Neo-Brutalism',
+        css: `
+          body { background:#000; font-family:'Courier New',monospace; color:#0f0; }
+          article.style-card { background:#111; border:3px solid #0f0; }
+          .style-title { color:#0f0; }
+          nav a, #theme-list li.active { color:#0f0; background:#030; }
+        `
+      },
+      {
+        name: 'Dark Mode',
+        css: `
+          body { background:#121212; font-family:Arial,sans-serif; color:#e0e0e0; }
+          article.style-card { background:#1e1e1e; border:2px solid #444; }
+          .style-title { color:#e0e0e0; }
+          nav a, #theme-list li.active { color:#e0e0e0; background:#444; }
+        `
+      },
+      {
+        name: 'Neumorphism',
+        css: `
+          body { background:#e0e0e0; font-family:'Segoe UI',sans-serif; color:#333; }
+          article.style-card { background:#e0e0e0; border-radius:12px; box-shadow:8px 8px 16px rgba(0,0,0,0.2), -8px -8px 16px rgba(255,255,255,0.7); }
+          .style-title { color:#555; }
+          nav a, #theme-list li.active { color:#555; background:#d0d0d0; }
+        `
+      },
+      {
+        name: 'Glassmorphism',
+        css: `
+          body { background:rgba(255,255,255,0.3); backdrop-filter:blur(8px); font-family:Arial,sans-serif; color:#333; }
+          article.style-card { background:rgba(255,255,255,0.5); border:2px solid rgba(255,255,255,0.8); backdrop-filter:blur(8px); }
+          .style-title { color:#333; }
+          nav a, #theme-list li.active { color:#333; background:rgba(255,255,255,0.6); }
+        `
+      },
+      {
+        name: 'Corporate Memphis',
+        css: `
+          body { background:#ff6f61; font-family:Helvetica,sans-serif; color:#fff; }
+          article.style-card { background:#fff; border:2px solid #fff; }
+          .style-title { color:#ff6f61; }
+          nav a, #theme-list li.active { color:#ff6f61; background:#fff; }
+        `
+      },
+      {
+        name: 'Retro Web',
+        css: `
+          body { background:repeating-linear-gradient(90deg,#f0,#0ff 10px,#f0 20px); font-family:'Courier New',monospace; color:#0f0; }
+          article.style-card { background:#001; border:2px solid #0ff; }
+          .style-title { color:#0ff; }
+          nav a, #theme-list li.active { color:#0ff; background:#003; }
+        `
+      },
+      {
+        name: 'Y2K Web',
+        css: `
+          body { background:linear-gradient(to right,#00f,#0ff); font-family:Arial,sans-serif; color:#000; }
+          article.style-card { background:rgba(255,255,255,0.8); border:2px solid #fff; }
+          .style-title { color:#00f; }
+          nav a, #theme-list li.active { color:#00f; background:#fff; }
+        `
+      },
+      {
+        name: 'WebGL & 3D',
+        css: `
+          body { background:#001; font-family:'Courier New',monospace; color:#0f0; perspective:800px; }
+          article.style-card { background:#002; border:2px solid #0f0; transform:rotateX(5deg); }
+          .style-title { color:#0f0; }
+          nav a, #theme-list li.active { color:#0f0; background:#003; }
+        `
+      },
+      {
+        name: 'Inclusive Design',
+        css: `
+          body { background:#fff; font-family:Arial,sans-serif; color:#000; }
+          article.style-card { background:#f9f9f9; border:2px solid #007acc; }
+          .style-title { color:#007acc; }
+          nav a, #theme-list li.active { color:#007acc; background:#e0f0ff; }
+        `
+      }
+    ];
+
+    let current = 0;
+
+    function applyTheme(idx) {
+      if (!themes[idx]) {
+        console.error('Invalid theme index:', idx);
+        return;
+      }
+      themeStyleEl.text(themes[idx].css);
+      currentThemeEl.text('Current Style: ' + themes[idx].name);
+      $themeList.children().removeClass('active').eq(idx).addClass('active');
+      current = idx;
+      console.log('Applied theme:', themes[idx].name);
+    }
+
+    // Initialize
+    applyTheme(current);
+
+    // Click‐to‐select
+    $themeList.on('click', 'li', function() {
+      applyTheme(parseInt($(this).data('index'), 10));
+    });
+    $('.style-title').on('click', function() {
+      const idx = parseInt($(this).closest('article').data('index'), 10);
+      applyTheme(idx);
+    });
+
+    // Keyboard cycle
+    $(document).on('keydown', function(e) {
+      if (e.ctrlKey && e.shiftKey && e.code === 'Space') {
+        e.preventDefault();
+        applyTheme((current + 1) % themes.length);
       }
     });
-  </script>
+  } catch (err) {
+    console.error('Initialization failed:', err);
+  }
+});
+</script>
 </body>
 </html>
