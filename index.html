@@ -518,14 +518,13 @@
     try {
       var $themeStyle    = $('#theme-style'),
           $currentTheme  = $('#current-theme'),
-          $themeList     = $('#theme-list'),
           $cssEditor     = $('#css-editor'),
           $heroSection   = $('.hero-section'),
           $contentWrapper = $('.content-wrapper'),
           $video1        = $('#traffic_videos_1'),
           $video2        = $('#traffic_videos_2');
 
-      if (!$themeStyle.length || !$currentTheme.length || !$themeList.length) {
+      if (!$themeStyle.length || !$currentTheme.length) {
         console.error('Essential elements missing, aborting initialization.');
         return;
       }
@@ -664,10 +663,19 @@
           console.error('Invalid theme index:', idx);
           return;
         }
+        
+        // Remove all theme classes
+        $('body').removeClass(function(index, className) {
+          return (className.match(/(^|\s)(?:vernacular|table-based|framesets|flash|web2|skeuomorphic|swiss|minimalist|responsive|mobile-first|flat-design|semi-flat|parallax|single-page|progressive|cinematic|brutalist|neo-brutalism|dark-mode|neumorphism|glassmorphism|corporate-memphis|retro-web|y2k-web|webgl|inclusive)\S*/g) || []).join(' ');
+        });
+        
+        // Add current theme class
+        var themeClass = themes[idx].name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        $('body').addClass(themeClass);
+        
         $themeStyle.text(themes[idx].css);
         $currentTheme.text('Current Style: ' + themes[idx].name);
-        $themeList.children().removeClass('active').eq(idx).addClass('active');
-
+        
         if ($cssEditor.length) {
           var formatted = formatCss(themes[idx].css);
           try {
@@ -768,10 +776,7 @@
       // Initialize
       applyTheme(current);
 
-      // Click handlers
-      $themeList.on('click', 'li', function() {
-        applyTheme(parseInt($(this).data('index'), 10));
-      });
+      // Click handlers - only for style-title now
       $('.style-title').on('click', function() {
         applyTheme(parseInt($(this).closest('article').data('index'), 10));
       });
