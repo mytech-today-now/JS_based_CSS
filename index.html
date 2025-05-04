@@ -4,7 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dynamic Theme Switcher</title>
-  <!-- Default to Flat theme -->
+
+  <!-- Static list styling -->
+  <style>
+    #theme-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    #theme-list li {
+      margin: 0 0.5rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      cursor: default;
+      transition: opacity 0.3s, background-color 0.3s;
+    }
+    #theme-list li.active {
+      font-weight: bold;
+      text-decoration: underline;
+      opacity: 1;
+    }
+    #theme-list li:not(.active) {
+      opacity: 0.6;
+    }
+  </style>
+
+  <!-- Theme CSS will be injected here -->
   <style id="theme-style">
     /* Flat Theme */
     body {
@@ -22,18 +50,30 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     h1 { margin-top: 0; }
+    #theme-name {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background-color: #333;
+      color: #fff;
+      display: inline-block;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <h1>Dynamic Theme Switcher</h1>
+    <p id="theme-name">Current Theme: Flat</p>
     <p>Press <strong>Ctrl + Shift + Space</strong> to cycle themes:</p>
-    <ul>
-      <li>Neumorphic</li>
-      <li>Flat</li>
-      <li>Skeuomorphism</li>
-      <li>Brutalism</li>
-      <li>Maximalism</li>
+    <ul id="theme-list">
+      <li data-index="0">Neumorphic</li>
+      <li data-index="1" class="active">Flat</li>
+      <li data-index="2">Skeuomorphism</li>
+      <li data-index="3">Brutalism</li>
+      <li data-index="4">Maximalism</li>
+      <li data-index="5">Semi-Flat</li>
+      <li data-index="6">Y2K Aesthetic</li>
     </ul>
   </div>
 
@@ -41,9 +81,14 @@
     document.addEventListener('DOMContentLoaded', () => {
       try {
         const themeStyleEl = document.getElementById('theme-style');
-        if (!themeStyleEl) {
-          throw new Error('Missing &lt;style id="theme-style"&gt; element.');
+        const themeNameEl  = document.getElementById('theme-name');
+        const themeListEl  = document.getElementById('theme-list');
+
+        if (!themeStyleEl || !themeNameEl || !themeListEl) {
+          throw new Error('Missing required elements: #theme-style, #theme-name, or #theme-list');
         }
+
+        const listItems = Array.from(themeListEl.querySelectorAll('li'));
 
         const themes = [
           {
@@ -61,10 +106,22 @@
                 padding: 2rem;
                 max-width: 400px;
                 margin: 4rem auto;
-                box-shadow:  8px 8px 16px rgba(0,0,0,0.2),
-                             -8px -8px 16px rgba(255,255,255,0.7);
+                box-shadow:
+                  8px 8px 16px rgba(0,0,0,0.2),
+                  -8px -8px 16px rgba(255,255,255,0.7);
               }
               h1 { margin-top: 0; }
+              #theme-name {
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                background: #e0e0e0;
+                box-shadow:
+                  inset 2px 2px 5px rgba(0,0,0,0.2),
+                  inset -2px -2px 5px rgba(255,255,255,0.7);
+                display: inline-block;
+                font-weight: bold;
+                margin-bottom: 1rem;
+              }
             `
           },
           {
@@ -85,6 +142,15 @@
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
               }
               h1 { margin-top: 0; }
+              #theme-name {
+                padding: 0.25rem 0.5rem;
+                border-radius: 4px;
+                background-color: #333;
+                color: #fff;
+                display: inline-block;
+                font-weight: bold;
+                margin-bottom: 1rem;
+              }
             `
           },
           {
@@ -105,6 +171,15 @@
                 box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
               }
               h1 { margin-top: 0; font-style: italic; }
+              #theme-name {
+                padding: 0.5rem;
+                border-radius: 4px;
+                background: #ccc;
+                border: 1px solid #999;
+                display: inline-block;
+                font-weight: bold;
+                margin-bottom: 1rem;
+              }
             `
           },
           {
@@ -124,6 +199,16 @@
                 margin: 4rem auto;
               }
               h1 { margin-top: 0; text-transform: uppercase; }
+              #theme-name {
+                padding: 0.5rem;
+                border-radius: 0;
+                background: #000;
+                color: #fff;
+                border: 2px solid #fff;
+                display: inline-block;
+                font-weight: bold;
+                margin-bottom: 1rem;
+              }
             `
           },
           {
@@ -155,11 +240,100 @@
                 from { transform: rotate(-1deg); }
                 to   { transform: rotate(1deg); }
               }
+              #theme-name {
+                padding: 0.5rem 1rem;
+                border-radius: 12px;
+                background: #e91e63;
+                color: #fff;
+                border: 3px dotted #ffeb3b;
+                display: inline-block;
+                font-weight: bold;
+                margin-bottom: 1rem;
+              }
+            `
+          },
+          {
+            name: 'Semi-Flat',
+            css: `
+              body {
+                margin: 0;
+                font-family: 'Helvetica Neue', sans-serif;
+                background: #f0f0f0;
+                color: #333;
+              }
+              .card {
+                background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+                border-radius: 8px;
+                padding: 2rem;
+                max-width: 400px;
+                margin: 4rem auto;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+              }
+              h1 { margin-top: 0; }
+              #theme-name {
+                padding: 0.25rem 0.75rem;
+                border-radius: 6px;
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                color: #fff;
+                display: inline-block;
+                font-weight: bold;
+                margin-bottom: 1rem;
+              }
+            `
+          },
+          {
+            name: 'Y2K Aesthetic',
+            css: `
+              body {
+                margin: 0;
+                font-family: 'Verdana', sans-serif;
+                background: radial-gradient(circle at top left, #ff9a9e, #fad0c4);
+                color: #100023;
+              }
+              .card {
+                background: rgba(255,255,255,0.8);
+                border: 2px solid #00FFFF;
+                padding: 2rem;
+                max-width: 400px;
+                margin: 4rem auto;
+                box-shadow: 0 0 10px rgba(0,255,255,0.5), 0 0 20px rgba(255,0,255,0.5);
+                backdrop-filter: blur(5px);
+              }
+              h1 {
+                margin-top: 0;
+                text-shadow: 2px 2px 4px #ff00ff;
+                animation: glow 1s infinite alternate;
+              }
+              @keyframes glow {
+                from { text-shadow: 0 0 5px #ff00ff; }
+                to   { text-shadow: 0 0 20px #00ffff; }
+              }
+              #theme-name {
+                padding: 0.5rem 1rem;
+                border-radius: 12px;
+                background: linear-gradient(90deg, #ff00ff, #00ffff);
+                color: #fff;
+                display: inline-block;
+                font-weight: bold;
+                margin-bottom: 1rem;
+                text-shadow: 1px 1px 2px #000;
+              }
             `
           }
         ];
 
-        let current = 1; // start on Flat (index 1)
+        let current = 1; // start on Flat
+        function updateActiveList() {
+          listItems.forEach(li => {
+            const idx = parseInt(li.dataset.index, 10);
+            li.classList.toggle('active', idx === current);
+          });
+        }
+
+        // Initialize display
+        themeStyleEl.textContent = themes[current].css;
+        themeNameEl.textContent = `Current Theme: ${themes[current].name}`;
+        updateActiveList();
         console.log(`Initial theme: ${themes[current].name}`);
 
         document.addEventListener('keydown', (e) => {
@@ -168,12 +342,15 @@
             try {
               current = (current + 1) % themes.length;
               themeStyleEl.textContent = themes[current].css;
+              themeNameEl.textContent = `Current Theme: ${themes[current].name}`;
+              updateActiveList();
               console.log(`Theme switched to: ${themes[current].name}`);
             } catch (err) {
               console.error('Failed to apply theme:', err);
             }
           }
         });
+
       } catch (initErr) {
         console.error('Theme switcher initialization failed:', initErr);
       }
