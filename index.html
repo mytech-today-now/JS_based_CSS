@@ -83,6 +83,17 @@
       text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
 
+    .era-timeline {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      margin: auto;
+      padding: 2rem;
+      overflow: hidden;
+      /* display: none; /* Hidden by default, shown in cinematic mode */
+    }
+
     main {
       max-width: 1200px; 
       margin: 0 auto;
@@ -175,11 +186,21 @@
       line-height: 1.5;
       padding: 10px;
       border-radius: 4px;
+      margin: 10px 0;
       border: 1px solid #ccc;
       background-color: #f9f9f9;
-      width: 100%;
+      max-width: 512vw;
+      min-width: 300px;
       min-height: 150px;
       resize: vertical;
+      
+    }
+
+    .css-editor {
+      margin: auto;
+      max-width: 800px;
+      text-align: center;
+      display: block;
     }
     
     body.dark-mode #css-editor {
@@ -234,13 +255,9 @@
     <div class="thirds header-content" style="flex-basis:450px;">
       <h1>Interactive Web Design Styles Showcase</h1>
       <p>From then to now.</p>
+      <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
     </div>
   </div>
-
-  <header>
-    <h1>Interactive Web Design Styles Showcase</h1>
-    <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
-  </header>
 
   <nav aria-label="Jump to era" class="era-timeline">
     <h3>Web Design Evolution Timeline</h3>
@@ -289,7 +306,7 @@ gantt
 
   <section class="css-editor">
     <h2>Current CSS</h2>
-    <textarea id="css-editor" readonly></textarea>
+    <textarea id="css-editor" editable></textarea>
   </section>
 
   <main>
@@ -610,18 +627,793 @@ gantt
   <!-- jQuery & Migrate -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
-  <script src="https://mytech.today/wp-content/uploads/custom-css-js/12419.js"></script>
+  <script src="./video.js"></script>
 
   <!-- Theme-switcher + CSS editor init -->
   <script>
   jQuery(function($) {
     try {
+      // Video sources for cinematic theme
+      var videoSources = [
+        "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-9161-large.mp4",
+        "https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4"
+      ];
+      
+      // Theme definitions
+      var themes = [
+        {
+          name: "Vernacular",
+          css: `
+            body { 
+              background: url('https://web.archive.org/web/19961022175643im_/http://www.geocities.com/Heartland/Hills/8280/tile.jpg') repeat;
+              color: navy;
+              font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            }
+            header { 
+              text-align: center; 
+              background: yellow;
+              border: 4px ridge blue;
+              padding: 10px;
+              margin: 10px;
+            }
+            header h1 { 
+              color: red; 
+              text-shadow: 2px 2px 0 yellow;
+              font-size: 36px;
+              margin-bottom: 5px;
+            }
+            .style-card {
+              background: #ffffcc;
+              border: 3px outset #cc9966;
+            }
+            .style-title {
+              color: #990000;
+              font-weight: bold;
+            }
+            .style-links a {
+              color: #0000ff;
+              text-decoration: underline;
+            }
+            .extra-under { display: block !important; }
+          `
+        },
+        {
+          name: "Table-Based Design",
+          css: `
+            body {
+              font-family: Arial, sans-serif;
+              background: #f0f0f0;
+              color: #333;
+            }
+            main {
+              display: table;
+              width: 100%;
+              border-collapse: collapse;
+            }
+            .style-card {
+              display: table-cell;
+              border: 1px solid #999;
+              padding: 10px;
+              background: white;
+            }
+            #main-table { display: block !important; }
+          `
+        },
+        {
+          name: "Framesets",
+          css: `
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: Verdana, sans-serif;
+            }
+            .frame-nav, .frame-content {
+              display: block !important;
+              position: fixed;
+              border: 2px inset #ccc;
+              background: #f0f0f0;
+            }
+            .frame-nav {
+              left: 0;
+              top: 0;
+              width: 200px;
+              height: 100%;
+              overflow: auto;
+              padding: 10px;
+            }
+            .frame-content {
+              left: 200px;
+              top: 0;
+              width: calc(100% - 200px);
+              height: 100%;
+              overflow: auto;
+              padding: 10px;
+              background: white;
+            }
+            main {
+              margin-left: 200px;
+            }
+          `
+        },
+        {
+          name: "Flash-Based Design",
+          css: `
+            body {
+              background: #000;
+              color: #fff;
+              font-family: Arial, sans-serif;
+              text-align: center;
+            }
+            .extra-flash-intro { 
+              display: block !important; 
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: #000;
+              z-index: 1000;
+            }
+            .style-card {
+              background: #333;
+              border-radius: 0;
+              border: 1px solid #666;
+              color: #fff;
+            }
+            .style-title {
+              color: #ff9900;
+            }
+            .style-links a {
+              color: #66ccff;
+            }
+          `
+        },
+        {
+          name: "Web 2.0 Glossy",
+          css: `
+            body {
+              font-family: 'Lucida Grande', Arial, sans-serif;
+              background: #f6f6f6;
+            }
+            .style-card {
+              border-radius: 8px;
+              border: 1px solid #ddd;
+              background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+            .style-title {
+              color: #0066cc;
+              text-shadow: 0 1px 0 white;
+            }
+            .beta-badge {
+              display: inline-block !important;
+              background: #ff6600;
+              color: white;
+              font-size: 10px;
+              padding: 2px 5px;
+              border-radius: 10px;
+              margin-left: 5px;
+              text-transform: uppercase;
+              font-weight: bold;
+            }
+          `
+        },
+        {
+          name: "Skeuomorphic",
+          css: `
+            body {
+              background: url('https://i.pinimg.com/originals/92/40/a2/9240a2a25f8b9eb9e3c3f8ea87f1c0f4.jpg') repeat;
+              font-family: 'Helvetica Neue', Arial, sans-serif;
+            }
+            .style-card {
+              background: url('https://i.pinimg.com/originals/d6/9a/9a/d69a9a9a9f2db8db1b0dfbf01c111234.jpg');
+              border-radius: 5px;
+              box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+              border: 1px solid #b8b8b8;
+            }
+            .card-texture {
+              display: block !important;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: url('https://i.imgur.com/FL3SmIu.jpeg');
+              opacity: 0.1;
+              pointer-events: none;
+            }
+          `
+        },
+        {
+          name: "Swiss Style",
+          css: `
+            body {
+              font-family: Helvetica, Arial, sans-serif;
+              background: white;
+              color: black;
+              line-height: 1.5;
+            }
+            main {
+              display: grid;
+              grid-template-columns: repeat(12, 1fr);
+              grid-gap: 20px;
+            }
+            .style-card {
+              grid-column: span 4;
+              background: white;
+              border: none;
+              border-bottom: 2px solid black;
+              border-radius: 0;
+              padding: 20px 0;
+            }
+            .style-title {
+              font-size: 18px;
+              font-weight: bold;
+              color: black;
+            }
+            .grid-overlay {
+              display: block !important;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: repeating-linear-gradient(
+                90deg,
+                rgba(255,0,0,0.03),
+                rgba(255,0,0,0.03) 8.33%,
+                transparent 8.33%,
+                transparent 16.66%
+              );
+              pointer-events: none;
+              z-index: 1000;
+            }
+          `
+        },
+        {
+          name: "Minimalist",
+          css: `
+            body {
+              font-family: 'Inter', sans-serif;
+              background: white;
+              color: #333;
+              line-height: 1.6;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 0;
+              padding: 30px 0;
+              box-shadow: none;
+            }
+            .style-title {
+              font-weight: 300;
+              font-size: 24px;
+              color: #000;
+            }
+            .style-description {
+              font-weight: 300;
+            }
+            .style-links a {
+              color: #000;
+              text-decoration: none;
+              border-bottom: 1px solid #000;
+              padding-bottom: 2px;
+            }
+          `
+        },
+        {
+          name: "Responsive",
+          css: `
+            body {
+              font-family: 'Open Sans', sans-serif;
+              background: #f9f9f9;
+            }
+            main {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+            }
+            .style-card {
+              flex: 0 0 calc(33.333% - 20px);
+              margin-bottom: 30px;
+              background: white;
+              border-radius: 5px;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              transition: all 0.3s ease;
+            }
+            @media (max-width: 992px) {
+              .style-card {
+                flex: 0 0 calc(50% - 15px);
+              }
+            }
+            @media (max-width: 576px) {
+              .style-card {
+                flex: 0 0 100%;
+              }
+            }
+          `
+        },
+        {
+          name: "Mobile-First",
+          css: `
+            body {
+              font-family: 'Roboto', sans-serif;
+              font-size: 16px;
+              line-height: 1.5;
+              color: #333;
+              background: #f5f5f5;
+            }
+            main {
+              padding: 10px;
+            }
+            .style-card {
+              width: 100%;
+              margin-bottom: 15px;
+              background: white;
+              border-radius: 5px;
+              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+              padding: 15px;
+            }
+            @media (min-width: 768px) {
+              main {
+                padding: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+              }
+              .style-card {
+                width: calc(50% - 10px);
+              }
+            }
+            @media (min-width: 992px) {
+              .style-card {
+                width: calc(33.333% - 15px);
+              }
+            }
+          `
+        },
+        {
+          name: "Flat Design",
+          css: `
+            body {
+              font-family: 'Segoe UI', 'Roboto', sans-serif;
+              background: #f9f9f9;
+              color: #333;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 2px;
+              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+              transition: all 0.2s ease;
+            }
+            .style-title {
+              color: #0078d7;
+            }
+            .style-links a {
+              color: #0078d7;
+              text-decoration: none;
+            }
+          `
+        },
+        {
+          name: "Semi-Flat",
+          css: `
+            body {
+              font-family: 'SF Pro Text', 'Roboto', sans-serif;
+              background: #f5f5f5;
+              color: #333;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+              transition: all 0.3s ease;
+            }
+            .style-card:hover {
+              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+              transform: translateY(-2px);
+            }
+            .style-title {
+              color: #007aff;
+            }
+          `
+        },
+        {
+          name: "Parallax",
+          css: `
+            body {
+              font-family: 'Montserrat', sans-serif;
+              background: #222;
+              color: white;
+              perspective: 1px;
+              height: 100vh;
+              overflow-x: hidden;
+              overflow-y: auto;
+            }
+            main {
+              transform-style: preserve-3d;
+            }
+            .style-card {
+              background: rgba(255,255,255,0.9);
+              color: #333;
+              border: none;
+              border-radius: 5px;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+              transform: translateZ(0);
+            }
+          `
+        },
+        {
+          name: "Single-Page App",
+          css: `
+            body {
+              font-family: 'Roboto', sans-serif;
+              background: #fafafa;
+              color: #333;
+              padding-top: 60px;
+            }
+            header {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              background: white;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              z-index: 100;
+              padding: 15px 0;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 2px;
+              box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+              transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            }
+          `
+        },
+        {
+          name: "Progressive Web App",
+          css: `
+            body {
+              font-family: 'Google Sans', 'Roboto', sans-serif;
+              background: #f5f5f5;
+              color: #202124;
+              margin: 0;
+              padding: 0;
+            }
+            header {
+              background: #1a73e8;
+              color: white;
+              padding: 16px;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+            .style-card {
+              background: white;
+              border-radius: 8px;
+              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+              margin-bottom: 16px;
+              overflow: hidden;
+            }
+          `
+        },
+        {
+          name: "Cinematic",
+          css: `
+            body {
+              font-family: 'Playfair Display', serif;
+              color: #666;
+              margin: 0;
+              padding: 0;
+              background: #000;
+            }
+            .hero-section, .content-wrapper {
+              display: block !important;
+            }
+            .video-background {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+              overflow: hidden;
+            }
+            .style-card {
+              background: rgba(0,0,0,0.7);
+              border: 1px solid rgba(255,255,255,0.2);
+              color: #666;
+            }
+            .style-title {
+              color: #333;
+              font-size: 24px;
+            }
+          `
+        },
+        {
+          name: "Brutalist",
+          css: `
+            body {
+              font-family: monospace;
+              background: white;
+              color: black;
+              margin: 0;
+              padding: 20px;
+              line-height: 1.2;
+            }
+            main {
+              max-width: none;
+              margin: 0;
+              padding: 0;
+            }
+            .style-card {
+              background: white;
+              border: 2px solid black;
+              border-radius: 0;
+              padding: 20px;
+              margin-bottom: 20px;
+              box-shadow: none;
+            }
+          `
+        },
+        {
+          name: "Neo-Brutalism",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "Dark Mode",
+          css: `
+            body {
+              font-family: 'SF Pro Text', 'Roboto', sans-serif;
+              background: #121212;
+              color: #e0e0e0;
+            }
+            .style-card {
+              background: #1e1e1e;
+              border: 1px solid #333;
+              border-radius: 8px;
+              color: #e0e0e0;
+            }
+            .style-title {
+              color: #bb86fc;
+            }
+            .style-links a {
+              color: #03dac6;
+            }
+            body.dark-mode #css-editor {
+              background-color: #2a2a2a;
+              color: #e0e0e0;
+              border-color: #444;
+            }
+          `
+        },
+        {
+          name: "Neumorphism",
+          css: `
+            body {
+              font-family: 'Poppins', sans-serif;
+              background: #e0e5ec;
+              color: #333;
+            }
+            .style-card {
+              background: #e0e5ec;
+              border-radius: 15px;
+              box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+              border: none;
+              padding: 20px;
+            }
+            .style-title {
+              color: #555;
+            }
+            .style-links a {
+              color: #555;
+              text-decoration: none;
+            }
+          `
+        },
+        {
+          name: "Glassmorphism",
+          css: `
+            body {
+              font-family: 'Segoe UI', 'Roboto', sans-serif;
+              background: #f9f9f9;
+              color: #333;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 2px;
+              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+              transition: all 0.2s ease;
+            }
+            .style-title {
+              color: #0078d7;
+            }
+            .style-links a {
+              color: #0078d7;
+              text-decoration: none;
+            }
+          `
+        },
+        {
+          name: "Corporate Memphis",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "Retro Web",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "Y2K Web",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "WebGL & 3D",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "Inclusive Design",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        }
+      ];
+      
       var $themeStyle = $('#theme-style'),
           $cssEditor = $('#css-editor'),
           $heroSection = $('.hero-section'),
           $contentWrapper = $('.content-wrapper'),
           $video1 = $('#traffic_videos_1'),
           $video2 = $('#traffic_videos_2');
+      
+      var current = 0;
+
+      // Format CSS for readability in the editor
+      function formatCss(css) {
+        try {
+          return css
+            .replace(/}/g, '}\n\n')
+            .replace(/{/g, ' {\n  ')
+            .replace(/;(?!.*\n)/g, ';\n  ')
+            .replace(/:/g, ': ')
+            .replace(/,(?=\S)/g, ', ')
+            .trim();
+        } catch (e) {
+          console.error('formatCss failed:', e);
+          return css;
+        }
+      }
+
+      // Apply theme by index
+      function applyTheme(index) {
+        try {
+          if (index < 0 || index >= themes.length) {
+            console.error('Invalid theme index:', index);
+            return;
+          }
+          
+          current = index;
+          var theme = themes[current];
+          
+          console.log('Applying theme:', theme.name);
+          
+          // Remove all theme-related classes from body
+          $('body').removeClass(function(index, className) {
+            return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
+          });
+          
+          // Add current theme class to body
+          $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
+          
+          // Apply CSS
+          $themeStyle.html(theme.css);
+          
+          // Update CSS editor with formatted CSS
+          $cssEditor.val(formatCss(theme.css));
+          
+          // Handle cinematic mode
+          if (theme.name === 'Cinematic') {
+            $heroSection.show();
+            $contentWrapper.show();
+            startCinematicVideos();
+          } else {
+            $heroSection.hide();
+            $contentWrapper.hide();
+          }
+          
+          // Update theme name display if it exists
+          if ($('#current-theme').length) {
+            $('#current-theme').text(theme.name);
+          }
+          
+        } catch (e) {
+          console.error('applyTheme failed:', e);
+        }
+      }
 
       // Preload videos for cinematic mode
       function preloadCinematicVideos() {
@@ -681,105 +1473,8 @@ gantt
         }
       }
 
-      var current = 0;
-
       // Preload cinematic videos on page load
       preloadCinematicVideos();
-
-      function formatCss(css) {
-        try {
-          return css
-            .replace(/}/g, '}\n')
-            .replace(/{/g, ' {\n')
-            .replace(/;/g, ';\n')
-            .replace(/:/g, ': ')
-            .replace(/,/g, ', \n')
-            .trim();
-        } catch (e) {
-          console.error('formatCss failed:', e);
-          return css;
-        }
-      }
-
-      function autosizeTextarea(el) {
-        try {
-          el.style.height = 'auto';
-          el.style.height = el.scrollHeight + 'px';
-        } catch (e) {
-          console.error('Textarea autosize failed:', e);
-        }
-      }
-
-      // Apply theme by index
-      function applyTheme(index) {
-        try {
-          if (index < 0 || index >= themes.length) {
-            console.error('Invalid theme index:', index);
-            return;
-          }
-          
-          current = index;
-          var theme = themes[current];
-          
-          console.log('Applying theme:', theme.name);
-          
-          // Remove all theme-related classes from body
-          $('body').removeClass(function(index, className) {
-            return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
-          });
-          
-          // Add current theme class to body
-          $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
-          
-          // Apply CSS
-          $themeStyle.html(theme.css);
-          
-          // Update CSS editor
-          $cssEditor.val(formatCss(theme.css));
-          autosizeTextarea($cssEditor[0]);
-          
-          // Handle cinematic mode
-          if (theme.name === 'Cinematic') {
-            $heroSection.show();
-            startCinematicVideos();
-          } else {
-            $heroSection.hide();
-          }
-          
-          // Update theme name display
-          $('#current-theme').text(theme.name);
-          
-          // Update Gantt chart styling based on theme
-          updateGanttStyling(theme.name.toLowerCase().replace(/\s+/g, '-'));
-          
-        } catch (e) {
-          console.error('applyTheme failed:', e);
-        }
-      }
-      
-      // Update Gantt chart styling based on current theme
-      function updateGanttStyling(themeName) {
-        try {
-          // Re-initialize Mermaid with theme-specific config
-          mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-            gantt: {
-              titleTopMargin: 25,
-              barHeight: 20,
-              barGap: 4,
-              topPadding: 50,
-              sidePadding: 50
-            }
-          });
-          
-          // Re-render the Gantt chart
-          mermaid.init(undefined, '.mermaid');
-          
-        } catch (e) {
-          console.error('Failed to update Gantt styling:', e);
-        }
-      }
 
       // Initialize with first theme
       applyTheme(0);
@@ -790,60 +1485,65 @@ gantt
         applyTheme(index);
       });
 
-      // Click handler for timeline elements
-      $('.mermaid').on('click', '.task, .taskText', function() {
-        var taskId = $(this).attr('id') || '';
-        
-        // Extract theme ID from task ID
-        var themeId = taskId.split('-')[0];
-        
-        // Find matching theme index
-        var themeIndex = themes.findIndex(function(theme) {
-          return theme.name.toLowerCase().replace(/\s+/g, '-') === themeId;
+      // Click handler for timeline elements in the Gantt chart
+      try {
+        $('.mermaid').on('click', '.task, .taskText', function() {
+          var taskId = $(this).attr('id') || '';
+          
+          // Extract theme ID from task ID
+          var themeId = taskId.split('-')[0];
+          
+          // Find matching theme index
+          var themeIndex = themes.findIndex(function(theme) {
+            return theme.name.toLowerCase().replace(/\s+/g, '-') === themeId;
+          });
+          
+          if (themeIndex >= 0) {
+            applyTheme(themeIndex);
+            console.log('Theme applied from Gantt chart:', themes[themeIndex].name);
+          }
         });
-        
-        if (themeIndex >= 0) {
-          applyTheme(themeIndex);
-        }
-      });
+      } catch (e) {
+        console.error('Failed to set up Gantt chart click handlers:', e);
+      }
 
       // Keyboard shortcut to cycle through themes
-      $(document).on('keydown', function(e) {
-        // Ctrl + Shift + Space
-        if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
-          var nextIndex = (current + 1) % themes.length;
-          applyTheme(nextIndex);
-          e.preventDefault();
-        }
-      });
+      try {
+        $(document).on('keydown', function(e) {
+          // Ctrl + Shift + Space
+          if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
+            var nextIndex = (current + 1) % themes.length;
+            applyTheme(nextIndex);
+            console.log('Theme cycled to:', themes[nextIndex].name);
+            e.preventDefault();
+          }
+        });
+      } catch (e) {
+        console.error('Failed to set up keyboard shortcuts:', e);
+      }
 
       // CSS Editor functionality
-      $('#reload-css').on('click', function() {
-        $cssEditor.val(formatCss(themes[current].css));
-        autosizeTextarea($cssEditor[0]);
-      });
-
-      $('#apply-css').on('click', function() {
-        try {
-          var customCss = $cssEditor.val();
-          $themeStyle.html(customCss);
-        } catch (e) {
-          console.error('Failed to apply custom CSS:', e);
-        }
+      // Apply custom CSS when the editor content changes
+      $cssEditor.on('input', function() {
+        var customCss = $(this).val();
+        $themeStyle.html(customCss);
+        console.log('Custom CSS applied');
       });
 
       // Initialize Mermaid
-      mermaid.initialize({
-        startOnLoad: true,
-        theme: 'default',
-        gantt: {
-          titleTopMargin: 25,
-          barHeight: 20,
-          barGap: 4,
-          topPadding: 50,
-          sidePadding: 50
-        }
-      });
+      if (typeof mermaid !== 'undefined') {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'default',
+          gantt: {
+            titleTopMargin: 25,
+            barHeight: 20,
+            barGap: 4,
+            topPadding: 50,
+            sidePadding: 50
+          }
+        });
+      }
 
     } catch (e) {
       console.error('Initialization failed:', e);
