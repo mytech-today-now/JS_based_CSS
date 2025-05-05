@@ -60,7 +60,7 @@
       padding-top: 40vh;
       color: #fff;
       text-align: center;
-      display: none; /* Hidden by default, shown in cinematic mode */
+      /* display: none;  Hidden by default, shown in cinematic mode */
     }
     
     .header-content {
@@ -278,28 +278,28 @@ gantt
     section 2000s
     Web 2.0 Glossy             :web2, 2004, 2013
     Skeuomorphic               :skeuomorphic, 2004, 2013
-    Swiss Style                :swiss, 2000, 2023
-    Minimalist                 :minimalist, 2000, 2023
+    Swiss Style                :swiss, 2000, 2025
+    Minimalist                 :minimalist, 2000, 2025
     
     section 2010s
-    Responsive Design          :responsive, 2010, 2023
-    Flat Design                :flat-design, 2010, 2023
+    Responsive Design          :responsive, 2010, 2025
+    Flat Design                :flat-design, 2010, 2025
     Parallax                   :parallax, 2012, 2016
     Single-Page App            :spa, 2012, 2016
-    Progressive Web App        :pwa, 2015, 2023
+    Progressive Web App        :pwa, 2015, 2025
     Cinematic                  :cinematic, 2010, 2019
-    Brutalist                  :brutalist, 2015, 2023
-    Neo-Brutalism              :neo-brutalism, 2015, 2023
-    Corporate Memphis          :corporate-memphis, 2018, 2023
-    WebGL & 3D                 :webgl-3d, 2015, 2023
+    Brutalist                  :brutalist, 2015, 2025
+    Neo-Brutalism              :neo-brutalism, 2015, 2025
+    Corporate Memphis          :corporate-memphis, 2018, 2025
+    WebGL & 3D                 :webgl-3d, 2015, 2025
     
     section 2020s
-    Dark Mode                  :dark-mode, 2020, 2023
-    Neumorphism                :neumorphism, 2020, 2020
-    Glassmorphism              :glassmorphism, 2020, 2020
-    Retro Web                  :retro-web, 2020, 2023
-    Y2K Web                    :y2k-web, 2020, 2023
-    Inclusive Design           :inclusive-design, 2010, 2023
+    Dark Mode                  :dark-mode, 2020, 2025
+    Neumorphism                :neumorphism, 2020, 2021
+    Glassmorphism              :glassmorphism, 2020, 2021
+    Retro Web                  :retro-web, 2020, 2025
+    Y2K Web                    :y2k-web, 2020, 2025
+    Inclusive Design           :inclusive-design, 2010, 2025
     </div>
   </div>
 </nav>
@@ -649,14 +649,16 @@ gantt
               color: navy;
               font-family: 'Comic Sans MS', 'Comic Sans', cursive;
             }
-            header { 
+            .header-content { 
               text-align: center; 
               background: yellow;
               border: 4px ridge blue;
               padding: 10px;
               margin: 10px;
+              top: 20px;
+              display: visible;
             }
-            header h1 { 
+            .header-content h1 { 
               color: red; 
               text-shadow: 2px 2px 0 yellow;
               font-size: 36px;
@@ -802,11 +804,16 @@ gantt
           name: "Skeuomorphic",
           css: `
             body {
-              background: url('https://i.imgur.com/Ncrkb8L.png') cover;
+              
               font-family: 'Helvetica Neue', Arial, sans-serif;
             }
-
             .style-card {
+              background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
+              border-radius: 5px;
+              box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+              border: 1px solid #b8b8b8;
+            }
+            .card-texture {
               display: block !important;
               position: absolute;
               top: 0;
@@ -816,9 +823,12 @@ gantt
               background: url('https://i.imgur.com/FL3SmIu.jpeg');
               opacity: 0.1;
               pointer-events: none;
-              border-radius: 5px;
-              box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-              border: 1px solid #b8b8b8;
+            }
+            .era-timeline {
+              display: block !important;
+              background: url('https://img.freepik.com/free-photo/white-gypsum-wall_1194-6990.jpg?t=st=1746443052~exp=1746446652~hmac=a2420a81ff31a63454846c9c05c450b65b5a3982ffc27fd89a63d2b85f7ca563&w=1380');
+              pointer-events: none;
+              
             }
           `
         },
