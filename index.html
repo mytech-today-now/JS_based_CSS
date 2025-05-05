@@ -4,6 +4,16 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Interactive Web Design Styles Showcase</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR81E31MX4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YR81E31MX4');
+  </script>
+  
   <style>
     /* Base styles */
     body {
@@ -11,78 +21,135 @@
       font-family: Arial, sans-serif;
       line-height: 1.6;
     }
+      /* Ensure site header stays at the very top */
+#site-header {
+    position: sticky;
+    z-index: 100; /* Ensure header stays above hero section */
+}
+
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.grid-item {
+  flex: 1 1 300px;
+  border: 1px solid var(--accent-color);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  box-sizing: border-box;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  radius: var(--rounded);
+}
+
+.grid-item p {
+  margin: 0.5rem;
+}
+
+/* Hero Section and Video Background */
+.hero-section {
+position: fixed;  /* Change from relative to fixed */
+top: 0;          /* Add top positioning */
+left: 0;         /* Add left positioning */
+width: 100%;     /* Simplify width */
+height: 100vh;   /* Keep full viewport height */
+z-index: -1;     /* Ensure it stays behind content */
+}
+
+.video-background {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+}
+
+/* Video Container Styling */
+#traffic_videos {
+position: relative;
+width: 100%;
+height: 100%;
+background-color: black;    /* Fallback color */
+}
+
+/* Individual Video Elements */
+[id$="_videos_1"],
+[id$="_videos_2"]	{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;          /* Maintain aspect ratio while covering */
+transition: opacity 1s ease-in-out;
+opacity: 0;
+display: none;
+}
+
+/* Video Overlay */
+.video-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.2);
+z-index: 1;
+}
+
+/* Content Wrapper Adjustments */
+.content-wrapper {
+position: relative;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: var(--padding);
+z-index: 2;
+margin: 0;                  /* Remove any margins */
+}
+
+/* Header Content */
+.header-content {
+flex: 1 1 33%;
+padding: 2rem;
+border-radius: var(--rounded);
+text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+backdrop-filter: var(--blur);
+opacity: var(--opacity);
+max-height: 35%;
+max-width: 35%;
+}
+
+.header-content h1 {
+font-size: 2.5rem;
+margin-bottom: 1rem;
+}
+
+.header-content p {
+font-size: 1.2rem;
+line-height: 1.6;
+}
     
-    /* Hero section for cinematic style */
-    .hero-section {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      z-index: -1;
-      display: none; /* Hidden by default, shown in cinematic mode */
-    }
     
-    .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-    
-    #traffic_videos {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      transform: translateX(-50%) translateY(-50%);
-    }
-    
-    #traffic_videos video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-    
-    .content-wrapper {
-      position: relative;
-      padding-top: 40vh;
-      color: #fff;
-      text-align: center;
-      /* display: none;  Hidden by default, shown in cinematic mode */
-    }
-    
-    .header-content {
-      margin: 0 auto;
-      padding: 2rem;
-      background: rgba(0,0,0,0.5);
-      border-radius: 8px;
-      max-width: 600px;
-    }
-    
-    .header-content h1 {
+    .content-wrapper h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     
-    .header-content p {
+    .content-wrapper p {
       font-size: 1.5rem;
       margin-bottom: 2rem;
       text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
-
+    
     .era-timeline {
       top: 0;
       left: 0;
@@ -234,6 +301,64 @@
     .mermaid .task, .mermaid text.taskText {
       position: relative;
     }
+
+    /* Container for all ads */
+.ad-group {
+width: 80%;
+margin: 2rem auto;
+padding: 1rem;
+border-radius: var(--rounded);
+background-color: var(--content-bg);
+box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
+}
+
+/* Each ad line */
+.ad-group .ad-line {
+margin: 0.75rem 0;
+padding: 0.75rem 1rem;
+background-color: var(--bg-color);
+
+transition: transform 0.3s ease;
+border: 1px solid var(--accent-color);
+}
+
+/* Hover effect for ad lines */
+.ad-group .ad-line:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 6px var(--shadow-dark);
+}
+
+/* Link styling */
+.ad-group .ad-line a {
+display: block;
+color: var(--text-color);
+font-weight: 600;
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+/* Link hover state */
+.ad-group .ad-line a:hover {
+color: var(--text-color);
+text-decoration: underline;
+}
+
+/* ===== Main Container & Layout ===== */
+#main-core {
+max-width: 1300px;
+margin: 0 auto;
+}
+
+/* Ensure main content scrolls above video */
+main {
+position: relative;
+max-width: 85%;
+align-items: center;
+justify-content: center;
+padding: 0;                 /* Remove any padding */
+margin: auto;                  /* Remove any margins */
+top: 10vh;
+}
   </style>
 
   <!-- Dynamic theme CSS will be injected here -->
@@ -252,7 +377,7 @@
     </div>
   </div>
   <div class="content-wrapper">
-    <div class="thirds header-content" style="flex-basis:450px;">
+    <div class="header-content" style="flex-basis:450px;">
       <h1>Interactive Web Design Styles Showcase</h1>
       <p>From then to now.</p>
       <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
@@ -264,7 +389,7 @@
     <div class="mermaid-wrapper">
       <div class="mermaid" id="era-timeline">
 gantt
-    title Web Design Styles Timeline
+    title       Web Design History
     dateFormat  YYYY
     axisFormat  %Y
     todayMarker off
@@ -645,28 +770,36 @@ gantt
           name: "Vernacular",
           css: `
             body { 
-              background: url('https://web.archive.org/web/19961022175643im_/http://www.geocities.com/Heartland/Hills/8280/tile.jpg') repeat;
-              color: navy;
+              background: rgb(246, 243, 74);
               font-family: 'Comic Sans MS', 'Comic Sans', cursive;
             }
-            .header-content { 
+            .content-wrapper
               text-align: center; 
               background: yellow;
               border: 4px ridge blue;
               padding: 10px;
               margin: 10px;
-              top: 20px;
+              top: 10px;
               display: visible;
+              position: relative;
             }
             .header-content h1 { 
-              color: red; 
+              color: #ff0000; 
               text-shadow: 2px 2px 0 yellow;
-              font-size: 36px;
+              font-size: 15vw;
               margin-bottom: 5px;
+            }
+            .era-timeline { 
+              display: block !important;
+              background: #ffffff;
+              opacity: 0.7;
             }
             .style-card {
               background: #ffffcc;
               border: 3px outset #cc9966;
+            }
+            .style-description {
+              color: #333333;
             }
             .style-title {
               color: #990000;
@@ -1112,13 +1245,25 @@ gantt
           css: `
             body {
               font-family: 'Playfair Display', serif;
-              color: #666;
+              color: #fff;
+              text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
               margin: 0;
               padding: 0;
               background: #000;
             }
             .hero-section, .content-wrapper {
               display: block !important;
+            }
+            .era-timeline {
+              top: 0;
+              left: 0;
+              width: 80%;
+              margin: auto;
+              padding: 2rem;
+              overflow: hidden;
+              background: rgba(255, 255, 255, 0.5);
+              backdrop-filter: 2px;
+              /* display: none; /* Hidden by default, shown in cinematic mode */
             }
             .video-background {
               position: fixed;
@@ -1363,18 +1508,457 @@ gantt
       // Format CSS for readability in the editor
       function formatCss(css) {
         try {
-          return css
+          // Format the CSS
+          const formattedCss = css
             .replace(/}/g, '}\n\n')
             .replace(/{/g, ' {\n  ')
             .replace(/;(?!.*\n)/g, ';\n  ')
             .replace(/:/g, ': ')
             .replace(/,(?=\S)/g, ', ')
             .trim();
+          
+          // Send Google Analytics event for successful CSS formatting
+          if (typeof gtag === 'function') {
+            gtag('event', 'css_formatting', {
+              'event_category': 'CSS Editor',
+              'event_label': 'CSS Formatted Successfully',
+              'value': css.length
+            });
+          }
+          
+          return formattedCss;
         } catch (e) {
           console.error('formatCss failed:', e);
+          
+          // Send Google Analytics event for CSS formatting error
+          if (typeof gtag === 'function') {
+            gtag('event', 'error', {
+              'event_category': 'CSS Editor',
+              'event_label': 'CSS Formatting Error',
+              'value': 0,
+              'description': e.message || 'Unknown error'
+            });
+          }
+          
           return css;
         }
       }
+
+      // Add a dark mode toggle to the UI
+      $('.header-content').append(`
+        <div class="dark-mode-toggle">
+          <label class="switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider round"></span>
+          </label>
+          <span>Dark Mode</span>
+        </div>
+      `);
+
+      // Add dark mode toggle styles
+      $('head').append(`
+        <style>
+          .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+          }
+          .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin-right: 10px;
+          }
+          .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+          }
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+          }
+          input:checked + .slider {
+            background-color: #2196F3;
+          }
+          input:checked + .slider:before {
+            transform: translateX(26px);
+          }
+          .slider.round {
+            border-radius: 34px;
+          }
+          .slider.round:before {
+            border-radius: 50%;
+          }
+        </style>
+      `);
+
+      // Modify theme definitions to include custom dark variants for each theme
+      themes.forEach(theme => {
+        // Store the original (light) CSS
+        theme.lightCss = theme.css;
+        
+        // Create a custom dark version based on the theme
+        switch(theme.name) {
+          case "Dark Mode":
+            // Dark Mode theme is already dark, just enhance it
+            theme.darkCss = `
+              body {
+                background: #121212;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background: #1e1e1e;
+                border: 1px solid #333;
+                border-radius: 8px;
+                color: #e0e0e0;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              .style-links a {
+                color: #03dac6;
+              }
+              body.dark-mode #css-editor {
+                background-color: #2a2a2a;
+                color: #e0e0e0;
+                border-color: #444;
+              }
+            `;
+            break;
+            
+          case "Vernacular":
+            theme.darkCss = `
+              body { 
+                background: rgb(46, 43, 0);
+                font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+                color: #f0f0f0;
+              }
+              .content-wrapper {
+                text-align: center; 
+                background: rgb(70, 70, 0);
+                border: 4px ridge rgb(0, 0, 150);
+                padding: 10px;
+                margin: 10px;
+              }
+              .header-content h1 { 
+                color: #ff6666; 
+                text-shadow: 2px 2px 0 rgb(70, 70, 0);
+              }
+              .style-card {
+                background: #333300;
+                border: 3px outset #664400;
+                color: #f0f0f0;
+              }
+              .style-title {
+                color: #ff9999;
+              }
+              .style-links a {
+                color: #99ccff;
+              }
+              #css-editor {
+                background-color: #333300;
+                color: #f0f0f0;
+                border-color: #664400;
+              }
+              .mermaid {
+                background: #333300;
+                color: #f0f0f0;
+              }
+            `;
+            break;
+            
+          case "Skeuomorphic":
+            theme.darkCss = `
+              body {
+                background: #222;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
+                border-radius: 5px;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+                border: 1px solid #444;
+                color: #e0e0e0;
+              }
+              .card-texture {
+                display: block !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('https://i.imgur.com/FL3SmIu.jpeg');
+                opacity: 0.05;
+                pointer-events: none;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              #css-editor {
+                background-color: #333;
+                color: #e0e0e0;
+                border-color: #444;
+                box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+              }
+            `;
+            break;
+            
+          case "Swiss Style":
+            theme.darkCss = `
+              body {
+                font-family: Helvetica, Arial, sans-serif;
+                background: #121212;
+                color: white;
+                line-height: 1.5;
+              }
+              main {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                grid-gap: 20px;
+              }
+              .style-card {
+                grid-column: span 4;
+                background: #1a1a1a;
+                border: none;
+                border-bottom: 2px solid white;
+                border-radius: 0;
+                padding: 20px 0;
+                color: white;
+              }
+              .style-title {
+                font-size: 18px;
+                font-weight: bold;
+                color: white;
+              }
+              .style-links a {
+                color: #bb86fc;
+              }
+              #css-editor {
+                background-color: #1a1a1a;
+                color: white;
+                border-color: white;
+              }
+            `;
+            break;
+            
+          case "Minimalist":
+            theme.darkCss = `
+              body {
+                font-family: 'Inter', sans-serif;
+                background: #121212;
+                color: #e0e0e0;
+                line-height: 1.6;
+              }
+              .style-card {
+                background: #1a1a1a;
+                border: none;
+                border-radius: 0;
+                padding: 30px 0;
+                box-shadow: none;
+                color: #e0e0e0;
+              }
+              .style-title {
+                font-weight: 300;
+                font-size: 24px;
+                color: #fff;
+              }
+              .style-description {
+                font-weight: 300;
+              }
+              .style-links a {
+                color: #bb86fc;
+                text-decoration: none;
+                border-bottom: 1px solid #bb86fc;
+                padding-bottom: 2px;
+              }
+              #css-editor {
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+                border: none;
+                border-bottom: 1px solid #333;
+              }
+            `;
+            break;
+            
+          case "Brutalist":
+            theme.darkCss = `
+              body {
+                font-family: monospace;
+                background: black;
+                color: white;
+                margin: 0;
+                padding: 20px;
+                line-height: 1.2;
+              }
+              main {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+              }
+              .style-card {
+                background: black;
+                border: 2px solid white;
+                border-radius: 0;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: none;
+                color: white;
+              }
+              .style-title {
+                color: #ff6666;
+              }
+              .style-links a {
+                color: #66ff66;
+              }
+              #css-editor {
+                background-color: black;
+                color: white;
+                border: 2px solid white;
+                font-family: monospace;
+              }
+            `;
+            break;
+            
+          case "Neo-Brutalism":
+            theme.darkCss = `
+              body {
+                font-family: 'Arial', sans-serif;
+                background: #121212;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background: #1a1a1a;
+                border: 3px solid #bb86fc;
+                border-radius: 0;
+                box-shadow: 5px 5px 0 #bb86fc;
+                transform: rotate(-1deg);
+                transition: all 0.2s ease;
+                color: #e0e0e0;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              .style-links a {
+                color: #03dac6;
+              }
+              #css-editor {
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+                border: 3px solid #bb86fc;
+                box-shadow: 5px 5px 0 #bb86fc;
+              }
+            `;
+            break;
+            
+          case "Neumorphism":
+            theme.darkCss = `
+              body {
+                font-family: 'Poppins', sans-serif;
+                background: #2d2d2d;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background: #2d2d2d;
+                border-radius: 15px;
+                box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+                border: none;
+                padding: 20px;
+                color: #e0e0e0;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              .style-links a {
+                color: #03dac6;
+                text-decoration: none;
+              }
+              #css-editor {
+                background: #2d2d2d;
+                border-radius: 15px;
+                box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+                border: none;
+                color: #e0e0e0;
+              }
+            `;
+            break;
+            
+          case "Glassmorphism":
+            theme.darkCss = `
+              body {
+                font-family: 'Segoe UI', 'Roboto', sans-serif;
+                background: linear-gradient(135deg, #121212, #2d2d2d);
+                color: #e0e0e0;
+              }
+              .style-card {
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                color: #e0e0e0;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              .style-links a {
+                color: #03dac6;
+              }
+              #css-editor {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: #e0e0e0;
+              }
+            `;
+            break;
+            
+          default:
+            // For other themes, create a generic dark variant
+            theme.darkCss = `
+              body {
+                background-color: #121212;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background-color: #1e1e1e;
+                border-color: #333;
+                color: #e0e0e0;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              .style-links a {
+                color: #03dac6;
+              }
+              #css-editor {
+                background-color: #2a2a2a;
+                color: #e0e0e0;
+                border-color: #444;
+              }
+            ` + theme.css;
+        }
+      });
 
       // Apply theme by index
       function applyTheme(index) {
@@ -1397,11 +1981,15 @@ gantt
           // Add current theme class to body
           $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
           
-          // Apply CSS
-          $themeStyle.html(theme.css);
+          // Check dark mode state
+          const isDarkMode = $('#dark-mode-toggle').is(':checked');
+          
+          // Apply appropriate CSS based on dark mode state
+          const cssToApply = isDarkMode ? theme.darkCss : theme.lightCss;
+          $themeStyle.html(cssToApply);
           
           // Update CSS editor with formatted CSS
-          $cssEditor.val(formatCss(theme.css));
+          $cssEditor.val(formatCss(cssToApply));
           
           // Handle cinematic mode
           if (theme.name === 'Cinematic') {
@@ -1410,12 +1998,20 @@ gantt
             startCinematicVideos();
           } else {
             $heroSection.hide();
-            $contentWrapper.hide();
           }
           
           // Update theme name display if it exists
           if ($('#current-theme').length) {
-            $('#current-theme').text(theme.name);
+            $('#current-theme').text(theme.name + (isDarkMode ? ' (Dark)' : ' (Light)'));
+          }
+          
+          // Send Google Analytics event for theme change
+          if (typeof gtag === 'function') {
+            gtag('event', 'theme_change', {
+              'event_category': 'Theme Selection',
+              'event_label': theme.name + (isDarkMode ? ' (Dark)' : ' (Light)'),
+              'value': index
+            });
           }
           
         } catch (e) {
@@ -1457,6 +2053,15 @@ gantt
             console.error('Failed to play video 1:', e);
           });
           
+          // Send Google Analytics event for video playback start
+          if (typeof gtag === 'function') {
+            gtag('event', 'video_playback', {
+              'event_category': 'Cinematic Theme',
+              'event_label': 'Started Video Playback',
+              'value': 1
+            });
+          }
+          
           // Set up video switching
           $video1.on('ended', function() {
             console.log('Video 1 ended, switching to video 2');
@@ -1465,6 +2070,15 @@ gantt
             $video2[0].play().catch(function(e) {
               console.error('Failed to play video 2:', e);
             });
+            
+            // Send Google Analytics event for video switch
+            if (typeof gtag === 'function') {
+              gtag('event', 'video_switch', {
+                'event_category': 'Cinematic Theme',
+                'event_label': 'Switched to Video 2',
+                'value': 2
+              });
+            }
           });
           
           $video2.on('ended', function() {
@@ -1475,9 +2089,27 @@ gantt
             $video1[0].play().catch(function(e) {
               console.error('Failed to replay video 1:', e);
             });
+            
+            // Send Google Analytics event for video switch
+            if (typeof gtag === 'function') {
+              gtag('event', 'video_switch', {
+                'event_category': 'Cinematic Theme',
+                'event_label': 'Switched to Video 1',
+                'value': 1
+              });
+            }
           });
         } catch (e) {
           console.error('Failed to start cinematic videos:', e);
+          
+          // Send Google Analytics event for video error
+          if (typeof gtag === 'function') {
+            gtag('event', 'video_error', {
+              'event_category': 'Cinematic Theme',
+              'event_label': e.message || 'Unknown error',
+              'value': 0
+            });
+          }
         }
       }
 
@@ -1509,10 +2141,29 @@ gantt
           if (themeIndex >= 0) {
             applyTheme(themeIndex);
             console.log('Theme applied from Gantt chart:', themes[themeIndex].name);
+            
+            // Send Google Analytics event for Gantt chart theme selection
+            if (typeof gtag === 'function') {
+              gtag('event', 'gantt_chart_selection', {
+                'event_category': 'Theme Navigation',
+                'event_label': themes[themeIndex].name,
+                'value': themeIndex
+              });
+            }
           }
         });
       } catch (e) {
         console.error('Failed to set up Gantt chart click handlers:', e);
+        
+        // Send Google Analytics event for error
+        if (typeof gtag === 'function') {
+          gtag('event', 'error', {
+            'event_category': 'Error Handling',
+            'event_label': 'Gantt Chart Click Handler Error',
+            'value': 0,
+            'description': e.message || 'Unknown error'
+          });
+        }
       }
 
       // Keyboard shortcut to cycle through themes
@@ -1523,6 +2174,16 @@ gantt
             var nextIndex = (current + 1) % themes.length;
             applyTheme(nextIndex);
             console.log('Theme cycled to:', themes[nextIndex].name);
+            
+            // Send Google Analytics event
+            if (typeof gtag === 'function') {
+              gtag('event', 'keyboard_shortcut', {
+                'event_category': 'Theme Navigation',
+                'event_label': themes[nextIndex].name,
+                'value': nextIndex
+              });
+            }
+            
             e.preventDefault();
           }
         });
@@ -1552,6 +2213,27 @@ gantt
           }
         });
       }
+
+      // Add event listener for dark mode toggle with enhanced analytics
+      $('#dark-mode-toggle').on('change', function() {
+        const isDarkMode = $(this).is(':checked');
+        
+        // Toggle dark mode class on body
+        $('body').toggleClass('dark-mode', isDarkMode);
+        
+        // Reapply current theme with dark mode setting
+        applyTheme(current);
+        
+        // Send Google Analytics event for dark mode toggle with theme context
+        if (typeof gtag === 'function') {
+          gtag('event', 'dark_mode_toggle', {
+            'event_category': 'Theme Settings',
+            'event_label': themes[current].name + (isDarkMode ? ' - Enabled' : ' - Disabled'),
+            'value': isDarkMode ? 1 : 0,
+            'theme_name': themes[current].name
+          });
+        }
+      });
 
     } catch (e) {
       console.error('Initialization failed:', e);

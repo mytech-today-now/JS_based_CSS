@@ -74,6 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
     class VideoPlayer {
         constructor(setId) {
             this.setId = setId;
+            // Check if the set exists before accessing it
+            if (!VIDEO_SETS[setId]) {
+                console.error(`[${setId}] Video set not found in VIDEO_SETS`);
+                return;
+            }
+            
             this.config = VIDEO_SETS[setId];
             this.fadeTransitionTime = 1000;
             
@@ -84,12 +90,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 videoFiles: this.shuffleArray([...this.config.videos])
             };
 
+            // Check if elements exist before setting them
+            const container = document.getElementById(setId);
+            const video1 = document.getElementById(`${setId}_1`);
+            const video2 = document.getElementById(`${setId}_2`);
+            
+            if (!container || !video1 || !video2) {
+                console.error(`[${setId}] Required DOM elements not found`);
+                return;
+            }
+
             this.elements = {
-                container: document.getElementById(setId),
-                videos: [
-                    document.getElementById(`${setId}_1`),
-                    document.getElementById(`${setId}_2`)
-                ]
+                container: container,
+                videos: [video1, video2]
             };
 
             this.initialize();
@@ -235,27 +248,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize players for all video sets present on the page
     Object.keys(VIDEO_SETS).forEach(setId => {
-        if (document.getElementById(setId)) {
-            new VideoPlayer(setId);
+        const container = document.getElementById(setId);
+        if (container) {
+            try {
+                new VideoPlayer(setId);
+            } catch (error) {
+                console.error(`Failed to initialize VideoPlayer for ${setId}:`, error);
+            }
         }
     });
 
-  this.elements.videos.forEach(video => {
-  // ensure iOS policy is satisfied
-  video.muted = true;
-  video.autoplay = true;
-  video.playsInline = true;
-  video.setAttribute('webkit-playsinline', '');
-  // styling
-  video.style.position = 'absolute';
-  video.style.width = '100%';
-  video.style.height = '100%';
-  video.style.objectFit = 'cover';
-  video.style.opacity = '0';
-  // event listeners…
-});
-
-  
     // Handle visibility changes globally
     document.addEventListener('visibilitychange', () => {
         const videos = document.querySelectorAll('video');
@@ -264,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             videos.forEach(video => {
                 if (video.style.opacity === '1') {
-                    video.play();
+                    video.play().catch(e => console.warn('Auto-play failed:', e));
                 }
             });
         }
