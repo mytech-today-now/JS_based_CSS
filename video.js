@@ -44,8 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         'traffic_videos': {
             videos: [
-                'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-9161-large.mp4',
-                'https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4'
+                'https://mytech.today/wp-content/uploads/2025/04/tTrucks.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/04/Notgridlock.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/04/Gridlock.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/04/RTA_bus-2-12043240-3840-2160-24Fps.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/04/lsd-01-12057787-3840-2160-24Fps.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/04/lsd-02-.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/04/lower-waker-bridge-2-2005974-Hd-1920-1080-24Fps.mp4'
             ],
             loadingImage: 'https://mytech.today/wp-content/uploads/2025/04/stephan-cassara-VguAb_4yJ_Q-unsplash.jpg'
         },
@@ -124,17 +129,67 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(`[${this.setId}] Preloading video: ${sourceUrl}`);
                 videoElement.src = sourceUrl;
                 
+                // Track video load start
+                if (typeof gtag === 'function') {
+                    gtag('event', 'video_preload_start', {
+                        'event_category': 'Video Player',
+                        'event_label': sourceUrl,
+                        'video_set': this.setId
+                    });
+                }
+                
+                // Add timeout - give video 15 seconds to load before failing
+                const timeoutId = setTimeout(() => {
+                    videoElement.removeEventListener('loadeddata', onLoadedData);
+                    videoElement.removeEventListener('error', onError);
+                    console.warn(`[${this.setId}] Timeout loading: ${sourceUrl}`);
+                    
+                    // Track timeout event
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'video_load_timeout', {
+                            'event_category': 'Video Player',
+                            'event_label': sourceUrl,
+                            'video_set': this.setId
+                        });
+                    }
+                    
+                    reject(new Error('Video load timeout'));
+                }, 15000);
+                
                 const onLoadedData = () => {
+                    clearTimeout(timeoutId);
                     videoElement.removeEventListener('loadeddata', onLoadedData);
                     videoElement.removeEventListener('error', onError);
                     console.log(`[${this.setId}] Successfully loaded: ${sourceUrl}`);
+                    
+                    // Track successful load
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'video_load_success', {
+                            'event_category': 'Video Player',
+                            'event_label': sourceUrl,
+                            'video_set': this.setId
+                        });
+                    }
+                    
                     resolve();
                 };
 
                 const onError = (error) => {
+                    clearTimeout(timeoutId);
                     videoElement.removeEventListener('loadeddata', onLoadedData);
                     videoElement.removeEventListener('error', onError);
                     console.error(`[${this.setId}] Failed to load: ${sourceUrl}`, error);
+                    
+                    // Track error event
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'video_load_error', {
+                            'event_category': 'Video Player',
+                            'event_label': sourceUrl,
+                            'video_set': this.setId,
+                            'error_message': error.message || 'Unknown error'
+                        });
+                    }
+                    
                     reject(error);
                 };
 
@@ -292,6 +347,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.style.opacity = '0';
                 video.style.display = 'none';
                 
+                // Add error retry mechanism
+                let retryCount = 0;
+                const maxRetries = 3;
+                
                 video.addEventListener('ended', () => {
                     if (!this.state.isTransitioning) {
                         this.transitionToNextVideo();
@@ -300,6 +359,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 video.addEventListener('error', (e) => {
                     console.error(`[${this.setId}] Video error:`, e);
+                    
+                    // Track error with Google Analytics
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'video_playback_error', {
+                            'event_category': 'Video Player',
+                            'event_label': video.src,
+                            'video_set': this.setId,
+                            'error_type': e.type || 'unknown'
+                        });
+                    }
+                    
+                    // Try to recover by using a different video if available
+                    if (retryCount < maxRetries) {
+                        retryCount++;
+                        console.log(`[${this.setId}] Retrying video load (${retryCount}/${maxRetries})`);
+                        
+                        // Try next video in the list if available
+                        const nextIndex = (this.state.currentVideoIndex + 1) % this.state.videoFiles.length;
+                        const nextVideoUrl = this.state.videoFiles[nextIndex];
+                        
+                        if (nextVideoUrl) {
+                            setTimeout(() => {
+                                video.src = nextVideoUrl;
+                            }, 1000); // Wait 1 second before retrying
+                            return;
+                        }
+                    }
+                    
+                    // If we've exhausted retries or no alternative videos, transition to next
                     if (!this.state.isTransitioning) {
                         this.transitionToNextVideo();
                     }
@@ -318,7 +406,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('traffic_videos')) {
         console.log('Initializing traffic_videos player');
         try {
+            // Create player with mobile_videos set directly
             window.videoPlayers.trafficVideos = new VideoPlayer('traffic_videos');
+            
+            // Override the video files with working videos from mobile_videos set
+            if (window.videoPlayers.trafficVideos) {
+                // Use mobile_videos directly since those URLs are working
+                window.videoPlayers.trafficVideos.state.videoFiles = 
+                    window.videoPlayers.trafficVideos.shuffleArray([...VIDEO_SETS['mobile_videos'].videos]);
+                
+                // Also update the config to use mobile_videos
+                window.videoPlayers.trafficVideos.config = VIDEO_SETS['mobile_videos'];
+                
+                console.log('[traffic_videos] Using mobile_videos set as fallback');
+            }
         } catch (error) {
             console.error('Failed to initialize traffic_videos player:', error);
         }

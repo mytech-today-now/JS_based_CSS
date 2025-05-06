@@ -19,7 +19,7 @@
   :root {
   /* Customize these to change stripe look */
   --stripe-color: rgba(252, 255, 75, 0.85);  /* color of the stripe */
-  --dark-stripe-color: rgba(80, 81, 20, 0.95);  /* color of the stripe */
+  --dark-stripe-color: rgba(64, 60, 0, 0.95);  /* color of the stripe */
   --stripe-width: 25px;               /* thickness of each stripe */
   --stripe-spacing: 50px;             /* distance from start of one stripe to the next */
   --stripe-angle: 135deg;             /* direction of the stripes */
@@ -47,15 +47,31 @@
     z-index: 100; /* Ensure header stays above hero section */
 }
 .intro {
+  display: flex;
+    flex-direction: column;
     padding: 2rem;
     background-color: var(--bg-color);
+    backdrop-filter: var(--blur);
     color: var(--text-color);
     text-align: center;
     margin: 0 auto;
     max-width: 80%;
     border-radius: var(--rounded);
     box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
-    backdrop-filter: var(--blur);
+    margin-bottom: 2rem;
+}
+.into h3 {
+  align-items: center;
+  justify-content: center;
+}
+.intro p {
+align-items: left;
+justify-content: center;
+
+}
+
+#outro {
+  padding-top: 5rem;
 }
 
 .flex-grid {
@@ -145,6 +161,21 @@ padding: var(--padding);
 z-index: 2;
 margin: 0;                  /* Remove any margins */
 }
+.content-wrapper h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+    
+.content-wrapper p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: left;
+  justify-content: left;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
 
 /* Header Content */
 .header-content {
@@ -167,51 +198,28 @@ margin-bottom: 1rem;
 font-size: 1.2rem;
 line-height: 1.6;
 }
-    
-    
-    .content-wrapper h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-    
-    .content-wrapper p {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    }
-    
-    .era-timeline {
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      margin: auto;
-      padding: 2rem;
-      overflow: hidden;
-      /* display: none; /* Hidden by default, shown in cinematic mode */
-    }
 
-    main {
-      max-width: 1200px; 
-      margin: 0 auto;
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px;
-    }
+.era-timeline {
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 80vh;
+  margin: auto;
+  padding: 2rem;
+  overflow: hidden;
+  /* display: none; /* Hidden by default, shown in cinematic mode */
+}
     
-    article.style-card {
-      flex: 1 0 300px;
-      border: 2px solid #ccc;
-      border-radius: 6px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      background: #fff;
-      transition: transform .2s;
-      max-width: calc(33.333% - 20px);
-    }
+article.style-card {
+  flex: 1 0 300px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  transition: transform .2s;
+  max-width: calc(33.333% - 20px);
+}
     
     @media (max-width: 992px) {
       article.style-card {
@@ -257,6 +265,11 @@ line-height: 1.6;
       opacity: 0.8;
       transform: translateY(-2px);
     }
+
+.mermaid {
+    background-color: var(--bg-color);
+    backdrop-filter: var(--blur);
+}
     
     .mermaid text.taskText:hover {
       font-weight: bold;
@@ -279,7 +292,7 @@ line-height: 1.6;
     }
     
     /* CSS editor styles */
-    #css-editor {
+    #css-editor, #html-editor {
       font-family: 'Courier New', monospace;
       line-height: 1.5;
       padding: 10px;
@@ -287,24 +300,35 @@ line-height: 1.6;
       margin: 10px 0;
       border: 1px solid #ccc;
       background-color: #f9f9f9;
-      max-width: 512vw;
-      min-width: 300px;
-      min-height: 150px;
       resize: vertical;
       
     }
 
     .css-editor {
       margin: auto;
-      max-width: 800px;
+      max-width: 800vw;
+      min-width: 500px;
+      min-height: 150px;
+      text-align: center;
+      display: block;
+    }
+
+    .css-editor {
+      margin: auto;
+      max-width: 800vw;
+      min-width: 500px;
+      min-height: 150px;
       text-align: center;
       display: block;
     }
     
-    body.dark-mode #css-editor {
-      background-color: #2a2a2a;
-      color: #e0e0e0;
-      border-color: #444;
+    .html-editor {
+      margin: auto;
+      max-width: calc(100% - 20px);
+      min-width: 500px;
+      min-height: 500px;
+      text-align: center;
+      display: block;
     }
     
     /* Tooltip to indicate clickable elements */
@@ -388,9 +412,109 @@ align-items: center;
 justify-content: center;
 padding: 0;                 /* Remove any padding */
 margin: auto;                  /* Remove any margins */
-top: 10vh;
+top: 5vh;
+max-width: 1200px; /* Adjust this value as needed */
+display: flex;
+flex-wrap: wrap !important;
+gap: 20px;
+}
+#under-construction {
+  position: absolute;
+  margin: 2rem;
+  width: 100%;
+  height: 100%;
+  left: 40%
+}
+.counter {
+  display: flex;
+  flex: row wrap;
+  padding: 2rem;
 }
   </style>
+<style>
+          /* Dark mode toggle styles */
+          .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px;
+            border-radius: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          }
+          .current-style-display {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px;
+            border-radius: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          }
+          #current-theme {
+            margin-left: 5px;
+            color: #2196F3;
+          }
+          .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin-right: 10px;
+          }
+          .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+          }
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+          }
+          input:checked + .slider {
+            background-color: #2196F3;
+          }
+          input:checked + .slider:before {
+            transform: translateX(26px);
+          }
+          .slider.round {
+            border-radius: 34px;
+          }
+          .slider.round:before {
+            border-radius: 50%;
+          }
+          .dark-mode-toggle span {
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          }
+        </style>
+
 
   <!-- Dynamic theme CSS will be injected here -->
   <style id="theme-style"></style>
@@ -407,6 +531,13 @@ top: 10vh;
       </div>
     </div>
   </div>
+  <div class="counter">
+  <div>Website visit count:</div>
+  <div id="vistor-counter"></div>
+  </div>
+  <div id="under-construction">
+  <img src="https://gifgifs.com/animations/webdesign-elements/under-construction/webpage_construction.gif" alt="Under Construction">
+  </div>
   <div class="content-wrapper">
     <div class="header-content">
       <h1>Interactive Web Design Styles Showcase</h1>
@@ -418,8 +549,6 @@ top: 10vh;
 <section class="intro">
   <h3><strong>Overview</strong></h3>
   <p>The Interactive Web Design Styles Showcase is designed to guide you through the evolution of web design—from the playful, “Under Construction” days of GeoCities to the sleek, glass-blur panels of Glassmorphism. At its core, the page presents a chronological Gantt-style timeline of major design movements and pairs each era with a corresponding “style card” that highlights its defining characteristics, key dates, and reference links. You can explore each style by clicking its title or by pressing <strong>Ctrl + Shift + Space</strong>, which cycles through the various themes in sequence. Below the timeline, a live CSS editor displays the exact rules being applied, so you can see how each design aesthetic is constructed in real time.</p>
-  <h3><strong>Under The Hood</strong></h3>
-  <p>Under the hood, the page relies on a combination of HTML, CSS, and JavaScript (with jQuery) to switch between design themes dynamically. A &lt;style id="theme-style"&gt; element is injected into the document head to override default styles with the current theme’s custom CSS. The page initializes a themes array in the video.js script, where each object includes a theme name and its CSS rules; a separate dark-mode variant is generated for each theme. When you trigger a theme change—either by clicking on a card, Gantt Timeline element, or using the keyboard shortcut—the script updates the injected CSS, reformats it for readability in the editor, and logs events (including Google Analytics tracking and console messages) for debugging. Special handling is included for cinematic themes, which preload and alternate background videos to recreate the immersive, full-screen intro experiences of earlier Flash-driven sites</p>
   </section>
 
   <nav aria-label="Jump to era" class="era-timeline">
@@ -788,11 +917,72 @@ gantt
       </p>
     </article>
   </main>
+  <section id="outro" class="intro outro">
+  <h3><strong>Under The Hood</strong></h3>
+  <p>Under the hood, the page relies on a combination of HTML, CSS, and JavaScript (with jQuery) to switch between design themes dynamically. A &lt;style id="theme-style"&gt; element is injected into the document head to override default styles with the current theme’s custom CSS. The page initializes a themes array in the video.js script, where each object includes a theme name and its CSS rules; a separate dark-mode variant is generated for each theme. When you trigger a theme change—either by clicking on a card, Gantt Timeline element, or using the keyboard shortcut—the script updates the injected CSS, reformats it for readability in the editor, and logs events (including Google Analytics tracking and console messages) for debugging. Special handling is included for cinematic themes, which preload and alternate background videos to recreate the immersive, full-screen intro experiences of earlier Flash-driven sites</p>
+  </section>
+
+  <section class="html-editor">
+  <h2>Current HTML</h2>
+  <textarea id="html-editor" editable></textarea>
+  </section>
 
   <!-- jQuery & Migrate -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/standalone.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-postcss.js"></script>
   <script src="./video.js"></script>
+
+  <script>
+    var counterContainer = document.querySelector("#vistor-counter");
+    var resetButton = document.querySelector("#reset");
+    var visitCount = localStorage.getItem("page_view");
+
+    // Check if page_view entry is present
+    if (visitCount) {
+      visitCount = Number(visitCount) + 1;
+      localStorage.setItem("page_view", visitCount);
+    } else {
+      visitCount = 1;
+      localStorage.setItem("page_view", 1);
+    }
+    counterContainer.innerHTML = visitCount;
+
+
+      // Keyboard shortcut to cycle through themes
+      try {
+        $(document).on('keydown', function(e) {
+          // Ctrl + Shift + Space
+          if (e.ctrlKey && e.shiftKey && e.keyCode === 82) {
+            visitCount = 1;
+            localStorage.setItem("page_view", 1);
+            counterContainer.innerHTML = visitCount;
+            console.log('Vernacular Visitor Counter Reset by R');
+            
+            // Send Google Analytics event
+            if (typeof gtag === 'function') {
+              gtag('event', 'keyboard_shortcut', {
+                'event_category': 'Visitor Counter Reset',
+                'event_label': themes[nextIndex].name,
+                'value': nextIndex
+              });
+            }
+            e.preventDefault();
+          }
+        });
+      } catch (e) {
+        console.error('Failed to set up keyboard shortcuts:', e);
+      }
+
+
+    // Adding onClick event listener
+    resetButton.addEventListener("click", () => {
+      visitCount = 1;
+      localStorage.setItem("page_view", 1);
+      counterContainer.innerHTML = visitCount;
+    });
+  </script>
 
   <!-- Theme-switcher + CSS editor init -->
   <script>
@@ -823,16 +1013,21 @@ gantt
               );
               font-family: 'Comic Sans MS', 'Comic Sans', cursive;
             }
-            .content-wrapper
-              display: visible;
-              position: relative;
-            }
-            .header-content h1 { 
-              color: #ff0000; 
-              text-shadow: 2px 2px 0 yellow;
-              font-size: 15vw;
-              margin-bottom: 5px;
-            }
+            .content-wrapper {
+                display: block;
+                position: relative;
+                left: 0;
+                top: 0;
+              }
+              .header-content h1 { 
+                color: #ff0000; 
+                font-size: 3vw;
+                margin-bottom: 5px;
+              }
+              .header-content p { 
+                color: #ffa600; 
+                font-size: 1.5vw;
+              }
             .era-timeline { 
               display: block !important;
               background: var(--bg-color);
@@ -1523,12 +1718,11 @@ gantt
           css: `
             body {
               font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
+              color:rgba(230, 230, 230, 0.9);
             }
             .style-card {
-              background: white;
-              border: 3px solid black;
+              background:rgba(1, 36, 0, 0.9);
+              border: 3px solid rgba(0, 255, 21, 0.9);
               border-radius: 0;
               box-shadow: 5px 5px 0 black;
               transform: rotate(-1deg);
@@ -1562,6 +1756,8 @@ gantt
           $contentWrapper = $('.content-wrapper'),
           $video1 = $('#traffic_videos_1'),
           $video2 = $('#traffic_videos_2');
+          $underConstruction = $('#under-construction');
+          $$vistorCounter = $('.counter');
       
       var current = 0;
 
@@ -1570,15 +1766,15 @@ gantt
         try {
           // Check if css is undefined or null
           if (!css) {
-            console.warn('Received undefined or null CSS');
-            return '';
+            console.warn('Received undefined or null CSS for formatting');
+            return '/* No CSS defined for this theme */';
           }
           
           // Format the CSS
           const formattedCss = css
-            .replace(/}/g, '}\n\n')
-            .replace(/{/g, ' {\n  ')
-            .replace(/;(?!.*\n)/g, ';\n  ')
+            .replace(/}/g, '}\n')
+            .replace(/{/g, ' {\n')
+            .replace(/;(?!.*\n)/g, ';\n')
             .replace(/:/g, ': ')
             .replace(/,(?=\S)/g, ', ')
             .trim();
@@ -1606,8 +1802,8 @@ gantt
             });
           }
           
-          // Return the original CSS or empty string if undefined
-          return css || '';
+          // Return a placeholder message instead of empty string
+          return '/* Error formatting CSS */';
         }
       }
 
@@ -1620,75 +1816,12 @@ gantt
           </label>
           <span>Dark Mode</span>
         </div>
+        <div class="current-style-display">
+          <span>Style: </span>
+          <span id="current-theme">Default</span>
+        </div>
       `);
 
-      // Add dark mode toggle styles
-      $('head').append(`
-        <style>
-          /* Dark mode toggle styles */
-          .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 8px 12px;
-            border-radius: 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-          }
-          .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-            margin-right: 10px;
-          }
-          .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-          }
-          .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-          }
-          .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-          }
-          input:checked + .slider {
-            background-color: #2196F3;
-          }
-          input:checked + .slider:before {
-            transform: translateX(26px);
-          }
-          .slider.round {
-            border-radius: 34px;
-          }
-          .slider.round:before {
-            border-radius: 50%;
-          }
-          .dark-mode-toggle span {
-            color: white;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-          }
-        </style>
-      `);
 
       // First, store the original themes without dark variants
       var originalThemes = themes.slice();
@@ -1740,11 +1873,11 @@ gantt
 
                 /* repeating diagonal stripes */
                 background-image: repeating-linear-gradient(
-                    var(--stripe-angle, 45deg),
-                    var(--dark-stripe-color, #222) 0,
-                    var(--dark-stripe-color, #222) var(--stripe-width, 10px),
-                    transparent var(--stripe-width, 10px),
-                    transparent var(--stripe-spacing, 20px)
+                    calc(3.125 * var(--stripe-angle)),
+                    var(--dark-stripe-color) 0,
+                    var(--dark-stripe-color) var(--stripe-width),
+                    rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
+                    rgba(0, 0, 0, 0.8) var(--stripe-spacing)
                 );
                 font-family: 'Comic Sans MS', 'Comic Sans', cursive;
               }
@@ -1752,34 +1885,26 @@ gantt
               .content-wrapper {
                 display: block;
                 position: relative;
-                left: 10px;
-                top: 10px;
+                left: 0;
+                top: 0;
               }
               .header-content h1 { 
                 color: #ff0000; 
-                font-size: 15vw;
+                font-size: 6vw;
                 margin-bottom: 5px;
+              }
+              .header-content p { 
+                color: #ffa600; 
+                font-size: 4vw;
               }
               .era-timeline { 
                 display: block !important;
                 background: var(--inverse-bg-color, #222);
                 opacity: var(--opacity, 0.8);
               }
-              .style-card {
-                background: #333;
-                border: 3px outset #cc9966;
-                color: #ffffcc;
-              }
-              .style-description {
-                color: #cccccc;
-              }
-              .style-title {
-                color: #ff6666;
-                font-weight: bold;
-              }
               .style-links a {
                 color: #66ccff;
-                text-decoration: underline;
+                text-d#3554den: underline;
               }
               .extra-under { display: block !important; }
               .mermaid {
@@ -2137,15 +2262,31 @@ gantt
                 background-color: #121212;
                 color: #e0e0e0;
               }
-              .style-card {
-                background-color: #1e1e1e;
-                border-color: #333;
-                color: #e0e0e0;
-              }
             ` + theme.css;
           }
         }
       });
+
+      // Remove all classes from body
+      function dropTheme(index) {
+        try {
+          // Remove all theme-related classes from body
+          $('body').removeClass(function(index, className) {
+            return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
+          });
+
+        } catch (e) {
+          console.error('Failed to remove classes. Error: ', e);
+          // Send Google Analytics event for theme change
+          if (typeof gtag === 'function') {
+            gtag('event', 'theme_change', {
+              'event_category': 'Failed to Remove Classes',
+              'event_label': index.className,
+              'value': index
+            });
+          }
+        };
+      };
 
       // Apply theme by index
       function applyTheme(index) {
@@ -2154,55 +2295,122 @@ gantt
             console.error('Invalid theme index:', index);
             return;
           }
+        
           
           current = index;
           var theme = themes[current];
           
           console.log('Applying theme:', theme.name);
           
+          /*
           // Remove all theme-related classes from body
           $('body').removeClass(function(index, className) {
             return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
           });
+          */
+          dropTheme(index)
           
-          // Add current theme class to body
-          $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
+          
           
           // Check dark mode state
           const isDarkMode = $('#dark-mode-toggle').is(':checked');
           
-          // Apply appropriate CSS based on dark mode state
-          const cssToApply = isDarkMode ? theme.darkCss : theme.lightCss;
+          // Apply appropriate CSS based on dark mode state and theme type
+          let cssToApply;
+          
+          if (theme.name.includes("(Dark)")) {
+            // For dark themes, use the css property directly
+            cssToApply = theme.css || '';
+          } else {
+            // For regular themes, use lightCss or darkCss based on dark mode toggle
+            cssToApply = isDarkMode ? (theme.darkCss || theme.css || '') : (theme.lightCss || theme.css || '');
+          }
+          
+          // Ensure we have valid CSS before applying
+          if (!cssToApply) {
+            console.warn(`No CSS found for theme: ${theme.name}, using fallback`);
+            cssToApply = `/* Fallback CSS for ${theme.name} */
+              body { background: #f0f0f0; color: #333; }
+            `;
+          }
+          
+          // Add this line to register the CSS parser plugin
+          prettier.prettierPlugins = prettierPlugins;
+
+          // Tidy up CSS using Prettier
+          cssToApply = prettier.format(cssToApply, {
+            parser: "css",
+            plugins: prettierPlugins,
+            printWidth: 80,
+            tabWidth: 2,
+            useTabs: false
+          });
+          
           $themeStyle.html(cssToApply);
           
           // Update CSS editor with formatted CSS
           $cssEditor.val(formatCss(cssToApply));
           
           // Handle cinematic mode
-          if (theme.name === 'Cinematic') {
+          if (theme.name === 'Cinematic' || theme.name === 'Cinematic (Dark)') {
             $heroSection.show();
             $contentWrapper.show();
             startCinematicVideos();
+            
+            // Dispatch theme changed event for video.js
+            document.dispatchEvent(new CustomEvent('themeChanged', { 
+              detail: { themeName: 'Cinematic' } 
+            }));
           } else {
             $heroSection.hide();
+            
+            // Dispatch theme changed event for video.js
+            document.dispatchEvent(new CustomEvent('themeChanged', { 
+              detail: { themeName: theme.name } 
+            }));
+          }
+
+          // Handle Vernacular mode
+          if (theme.name === 'Vernacular' || theme.name === 'Vernacular (Dark)') {
+            dropTheme(index)
+            $underConstruction.show();
+            $contentWrapper.show();
+            $vistorCounter.show();
+          } else {
+            $heroSection.hide();
+            $underConstruction.hide();
+            $vistorCounter.hide();
           }
           
+          // Add current theme class to body
+          $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
+
           // Update theme name display if it exists
           if ($('#current-theme').length) {
-            $('#current-theme').text(theme.name + (isDarkMode ? ' (Dark)' : ' (Light)'));
+            $('#current-theme').text(theme.name);
           }
           
           // Send Google Analytics event for theme change
           if (typeof gtag === 'function') {
             gtag('event', 'theme_change', {
               'event_category': 'Theme Selection',
-              'event_label': theme.name + (isDarkMode ? ' (Dark)' : ' (Light)'),
+              'event_label': theme.name,
               'value': index
             });
           }
           
         } catch (e) {
           console.error('applyTheme failed:', e);
+          
+          // Send Google Analytics event for theme application error
+          if (typeof gtag === 'function') {
+            gtag('event', 'error', {
+              'event_category': 'Theme Application',
+              'event_label': 'Theme Application Failed',
+              'value': current || 0,
+              'description': e.message || 'Unknown error'
+            });
+          }
         }
       }
 
@@ -2396,7 +2604,8 @@ gantt
             barHeight: 20,
             barGap: 4,
             topPadding: 50,
-            sidePadding: 50
+            sidePadding: 50,
+            bottomPadding: 50
           }
         });
       }
