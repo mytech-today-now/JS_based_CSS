@@ -532,11 +532,22 @@ gap: 20px;
     </div>
   </div>
   <div class="counter">
-  <div>Website visit count:</div>
-  <div id="vistor-counter"></div>
+    <div>Website visit count:</div>
+    <div id="vistor-counter"></div>
+  </div>
+  <div class="dark-mode-toggle">
+    <label class="switch">
+      <input type="checkbox" id="dark-mode-toggle">
+      <span class="slider round"></span>
+    </label>
+    <span>Dark Mode</span>
+  </div>
+  <div class="current-style-display">
+    <span>Style: </span>
+    <span id="current-theme">Default</span>
   </div>
   <div id="under-construction">
-  <img src="https://gifgifs.com/animations/webdesign-elements/under-construction/webpage_construction.gif" alt="Under Construction">
+    <img src="https://gifgifs.com/animations/webdesign-elements/under-construction/webpage_construction.gif" alt="Under Construction">
   </div>
   <div class="content-wrapper">
     <div class="header-content">
@@ -975,13 +986,6 @@ gantt
         console.error('Failed to set up keyboard shortcuts:', e);
       }
 
-
-    // Adding onClick event listener
-    resetButton.addEventListener("click", () => {
-      visitCount = 1;
-      localStorage.setItem("page_view", 1);
-      counterContainer.innerHTML = visitCount;
-    });
   </script>
 
   <!-- Theme-switcher + CSS editor init -->
@@ -994,7 +998,18 @@ gantt
         "https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4"
       ];
       
-      // Theme definitions
+      var $themeStyle = $('#theme-style'),
+          $cssEditor = $('#css-editor'),
+          $heroSection = $('.hero-section'),
+          $contentWrapper = $('.content-wrapper'),
+          $video1 = $('#traffic_videos_1'),
+          $video2 = $('#traffic_videos_2');
+          $underConstruction = $('#under-construction');
+          $$vistorCounter = $('.counter');
+      
+      var current = 0;
+
+      // Light Themes definitions
       var themes = [
         {
           name: "Vernacular",
@@ -1749,123 +1764,12 @@ gantt
           `
         }
       ];
-      
-      var $themeStyle = $('#theme-style'),
-          $cssEditor = $('#css-editor'),
-          $heroSection = $('.hero-section'),
-          $contentWrapper = $('.content-wrapper'),
-          $video1 = $('#traffic_videos_1'),
-          $video2 = $('#traffic_videos_2');
-          $underConstruction = $('#under-construction');
-          $$vistorCounter = $('.counter');
-      
-      var current = 0;
 
-      // Format CSS for readability in the editor
-      function formatCss(css) {
-        try {
-          // Check if css is undefined or null
-          if (!css) {
-            console.warn('Received undefined or null CSS for formatting');
-            return '/* No CSS defined for this theme */';
-          }
-          
-          // Format the CSS
-          const formattedCss = css
-            .replace(/}/g, '}\n')
-            .replace(/{/g, ' {\n')
-            .replace(/;(?!.*\n)/g, ';\n')
-            .replace(/:/g, ': ')
-            .replace(/,(?=\S)/g, ', ')
-            .trim();
-          
-          // Send Google Analytics event for successful CSS formatting
-          if (typeof gtag === 'function') {
-            gtag('event', 'css_formatting', {
-              'event_category': 'CSS Editor',
-              'event_label': 'CSS Formatted Successfully',
-              'value': css.length
-            });
-          }
-          
-          return formattedCss;
-        } catch (e) {
-          console.error('formatCss failed:', e);
-          
-          // Send Google Analytics event for CSS formatting error
-          if (typeof gtag === 'function') {
-            gtag('event', 'error', {
-              'event_category': 'CSS Editor',
-              'event_label': 'CSS Formatting Error',
-              'value': 0,
-              'description': e.message || 'Unknown error'
-            });
-          }
-          
-          // Return a placeholder message instead of empty string
-          return '/* Error formatting CSS */';
-        }
-      }
-
-      // Add a dark mode toggle to the UI
-      $('body').append(`
-        <div class="dark-mode-toggle">
-          <label class="switch">
-            <input type="checkbox" id="dark-mode-toggle">
-            <span class="slider round"></span>
-          </label>
-          <span>Dark Mode</span>
-        </div>
-        <div class="current-style-display">
-          <span>Style: </span>
-          <span id="current-theme">Default</span>
-        </div>
-      `);
-
-
-      // First, store the original themes without dark variants
-      var originalThemes = themes.slice();
-
-      // Then create dark variants and add them after the original themes
-      originalThemes.forEach(theme => {
-        // Create a dark variant of the theme
-        var darkTheme = {
-          name: theme.name + " (Dark)",
-          // Store the original CSS for reference
-          originalCss: theme.css
-        };
-        
-        // Create custom dark CSS based on the theme
-        switch(theme.name) {
-          case "Dark Mode":
-            // Dark Mode theme is already dark, just enhance it
-            darkTheme.css = `
-              body {
-                background: #121212;
-                color: #e0e0e0;
-              }
-              .style-card {
-                background: #1e1e1e;
-                border: 1px solid var(--inverse-accent-color);
-                border-radius: 8px;
-                color: #e0e0e0;
-              }
-              .style-title {
-                color: #bb86fc;
-              }
-              .style-links a {
-                color: #03dac6;
-              }
-              body.dark-mode #css-editor {
-                background-color: var(--inverse-bg-color);
-                color: var(--inverse-text-color);
-                border-color: var(--inverse-accent-color);
-              }
-            `;
-            break;
-            
-          case "Vernacular":
-            darkTheme.css = `
+      // Create custom dark CSS based on the theme
+      var darkThemes = [
+          {
+            name: "Vernacular",
+            css: `
               body { 
                 /* fill the full viewport */
                 min-height: 100vh;
@@ -1911,11 +1815,169 @@ gantt
                 background: #333300;
                 color: #f0f0f0;
               }
-            `;
-            break;
-            
-          case "Skeuomorphic":
-            darkTheme.css = `
+            `
+          },
+          },
+        {
+          name: "Table-Based Design",
+          css: `
+            body {
+              font-family: Arial, sans-serif;
+              background: #f0f0f0;
+              color: #333;
+            }
+            main {
+              display: table;
+              width: 100%;
+              border-collapse: collapse;
+            }
+            .style-card {
+              display: table-cell;
+              border: 1px solid #999;
+              padding: 10px;
+              background: white;
+            }
+            #main-table { display: block !important; }
+          `
+        },
+        {
+          name: "Framesets",
+          css: `
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: Verdana, sans-serif;
+            }
+            .frame-nav, .frame-content {
+              display: block !important;
+              position: fixed;
+              border: 2px inset #ccc;
+              background: #f0f0f0;
+            }
+            .frame-nav {
+              left: 0;
+              top: 0;
+              width: 200px;
+              height: 100%;
+              overflow: auto;
+              padding: 10px;
+            }
+            .frame-content {
+              left: 200px;
+              top: 0;
+              width: calc(100% - 200px);
+              height: 100%;
+              overflow: auto;
+              padding: 10px;
+              background: white;
+            }
+            main {
+              margin-left: 200px;
+            }
+          `
+        },
+        {
+          name: "Framesets",
+          css: `
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: Verdana, sans-serif;
+            }
+            .frame-nav, .frame-content {
+              display: block !important;
+              position: fixed;
+              border: 2px inset #ccc;
+              background: #f0f0f0;
+            }
+            .frame-nav {
+              left: 0;
+              top: 0;
+              width: 200px;
+              height: 100%;
+              overflow: auto;
+              padding: 10px;
+            }
+            .frame-content {
+              left: 200px;
+              top: 0;
+              width: calc(100% - 200px);
+              height: 100%;
+              overflow: auto;
+              padding: 10px;
+              background: white;
+            }
+            main {
+              margin-left: 200px;
+            }
+          `
+        },
+        {
+          name: "Flash-Based Design",
+          css: `
+            body {
+              background: #000;
+              color: #fff;
+              font-family: Arial, sans-serif;
+              text-align: center;
+            }
+            .extra-flash-intro { 
+              display: block !important; 
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: #000;
+              z-index: 1000;
+            }
+            .style-card {
+              background: #333;
+              border-radius: 0;
+              border: 1px solid #666;
+              color: #fff;
+            }
+            .style-title {
+              color: #ff9900;
+            }
+            .style-links a {
+              color: #66ccff;
+            }
+          `
+        },
+        {
+          name: "Web 2.0 Glossy",
+          css: `
+            body {
+              font-family: 'Lucida Grande', Arial, sans-serif;
+              background: #f6f6f6;
+            }
+            .style-card {
+              border-radius: 8px;
+              border: 1px solid #ddd;
+              background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+            .style-title {
+              color: #0066cc;
+              text-shadow: 0 1px 0 white;
+            }
+            .beta-badge {
+              display: inline-block !important;
+              background: #ff6600;
+              color: white;
+              font-size: 10px;
+              padding: 2px 5px;
+              border-radius: 10px;
+              margin-left: 5px;
+              text-transform: uppercase;
+              font-weight: bold;
+            }
+          `
+        },
+        {
+            name: "Skeuomorphic",
+            css: `
               body {
                 background: #222;
                 font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -1948,11 +2010,11 @@ gantt
                 border-color: #444;
                 box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
               }
-            `;
-            break;
-            
-          case "Swiss Style":
-            darkTheme.css = `
+            `
+          },
+          {
+            name: "Swiss Style",
+            css: `
               body {
                 font-family: Helvetica, Arial, sans-serif;
                 background: #121212;
@@ -1986,11 +2048,11 @@ gantt
                 color: white;
                 border-color: white;
               }
-            `;
-            break;
-            
-          case "Minimalist":
-            darkTheme.css = `
+            `
+          },
+          {
+            name: "Minimalist",
+            css: `
               body {
                 font-family: 'Inter', sans-serif;
                 background: #121212;
@@ -2025,113 +2087,208 @@ gantt
                 border: none;
                 border-bottom: 1px solid #333;
               }
-            `;
-            break;
-            
-          case "Brutalist":
-            darkTheme.css = `
-              body {
-                font-family: monospace;
-                background: black;
-                color: white;
-                margin: 0;
-                padding: 20px;
-                line-height: 1.2;
+            `
+          },
+        {
+          name: "Responsive",
+          css: `
+            body {
+              font-family: 'Open Sans', sans-serif;
+              background: #f9f9f9;
+            }
+            main {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+            }
+            .style-card {
+              flex: 0 0 calc(33.333% - 20px);
+              margin-bottom: 30px;
+              background: white;
+              border-radius: 5px;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              transition: all 0.3s ease;
+            }
+            @media (max-width: 992px) {
+              .style-card {
+                flex: 0 0 calc(50% - 15px);
               }
+            }
+            @media (max-width: 576px) {
+              .style-card {
+                flex: 0 0 100%;
+              }
+            }
+          `
+        },
+        {
+          name: "Mobile-First",
+          css: `
+            body {
+              font-family: 'Roboto', sans-serif;
+              font-size: 16px;
+              line-height: 1.5;
+              color: #333;
+              background: #f5f5f5;
+            }
+            main {
+              padding: 10px;
+            }
+            .style-card {
+              width: 100%;
+              margin-bottom: 15px;
+              background: white;
+              border-radius: 5px;
+              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+              padding: 15px;
+            }
+            @media (min-width: 768px) {
               main {
-                max-width: none;
-                margin: 0;
-                padding: 0;
-              }
-              .style-card {
-                background: black;
-                border: 2px solid white;
-                border-radius: 0;
                 padding: 20px;
-                margin-bottom: 20px;
-                box-shadow: none;
-                color: white;
-              }
-              .style-title {
-                color: #ff6666;
-              }
-              .style-links a {
-                color: #66ff66;
-              }
-              #css-editor {
-                background-color: black;
-                color: white;
-                border: 2px solid white;
-                font-family: monospace;
-              }
-            `;
-            break;
-            
-          case "Neo-Brutalism":
-            darkTheme.css = `
-              body {
-                font-family: 'Arial', sans-serif;
-                background: #121212;
-                color: #e0e0e0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
               }
               .style-card {
-                background: #1a1a1a;
-                border: 3px solid #bb86fc;
-                border-radius: 0;
-                box-shadow: 5px 5px 0 #bb86fc;
-                transform: rotate(-1deg);
-                transition: all 0.2s ease;
-                color: #e0e0e0;
+                width: calc(50% - 10px);
               }
-              .style-title {
-                color: #bb86fc;
-              }
-              .style-links a {
-                color: #03dac6;
-              }
-              #css-editor {
-                background-color: #1a1a1a;
-                color: #e0e0e0;
-                border: 3px solid #bb86fc;
-                box-shadow: 5px 5px 0 #bb86fc;
-              }
-            `;
-            break;
-            
-          case "Neumorphism":
-            darkTheme.css = `
-              body {
-                font-family: 'Poppins', sans-serif;
-                background: #2d2d2d;
-                color: #e0e0e0;
-              }
+            }
+            @media (min-width: 992px) {
               .style-card {
-                background: #2d2d2d;
-                border-radius: 15px;
-                box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
-                border: none;
-                padding: 20px;
-                color: #e0e0e0;
+                width: calc(33.333% - 15px);
               }
-              .style-title {
-                color: #bb86fc;
-              }
-              .style-links a {
-                color: #03dac6;
-                text-decoration: none;
-              }
-              #css-editor {
-                background: #2d2d2d;
-                border-radius: 15px;
-                box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
-                border: none;
-                color: #e0e0e0;
-              }
-            `;
-            break;
-          
-          case "Cinematic":
-            darkTheme.css = `
+            }
+          `
+        },
+        {
+          name: "Flat Design",
+          css: `
+            body {
+              font-family: 'Segoe UI', 'Roboto', sans-serif;
+              background: #f9f9f9;
+              color: #333;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 2px;
+              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+              transition: all 0.2s ease;
+            }
+            .style-title {
+              color: #0078d7;
+            }
+            .style-links a {
+              color: #0078d7;
+              text-decoration: none;
+            }
+          `
+        },
+        {
+          name: "Semi-Flat",
+          css: `
+            body {
+              font-family: 'SF Pro Text', 'Roboto', sans-serif;
+              background: #f5f5f5;
+              color: #333;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+              transition: all 0.3s ease;
+            }
+            .style-card:hover {
+              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+              transform: translateY(-2px);
+            }
+            .style-title {
+              color: #007aff;
+            }
+          `
+        },
+        {
+          name: "Parallax",
+          css: `
+            body {
+              font-family: 'Montserrat', sans-serif;
+              background: #222;
+              color: white;
+              perspective: 1px;
+              height: 100vh;
+              overflow-x: hidden;
+              overflow-y: auto;
+            }
+            main {
+              transform-style: preserve-3d;
+            }
+            .style-card {
+              background: rgba(255,255,255,0.9);
+              color: #333;
+              border: none;
+              border-radius: 5px;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+              transform: translateZ(0);
+            }
+          `
+        },
+        {
+          name: "Single-Page App",
+          css: `
+            body {
+              font-family: 'Roboto', sans-serif;
+              background: #fafafa;
+              color: #333;
+              padding-top: 60px;
+            }
+            header {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              background: white;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              z-index: 100;
+              padding: 15px 0;
+            }
+            .style-card {
+              background: white;
+              border: none;
+              border-radius: 2px;
+              box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+              transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            }
+          `
+        },
+        {
+          name: "Progressive Web App",
+          css: `
+            body {
+              font-family: 'Google Sans', 'Roboto', sans-serif;
+              background: #f5f5f5;
+              color: #202124;
+              margin: 0;
+              padding: 0;
+            }
+            header {
+              background: #1a73e8;
+              color: white;
+              padding: 16px;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+            .style-card {
+              background: white;
+              border-radius: 8px;
+              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+              margin-bottom: 16px;
+              overflow: hidden;
+            }
+          `
+        },
+          {
+            name: "Cinematic",
+            css: `
               body {
                 font-family: 'Playfair Display', serif;
                 color: #e0e0e0;
@@ -2181,11 +2338,140 @@ gantt
             .mermaid .task {
               fill: var(--inverse-accent-color);
             }
-            `;
-            break;
-
-          case "Glassmorphism":
-            darkTheme.css = `
+            `
+          },
+          {
+            name: "Brutalist",
+            css: `
+              body {
+                font-family: monospace;
+                background: black;
+                color: white;
+                margin: 0;
+                padding: 20px;
+                line-height: 1.2;
+              }
+              main {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+              }
+              .style-card {
+                background: black;
+                border: 2px solid white;
+                border-radius: 0;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: none;
+                color: white;
+              }
+              .style-title {
+                color: #ff6666;
+              }
+              .style-links a {
+                color: #66ff66;
+              }
+              #css-editor {
+                background-color: black;
+                color: white;
+                border: 2px solid white;
+                font-family: monospace;
+              }
+            `
+          },
+          {
+            name: "Neo-Brutalism",
+            css: `
+              body {
+                font-family: 'Arial', sans-serif;
+                background: #121212;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background: #1a1a1a;
+                border: 3px solid #bb86fc;
+                border-radius: 0;
+                box-shadow: 5px 5px 0 #bb86fc;
+                transform: rotate(-1deg);
+                transition: all 0.2s ease;
+                color: #e0e0e0;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              .style-links a {
+                color: #03dac6;
+              }
+              #css-editor {
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+                border: 3px solid #bb86fc;
+                box-shadow: 5px 5px 0 #bb86fc;
+              }
+            `
+          },
+        {
+          name: "Dark Mode",
+          css: `
+            body {
+              font-family: 'SF Pro Text', 'Roboto', sans-serif;
+              background: #121212;
+              color: #e0e0e0;
+            }
+            .style-card {
+              background: #1e1e1e;
+              border: 1px solid #333;
+              border-radius: 8px;
+              color: #e0e0e0;
+            }
+            .style-title {
+              color: #bb86fc;
+            }
+            .style-links a {
+              color: #03dac6;
+            }
+            body.dark-mode #css-editor {
+              background-color: #2a2a2a;
+              color: #e0e0e0;
+              border-color: #444;
+            }
+          `
+        },
+        {
+            name: "Neumorphism",
+            css: `
+              body {
+                font-family: 'Poppins', sans-serif;
+                background: #2d2d2d;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background: #2d2d2d;
+                border-radius: 15px;
+                box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+                border: none;
+                padding: 20px;
+                color: #e0e0e0;
+              }
+              .style-title {
+                color: #bb86fc;
+              }
+              .style-links a {
+                color: #03dac6;
+                text-decoration: none;
+              }
+              #css-editor {
+                background: #2d2d2d;
+                border-radius: 15px;
+                box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+                border: none;
+                color: #e0e0e0;
+              }
+            `
+          },
+          {
+            name: "Glassmorphism",
+            css: `
               body {
                 font-family: 'Segoe UI', 'Roboto', sans-serif;
                 background: linear-gradient(135deg, #121212, #2d2d2d);
@@ -2213,12 +2499,11 @@ gantt
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 color: #e0e0e0;
               }
-            `;
-            break;
-            
-          default:
-            // For other themes, create a generic dark variant
-            darkTheme.css = `
+            `
+          },
+          {
+            name: "Corporate Memphis",
+            css: `
               body {
                 background-color: #121212;
                 color: #e0e0e0;
@@ -2240,11 +2525,139 @@ gantt
                 border-color: #444;
               }
             ` + theme.css;
+        },
+        {
+          name: "Retro Web",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "Y2K Web",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "WebGL & 3D",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              color:rgba(230, 230, 230, 0.9);
+            }
+            .style-card {
+              background:rgba(1, 36, 0, 0.9);
+              border: 3px solid rgba(0, 255, 21, 0.9);
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
+        },
+        {
+          name: "Inclusive Design",
+          css: `
+            body {
+              font-family: 'Arial', sans-serif;
+              background: #ffde59;
+              color: black;
+            }
+            .style-card {
+              background: white;
+              border: 3px solid black;
+              border-radius: 0;
+              box-shadow: 5px 5px 0 black;
+              transform: rotate(-1deg);
+              transition: all 0.2s ease;
+            }
+          `
         }
-        
-        // Add the dark theme to the themes array
-        themes.push(darkTheme);
-      });
+      ];
+
+  // Format CSS for readability in the editor
+      function formatCss(css) {
+        try {
+          // Check if css is undefined or null
+          if (!css) {
+            console.warn('Received undefined or null CSS for formatting');
+            return '/* No CSS defined for this theme */';
+          }
+          
+          // Format the CSS
+          const formattedCss = css
+            .replace(/}/g, '}\n')
+            .replace(/{/g, ' {\n')
+            .replace(/;(?!.*\n)/g, ';\n')
+            .replace(/:/g, ': ')
+            .replace(/,(?=\S)/g, ', ')
+            .trim();
+          
+          // Send Google Analytics event for successful CSS formatting
+          if (typeof gtag === 'function') {
+            gtag('event', 'css_formatting', {
+              'event_category': 'CSS Editor',
+              'event_label': 'CSS Formatted Successfully',
+              'value': css.length
+            });
+          }
+          
+          return formattedCss;
+        } catch (e) {
+          console.error('formatCss failed:', e);
+          
+          // Send Google Analytics event for CSS formatting error
+          if (typeof gtag === 'function') {
+            gtag('event', 'error', {
+              'event_category': 'CSS Editor',
+              'event_label': 'CSS Formatting Error',
+              'value': 0,
+              'description': e.message || 'Unknown error'
+            });
+          }
+          
+          // Return a placeholder message instead of empty string
+          return '/* Error formatting CSS */';
+        }
+      }
+
+      // First, store the original themes without dark variants
+      var originalThemes = themes.slice();
+      var originalDarkThemes = darkThemes.slice();
+
+      // Then create dark variants and add them after the original themes
+      originalThemes.forEach(theme => {
+        // Create a dark variant of the theme
+        var darkTheme = {
+          name: theme.name + " (Dark)",
+          // Store the original CSS for reference
+          originalCss: theme.css
+        };
+
 
       // Also keep the original theme.lightCss and theme.darkCss for the dark mode toggle
       themes.forEach(theme => {
