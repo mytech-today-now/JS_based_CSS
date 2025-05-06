@@ -15,6 +15,26 @@
   </script>
   
   <style>
+
+  :root {
+  /* Customize these to change stripe look */
+  --stripe-color: rgba(252, 255, 75, 0.85);  /* color of the stripe */
+  --dark-stripe-color: rgba(80, 81, 20, 0.95);  /* color of the stripe */
+  --stripe-width: 25px;               /* thickness of each stripe */
+  --stripe-spacing: 50px;             /* distance from start of one stripe to the next */
+  --stripe-angle: 135deg;             /* direction of the stripes */
+  --opacity: 0.8;                     /* opacity of the overlay */
+  --bg-color:rgba(255, 255, 255, 0.9);                   /* background color of the overlay */
+  --inverse-bg-color:rgb(0, 0, 0);           /* background color of the inverse overlay */
+  --padding: 1rem;                    /* padding of the overlay */
+  --blur: 10px;                       /* blur effect */
+  --rounded: 10px;                    /* border radius of the overlay */
+  --accent-color:rgba(0, 122, 204, 0.9);          /* color of the accent */
+  --inverse-accent-color:rgba(164, 163, 228, 0.9);  /* color of the inverse accent */
+  --text-color:rgba(51, 51, 51, 0.9);                 /* color of the text */
+  --inverse-text-color:rgba(255, 255, 255, 0.9);         /* color of the inverse text */
+}
+
     /* Base styles */
     body {
       margin: 0; padding: 0;
@@ -25,6 +45,17 @@
 #site-header {
     position: sticky;
     z-index: 100; /* Ensure header stays above hero section */
+}
+.intro {
+    padding: 2rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    margin: 0 auto;
+    max-width: 80%;
+    border-radius: var(--rounded);
+    box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
+    backdrop-filter: var(--blur);
 }
 
 .flex-grid {
@@ -377,12 +408,19 @@ top: 10vh;
     </div>
   </div>
   <div class="content-wrapper">
-    <div class="header-content" style="flex-basis:450px;">
+    <div class="header-content">
       <h1>Interactive Web Design Styles Showcase</h1>
       <p>From then to now.</p>
       <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
     </div>
   </div>
+
+<section class="intro">
+  <h3><strong>Overview</strong></h3>
+  <p>The Interactive Web Design Styles Showcase is designed to guide you through the evolution of web design—from the playful, “Under Construction” days of GeoCities to the sleek, glass-blur panels of Glassmorphism. At its core, the page presents a chronological Gantt-style timeline of major design movements and pairs each era with a corresponding “style card” that highlights its defining characteristics, key dates, and reference links. You can explore each style by clicking its title or by pressing <strong>Ctrl + Shift + Space</strong>, which cycles through the various themes in sequence. Below the timeline, a live CSS editor displays the exact rules being applied, so you can see how each design aesthetic is constructed in real time.</p>
+  <h3><strong>Under The Hood</strong></h3>
+  <p>Under the hood, the page relies on a combination of HTML, CSS, and JavaScript (with jQuery) to switch between design themes dynamically. A &lt;style id="theme-style"&gt; element is injected into the document head to override default styles with the current theme’s custom CSS. The page initializes a themes array in the video.js script, where each object includes a theme name and its CSS rules; a separate dark-mode variant is generated for each theme. When you trigger a theme change—either by clicking on a card, Gantt Timeline element, or using the keyboard shortcut—the script updates the injected CSS, reformats it for readability in the editor, and logs events (including Google Analytics tracking and console messages) for debugging. Special handling is included for cinematic themes, which preload and alternate background videos to recreate the immersive, full-screen intro experiences of earlier Flash-driven sites</p>
+  </section>
 
   <nav aria-label="Jump to era" class="era-timeline">
     <h3>Web Design Evolution Timeline</h3>
@@ -433,6 +471,8 @@ gantt
     <h2>Current CSS</h2>
     <textarea id="css-editor" editable></textarea>
   </section>
+
+  
 
   <main>
     <!-- All 26 style cards -->
@@ -770,16 +810,20 @@ gantt
           name: "Vernacular",
           css: `
             body { 
-              background: rgb(246, 243, 74);
+              /* fill the full viewport */
+              min-height: 100vh;
+              margin: 0;
+              /* repeating diagonal stripes */
+              background-image: repeating-linear-gradient(
+                  var(--stripe-angle),
+                  var(--stripe-color) 0,
+                  var(--stripe-color) var(--stripe-width),
+                transparent var(--stripe-width),
+                  transparent var(--stripe-spacing)
+              );
               font-family: 'Comic Sans MS', 'Comic Sans', cursive;
             }
             .content-wrapper
-              text-align: center; 
-              background: yellow;
-              border: 4px ridge blue;
-              padding: 10px;
-              margin: 10px;
-              top: 10px;
               display: visible;
               position: relative;
             }
@@ -791,8 +835,8 @@ gantt
             }
             .era-timeline { 
               display: block !important;
-              background: #ffffff;
-              opacity: 0.7;
+              background: var(--bg-color);
+              opacity: var(--opacity);
             }
             .style-card {
               background: #ffffcc;
@@ -810,6 +854,10 @@ gantt
               text-decoration: underline;
             }
             .extra-under { display: block !important; }
+            .mermaid {
+              background:rgb(245, 245, 243);
+              color:rgb(42, 44, 20);
+            }
           `
         },
         {
@@ -1262,7 +1310,7 @@ gantt
               padding: 2rem;
               overflow: hidden;
               background: rgba(255, 255, 255, 0.5);
-              backdrop-filter: 2px;
+              backdrop-filter: blur(--blur);
               /* display: none; /* Hidden by default, shown in cinematic mode */
             }
             .video-background {
@@ -1282,6 +1330,18 @@ gantt
             .style-title {
               color: #333;
               font-size: 24px;
+            }
+            .mermaid {
+              background: var(--bg-color);
+              color: var(--text-color);
+              border: 1px solid var(--accent-color);
+              border-radius: var(--rounded);
+            }
+            .mermaid text.taskText, .mermaid text.sectionTitle {
+              color: var(--text-color);
+            }
+            .mermaid .task {
+              fill: var(--accent-color);
             }
           `
         },
@@ -1508,6 +1568,12 @@ gantt
       // Format CSS for readability in the editor
       function formatCss(css) {
         try {
+          // Check if css is undefined or null
+          if (!css) {
+            console.warn('Received undefined or null CSS');
+            return '';
+          }
+          
           // Format the CSS
           const formattedCss = css
             .replace(/}/g, '}\n\n')
@@ -1540,12 +1606,13 @@ gantt
             });
           }
           
-          return css;
+          // Return the original CSS or empty string if undefined
+          return css || '';
         }
       }
 
       // Add a dark mode toggle to the UI
-      $('.header-content').append(`
+      $('body').append(`
         <div class="dark-mode-toggle">
           <label class="switch">
             <input type="checkbox" id="dark-mode-toggle">
@@ -1558,10 +1625,18 @@ gantt
       // Add dark mode toggle styles
       $('head').append(`
         <style>
+          /* Dark mode toggle styles */
           .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             display: flex;
             align-items: center;
-            margin-top: 1rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px;
+            border-radius: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
           }
           .switch {
             position: relative;
@@ -1607,26 +1682,38 @@ gantt
           .slider.round:before {
             border-radius: 50%;
           }
+          .dark-mode-toggle span {
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          }
         </style>
       `);
 
-      // Modify theme definitions to include custom dark variants for each theme
-      themes.forEach(theme => {
-        // Store the original (light) CSS
-        theme.lightCss = theme.css;
+      // First, store the original themes without dark variants
+      var originalThemes = themes.slice();
+
+      // Then create dark variants and add them after the original themes
+      originalThemes.forEach(theme => {
+        // Create a dark variant of the theme
+        var darkTheme = {
+          name: theme.name + " (Dark)",
+          // Store the original CSS for reference
+          originalCss: theme.css
+        };
         
-        // Create a custom dark version based on the theme
+        // Create custom dark CSS based on the theme
         switch(theme.name) {
           case "Dark Mode":
             // Dark Mode theme is already dark, just enhance it
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 background: #121212;
                 color: #e0e0e0;
               }
               .style-card {
                 background: #1e1e1e;
-                border: 1px solid #333;
+                border: 1px solid var(--inverse-accent-color);
                 border-radius: 8px;
                 color: #e0e0e0;
               }
@@ -1637,47 +1724,64 @@ gantt
                 color: #03dac6;
               }
               body.dark-mode #css-editor {
-                background-color: #2a2a2a;
-                color: #e0e0e0;
-                border-color: #444;
+                background-color: var(--inverse-bg-color);
+                color: var(--inverse-text-color);
+                border-color: var(--inverse-accent-color);
               }
             `;
             break;
             
           case "Vernacular":
-            theme.darkCss = `
+            darkTheme.css = `
               body { 
-                background: rgb(46, 43, 0);
+                /* fill the full viewport */
+                min-height: 100vh;
+                margin: 0;
+
+                /* repeating diagonal stripes */
+                background-image: repeating-linear-gradient(
+                    var(--stripe-angle, 45deg),
+                    var(--dark-stripe-color, #222) 0,
+                    var(--dark-stripe-color, #222) var(--stripe-width, 10px),
+                    transparent var(--stripe-width, 10px),
+                    transparent var(--stripe-spacing, 20px)
+                );
                 font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-                color: #f0f0f0;
               }
+              
               .content-wrapper {
-                text-align: center; 
-                background: rgb(70, 70, 0);
-                border: 4px ridge rgb(0, 0, 150);
-                padding: 10px;
-                margin: 10px;
+                display: block;
+                position: relative;
+                left: 10px;
+                top: 10px;
               }
               .header-content h1 { 
-                color: #ff6666; 
-                text-shadow: 2px 2px 0 rgb(70, 70, 0);
+                color: #ff0000; 
+                font-size: 15vw;
+                margin-bottom: 5px;
+              }
+              .era-timeline { 
+                display: block !important;
+                background: var(--inverse-bg-color, #222);
+                opacity: var(--opacity, 0.8);
               }
               .style-card {
-                background: #333300;
-                border: 3px outset #664400;
-                color: #f0f0f0;
+                background: #333;
+                border: 3px outset #cc9966;
+                color: #ffffcc;
+              }
+              .style-description {
+                color: #cccccc;
               }
               .style-title {
-                color: #ff9999;
+                color: #ff6666;
+                font-weight: bold;
               }
               .style-links a {
-                color: #99ccff;
+                color: #66ccff;
+                text-decoration: underline;
               }
-              #css-editor {
-                background-color: #333300;
-                color: #f0f0f0;
-                border-color: #664400;
-              }
+              .extra-under { display: block !important; }
               .mermaid {
                 background: #333300;
                 color: #f0f0f0;
@@ -1686,7 +1790,7 @@ gantt
             break;
             
           case "Skeuomorphic":
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 background: #222;
                 font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -1723,7 +1827,7 @@ gantt
             break;
             
           case "Swiss Style":
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 font-family: Helvetica, Arial, sans-serif;
                 background: #121212;
@@ -1761,7 +1865,7 @@ gantt
             break;
             
           case "Minimalist":
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 font-family: 'Inter', sans-serif;
                 background: #121212;
@@ -1800,7 +1904,7 @@ gantt
             break;
             
           case "Brutalist":
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 font-family: monospace;
                 background: black;
@@ -1839,7 +1943,7 @@ gantt
             break;
             
           case "Neo-Brutalism":
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 font-family: 'Arial', sans-serif;
                 background: #121212;
@@ -1870,7 +1974,7 @@ gantt
             break;
             
           case "Neumorphism":
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 font-family: 'Poppins', sans-serif;
                 background: #2d2d2d;
@@ -1900,9 +2004,63 @@ gantt
               }
             `;
             break;
-            
+          
+          case "Cinematic":
+            darkTheme.css = `
+              body {
+                font-family: 'Playfair Display', serif;
+                color: #e0e0e0;
+              }
+              .era-timeline {
+                top: 0;
+                left: 0;
+                width: 80%;
+                margin: auto;
+                padding: 2rem;
+                overflow: hidden;
+                background: rgba(255, 255, 255, 0.5);
+                backdrop-filter: blur(--blur);
+                /* display: none; /* Hidden by default, shown in cinematic mode */
+              }
+              .style-card {
+                background-color: var(--inverse-bg-color);
+                border-radius: var(--rounded);
+                box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+                border: 1px solid var(--inverse-accent-color);
+                padding: 20px;
+                color: var(--inverse-text-color);
+              }
+              .style-title {
+                color:rgb(255, 0, 55);
+              }
+              .style-links a {
+                color:rgba(226, 182, 4, 0.91);
+                text-decoration: none;
+              }
+              #css-editor {
+                background: #2d2d2d;
+                border-radius: var(--rounded);
+                box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+                border: 1px solid var(--accent-color);
+                color: #e0e0e0;
+              }
+              .mermaid {
+                background: var(--inverse-bg-color);
+                color: var(--inverse-text-color);
+                border: 1px solid var(--inverse-accent-color);
+                border-radius: var(--rounded);
+              }
+              .task, .mermaid text.taskText, .mermaid text.sectionTitle {
+                color: var(--inverse-text-color);
+              }
+            .mermaid .task {
+              fill: var(--inverse-accent-color);
+            }
+            `;
+            break;
+
           case "Glassmorphism":
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 font-family: 'Segoe UI', 'Roboto', sans-serif;
                 background: linear-gradient(135deg, #121212, #2d2d2d);
@@ -1935,7 +2093,7 @@ gantt
             
           default:
             // For other themes, create a generic dark variant
-            theme.darkCss = `
+            darkTheme.css = `
               body {
                 background-color: #121212;
                 color: #e0e0e0;
@@ -1957,6 +2115,35 @@ gantt
                 border-color: #444;
               }
             ` + theme.css;
+        }
+        
+        // Add the dark theme to the themes array
+        themes.push(darkTheme);
+      });
+
+      // Also keep the original theme.lightCss and theme.darkCss for the dark mode toggle
+      themes.forEach(theme => {
+        if (!theme.name.includes("(Dark)")) {
+          theme.lightCss = theme.css;
+          
+          // Find the corresponding dark theme
+          const darkTheme = themes.find(t => t.name === theme.name + " (Dark)");
+          if (darkTheme) {
+            theme.darkCss = darkTheme.css;
+          } else {
+            // Fallback if no dark theme was found
+            theme.darkCss = `
+              body {
+                background-color: #121212;
+                color: #e0e0e0;
+              }
+              .style-card {
+                background-color: #1e1e1e;
+                border-color: #333;
+                color: #e0e0e0;
+              }
+            ` + theme.css;
+          }
         }
       });
 
@@ -2217,20 +2404,41 @@ gantt
       // Add event listener for dark mode toggle with enhanced analytics
       $('#dark-mode-toggle').on('change', function() {
         const isDarkMode = $(this).is(':checked');
+        const currentThemeName = themes[current].name;
         
-        // Toggle dark mode class on body
-        $('body').toggleClass('dark-mode', isDarkMode);
+        if (isDarkMode) {
+          // Find the dark version of the current theme
+          const darkThemeIndex = themes.findIndex(t => t.name === currentThemeName + " (Dark)");
+          if (darkThemeIndex >= 0) {
+            applyTheme(darkThemeIndex);
+          } else {
+            // If no specific dark theme, apply dark CSS to current theme
+            $('body').addClass('dark-mode');
+            $themeStyle.html(themes[current].darkCss);
+            $cssEditor.val(formatCss(themes[current].darkCss));
+          }
+        } else {
+          // If we're in a dark theme, find the light version
+          if (currentThemeName.includes("(Dark)")) {
+            const lightThemeName = currentThemeName.replace(" (Dark)", "");
+            const lightThemeIndex = themes.findIndex(t => t.name === lightThemeName);
+            if (lightThemeIndex >= 0) {
+              applyTheme(lightThemeIndex);
+            }
+          } else {
+            // Just apply light CSS to current theme
+            $('body').removeClass('dark-mode');
+            $themeStyle.html(themes[current].lightCss);
+            $cssEditor.val(formatCss(themes[current].lightCss));
+          }
+        }
         
-        // Reapply current theme with dark mode setting
-        applyTheme(current);
-        
-        // Send Google Analytics event for dark mode toggle with theme context
+        // Send Google Analytics event for dark mode toggle
         if (typeof gtag === 'function') {
           gtag('event', 'dark_mode_toggle', {
             'event_category': 'Theme Settings',
             'event_label': themes[current].name + (isDarkMode ? ' - Enabled' : ' - Disabled'),
-            'value': isDarkMode ? 1 : 0,
-            'theme_name': themes[current].name
+            'value': isDarkMode ? 1 : 0
           });
         }
       });

@@ -44,14 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         'traffic_videos': {
             videos: [
-                'https://mytech.today/wp-content/uploads/2025/04/tTrucks.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/04/Notgridlock.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/04/Gridlock.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/04/RTA_bus-2-12043240-3840-2160-24Fps.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/04/lsd-01-12057787-3840-2160-24Fps.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/04/lsd-02-.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/04/DanRyan-2-6138427-Hd-1920-1080-24Fps.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/04/lower-waker-bridge-2-2005974-Hd-1920-1080-24Fps.mp4'
+                'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-9161-large.mp4',
+                'https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4'
             ],
             loadingImage: 'https://mytech.today/wp-content/uploads/2025/04/stephan-cassara-VguAb_4yJ_Q-unsplash.jpg'
         },
@@ -87,7 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentVideoIndex: 0,
                 isTransitioning: false,
                 isPlaying: false,
-                videoFiles: this.shuffleArray([...this.config.videos])
+                videoFiles: this.shuffleArray([...this.config.videos]),
+                videosLoaded: false
             };
 
             // Check if elements exist before setting them
@@ -105,36 +100,72 @@ document.addEventListener('DOMContentLoaded', function() {
                 videos: [video1, video2]
             };
 
+            // Ensure videos have proper attributes for mobile playback
+            this.elements.videos.forEach(video => {
+                video.muted = true;
+                video.playsInline = true;
+                video.setAttribute('webkit-playsinline', '');
+            });
+
             this.initialize();
         }
 
         shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
             }
-            return array;
+            return newArray;
         }
 
         async preloadVideo(videoElement, sourceUrl) {
             return new Promise((resolve, reject) => {
+                console.log(`[${this.setId}] Preloading video: ${sourceUrl}`);
                 videoElement.src = sourceUrl;
                 
                 const onLoadedData = () => {
                     videoElement.removeEventListener('loadeddata', onLoadedData);
                     videoElement.removeEventListener('error', onError);
+                    console.log(`[${this.setId}] Successfully loaded: ${sourceUrl}`);
                     resolve();
                 };
 
                 const onError = (error) => {
                     videoElement.removeEventListener('loadeddata', onLoadedData);
                     videoElement.removeEventListener('error', onError);
+                    console.error(`[${this.setId}] Failed to load: ${sourceUrl}`, error);
                     reject(error);
                 };
 
                 videoElement.addEventListener('loadeddata', onLoadedData);
                 videoElement.addEventListener('error', onError);
             });
+        }
+
+        async loadVideos() {
+            try {
+                console.log(`[${this.setId}] Loading videos`);
+                const firstVideo = this.elements.videos[0];
+                await this.preloadVideo(firstVideo, this.state.videoFiles[0]);
+                
+                // Preload the second video as well
+                if (this.state.videoFiles.length > 1) {
+                    const secondVideo = this.elements.videos[1];
+                    await this.preloadVideo(secondVideo, this.state.videoFiles[1]);
+                }
+                
+                this.state.videosLoaded = true;
+                console.log(`[${this.setId}] Videos loaded successfully`);
+                
+                // Return true to indicate successful loading
+                return true;
+            } catch (error) {
+                console.error(`[${this.setId}] Video loading failed:`, error);
+                // Try again with a delay
+                setTimeout(() => this.loadVideos(), 1000);
+                return false;
+            }
         }
 
         async transitionToNextVideo() {
@@ -197,21 +228,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         async startPlayback() {
+            if (this.state.isPlaying) {
+                console.log(`[${this.setId}] Playback already started`);
+                return;
+            }
+            
             try {
+                console.log(`[${this.setId}] Starting playback`);
+                
+                // If videos aren't loaded yet, load them first
+                if (!this.state.videosLoaded) {
+                    await this.loadVideos();
+                }
+                
                 const firstVideo = this.elements.videos[0];
-                await this.preloadVideo(firstVideo, this.state.videoFiles[0]);
-
                 firstVideo.style.opacity = '1';
                 firstVideo.style.display = 'block';
 
                 await firstVideo.play();
                 this.state.isPlaying = true;
                 this.scheduleNextTransition();
+                console.log(`[${this.setId}] Playback started successfully`);
 
             } catch (error) {
                 console.error(`[${this.setId}] Playback initialization failed:`, error);
+                // Try again with a delay
                 setTimeout(() => this.startPlayback(), 1000);
             }
+        }
+
+        stopPlayback() {
+            if (!this.state.isPlaying) {
+                return;
+            }
+            
+            console.log(`[${this.setId}] Stopping playback`);
+            
+            // Pause all videos
+            this.elements.videos.forEach(video => {
+                video.pause();
+                video.style.opacity = '0';
+                video.style.display = 'none';
+            });
+            
+            this.state.isPlaying = false;
+            console.log(`[${this.setId}] Playback stopped`);
         }
 
         initialize() {
@@ -220,6 +281,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            console.log(`[${this.setId}] Initializing video player`);
+
             // Initialize video elements
             this.elements.videos.forEach(video => {
                 video.style.position = 'absolute';
@@ -227,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.style.height = '100%';
                 video.style.objectFit = 'cover';
                 video.style.opacity = '0';
+                video.style.display = 'none';
                 
                 video.addEventListener('ended', () => {
                     if (!this.state.isTransitioning) {
@@ -234,41 +298,65 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                video.addEventListener('error', () => {
+                video.addEventListener('error', (e) => {
+                    console.error(`[${this.setId}] Video error:`, e);
                     if (!this.state.isTransitioning) {
                         this.transitionToNextVideo();
                     }
                 });
             });
 
-            // Start playback
-            this.startPlayback();
+            // Load videos but don't start playback
+            this.loadVideos();
         }
     }
 
-    // Initialize players for all video sets present on the page
-    Object.keys(VIDEO_SETS).forEach(setId => {
-        const container = document.getElementById(setId);
-        if (container) {
-            try {
-                new VideoPlayer(setId);
-            } catch (error) {
-                console.error(`Failed to initialize VideoPlayer for ${setId}:`, error);
-            }
+    // Create a global variable to store the video player instance
+    window.videoPlayers = {};
+
+    // Only initialize the traffic_videos player if we're on a page that has it
+    if (document.getElementById('traffic_videos')) {
+        console.log('Initializing traffic_videos player');
+        try {
+            window.videoPlayers.trafficVideos = new VideoPlayer('traffic_videos');
+        } catch (error) {
+            console.error('Failed to initialize traffic_videos player:', error);
         }
-    });
+    }
 
     // Handle visibility changes globally
     document.addEventListener('visibilitychange', () => {
-        const videos = document.querySelectorAll('video');
         if (document.hidden) {
-            videos.forEach(video => video.pause());
+            // Pause all videos when tab is not visible
+            document.querySelectorAll('video').forEach(video => video.pause());
         } else {
-            videos.forEach(video => {
-                if (video.style.opacity === '1') {
+            // Only resume playing videos if they were playing before
+            document.querySelectorAll('video').forEach(video => {
+                if (video.style.opacity === '1' && window.currentTheme === 'Cinematic') {
                     video.play().catch(e => console.warn('Auto-play failed:', e));
                 }
             });
+        }
+    });
+
+    // Add a custom event listener for theme changes
+    document.addEventListener('themeChanged', function(e) {
+        const themeName = e.detail.themeName;
+        console.log('Theme changed to:', themeName);
+        
+        // Store current theme name globally
+        window.currentTheme = themeName;
+        
+        if (themeName === 'Cinematic') {
+            console.log('Cinematic theme activated, starting video playback');
+            if (window.videoPlayers.trafficVideos) {
+                window.videoPlayers.trafficVideos.startPlayback();
+            }
+        } else {
+            console.log('Non-cinematic theme activated, stopping video playback');
+            if (window.videoPlayers.trafficVideos) {
+                window.videoPlayers.trafficVideos.stopPlayback();
+            }
         }
     });
 });
