@@ -1,242 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Interactive Web Design Styles Showcase</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR81E31MX4"></script>
-  <script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Web Design Styles Showcase</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR81E31MX4"></script>
+    <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-YR81E31MX4');
-  </script>
-  
-  <style>
-
-  :root {
-  /* Customize these to change stripe look */
-  --stripe-color: rgba(252, 255, 75, 0.85);  /* color of the stripe */
-  --dark-stripe-color: rgba(64, 60, 0, 0.95);  /* color of the stripe */
-  --stripe-width: 25px;               /* thickness of each stripe */
-  --stripe-spacing: 50px;             /* distance from start of one stripe to the next */
-  --stripe-angle: 135deg;             /* direction of the stripes */
-  --opacity: 0.8;                     /* opacity of the overlay */
-  --bg-color:rgba(255, 255, 255, 0.9);                   /* background color of the overlay */
-  --inverse-bg-color:rgb(0, 0, 0);           /* background color of the inverse overlay */
-  --padding: 1rem;                    /* padding of the overlay */
-  --blur: 10px;                       /* blur effect */
-  --rounded: 10px;                    /* border radius of the overlay */
-  --accent-color:rgba(0, 122, 204, 0.9);          /* color of the accent */
-  --inverse-accent-color:rgba(164, 163, 228, 0.9);  /* color of the inverse accent */
-  --text-color:rgba(51, 51, 51, 0.9);                 /* color of the text */
-  --inverse-text-color:rgba(255, 255, 255, 0.9);         /* color of the inverse text */
-}
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-YR81E31MX4');
+    </script>
+    <style>
+    :root {
+      /* Customize these to change stripe look */
+      --stripe-color: rgba(252, 255, 75, 0.85);
+      /* color of the stripe */
+      --dark-stripe-color: rgba(64, 60, 0, 0.95);
+      /* color of the stripe */
+      --stripe-width: 25px;
+      /* thickness of each stripe */
+      --stripe-spacing: 50px;
+      /* distance from start of one stripe to the next */
+      --stripe-angle: 135deg;
+      /* direction of the stripes */
+      --opacity: 0.8;
+      /* opacity of the overlay */
+      --bg-color: rgba(255, 255, 255, 0.9);
+      /* background color of the overlay */
+      --inverse-bg-color: rgb(0, 0, 0);
+      /* background color of the inverse overlay */
+      --padding: 1rem;
+      /* padding of the overlay */
+      --blur: 10px;
+      /* blur effect */
+      --rounded: 10px;
+      /* border radius of the overlay */
+      --accent-color: rgba(0, 122, 204, 0.9);
+      /* color of the accent */
+      --inverse-accent-color: rgba(164, 163, 228, 0.9);
+      /* color of the inverse accent */
+      --text-color: rgba(51, 51, 51, 0.9);
+      /* color of the text */
+      --inverse-text-color: rgba(255, 255, 255, 0.9);
+      /* color of the inverse text */
+    }
 
     /* Base styles */
     body {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
       line-height: 1.6;
     }
-      /* Ensure site header stays at the very top */
-#site-header {
-    position: sticky;
-    z-index: 100; /* Ensure header stays above hero section */
-}
-.intro {
-  display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    background-color: var(--bg-color);
-    backdrop-filter: var(--blur);
-    color: var(--text-color);
-    text-align: center;
-    margin: 0 auto;
-    max-width: 80%;
-    border-radius: var(--rounded);
-    box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
-    margin-bottom: 2rem;
-}
-.into h3 {
-  align-items: center;
-  justify-content: center;
-}
-.intro p {
-align-items: left;
-justify-content: center;
 
-}
+    /* Ensure site header stays at the very top */
+    #site-header {
+      position: sticky;
+      z-index: 100;
+      /* Ensure header stays above hero section */
+    }
 
-#outro {
-  padding-top: 5rem;
-}
+    .intro {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      background-color: var(--bg-color);
+      backdrop-filter: var(--blur);
+      color: var(--text-color);
+      text-align: center;
+      margin: 0 auto;
+      max-width: 80%;
+      border-radius: var(--rounded);
+      box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
+      margin-bottom: 2rem;
+    }
 
-.flex-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
+    .into h3 {
+      align-items: center;
+      justify-content: center;
+    }
 
-.grid-item {
-  flex: 1 1 300px;
-  border: 1px solid var(--accent-color);
-  padding: 1rem;
-  margin: 0.5rem 0;
-  box-sizing: border-box;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  radius: var(--rounded);
-}
+    .intro p {
+      align-items: left;
+      justify-content: center;
 
-.grid-item p {
-  margin: 0.5rem;
-}
+    }
 
-/* Hero Section and Video Background */
-.hero-section {
-position: fixed;  /* Change from relative to fixed */
-top: 0;          /* Add top positioning */
-left: 0;         /* Add left positioning */
-width: 100%;     /* Simplify width */
-height: 100vh;   /* Keep full viewport height */
-z-index: -1;     /* Ensure it stays behind content */
-}
+    #outro {
+      padding-top: 5rem;
+    }
 
-.video-background {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: -1;
-}
+    .flex-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
 
-/* Video Container Styling */
-#traffic_videos {
-position: relative;
-width: 100%;
-height: 100%;
-background-color: black;    /* Fallback color */
-}
+    .grid-item {
+      flex: 1 1 300px;
+      border: 1px solid var(--accent-color);
+      padding: 1rem;
+      margin: 0.5rem 0;
+      box-sizing: border-box;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      radius: var(--rounded);
+    }
 
-/* Individual Video Elements */
-[id$="_videos_1"],
-[id$="_videos_2"]	{
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;          /* Maintain aspect ratio while covering */
-transition: opacity 1s ease-in-out;
-opacity: 0;
-display: none;
-}
+    .grid-item p {
+      margin: 0.5rem;
+    }
 
-/* Video Overlay */
-.video-overlay {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.2);
-z-index: 1;
-}
+    /* Hero Section and Video Background */
+    .hero-section {
+      position: fixed;
+      /* Change from relative to fixed */
+      top: 0;
+      /* Add top positioning */
+      left: 0;
+      /* Add left positioning */
+      width: 100%;
+      /* Simplify width */
+      height: 100vh;
+      /* Keep full viewport height */
+      z-index: -1;
+      /* Ensure it stays behind content */
+    }
 
-/* Content Wrapper Adjustments */
-.content-wrapper {
-position: relative;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: var(--padding);
-z-index: 2;
-margin: 0;                  /* Remove any margins */
-}
-.content-wrapper h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  align-items: center;
-  justify-content: center;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-    
-.content-wrapper p {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  align-items: left;
-  justify-content: left;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
 
-/* Header Content */
-.header-content {
-flex: 1 1 33%;
-padding: 2rem;
-border-radius: var(--rounded);
-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-backdrop-filter: var(--blur);
-opacity: var(--opacity);
-max-height: 35%;
-max-width: 35%;
-}
+    /* Video Container Styling */
+    #traffic_videos {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      /* Fallback color */
+    }
 
-.header-content h1 {
-font-size: 2.5rem;
-margin-bottom: 1rem;
-}
+    /* Individual Video Elements */
+    [id$="_videos_1"],
+    [id$="_videos_2"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Maintain aspect ratio while covering */
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+      display: none;
+    }
 
-.header-content p {
-font-size: 1.2rem;
-line-height: 1.6;
-}
+    /* Video Overlay */
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
 
-.era-timeline {
-  top: 0;
-  left: 0;
-  width: 80%;
-  height: 80vh;
-  margin: auto;
-  padding: 2rem;
-  overflow: hidden;
-  /* display: none; /* Hidden by default, shown in cinematic mode */
-}
-    
-article.style-card {
-  flex: 1 0 300px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background: #fff;
-  transition: transform .2s;
-  max-width: calc(33.333% - 20px);
-}
-    
+    /* Content Wrapper Adjustments */
+    .content-wrapper {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding);
+      z-index: 2;
+      margin: 0;
+      /* Remove any margins */
+    }
+
+    .content-wrapper h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .content-wrapper p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      align-items: left;
+      justify-content: left;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Header Content */
+    .header-content {
+      flex: 1 1 33%;
+      padding: 2rem;
+      border-radius: var(--rounded);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      backdrop-filter: var(--blur);
+      opacity: var(--opacity);
+      max-height: 35%;
+      max-width: 35%;
+    }
+
+    .header-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .header-content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .era-timeline {
+      top: 0;
+      left: 0;
+      width: 80%;
+      height: 80vh;
+      margin: auto;
+      padding: 2rem;
+      overflow: hidden;
+      /* display: none; /* Hidden by default, shown in cinematic mode */
+    }
+
+    article.style-card {
+      flex: 1 0 300px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #fff;
+      transition: transform .2s;
+      max-width: calc(33.333% - 20px);
+    }
+
     @media (max-width: 992px) {
       article.style-card {
         max-width: calc(50% - 20px);
       }
     }
-    
+
     @media (max-width: 576px) {
       article.style-card {
         max-width: 100%;
       }
     }
-    
-    article.style-card:hover { 
-      transform: scale(1.02); 
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    article.style-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
+
     .style-title {
       font-size: 1.25rem;
       cursor: pointer;
@@ -244,55 +275,75 @@ article.style-card {
       display: inline-block;
       margin-bottom: .25rem;
     }
-    .style-era { font-style: italic; margin-bottom: .5rem; }
-    .style-description { margin-bottom: .5rem; }
-    .style-links a { margin-right: .5rem; color: #007acc; }
+
+    .style-era {
+      font-style: italic;
+      margin-bottom: .5rem;
+    }
+
+    .style-description {
+      margin-bottom: .5rem;
+    }
+
+    .style-links a {
+      margin-right: .5rem;
+      color: #007acc;
+    }
 
     /* Hide legacy extras */
-    .extra-under, .extra-counter, .extra-flash-intro,
-    #main-table, .frame-nav, .frame-content,
-    .beta-badge, .card-texture, .grid-overlay {
+    .extra-under,
+    .extra-counter,
+    .extra-flash-intro,
+    #main-table,
+    .frame-nav,
+    .frame-content,
+    .beta-badge,
+    .card-texture,
+    .grid-overlay {
       display: none !important;
     }
 
     /* Gantt chart interactive styles */
-    .mermaid .task, .mermaid text.taskText, .mermaid text.sectionTitle {
+    .mermaid .task,
+    .mermaid text.taskText,
+    .mermaid text.sectionTitle {
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    
+
     .mermaid .task:hover {
       opacity: 0.8;
       transform: translateY(-2px);
     }
 
-.mermaid {
-    background-color: var(--bg-color);
-    backdrop-filter: var(--blur);
-}
-    
+    .mermaid {
+      background-color: var(--bg-color);
+      backdrop-filter: var(--blur);
+    }
+
     .mermaid text.taskText:hover {
       font-weight: bold;
     }
-    
+
     .mermaid text.sectionTitle:hover {
       font-weight: bold;
       text-decoration: underline;
     }
-    
+
     /* Style cards interactive styles */
     .style-card {
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    
+
     .style-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
-    
+
     /* CSS editor styles */
-    #css-editor, #html-editor {
+    #css-editor,
+    #html-editor {
       font-family: 'Courier New', monospace;
       line-height: 1.5;
       padding: 10px;
@@ -301,7 +352,7 @@ article.style-card {
       border: 1px solid #ccc;
       background-color: #f9f9f9;
       resize: vertical;
-      
+
     }
 
     .css-editor {
@@ -321,7 +372,7 @@ article.style-card {
       text-align: center;
       display: block;
     }
-    
+
     .html-editor {
       margin: auto;
       max-width: calc(100% - 20px);
@@ -330,7 +381,7 @@ article.style-card {
       text-align: center;
       display: block;
     }
-    
+
     /* Tooltip to indicate clickable elements */
     [data-tooltip]:before {
       content: attr(data-tooltip);
@@ -340,612 +391,631 @@ article.style-card {
       padding: 5px 10px;
       color: #fff;
       border-radius: 4px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       pointer-events: none;
       z-index: 10;
       white-space: nowrap;
       transform: translateY(10px);
     }
-    
+
     [data-tooltip]:hover:before {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     /* Add tooltips to Gantt elements */
-    .mermaid .task, .mermaid text.taskText {
+    .mermaid .task,
+    .mermaid text.taskText {
       position: relative;
     }
 
     /* Container for all ads */
-.ad-group {
-width: 80%;
-margin: 2rem auto;
-padding: 1rem;
-border-radius: var(--rounded);
-background-color: var(--content-bg);
-box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
-}
+    .ad-group {
+      width: 80%;
+      margin: 2rem auto;
+      padding: 1rem;
+      border-radius: var(--rounded);
+      background-color: var(--content-bg);
+      box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
+    }
 
-/* Each ad line */
-.ad-group .ad-line {
-margin: 0.75rem 0;
-padding: 0.75rem 1rem;
-background-color: var(--bg-color);
+    /* Each ad line */
+    .ad-group .ad-line {
+      margin: 0.75rem 0;
+      padding: 0.75rem 1rem;
+      background-color: var(--bg-color);
 
-transition: transform 0.3s ease;
-border: 1px solid var(--accent-color);
-}
+      transition: transform 0.3s ease;
+      border: 1px solid var(--accent-color);
+    }
 
-/* Hover effect for ad lines */
-.ad-group .ad-line:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 6px var(--shadow-dark);
-}
+    /* Hover effect for ad lines */
+    .ad-group .ad-line:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px var(--shadow-dark);
+    }
 
-/* Link styling */
-.ad-group .ad-line a {
-display: block;
-color: var(--text-color);
-font-weight: 600;
-text-decoration: none;
-transition: color 0.3s ease;
-}
+    /* Link styling */
+    .ad-group .ad-line a {
+      display: block;
+      color: var(--text-color);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
-/* Link hover state */
-.ad-group .ad-line a:hover {
-color: var(--text-color);
-text-decoration: underline;
-}
+    /* Link hover state */
+    .ad-group .ad-line a:hover {
+      color: var(--text-color);
+      text-decoration: underline;
+    }
 
-/* ===== Main Container & Layout ===== */
-#main-core {
-max-width: 1300px;
-margin: 0 auto;
-}
+    /* ===== Main Container & Layout ===== */
+    #main-core {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
 
-/* Ensure main content scrolls above video */
-main {
-position: relative;
-max-width: 85%;
-align-items: center;
-justify-content: center;
-padding: 0;                 /* Remove any padding */
-margin: auto;                  /* Remove any margins */
-top: 5vh;
-max-width: 1200px; /* Adjust this value as needed */
-display: flex;
-flex-wrap: wrap !important;
-gap: 20px;
-}
-#under-construction {
-  position: absolute;
-  margin: 2rem;
-  width: 100%;
-  height: 100%;
-  left: 40%
-}
-.counter {
-  display: flex;
-  flex: row wrap;
-  padding: 2rem;
-}
-  </style>
-<style>
-          /* Dark mode toggle styles */
-          .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 8px 12px;
-            border-radius: 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-          }
-          .current-style-display {
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 8px 12px;
-            border-radius: 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            color: white;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-          }
-          #current-theme {
-            margin-left: 5px;
-            color: #2196F3;
-          }
-          .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-            margin-right: 10px;
-          }
-          .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-          }
-          .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-          }
-          .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-          }
-          input:checked + .slider {
-            background-color: #2196F3;
-          }
-          input:checked + .slider:before {
-            transform: translateX(26px);
-          }
-          .slider.round {
-            border-radius: 34px;
-          }
-          .slider.round:before {
-            border-radius: 50%;
-          }
-          .dark-mode-toggle span {
-            color: white;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-          }
-        </style>
+    /* Ensure main content scrolls above video */
+    main {
+      position: relative;
+      max-width: 85%;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      /* Remove any padding */
+      margin: auto;
+      /* Remove any margins */
+      top: 5vh;
+      max-width: 1200px;
+      /* Adjust this value as needed */
+      display: flex;
+      flex-wrap: wrap !important;
+      gap: 20px;
+    }
+
+    #under-construction {
+      position: absolute;
+      margin: 2rem;
+      width: 100%;
+      height: 100%;
+      left: 40%
+    }
+
+    .counter {
+      display: flex;
+      flex: row wrap;
+      padding: 2rem;
+    }
+    </style>
+    <style>
+    /* Dark mode toggle styles */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 8px 12px;
+      border-radius: 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .current-style-display {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 8px 12px;
+      border-radius: 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    #current-theme {
+      margin-left: 5px;
+      color: #2196F3;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+      margin-right: 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .dark-mode-toggle span {
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    </style>
 
 
-  <!-- Dynamic theme CSS will be injected here -->
-  <style id="theme-style"></style>
+    <!-- Dynamic theme CSS will be injected here -->
+    <style id="theme-style"></style>
 
-  <!-- Add Mermaid JS library -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-</head>
-<body>
-  <div class="hero-section">
-    <div class="video-background">
-      <div id="traffic_videos">
-        <video id="traffic_videos_1" muted playsinline webkit-playsinline></video>
-        <video id="traffic_videos_2" muted playsinline webkit-playsinline></video>
+    <!-- Add Mermaid JS library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+  </head>
+
+  <body>
+    <div class="hero-section">
+      <div class="video-background">
+        <div id="traffic_videos">
+          <video id="traffic_videos_1" muted playsinline webkit-playsinline></video>
+          <video id="traffic_videos_2" muted playsinline webkit-playsinline></video>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="counter">
-    <div>Website visit count:</div>
-    <div id="vistor-counter"></div>
-  </div>
-  <div class="dark-mode-toggle">
-    <label class="switch">
-      <input type="checkbox" id="dark-mode-toggle">
-      <span class="slider round"></span>
-    </label>
-    <span>Dark Mode</span>
-  </div>
-  <div class="current-style-display">
-    <span>Style: </span>
-    <span id="current-theme">Default</span>
-  </div>
-  <div id="under-construction">
-    <img src="https://gifgifs.com/animations/webdesign-elements/under-construction/webpage_construction.gif" alt="Under Construction">
-  </div>
-  <div class="content-wrapper">
-    <div class="header-content">
-      <h1>Interactive Web Design Styles Showcase</h1>
-      <p>From then to now.</p>
-      <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
+    <div class="counter">
+      <div>Website visit count:</div>
+      <div id="vistor-counter"></div>
     </div>
-  </div>
-
-<section class="intro">
-  <h3><strong>Overview</strong></h3>
-  <p>The Interactive Web Design Styles Showcase is designed to guide you through the evolution of web design—from the playful, “Under Construction” days of GeoCities to the sleek, glass-blur panels of Glassmorphism. At its core, the page presents a chronological Gantt-style timeline of major design movements and pairs each era with a corresponding “style card” that highlights its defining characteristics, key dates, and reference links. You can explore each style by clicking its title or by pressing <strong>Ctrl + Shift + Space</strong>, which cycles through the various themes in sequence. Below the timeline, a live CSS editor displays the exact rules being applied, so you can see how each design aesthetic is constructed in real time.</p>
-  </section>
-
-  <nav aria-label="Jump to era" class="era-timeline">
-    <h3>Web Design Evolution Timeline</h3>
-    <div class="mermaid-wrapper">
-      <div class="mermaid" id="era-timeline">
-gantt
-    title       Web Design History
-    dateFormat  YYYY
-    axisFormat  %Y
-    todayMarker off
-    
-    section 1990s
-    Vernacular / Geocities     :vernacular, 1991, 1995
-    Table-Based Design         :table-frames, 1993, 1998
-    Framesets                  :framesets, 1993, 1998
-    Flash-Based Design         :flash, 1996, 2008
-    
-    section 2000s
-    Web 2.0 Glossy             :web2, 2004, 2013
-    Skeuomorphic               :skeuomorphic, 2004, 2013
-    Swiss Style                :swiss, 2000, 2025
-    Minimalist                 :minimalist, 2000, 2025
-    
-    section 2010s
-    Responsive Design          :responsive, 2010, 2025
-    Flat Design                :flat-design, 2010, 2025
-    Parallax                   :parallax, 2012, 2016
-    Single-Page App            :spa, 2012, 2016
-    Progressive Web App        :pwa, 2015, 2025
-    Cinematic                  :cinematic, 2010, 2019
-    Brutalist                  :brutalist, 2015, 2025
-    Neo-Brutalism              :neo-brutalism, 2015, 2025
-    Corporate Memphis          :corporate-memphis, 2018, 2025
-    WebGL & 3D                 :webgl-3d, 2015, 2025
-    
-    section 2020s
-    Dark Mode                  :dark-mode, 2020, 2025
-    Neumorphism                :neumorphism, 2020, 2021
-    Glassmorphism              :glassmorphism, 2020, 2021
-    Retro Web                  :retro-web, 2020, 2025
-    Y2K Web                    :y2k-web, 2020, 2025
-    Inclusive Design           :inclusive-design, 2010, 2025
+    <div id="theme-style"></div>
+    <div class="dark-mode-toggle">
+      <label class="switch">
+        <input type="checkbox" id="dark-mode-toggle">
+        <span class="slider round"></span>
+      </label>
+      <span>Dark Mode</span>
     </div>
-  </div>
-</nav>
+    <div class="current-style-display">
+      <span>Style: </span>
+      <span id="current-theme">Default</span>
+    </div>
+    <div id="under-construction">
+      <img src="https://gifgifs.com/animations/webdesign-elements/under-construction/webpage_construction.gif" alt="Under Construction">
+    </div>
+    <div class="content-wrapper">
+      <div class="header-content">
+        <h1>Interactive Web Design Styles Showcase</h1>
+        <p>From then to now.</p>
+        <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
+      </div>
+    </div>
 
-  <section class="css-editor">
-    <h2>Current CSS</h2>
-    <textarea id="css-editor" editable></textarea>
-  </section>
+    <section class="intro">
+      <h3><strong>Overview</strong></h3>
+      <p>The Interactive Web Design Styles Showcase is designed to guide you through the evolution of web design—from the playful, “Under Construction” days of GeoCities to the sleek, glass-blur panels of Glassmorphism. At its core, the page presents a chronological Gantt-style timeline of major design movements and pairs each era with a corresponding “style card” that highlights its defining characteristics, key dates, and reference links. You can explore each style by clicking its title or by pressing <strong>Ctrl + Shift + Space</strong>, which cycles through the various themes in sequence. Below the timeline, a live CSS editor displays the exact rules being applied, so you can see how each design aesthetic is constructed in real time.</p>
+    </section>
 
-  
+    <nav aria-label="Jump to era" class="era-timeline">
+      <h3>Web Design Evolution Timeline</h3>
+      <div class="mermaid-wrapper">
+        <div class="mermaid" id="era-timeline">
+          gantt
+          title Web Design History
+          dateFormat YYYY
+          axisFormat %Y
+          todayMarker off
 
-  <main>
-    <!-- All 26 style cards -->
-    <article class="style-card" data-index="0" id="vernacular">
-      <h3 class="style-title">Vernacular / Geocities</h3>
-      <p class="style-era">1991–1995</p>
-      <p class="style-description">
-        Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs, and visitor counters.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/GeoCities" target="_blank">GeoCities</a>
-        <a href="https://en.wikipedia.org/wiki/Under_Construction" target="_blank">Under Construction</a>
-      </p>
-    </article>
+          section 1990s
+          Vernacular / Geocities :vernacular, 1991, 1995
+          Table-Based Design :table-frames, 1993, 1998
+          Framesets :framesets, 1993, 1998
+          Flash-Based Design :flash, 1996, 2008
 
-    <article class="style-card" data-index="1" id="table-frames">
-      <h3 class="style-title">Table-Based Design</h3>
-      <p class="style-era">1993–1998</p>
-      <p class="style-description">
-        Using HTML tables to approximate multi-column layouts before CSS adoption.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/HTML_table" target="_blank">HTML Tables</a>
-        <a href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS</a>
-      </p>
-    </article>
+          section 2000s
+          Web 2.0 Glossy :web2, 2004, 2013
+          Skeuomorphic :skeuomorphic, 2004, 2013
+          Swiss Style :swiss, 2000, 2025
+          Minimalist :minimalist, 2000, 2025
 
-    <article class="style-card" data-index="2" id="framesets">
-      <h3 class="style-title">Framesets</h3>
-      <p class="style-era">1993–1998</p>
-      <p class="style-description">
-        Splitting the browser window into independent panes—navigation, content, etc.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/HTML_frame" target="_blank">HTML Frames</a>
-        <a href="https://developer.mozilla.org/docs/Web/HTML/Element/frame" target="_blank">MDN Frames</a>
-      </p>
-    </article>
+          section 2010s
+          Responsive Design :responsive, 2010, 2025
+          Flat Design :flat-design, 2010, 2025
+          Parallax :parallax, 2012, 2016
+          Single-Page App :spa, 2012, 2016
+          Progressive Web App :pwa, 2015, 2025
+          Cinematic :cinematic, 2010, 2019
+          Brutalist :brutalist, 2015, 2025
+          Neo-Brutalism :neo-brutalism, 2015, 2025
+          Corporate Memphis :corporate-memphis, 2018, 2025
+          WebGL & 3D :webgl-3d, 2015, 2025
 
-    <article class="style-card" data-index="3" id="flash">
-      <h3 class="style-title">Flash-Based Design</h3>
-      <p class="style-era">1996–2008</p>
-      <p class="style-description">
-        Rich animations, interactive menus, and full-screen intros created with Macromedia Flash.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Adobe_Flash" target="_blank">Adobe Flash</a>
-        <a href="https://en.wikipedia.org/wiki/Adobe_Animate" target="_blank">Adobe Animate</a>
-      </p>
-    </article>
+          section 2020s
+          Dark Mode :dark-mode, 2020, 2025
+          Neumorphism :neumorphism, 2020, 2021
+          Glassmorphism :glassmorphism, 2020, 2021
+          Retro Web :retro-web, 2020, 2025
+          Y2K Web :y2k-web, 2020, 2025
+          Inclusive Design :inclusive-design, 2010, 2025
+        </div>
+      </div>
+    </nav>
 
-    <article class="style-card" data-index="4" id="web2">
-      <h3 class="style-title">Web 2.0 Glossy</h3>
-      <p class="style-era">2004–2013</p>
-      <p class="style-description">
-        Glossy buttons, drop shadows, reflections, stock-photo headers, and “beta” tags.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Web_2.0" target="_blank">Web 2.0</a>
-        <a href="https://www.wired.com/" target="_blank">WIRED</a>
-      </p>
-    </article>
+    <section class="css-editor">
+      <h2>Current CSS</h2>
+      <textarea id="css-editor" editable></textarea>
+    </section>
 
-    <article class="style-card" data-index="5" id="skeuomorphic">
-      <h3 class="style-title">Skeuomorphic</h3>
-      <p class="style-era">2004–2013</p>
-      <p class="style-description">
-        Interfaces mimicking real-world textures (leather, paper, metal).
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Skeuomorph" target="_blank">Skeuomorph</a>
-        <a href="https://en.wikipedia.org/wiki/Apple_Human_Interface_Guidelines#Skeuomorphism" target="_blank">iOS Skeuomorphism</a>
-      </p>
-    </article>
 
-    <article class="style-card" data-index="6" id="swiss">
-      <h3 class="style-title">Swiss Style</h3>
-      <p class="style-era">2000s–present</p>
-      <p class="style-description">
-        Grid-based layouts, strong typography, and generous whitespace.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Swiss_Style" target="_blank">International Typographic Style</a>
-        <a href="https://en.wikipedia.org/wiki/Helvetica" target="_blank">Helvetica</a>
-      </p>
-    </article>
 
-    <article class="style-card" data-index="7" id="minimalist">
-      <h3 class="style-title">Minimalist</h3>
-      <p class="style-era">2000s–present</p>
-      <p class="style-description">
-        Stripping interfaces to essentials—white space, high-contrast typography, and minimal UI elements.
-      </p>
-      <p class="style-links">
-        <a href="https://www.nngroup.com/articles/minimalist-web-design/" target="_blank">NNG Guide</a>
-        <a href="https://en.wikipedia.org/wiki/Minimalism" target="_blank">Minimalism</a>
-      </p>
-    </article>
+    <main>
+      <!-- All 26 style cards -->
+      <article class="style-card" data-index="0" id="vernacular">
+        <h3 class="style-title">Vernacular / Geocities</h3>
+        <p class="style-era">1991–1995</p>
+        <p class="style-description">
+          Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs, and visitor counters.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/GeoCities" target="_blank">GeoCities</a>
+          <a href="https://en.wikipedia.org/wiki/Under_Construction" target="_blank">Under Construction</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="8" id="responsive">
-      <h3 class="style-title">Responsive</h3>
-      <p class="style-era">2010–present</p>
-      <p class="style-description">
-        Fluid grids, flexible images, and CSS media queries ensure layouts adapt.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Responsive_web_design" target="_blank">Responsive</a>
-        <a href="https://developer.mozilla.org/docs/Web/CSS/Media_Queries" target="_blank">MDN Media Queries</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="1" id="table-frames">
+        <h3 class="style-title">Table-Based Design</h3>
+        <p class="style-era">1993–1998</p>
+        <p class="style-description">
+          Using HTML tables to approximate multi-column layouts before CSS adoption.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/HTML_table" target="_blank">HTML Tables</a>
+          <a href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="9" id="mobile-first">
-      <h3 class="style-title">Mobile-First</h3>
-      <p class="style-era">2010–present</p>
-      <p class="style-description">
-        Designing for small screens first, then enhancing for larger viewports.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Mobile-first_design" target="_blank">Mobile-First</a>
-        <a href="https://www.smashingmagazine.com/2011/01/guidelines-for-responsive-web-design/" target="_blank">Smashing Mag.</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="2" id="framesets">
+        <h3 class="style-title">Framesets</h3>
+        <p class="style-era">1993–1998</p>
+        <p class="style-description">
+          Splitting the browser window into independent panes—navigation, content, etc.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/HTML_frame" target="_blank">HTML Frames</a>
+          <a href="https://developer.mozilla.org/docs/Web/HTML/Element/frame" target="_blank">MDN Frames</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="10" id="flat-design">
-      <h3 class="style-title">Flat Design</h3>
-      <p class="style-era">2010–present</p>
-      <p class="style-description">
-        Minimalist UI with simple elements, flat colors, no textures.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Flat_design" target="_blank">Flat Design</a>
-        <a href="https://en.wikipedia.org/wiki/Metro_(design_language)" target="_blank">Metro UI</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="3" id="flash">
+        <h3 class="style-title">Flash-Based Design</h3>
+        <p class="style-era">1996–2008</p>
+        <p class="style-description">
+          Rich animations, interactive menus, and full-screen intros created with Macromedia Flash.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Adobe_Flash" target="_blank">Adobe Flash</a>
+          <a href="https://en.wikipedia.org/wiki/Adobe_Animate" target="_blank">Adobe Animate</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="11" id="semi-flat">
-      <h3 class="style-title">Semi-Flat</h3>
-      <p class="style-era">2010–present</p>
-      <p class="style-description">
-        Flat foundations augmented with subtle shadows or minimal gradients.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Flat_design#Flat_2.0" target="_blank">Flat 2.0</a>
-        <a href="https://uxplanet.org/semi-flat-design-principles-and-examples-6d1d90d82469" target="_blank">UX Planet</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="4" id="web2">
+        <h3 class="style-title">Web 2.0 Glossy</h3>
+        <p class="style-era">2004–2013</p>
+        <p class="style-description">
+          Glossy buttons, drop shadows, reflections, stock-photo headers, and “beta” tags.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Web_2.0" target="_blank">Web 2.0</a>
+          <a href="https://www.wired.com/" target="_blank">WIRED</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="12" id="parallax">
-      <h3 class="style-title">Parallax</h3>
-      <p class="style-era">2012–2016</p>
-      <p class="style-description">
-        Layered backgrounds move at different speeds for depth.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Parallax_scrolling" target="_blank">Parallax</a>
-        <a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/translate3d" target="_blank">MDN</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="5" id="skeuomorphic">
+        <h3 class="style-title">Skeuomorphic</h3>
+        <p class="style-era">2004–2013</p>
+        <p class="style-description">
+          Interfaces mimicking real-world textures (leather, paper, metal).
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Skeuomorph" target="_blank">Skeuomorph</a>
+          <a href="https://en.wikipedia.org/wiki/Apple_Human_Interface_Guidelines#Skeuomorphism" target="_blank">iOS Skeuomorphism</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="13" id="spa">
-      <h3 class="style-title">Single-Page App</h3>
-      <p class="style-era">2012–2016</p>
-      <p class="style-description">
-        JavaScript-driven sites loading content dynamically on one page.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Single-page_application" target="_blank">SPA</a>
-        <a href="https://angular.io/guide/architecture" target="_blank">Angular</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="6" id="swiss">
+        <h3 class="style-title">Swiss Style</h3>
+        <p class="style-era">2000s–present</p>
+        <p class="style-description">
+          Grid-based layouts, strong typography, and generous whitespace.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Swiss_Style" target="_blank">International Typographic Style</a>
+          <a href="https://en.wikipedia.org/wiki/Helvetica" target="_blank">Helvetica</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="14" id="pwa">
-      <h3 class="style-title">Progressive Web App</h3>
-      <p class="style-era">2015–present</p>
-      <p class="style-description">
-        App-like experiences with service workers, offline support, push notifications.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Progressive_web_app" target="_blank">PWA</a>
-        <a href="https://web.dev/what-are-pwas/" target="_blank">web.dev</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="7" id="minimalist">
+        <h3 class="style-title">Minimalist</h3>
+        <p class="style-era">2000s–present</p>
+        <p class="style-description">
+          Stripping interfaces to essentials—white space, high-contrast typography, and minimal UI elements.
+        </p>
+        <p class="style-links">
+          <a href="https://www.nngroup.com/articles/minimalist-web-design/" target="_blank">NNG Guide</a>
+          <a href="https://en.wikipedia.org/wiki/Minimalism" target="_blank">Minimalism</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="15" id="cinematic">
-      <h3 class="style-title">Cinematic</h3>
-      <p class="style-era">2010s</p>
-      <p class="style-description">
-        Full-screen video headers, ambient soundscapes, story layouts.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Video_background" target="_blank">Video Background</a>
-        <a href="https://webflow.com/blog/video-backgrounds" target="_blank">Webflow</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="8" id="responsive">
+        <h3 class="style-title">Responsive</h3>
+        <p class="style-era">2010–present</p>
+        <p class="style-description">
+          Fluid grids, flexible images, and CSS media queries ensure layouts adapt.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Responsive_web_design" target="_blank">Responsive</a>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/Media_Queries" target="_blank">MDN Media Queries</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="16" id="brutalist">
-      <h3 class="style-title">Brutalist</h3>
-      <p class="style-era">2015–present</p>
-      <p class="style-description">
-        Stark pages emphasizing raw HTML, plain fonts, bare-bones layout.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Brutalist_Web_Design" target="_blank">Brutalist Web</a>
-        <a href="https://verpex.com/blog/brutalist-web-design/" target="_blank">Verpex</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="9" id="mobile-first">
+        <h3 class="style-title">Mobile-First</h3>
+        <p class="style-era">2010–present</p>
+        <p class="style-description">
+          Designing for small screens first, then enhancing for larger viewports.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Mobile-first_design" target="_blank">Mobile-First</a>
+          <a href="https://www.smashingmagazine.com/2011/01/guidelines-for-responsive-web-design/" target="_blank">Smashing Mag.</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="17" id="neo-brutalism">
-      <h3 class="style-title">Neo-Brutalism</h3>
-      <p class="style-era">2015–present</p>
-      <p class="style-description">
-        Brutalist structure combined with neon or saturated color accents.
-      </p>
-      <p class="style-links">
-        <a href="https://web.dev/neo-brutalism/" target="_blank">web.dev</a>
-        <a href="https://fireart.studio/blog/neo-brutalism/" target="_blank">Fireart</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="10" id="flat-design">
+        <h3 class="style-title">Flat Design</h3>
+        <p class="style-era">2010–present</p>
+        <p class="style-description">
+          Minimalist UI with simple elements, flat colors, no textures.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Flat_design" target="_blank">Flat Design</a>
+          <a href="https://en.wikipedia.org/wiki/Metro_(design_language)" target="_blank">Metro UI</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="18" id="dark-mode">
-      <h3 class="style-title">Dark Mode</h3>
-      <p class="style-era">2020–present</p>
-      <p class="style-description">
-        Light-on-dark color schemes reduce eye strain and feel modern.
-      </p>
-      <p class="style-links">
-        <a href="https://bluecompass.com/articles/dark-mode-web-design/" target="_blank">Bluecompass</a>
-        <a href="https://css-tricks.com/dark-modes-with-css/" target="_blank">CSS-Tricks</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="11" id="semi-flat">
+        <h3 class="style-title">Semi-Flat</h3>
+        <p class="style-era">2010–present</p>
+        <p class="style-description">
+          Flat foundations augmented with subtle shadows or minimal gradients.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Flat_design#Flat_2.0" target="_blank">Flat 2.0</a>
+          <a href="https://uxplanet.org/semi-flat-design-principles-and-examples-6d1d90d82469" target="_blank">UX Planet</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="19" id="neumorphism">
-      <h3 class="style-title">Neumorphism</h3>
-      <p class="style-era">2020</p>
-      <p class="style-description">
-        Soft inner/outer shadows create embossed UI elements.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Neumorphism" target="_blank">Wikipedia</a>
-        <a href="https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6" target="_blank">UX Design</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="12" id="parallax">
+        <h3 class="style-title">Parallax</h3>
+        <p class="style-era">2012–2016</p>
+        <p class="style-description">
+          Layered backgrounds move at different speeds for depth.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Parallax_scrolling" target="_blank">Parallax</a>
+          <a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/translate3d" target="_blank">MDN</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="20" id="glassmorphism">
-      <h3 class="style-title">Glassmorphism</h3>
-      <p class="style-era">2020</p>
-      <p class="style-description">
-        Translucent panels with backdrop blur convey depth.
-      </p>
-      <p class="style-links">
-        <a href="https://www.nngroup.com/articles/glassmorphism/" target="_blank">NNG</a>
-        <a href="https://css-tricks.com/glassmorphism-using-backdrop-filter/" target="_blank">CSS-Tricks</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="13" id="spa">
+        <h3 class="style-title">Single-Page App</h3>
+        <p class="style-era">2012–2016</p>
+        <p class="style-description">
+          JavaScript-driven sites loading content dynamically on one page.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Single-page_application" target="_blank">SPA</a>
+          <a href="https://angular.io/guide/architecture" target="_blank">Angular</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="21" id="corporate-memphis">
-      <h3 class="style-title">Corporate Memphis</h3>
-      <p class="style-era">2018–present</p>
-      <p class="style-description">
-        Flat geometric illustrations with bendy characters and bright color.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Corporate_Memphis" target="_blank">Wikipedia</a>
-        <a href="https://medium.com/corporate-memphis" target="_blank">Medium</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="14" id="pwa">
+        <h3 class="style-title">Progressive Web App</h3>
+        <p class="style-era">2015–present</p>
+        <p class="style-description">
+          App-like experiences with service workers, offline support, push notifications.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Progressive_web_app" target="_blank">PWA</a>
+          <a href="https://web.dev/what-are-pwas/" target="_blank">web.dev</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="22" id="retro-web">
-      <h3 class="style-title">Retro Web</h3>
-      <p class="style-era">2020s</p>
-      <p class="style-description">
-        Nostalgic callbacks to ’90s/00s—pixel art, marquee text, neon palettes.
-      </p>
-      <p class="style-links">
-        <a href="https://fireart.studio/blog/retro-web-design/" target="_blank">Fireart</a>
-        <a href="https://99designs.com/blog/web-design/trends/nostalgic-web-design-trends/" target="_blank">99designs</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="15" id="cinematic">
+        <h3 class="style-title">Cinematic</h3>
+        <p class="style-era">2010s</p>
+        <p class="style-description">
+          Full-screen video headers, ambient soundscapes, story layouts.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Video_background" target="_blank">Video Background</a>
+          <a href="https://webflow.com/blog/video-backgrounds" target="_blank">Webflow</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="23" id="y2k-web">
-      <h3 class="style-title">Y2K Web</h3>
-      <p class="style-era">2020s</p>
-      <p class="style-description">
-        Chrome buttons, metallic gradients, playful typography.
-      </p>
-      <p class="style-links">
-        <a href="https://fireart.studio/blog/y2k-web-design/" target="_blank">Fireart</a>
-        <a href="https://medium.com/y2k-web" target="_blank">Medium</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="16" id="brutalist">
+        <h3 class="style-title">Brutalist</h3>
+        <p class="style-era">2015–present</p>
+        <p class="style-description">
+          Stark pages emphasizing raw HTML, plain fonts, bare-bones layout.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Brutalist_Web_Design" target="_blank">Brutalist Web</a>
+          <a href="https://verpex.com/blog/brutalist-web-design/" target="_blank">Verpex</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="24" id="webgl-3d">
-      <h3 class="style-title">WebGL & 3D</h3>
-      <p class="style-era">2015–present</p>
-      <p class="style-description">
-        Interactive 3D graphics, model viewers, VR/AR in browser.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a>
-        <a href="https://threejs.org/" target="_blank">three.js</a>
-      </p>
-    </article>
+      <article class="style-card" data-index="17" id="neo-brutalism">
+        <h3 class="style-title">Neo-Brutalism</h3>
+        <p class="style-era">2015–present</p>
+        <p class="style-description">
+          Brutalist structure combined with neon or saturated color accents.
+        </p>
+        <p class="style-links">
+          <a href="https://web.dev/neo-brutalism/" target="_blank">web.dev</a>
+          <a href="https://fireart.studio/blog/neo-brutalism/" target="_blank">Fireart</a>
+        </p>
+      </article>
 
-    <article class="style-card" data-index="25" id="inclusive-design">
-      <h3 class="style-title">Inclusive Design</h3>
-      <p class="style-era">Ongoing</p>
-      <p class="style-description">
-        ARIA roles, semantic HTML, user-centric accessibility.
-      </p>
-      <p class="style-links">
-        <a href="https://en.wikipedia.org/wiki/Accessible_design" target="_blank">Accessible Design</a>
-        <a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">W3C</a>
-      </p>
-    </article>
-  </main>
-  <section id="outro" class="intro outro">
-  <h3><strong>Under The Hood</strong></h3>
-  <p>Under the hood, the page relies on a combination of HTML, CSS, and JavaScript (with jQuery) to switch between design themes dynamically. A &lt;style id="theme-style"&gt; element is injected into the document head to override default styles with the current theme’s custom CSS. The page initializes a themes array in the video.js script, where each object includes a theme name and its CSS rules; a separate dark-mode variant is generated for each theme. When you trigger a theme change—either by clicking on a card, Gantt Timeline element, or using the keyboard shortcut—the script updates the injected CSS, reformats it for readability in the editor, and logs events (including Google Analytics tracking and console messages) for debugging. Special handling is included for cinematic themes, which preload and alternate background videos to recreate the immersive, full-screen intro experiences of earlier Flash-driven sites</p>
-  </section>
+      <article class="style-card" data-index="18" id="dark-mode">
+        <h3 class="style-title">Dark Mode</h3>
+        <p class="style-era">2020–present</p>
+        <p class="style-description">
+          Light-on-dark color schemes reduce eye strain and feel modern.
+        </p>
+        <p class="style-links">
+          <a href="https://bluecompass.com/articles/dark-mode-web-design/" target="_blank">Bluecompass</a>
+          <a href="https://css-tricks.com/dark-modes-with-css/" target="_blank">CSS-Tricks</a>
+        </p>
+      </article>
 
-  <section class="html-editor">
-  <h2>Current HTML</h2>
-  <textarea id="html-editor" editable></textarea>
-  </section>
+      <article class="style-card" data-index="19" id="neumorphism">
+        <h3 class="style-title">Neumorphism</h3>
+        <p class="style-era">2020</p>
+        <p class="style-description">
+          Soft inner/outer shadows create embossed UI elements.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Neumorphism" target="_blank">Wikipedia</a>
+          <a href="https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6" target="_blank">UX Design</a>
+        </p>
+      </article>
 
-  <!-- jQuery & Migrate -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
-  <script src="https://unpkg.com/prettier@2.8.8/standalone.js"></script>
-  <script src="https://unpkg.com/prettier@2.8.8/parser-postcss.js"></script>
-  <script src="./video.js"></script>
+      <article class="style-card" data-index="20" id="glassmorphism">
+        <h3 class="style-title">Glassmorphism</h3>
+        <p class="style-era">2020</p>
+        <p class="style-description">
+          Translucent panels with backdrop blur convey depth.
+        </p>
+        <p class="style-links">
+          <a href="https://www.nngroup.com/articles/glassmorphism/" target="_blank">NNG</a>
+          <a href="https://css-tricks.com/glassmorphism-using-backdrop-filter/" target="_blank">CSS-Tricks</a>
+        </p>
+      </article>
 
-  <script>
+      <article class="style-card" data-index="21" id="corporate-memphis">
+        <h3 class="style-title">Corporate Memphis</h3>
+        <p class="style-era">2018–present</p>
+        <p class="style-description">
+          Flat geometric illustrations with bendy characters and bright color.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Corporate_Memphis" target="_blank">Wikipedia</a>
+          <a href="https://medium.com/corporate-memphis" target="_blank">Medium</a>
+        </p>
+      </article>
+
+      <article class="style-card" data-index="22" id="retro-web">
+        <h3 class="style-title">Retro Web</h3>
+        <p class="style-era">2020s</p>
+        <p class="style-description">
+          Nostalgic callbacks to ’90s/00s—pixel art, marquee text, neon palettes.
+        </p>
+        <p class="style-links">
+          <a href="https://fireart.studio/blog/retro-web-design/" target="_blank">Fireart</a>
+          <a href="https://99designs.com/blog/web-design/trends/nostalgic-web-design-trends/" target="_blank">99designs</a>
+        </p>
+      </article>
+
+      <article class="style-card" data-index="23" id="y2k-web">
+        <h3 class="style-title">Y2K Web</h3>
+        <p class="style-era">2020s</p>
+        <p class="style-description">
+          Chrome buttons, metallic gradients, playful typography.
+        </p>
+        <p class="style-links">
+          <a href="https://fireart.studio/blog/y2k-web-design/" target="_blank">Fireart</a>
+          <a href="https://medium.com/y2k-web" target="_blank">Medium</a>
+        </p>
+      </article>
+
+      <article class="style-card" data-index="24" id="webgl-3d">
+        <h3 class="style-title">WebGL & 3D</h3>
+        <p class="style-era">2015–present</p>
+        <p class="style-description">
+          Interactive 3D graphics, model viewers, VR/AR in browser.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a>
+          <a href="https://threejs.org/" target="_blank">three.js</a>
+        </p>
+      </article>
+
+      <article class="style-card" data-index="25" id="inclusive-design">
+        <h3 class="style-title">Inclusive Design</h3>
+        <p class="style-era">Ongoing</p>
+        <p class="style-description">
+          ARIA roles, semantic HTML, user-centric accessibility.
+        </p>
+        <p class="style-links">
+          <a href="https://en.wikipedia.org/wiki/Accessible_design" target="_blank">Accessible Design</a>
+          <a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">W3C</a>
+        </p>
+      </article>
+    </main>
+    <section id="outro" class="intro outro">
+      <h3><strong>Under The Hood</strong></h3>
+      <p>Under the hood, the page relies on a combination of HTML, CSS, and JavaScript (with jQuery) to switch between design themes dynamically. A &lt;style id="theme-style"&gt; element is injected into the document head to override default styles with the current theme’s custom CSS. The page initializes a themes array in the video.js script, where each object includes a theme name and its CSS rules; a separate dark-mode variant is generated for each theme. When you trigger a theme change—either by clicking on a card, Gantt Timeline element, or using the keyboard shortcut—the script updates the injected CSS, reformats it for readability in the editor, and logs events (including Google Analytics tracking and console messages) for debugging. Special handling is included for cinematic themes, which preload and alternate background videos to recreate the immersive, full-screen intro experiences of earlier Flash-driven sites</p>
+    </section>
+
+    <section class="html-editor">
+      <h2>Current HTML</h2>
+      <textarea id="html-editor" editable></textarea>
+    </section>
+
+    <!-- jQuery & Migrate -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/prettier@2.8.8/standalone.js"></script>
+    <script src="https://unpkg.com/prettier@2.8.8/parser-postcss.js"></script>
+    <script src="./video.js"></script>
+
+    <script>
     var counterContainer = document.querySelector("#vistor-counter");
     var resetButton = document.querySelector("#reset");
     var visitCount = localStorage.getItem("page_view");
@@ -961,59 +1031,116 @@ gantt
     counterContainer.innerHTML = visitCount;
 
 
-      // Keyboard shortcut to cycle through themes
-      try {
-        $(document).on('keydown', function(e) {
-          // Ctrl + Shift + Space
-          if (e.ctrlKey && e.shiftKey && e.keyCode === 82) {
-            visitCount = 1;
-            localStorage.setItem("page_view", 1);
-            counterContainer.innerHTML = visitCount;
-            console.log('Vernacular Visitor Counter Reset by R');
-            
-            // Send Google Analytics event
-            if (typeof gtag === 'function') {
-              gtag('event', 'keyboard_shortcut', {
-                'event_category': 'Visitor Counter Reset',
-                'event_label': themes[nextIndex].name,
-                'value': nextIndex
-              });
-            }
-            e.preventDefault();
+    // Keyboard shortcut to cycle through themes
+    try {
+      $(document).on('keydown', function(e) {
+        // Ctrl + Shift + Space
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 82) {
+          visitCount = 1;
+          localStorage.setItem("page_view", 1);
+          counterContainer.innerHTML = visitCount;
+          console.log('Vernacular Visitor Counter Reset by R');
+
+          // Send Google Analytics event
+          if (typeof gtag === 'function') {
+            gtag('event', 'keyboard_shortcut', {
+              'event_category': 'Visitor Counter Reset',
+              'event_label': themes[nextIndex].name,
+              'value': nextIndex
+            });
           }
-        });
-      } catch (e) {
-        console.error('Failed to set up keyboard shortcuts:', e);
-      }
+          e.preventDefault();
+        }
+      });
+    } catch (e) {
+      console.error('Failed to set up keyboard shortcuts:', e);
+    }
+    </script>
 
-  </script>
+    <!-- Theme-switcher + CSS editor init -->
+    <script>
+    // Refactored Theme Switcher with Separate Light and Dark Arrays
+    jQuery(function($) {
+          try {
+            const videoSources = [
+              "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-9161-large.mp4",
+              "https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4"
+            ];
 
-  <!-- Theme-switcher + CSS editor init -->
-  <script>
-// Refactored Theme Switcher with Separate Light and Dark Arrays
-jQuery(function($) {
-  try {
-    const videoSources = [
-      "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-9161-large.mp4",
-      "https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4"
-    ];
+            const $themeStyle = $('#theme-style');
+            const $cssEditor = $('#css-editor');
+            const $heroSection = $('.hero-section');
+            const $contentWrapper = $('.content-wrapper');
+            const $video1 = $('#traffic_videos_1');
+            const $video2 = $('#traffic_videos_2');
+            const $underConstruction = $('#under-construction');
+            const $visitorCounter = $('.counter');
 
-    const $themeStyle = $('#theme-style');
-    const $cssEditor = $('#css-editor');
-    const $heroSection = $('.hero-section');
-    const $contentWrapper = $('.content-wrapper');
-    const $video1 = $('#traffic_videos_1');
-    const $video2 = $('#traffic_videos_2');
-    const $underConstruction = $('#under-construction');
-    const $visitorCounter = $('.counter');
+            let current = 0;
 
-    let current = 0;
+            function preloadAndStartVideos() {
+              try {
+                $video1.attr('src', videoSources[0]);
+                $video2.attr('src', videoSources[1]);
 
-    const lightThemes = [{
-      id: 'vernacular',
-    handle: 'vernacularStyle',
-    name: 'Vernacular / Geocities',
-    lightCss: `
+                let loadedVideos = 0;
+                const totalVideos = 2;
+
+                const checkAndStart = () => {
+                  if (loadedVideos === totalVideos) {
+                    startCinematicVideos();
+                  }
+                };
+
+                $video1.on('loadeddata', () => {
+                  console.log('Video 1 loaded');
+                  loadedVideos++;
+                  checkAndStart();
+                }).on('error', e => {
+                  console.error('Error loading video 1:', e);
+                });
+
+                $video2.on('loadeddata', () => {
+                  console.log('Video 2 loaded');
+                  loadedVideos++;
+                  checkAndStart();
+                }).on('error', e => {
+                  console.error('Error loading video 2:', e);
+                });
+              } catch (e) {
+                console.error('Error during video preload:', e);
+              }
+            }
+
+            function startCinematicVideos() {
+              try {
+                $video1.css('opacity', '1');
+                $video2.css('opacity', '0');
+
+                $video1[0].play().catch(e => console.error('Play error video1:', e));
+
+                $video1.on('ended', () => {
+                  $video1.css('opacity', '0');
+                  $video2.css('opacity', '1');
+                  $video2[0].play().catch(e => console.error('Play error video2:', e));
+                });
+
+                $video2.on('ended', () => {
+                  $video2.css('opacity', '0');
+                  $video1.css('opacity', '1');
+                  $video1[0].currentTime = 0;
+                  $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
+                });
+              } catch (e) {
+                console.error('Cinematic video error:', e);
+              }
+            }
+
+            const lightThemes = [{
+                id: 'default',
+                handle: 'defaultStyle',
+                name: 'Default',
+                lightCss: `
         body { 
           /* fill the full viewport */
           min-height: 100vh;
@@ -1069,8 +1196,7 @@ jQuery(function($) {
           color:rgb(42, 44, 20);
         }
       `,
-    darkCss: {
-      `
+                darkCss: `
         body { 
           /* fill the full viewport */
           min-height: 100vh;
@@ -1117,12 +1243,119 @@ jQuery(function($) {
           color: #f0f0f0;
         }
       `
-    },
-    {
-      id: 'table-frames',
-    handle: 'table-framesStyle',
-    name: 'Table-Based Design',
-    lightCss: `
+              }, {
+                id: 'vernacular',
+                handle: 'vernacularStyle',
+                name: 'Vernacular / Geocities',
+                lightCss: `
+        body { 
+          /* fill the full viewport */
+          min-height: 100vh;
+          margin: 0;
+          /* repeating diagonal stripes */
+          background-image: repeating-linear-gradient(
+              var(--stripe-angle),
+              var(--stripe-color) 0,
+              var(--stripe-color) var(--stripe-width),
+            transparent var(--stripe-width),
+              transparent var(--stripe-spacing)
+          );
+          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+        }
+        .content-wrapper {
+            display: block;
+            position: relative;
+            left: 0;
+            top: 0;
+          }
+          .header-content h1 { 
+            color: #ff0000; 
+            font-size: 3vw;
+            margin-bottom: 5px;
+          }
+          .header-content p { 
+            color: #ffa600; 
+            font-size: 1.5vw;
+          }
+        .era-timeline { 
+          display: block !important;
+          background: var(--bg-color);
+          opacity: var(--opacity);
+        }
+        .style-card {
+          background: #ffffcc;
+          border: 3px outset #cc9966;
+        }
+        .style-description {
+          color: #333333;
+        }
+        .style-title {
+          color: #990000;
+          font-weight: bold;
+        }
+        .style-links a {
+          color: #0000ff;
+          text-decoration: underline;
+        }
+        .extra-under { display: block !important; }
+        .mermaid {
+          background:rgb(245, 245, 243);
+          color:rgb(42, 44, 20);
+        }
+      `,
+                darkCss: `
+        body { 
+          /* fill the full viewport */
+          min-height: 100vh;
+          margin: 0;
+
+          /* repeating diagonal stripes */
+          background-image: repeating-linear-gradient(
+              calc(3.125 * var(--stripe-angle)),
+              var(--dark-stripe-color) 0,
+              var(--dark-stripe-color) var(--stripe-width),
+              rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
+              rgba(0, 0, 0, 0.8) var(--stripe-spacing)
+          );
+          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+        }
+        
+        .content-wrapper {
+          display: block;
+          position: relative;
+          left: 0;
+          top: 0;
+        }
+        .header-content h1 { 
+          color: #ff0000; 
+          font-size: 6vw;
+          margin-bottom: 5px;
+        }
+        .header-content p { 
+          color: #ffa600; 
+          font-size: 4vw;
+        }
+        .era-timeline { 
+          display: block !important;
+          background: var(--inverse-bg-color, #222);
+          opacity: var(--opacity, 0.8);
+        }
+        .style-links a {
+          color: #66ccff;
+          text-d#3554den: underline;
+        }
+        .extra-under { display: block !important; }
+        .mermaid {
+          background: #333300;
+          color: #f0f0f0;
+        }
+      `
+              },
+              {
+                id: 'table-frames',
+                handle: 'table-framesStyle',
+                name: 'Table-Based Design',
+                lightCss: `
         body {
           font-family: Arial, sans-serif;
           background: #f0f0f0;
@@ -1142,8 +1375,7 @@ jQuery(function($) {
         #main-table { display: block !important; }
     
     `,
-    darkCss: {
-      `
+                darkCss: `
       body {
         font-family: Arial, sans-serif;
         background: #f0f0f0;
@@ -1162,12 +1394,12 @@ jQuery(function($) {
       }
       #main-table { display: block !important; }
     `
-    },
-    {
-      id: 'Framesets',
-    handle: 'framesetsStyle',
-    name: 'Framesets',
-    lightCss: `
+              },
+              {
+                id: 'Framesets',
+                handle: 'framesetsStyle',
+                name: 'Framesets',
+                lightCss: `
         body {
           margin: 0;
           padding: 0;
@@ -1200,8 +1432,7 @@ jQuery(function($) {
           margin-left: 200px;
         }
       `,
-    darkCss: {
-      `
+                darkCss: `
       body {
         margin: 0;
         padding: 0;
@@ -1234,12 +1465,12 @@ jQuery(function($) {
         margin-left: 200px;
       }
     `
-    },
-    {
-      id: 'flash',
-    handle: 'flashStyle',
-    name: 'Flash-Based Design',
-    lightCss: `
+              },
+              {
+                id: 'flash',
+                handle: 'flashStyle',
+                name: 'Flash-Based Design',
+                lightCss: `
         body {
           background: #000;
           color: #fff;
@@ -1269,8 +1500,7 @@ jQuery(function($) {
           color: #66ccff;
         }
       `,
-    darkCss: {
-      `
+                darkCss: `
       body {
         background: #000;
         color: #fff;
@@ -1300,12 +1530,12 @@ jQuery(function($) {
         color: #66ccff;
       }
     `
-    },
-    {
-      id: 'web2',
-    handle: 'web2Style',
-    name: 'Web 2.0 Glossy',
-    lightCss: `
+              },
+              {
+                id: 'web2',
+                handle: 'web2Style',
+                name: 'Web 2.0 Glossy',
+                lightCss: `
         body {
           font-family: 'Lucida Grande', Arial, sans-serif;
           background: #f6f6f6;
@@ -1332,8 +1562,7 @@ jQuery(function($) {
           font-weight: bold;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
         font-family: 'Lucida Grande', Arial, sans-serif;
         background: #f6f6f6;
       }
@@ -1359,12 +1588,12 @@ jQuery(function($) {
         font-weight: bold;
       }
     `
-    },
-    {
-      id: 'skeuomorphic',
-    handle: 'skeuomorphicStyle',
-    name: 'Skeuomorphic Design',
-    lightCss: `
+              },
+              {
+                id: 'skeuomorphic',
+                handle: 'skeuomorphicStyle',
+                name: 'Skeuomorphic Design',
+                lightCss: `
         body {
           
           font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -1393,8 +1622,7 @@ jQuery(function($) {
           
         }
       `,
-    darkCss: {
-    `
+                darkCss: `
     body {
           background: #222;
           font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -1428,12 +1656,12 @@ jQuery(function($) {
           box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
         }
       `
-    },
-    {
-      id: 'swiss',
-    handle: 'swissStyle',
-    name: 'Swiss Style Design',
-    lightCss: `
+              },
+              {
+                id: 'swiss',
+                handle: 'swissStyle',
+                name: 'Swiss Style Design',
+                lightCss: `
         body {
           font-family: Helvetica, Arial, sans-serif;
           background: white;
@@ -1476,8 +1704,7 @@ jQuery(function($) {
           z-index: 1000;
         }
       `,
-    darkCss: {
-    `
+                darkCss: `
         body {
           font-family: Helvetica, Arial, sans-serif;
           background: #121212;
@@ -1512,12 +1739,12 @@ jQuery(function($) {
           border-color: white;
         }
       `
-    },
-    {
-      id: 'minimalist',
-    handle: 'minimalistStyle',
-    name: 'Minimalist',
-    lightCss: `
+              },
+              {
+                id: 'minimalist',
+                handle: 'minimalistStyle',
+                name: 'Minimalist',
+                lightCss: `
         body {
           font-family: 'Inter', sans-serif;
           background: white;
@@ -1546,7 +1773,7 @@ jQuery(function($) {
           padding-bottom: 2px;
         }
       `,
-    darkCss: { `
+                darkCss: `
     body {
           font-family: 'Inter', sans-serif;
           background: #121212;
@@ -1582,12 +1809,12 @@ jQuery(function($) {
           border-bottom: 1px solid #333;
         }
       `
-    },
-    {
-      id: 'responsive',
-    handle: 'responsiveStyle',
-    name: 'Responsive Design',
-    lightCss: `
+              },
+              {
+                id: 'responsive',
+                handle: 'responsiveStyle',
+                name: 'Responsive Design',
+                lightCss: `
         body {
           font-family: 'Open Sans', sans-serif;
           background: #f9f9f9;
@@ -1615,9 +1842,8 @@ jQuery(function($) {
             flex: 0 0 100%;
           }
         }
-	  `,
-    darkCss: {
-    `
+    `,
+                darkCss: `
       body {
         font-family: 'Open Sans', sans-serif;
         background: #f9f9f9;
@@ -1646,12 +1872,12 @@ jQuery(function($) {
         }
       }
     `
-    },
-    {
-      id: 'mobile-first',
-    handle: 'mobile-firstStyle',
-    name: 'Mobile-First Design',
-    lightCss: `
+              },
+              {
+                id: 'mobile-first',
+                handle: 'mobile-firstStyle',
+                name: 'Mobile-First Design',
+                lightCss: `
         body {
           font-family: 'Roboto', sans-serif;
           font-size: 16px;
@@ -1687,7 +1913,7 @@ jQuery(function($) {
           }
         }
       `,
-    darkCss: {
+                darkCss: `
     body {
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
@@ -1723,14 +1949,12 @@ jQuery(function($) {
         }
       }
     `
-    },
-    {
-      id: 'flat',
-    handle: 'flatStyle',
-    name: 'Flat Design',
-    lightCss: `
-      name: "",
-      css: `
+              },
+              {
+                id: 'flat',
+                handle: 'flatStyle',
+                name: 'Flat Design',
+                lightCss: `
         body {
           font-family: 'Segoe UI', 'Roboto', sans-serif;
           background: #f9f9f9;
@@ -1751,8 +1975,7 @@ jQuery(function($) {
           text-decoration: none;
         }
       `,
-    darkCss: {
-    `
+                darkCss: `
     body {
         font-family: 'Segoe UI', 'Roboto', sans-serif;
         background: #f9f9f9;
@@ -1773,12 +1996,12 @@ jQuery(function($) {
         text-decoration: none;
       }
     `
-    },
-    {
-      id: 'semi-flat',
-    handle: 'semi-flatStyle',
-    name: 'Semi-Flat Design',
-    lightCss: `
+              },
+              {
+                id: 'semi-flat',
+                handle: 'semi-flatStyle',
+                name: 'Semi-Flat Design',
+                lightCss: `
         body {
           font-family: 'SF Pro Text', 'Roboto', sans-serif;
           background: #f5f5f5;
@@ -1799,8 +2022,7 @@ jQuery(function($) {
           color: #007aff;
         }
       `,
-    darkCss: {
-      `
+                darkCss: `
     body {
         font-family: 'SF Pro Text', 'Roboto', sans-serif;
         background: #f5f5f5;
@@ -1821,12 +2043,12 @@ jQuery(function($) {
         color: #007aff;
       }
     `
-    },
-    {
-      id: 'parallax',
-    handle: 'parallaxStyle',
-    name: 'Parallax Design',
-    lightCss: `
+              },
+              {
+                id: 'parallax',
+                handle: 'parallaxStyle',
+                name: 'Parallax Design',
+                lightCss: `
         body {
           font-family: 'Montserrat', sans-serif;
           background: #222;
@@ -1848,8 +2070,7 @@ jQuery(function($) {
           transform: translateZ(0);
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
         font-family: 'Montserrat', sans-serif;
         background: #222;
         color: white;
@@ -1870,12 +2091,12 @@ jQuery(function($) {
         transform: translateZ(0);
       }
     `
-    },
-    {
-      id: 'spa',
-    handle: 'single-page-appStyle',
-    name: 'Single-Page App Design',
-    lightCss: `
+              },
+              {
+                id: 'spa',
+                handle: 'single-page-appStyle',
+                name: 'Single-Page App Design',
+                lightCss: `
         body {
           font-family: 'Roboto', sans-serif;
           background: #fafafa;
@@ -1900,8 +2121,7 @@ jQuery(function($) {
           transition: all 0.3s cubic-bezier(.25,.8,.25,1);
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
         font-family: 'Roboto', sans-serif;
         background: #fafafa;
         color: #333;
@@ -1925,12 +2145,12 @@ jQuery(function($) {
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
       }
     `
-    },
-    {
-      id: 'pwa',
-    handle: 'pwaStyle',
-    name: 'Progressive Web App Design',
-    lightCss: `
+              },
+              {
+                id: 'pwa',
+                handle: 'pwaStyle',
+                name: 'Progressive Web App Design',
+                lightCss: `
         body {
           font-family: 'Google Sans', 'Roboto', sans-serif;
           background: #f5f5f5;
@@ -1952,8 +2172,7 @@ jQuery(function($) {
           overflow: hidden;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
         font-family: 'Google Sans', 'Roboto', sans-serif;
         background: #f5f5f5;
         color: #202124;
@@ -1974,12 +2193,12 @@ jQuery(function($) {
         overflow: hidden;
       }
     `
-    },
-    {
-      id: 'cinematic',
-    handle: 'cinematicStyle',
-    name: 'Cinematic Design',
-    lightCss: `
+              },
+              {
+                id: 'cinematic',
+                handle: 'cinematicStyle',
+                name: 'Cinematic Design',
+                lightCss: `
         body {
           font-family: 'Playfair Display', serif;
           color: #fff;
@@ -2033,8 +2252,7 @@ jQuery(function($) {
           fill: var(--accent-color);
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
           font-family: 'Playfair Display', serif;
           color: #e0e0e0;
         }
@@ -2084,12 +2302,12 @@ jQuery(function($) {
         fill: var(--inverse-accent-color);
       }
       `
-    },
-    {
-      id: 'brutalist',
-    handle: 'brutalistStyle',
-    name: 'Brutalist Design',
-    lightCss: `
+              },
+              {
+                id: 'brutalist',
+                handle: 'brutalistStyle',
+                name: 'Brutalist Design',
+                lightCss: `
         body {
           font-family: monospace;
           background: white;
@@ -2112,8 +2330,7 @@ jQuery(function($) {
           box-shadow: none;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
           font-family: monospace;
           background: black;
           color: white;
@@ -2148,12 +2365,12 @@ jQuery(function($) {
           font-family: monospace;
         }
       `
-    },
-    {
-      id: 'neo-brutalism',
-    handle: 'neo-brutalismStyle',
-    name: 'Neo-Brutalism Design',
-    lightCss: `
+              },
+              {
+                id: 'neo-brutalism',
+                handle: 'neo-brutalismStyle',
+                name: 'Neo-Brutalism Design',
+                lightCss: `
         body {
           font-family: 'Arial', sans-serif;
           background: #ffde59;
@@ -2168,8 +2385,7 @@ jQuery(function($) {
           transition: all 0.2s ease;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
           font-family: 'Arial', sans-serif;
           background: #121212;
           color: #e0e0e0;
@@ -2196,12 +2412,12 @@ jQuery(function($) {
           box-shadow: 5px 5px 0 #bb86fc;
         }
       `
-    },
-    {
-      id: 'dark-mode',
-    handle: 'dark-modeStyle',
-    name: 'Dark Mode Design',
-    lightCss: `
+              },
+              {
+                id: 'dark-mode',
+                handle: 'dark-modeStyle',
+                name: 'Dark Mode Design',
+                lightCss: `
         body {
           font-family: 'SF Pro Text', 'Roboto', sans-serif;
           background: #121212;
@@ -2225,8 +2441,7 @@ jQuery(function($) {
           border-color: #444;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
         font-family: 'SF Pro Text', 'Roboto', sans-serif;
         background: #121212;
         color: #e0e0e0;
@@ -2249,12 +2464,12 @@ jQuery(function($) {
         border-color: #444;
       }
     `
-    },
-    {
-      id: 'neumorphism',
-    handle: 'neumorphismStyle',
-    name: 'Neumorphism Design',
-    lightCss: `
+              },
+              {
+                id: 'neumorphism',
+                handle: 'neumorphismStyle',
+                name: 'Neumorphism Design',
+                lightCss: `
        body {
           font-family: 'Poppins', sans-serif;
           background: #e0e5ec;
@@ -2275,8 +2490,7 @@ jQuery(function($) {
           text-decoration: none;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
           font-family: 'Poppins', sans-serif;
           background: #2d2d2d;
           color: #e0e0e0;
@@ -2304,12 +2518,12 @@ jQuery(function($) {
           color: #e0e0e0;
         }
       `
-    },
-    {
-      id: 'glassmorphism',
-    handle: 'glassmorphismStyle',
-    name: 'Glassmorphism Design',
-    lightCss: `
+              },
+              {
+                id: 'glassmorphism',
+                handle: 'glassmorphismStyle',
+                name: 'Glassmorphism Design',
+                lightCss: `
        body {
           font-family: 'Segoe UI', 'Roboto', sans-serif;
           background: #f9f9f9;
@@ -2330,8 +2544,7 @@ jQuery(function($) {
           text-decoration: none;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
           font-family: 'Segoe UI', 'Roboto', sans-serif;
           background: linear-gradient(135deg, #121212, #2d2d2d);
           color: #e0e0e0;
@@ -2359,12 +2572,12 @@ jQuery(function($) {
           color: #e0e0e0;
         }
       `
-    },
-    {
-      id: 'corporate-memphis',
-    handle: 'corporate-memphisStyle',
-    name: 'Corporate Memphis Design',
-    lightCss: `
+              },
+              {
+                id: 'corporate-memphis',
+                handle: 'corporate-memphisStyle',
+                name: 'Corporate Memphis Design',
+                lightCss: `
         body {
           font-family: 'Arial', sans-serif;
           background: #ffde59;
@@ -2379,8 +2592,7 @@ jQuery(function($) {
           transition: all 0.2s ease;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
           background-color: #121212;
           color: #e0e0e0;
         }
@@ -2401,12 +2613,12 @@ jQuery(function($) {
           border-color: #444;
         }
       `
-    },
-    {
-      id: 'retro-web',
-    handle: 'retro-webStyle',
-    name: 'Retro Web Design',
-    lightCss: `
+              },
+              {
+                id: 'retro-web',
+                handle: 'retro-webStyle',
+                name: 'Retro Web Design',
+                lightCss: `
         body {
           font-family: 'Arial', sans-serif;
           background: #ffde59;
@@ -2421,8 +2633,7 @@ jQuery(function($) {
           transition: all 0.2s ease;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
         font-family: 'Arial', sans-serif;
         background: #ffde59;
         color: black;
@@ -2436,12 +2647,12 @@ jQuery(function($) {
         transition: all 0.2s ease;
       }
     `
-    },
-    {
-      id: 'y2k-web',
-    handle: 'y2k-webStyle',
-    name: 'Y2K Web Design',
-    lightCss: `
+              },
+              {
+                id: 'y2k-web',
+                handle: 'y2k-webStyle',
+                name: 'Y2K Web Design',
+                lightCss: `
         body {
           font-family: 'Arial', sans-serif;
           background: #ffde59;
@@ -2454,10 +2665,8 @@ jQuery(function($) {
           box-shadow: 5px 5px 0 black;
           transform: rotate(-1deg);
           transition: all 0.2s ease;
-        } `
-      ,
-    darkCss: {
-    `body {
+        } `,
+                darkCss: `body {
         font-family: 'Arial', sans-serif;
         background: #ffde59;
         color: black;
@@ -2471,12 +2680,12 @@ jQuery(function($) {
         transition: all 0.2s ease;
       }
     `
-    },
-    {
-      id: 'webgl-3d',
-    handle: 'webgl-3dStyle',
-    name: 'WebGL & 3D Design',
-    lightCss: `
+              },
+              {
+                id: 'webgl-3d',
+                handle: 'webgl-3dStyle',
+                name: 'WebGL & 3D Design',
+                lightCss: `
         body {
           font-family: 'Arial', sans-serif;
           color:rgba(230, 230, 230, 0.9);
@@ -2490,8 +2699,7 @@ jQuery(function($) {
           transition: all 0.2s ease;
         }
       `,
-    darkCss: {
-    `body {
+                darkCss: `body {
         font-family: 'Arial', sans-serif;
         color:rgba(230, 230, 230, 0.9);
       }
@@ -2504,12 +2712,12 @@ jQuery(function($) {
         transition: all 0.2s ease;
       }
     `
-    },
-    {
-      id: 'inclusive-design',
-    handle: 'inclusive-designStyle',
-    name: 'Inclusive Design',
-    lightCss: `
+              },
+              {
+                id: 'inclusive-design',
+                handle: 'inclusive-designStyle',
+                name: 'Inclusive Design',
+                lightCss: `
         body {
           font-family: 'Arial', sans-serif;
           background: #ffde59;
@@ -2522,10 +2730,8 @@ jQuery(function($) {
           box-shadow: 5px 5px 0 black;
           transform: rotate(-1deg);
           transition: all 0.2s ease;
-        }`
-      ,
-    darkCss: {
-    `body {
+        }`,
+                darkCss: `body {
         font-family: 'Arial', sans-serif;
         background: #ffde59;
         color: black;
@@ -2539,338 +2745,171 @@ jQuery(function($) {
         transition: all 0.2s ease;
       }
     `
-  }
-];
+              }
+            ];
 
-  // === Theme State Initialization ===
-  let isDarkMode = localStorage.getItem('darkMode') === 'true';
-
-
-    function formatCss(css) {
-      try {
-        if (!css) return '/* No CSS defined */';
-        return css
-          .replace(/}/g, '};\n')
-          .replace(/{/g, ' {\n')
-          .replace(/;(?!\n)/g, ';\n')
-          .replace(/:(?! )/g, ': ')
-          .trim();
-      } catch (e) {
-        console.error('CSS formatting error:', e);
-        return '/* CSS formatting error */';
-      }
-    }
-
-    function dropTheme() {
-      $('body').removeClass(function(i, c) {
-        return (c.match(/(^|\s)theme-\S+/g) || []).join(' ');
-      });
-    }
-
-    function getCurrentThemeSet() {
-      const isDark = $('#dark-mode-toggle').is(':checked');
-      return isDark ? darkThemes : lightThemes;
-    }
-
-// === Apply Theme by Index ===
-function applyTheme(index) {
-  const theme = themes[index];
-  if (!theme) {
-    console.error(`Invalid theme index: ${index}`);
-    return;
-  }
-
-  const cssVars = isDarkMode ? theme.darkCss : theme.lightCss;
-  if (!cssVars) {
-    console.error(`Missing ${isDarkMode ? 'dark' : 'light'} CSS for theme "${theme.name}"`);
-    return;
-  }
-
-  Object.entries(cssVars).forEach(([key, value]) => {
-    document.documentElement.style.setProperty(key, value);
-  });
-
-  console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
-  localStorage.setItem('lastThemeIndex', index);
-}
-
-// === Dark Mode Toggle Handler ===
-$('#dark-mode-toggle').on('change', function () {
-  isDarkMode = this.checked;
-  localStorage.setItem('darkMode', isDarkMode);
-
-  const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
-  if (!isNaN(lastIndex)) {
-    applyTheme(lastIndex);
-  }
-
-  console.log(`Dark Mode toggled: ${isDarkMode}`);
-});
-
-// === Load Theme from Local Storage on Page Load ===
-$(document).ready(function () {
-  const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
-  if (!isNaN(lastIndex)) {
-    applyTheme(lastIndex);
-  }
-
-  $('#dark-mode-toggle').prop('checked', isDarkMode);
-});
-
-// === ID-Based Click Handler to Apply Theme ===
-$('[id]').on('click', function () {
-  const clickedId = this.id;
-  const index = themes.findIndex(theme => theme.id === clickedId);
-
-  if (index === -1) {
-    console.warn(`No theme found matching ID: "${clickedId}"`);
-    return;
-  }
-
-  console.log(`Clicked theme ID: "${clickedId}", applying index: ${index}`);
-  applyTheme(index);
-
-  // Google Analytics event
-  gtag('event', 'apply_theme_click', {
-    'event_category': 'Theme Interaction',
-    'event_label': themes[index].handle,
-    'value': index
-  });
-});
+            // === Theme State Initialization ===
+            let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
 
+            function formatCss(css) {
+              try {
+                if (!css) return '/* No CSS defined */';
+                return css
+                  .replace(/}/g, '};\n')
+                  .replace(/{/g, ' {\n')
+                  .replace(/;(?!\n)/g, ';\n')
+                  .replace(/:(?! )/g, ': ')
+                  .trim();
+              } catch (e) {
+                console.error('CSS formatting error:', e);
+                return '/* CSS formatting error */';
+              }
+            }
 
-    /*
+            function dropTheme() {
+              $('body').removeClass(function(i, c) {
+                return (c.match(/(^|\s)theme-\S+/g) || []).join(' ');
+              });
+            }
 
-    function applyTheme(index) {
-      try {
-        const themes = getCurrentThemeSet();
-        if (index < 0 || index >= themes.length) throw new Error('Invalid theme index');
+            function getCurrentThemeSet() {
+              const isDark = $('#dark-mode-toggle').is(':checked');
+              return isDark ? darkThemes : lightThemes;
+            }
 
-        current = index;
-        const theme = themes[current];
-        const css = theme.css;
+            // === Apply Theme by Index ===
+            function applyTheme(index) {
+              const theme = themes[index];
+              if (!theme) {
+                console.error(`Invalid theme index: ${index}`);
+                return;
+              }
 
-        const prettyCss = prettier.format(css, {
-          parser: 'css',
-          plugins: prettierPlugins,
-          printWidth: 80,
-          tabWidth: 2,
-          useTabs: false
-        });
+              const cssVars = isDarkMode ? theme.darkCss : theme.lightCss;
+              if (!cssVars) {
+                console.error(`Missing ${isDarkMode ? 'dark' : 'light'} CSS for theme "${theme.name}"`);
+                return;
+              }
 
-        dropTheme();
-        $themeStyle.html(prettyCss);
-        $cssEditor.val(formatCss(prettyCss));
+              const prettyCss = prettier.format(cssVars, {
+                parser: 'css',
+                plugins: prettierPlugins,
+                printWidth: 80,
+                tabWidth: 2,
+                useTabs: false
+              });
 
-        $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
-        if ($('#current-theme').length) $('#current-theme').text(theme.name);
+              $themeStyle.html(prettyCss);
+              $cssEditor.val(formatCss(prettyCss));
 
-        if (theme.name.includes('Cinematic')) {
-          $heroSection.show();
-          $contentWrapper.show();
-          startCinematicVideos();
-        } else {
-          $heroSection.hide();
-        }
+              Object.entries(prettyCss).forEach(([key, value]) => {
+                document.documentElement.style.setProperty(key, value);
+              });
 
-        if (theme.name.includes('Vernacular')) {
-          $underConstruction.show();
-          $visitorCounter.show();
-        } else {
-          $underConstruction.hide();
-          $visitorCounter.hide();
-        }
+              console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
+              localStorage.setItem('lastThemeIndex', index);
+            }
 
-        console.log('Theme applied:', theme.name);
-      } catch (e) {
-        console.error('Failed to apply theme:', e);
-      }
-    }
-*/
-    function preloadAndStartVideos() {
-      try {
-        $video1.attr('src', videoSources[0]);
-        $video2.attr('src', videoSources[1]);
+            // === Dark Mode Toggle Handler ===
+            $('#dark-mode-toggle').on('change', function() {
+              isDarkMode = this.checked;
+              localStorage.setItem('darkMode', isDarkMode);
 
-        let loadedVideos = 0;
-        const totalVideos = 2;
+              const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
+              if (!isNaN(lastIndex)) {
+                applyTheme(lastIndex);
+              }
 
-        const checkAndStart = () => {
-          if (loadedVideos === totalVideos) {
-            startCinematicVideos();
-          }
-        };
+              console.log(`Dark Mode toggled: ${isDarkMode}`);
+            });
 
-        $video1.on('loadeddata', () => {
-          console.log('Video 1 loaded');
-          loadedVideos++;
-          checkAndStart();
-        }).on('error', e => {
-          console.error('Error loading video 1:', e);
-        });
+            // === Load Theme from Local Storage on Page Load ===
+            $(document).ready(function() {
+              const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
+              if (!isNaN(lastIndex)) {
+                applyTheme(lastIndex);
+              }
 
-        $video2.on('loadeddata', () => {
-          console.log('Video 2 loaded');
-          loadedVideos++;
-          checkAndStart();
-        }).on('error', e => {
-          console.error('Error loading video 2:', e);
-        });
-      } catch (e) {
-        console.error('Error during video preload:', e);
-      }
-    }
+              $('#dark-mode-toggle').prop('checked', isDarkMode);
+            });
 
-    function startCinematicVideos() {
-      try {
-        $video1.css('opacity', '1');
-        $video2.css('opacity', '0');
+            // === ID-Based Click Handler to Apply Theme ===
+            $('[id]').on('click', function() {
+              const clickedId = this.id;
+              const index = themes.findIndex(theme => theme.id === clickedId);
 
-        $video1[0].play().catch(e => console.error('Play error video1:', e));
+              if (index === -1) {
+                console.warn(`No theme found matching ID: "${clickedId}"`);
+                return;
+              }
 
-        $video1.on('ended', () => {
-          $video1.css('opacity', '0');
-          $video2.css('opacity', '1');
-          $video2[0].play().catch(e => console.error('Play error video2:', e));
-        });
+              console.log(`Clicked theme ID: "${clickedId}", applying index: ${index}`);
+              applyTheme(index);
 
-        $video2.on('ended', () => {
-          $video2.css('opacity', '0');
-          $video1.css('opacity', '1');
-          $video1[0].currentTime = 0;
-          $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
-        });
-      } catch (e) {
-        console.error('Cinematic video error:', e);
-      }
-    }
+              // Google Analytics event
+              gtag('event', 'apply_theme_click', {
+                'event_category': 'Theme Interaction',
+                'event_label': themes[index].handle,
+                'value': index
+              });
+            });
 
-    applyTheme(0);
+            if (theme.name.includes('Cinematic')) {
+              $heroSection.show();
+              $contentWrapper.show();
+              startCinematicVideos();
+            } else {
+              $heroSection.hide();
+            }
 
-$(document).on('click', '[id]', function () {
-  const elementId = this.id;
-  if (!elementId) {
-    console.warn('Clicked element has no ID.');
-    gtag('event', 'apply_theme_click_error', {
-      event_category: 'Mermaid Interaction',
-      event_label: 'Theme Failed: Missing ID',
-      non_interaction: true
-    });
-    return;
-  }
-/*
-  const themes = getCurrentThemeSet();
+            if (theme.name.includes('Vernacular')) {
+              $underConstruction.show();
+              $visitorCounter.show();
+            } else {
+              $underConstruction.hide();
+              $visitorCounter.hide();
+            }
 
-  // Attempt exact ID-to-name match
-  let index = themes.findIndex(theme =>
-    theme.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').startsWith(elementId.toLowerCase())
-  );
+            $(document).on('click', '[id]', function() {
+              const elementId = this.id;
+              if (!elementId) {
+                console.warn('Clicked element has no ID.');
+                gtag('event', 'apply_theme_click_error', {
+                  event_category: 'Mermaid Interaction',
+                  event_label: 'Theme Failed: Missing ID',
+                  non_interaction: true
+                });
+                return;
+              }
 
-  // Try fallback: allow match by theme name *in* elementId (e.g., "vernacular-text")
-  if (index === -1) {
-    index = themes.findIndex(theme =>
-      elementId.toLowerCase().includes(theme.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
-    );
-  }
+              $('.style-card').on('click', function() {
+                const index = $(this).data('index');
+                applyTheme(index);
+              });
 
-  if (index === -1) {
-    console.warn(`No theme found matching ID: "${elementId}"`);
-    gtag('event', 'apply_theme_click_error', {
-      event_category: 'Mermaid Interaction',
-      event_label: `Theme Failed: No theme match for "${elementId}"`,
-      non_interaction: true
-    });
-    return;
-  }
+              $cssEditor.on('input', function() {
+                const customCss = $(this).val();
+                $themeStyle.html(customCss);
+                console.log('Custom CSS applied from editor');
+              });
 
-  console.log(`Applying theme by ID: "${elementId}" matched to index: ${index}`);
+              $(document).on('keydown', function(e) {
+                if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
+                  const themes = getCurrentThemeSet();
+                  const nextIndex = (current + 1) % themes.length;
+                  applyTheme(nextIndex);
+                  e.preventDefault();
+                }
+              });
+            
+            } catch (e) {
+                console.error('Error with script', e);
+              }
+              });
+        }); // <-- Add this closing line to fix the syntax error
+    </script>
 
-  try {
-    applyTheme(index);
-    gtag('event', 'apply_theme_click', {
-      event_category: 'Mermaid Interaction',
-      event_label: `Theme Applied: ${elementId}`,
-      value: index
-    });
-  } catch (err) {
-    console.error(`Error applying theme for ID "${elementId}" at index ${index}:`, err);
-    gtag('event', 'apply_theme_click_error', {
-      event_category: 'Mermaid Interaction',
-      event_label: `Theme Failed: Exception for "${elementId}"`,
-      non_interaction: true
-    });
-  }
-});
-*/
-    $('.style-card').on('click', function() {
-      const index = $(this).data('index');
-      applyTheme(index);
-    });
-/*
-// Update: Add dark mode toggle functionality using lightThemes and darkThemes arrays
-$('#dark-mode-toggle').on('change', function () {
-  try {
-    const isDarkMode = $(this).is(':checked');
-    localStorage.setItem('darkModeEnabled', isDarkMode);
+  </body>
 
-    // Apply the corresponding theme variant (light or dark)
-    const selectedTheme = isDarkMode ? darkThemes[current] : lightThemes[current];
-    if (!selectedTheme || !selectedTheme.css) {
-      console.warn('No theme CSS found for current index in selected mode.');
-      return;
-    }
-
-    $('#theme-style').text(selectedTheme.css);
-    $('#css-editor').val(formatCss(selectedTheme.css));
-
-    console.log(`Dark mode ${isDarkMode ? 'enabled' : 'disabled'}. Applied theme: ${selectedTheme.name}`);
-
-    gtag('event', 'dark_mode_toggle', {
-      'event_category': 'UI Interaction',
-      'event_label': selectedTheme.name,
-      'value': isDarkMode ? 1 : 0
-    });
-  } catch (error) {
-    console.error('Error applying theme for dark mode toggle:', error);
-    gtag('event', 'dark_mode_toggle_error', {
-      'event_category': 'UI Interaction',
-      'event_label': 'Theme Switch Failure',
-      'non_interaction': true
-    });
-  }
-});
-
-// On page load, restore dark mode state from localStorage
-$(document).ready(function () {
-  const darkModeEnabled = localStorage.getItem('darkModeEnabled') === 'true';
-  $('#dark-mode-toggle').prop('checked', darkModeEnabled);
-
-  const selectedTheme = darkModeEnabled ? darkThemes[current] : lightThemes[current];
-  if (selectedTheme && selectedTheme.css) {
-    $('#theme-style').text(selectedTheme.css);
-    $('#css-editor').val(formatCss(selectedTheme.css));
-    console.log(`Restored ${darkModeEnabled ? 'dark' : 'light'} mode with theme: ${selectedTheme.name}`);
-  }
-});
-*/
-    $cssEditor.on('input', function() {
-      const customCss = $(this).val();
-      $themeStyle.html(customCss);
-      console.log('Custom CSS applied from editor');
-    });
-
-    $(document).on('keydown', function(e) {
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
-        const themes = getCurrentThemeSet();
-        const nextIndex = (current + 1) % themes.length;
-        applyTheme(nextIndex);
-        e.preventDefault();
-      }
-    });
-
-  
-});
-  </script>
-</body>
 </html>
