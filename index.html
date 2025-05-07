@@ -990,2085 +990,2222 @@ gantt
 
   <!-- Theme-switcher + CSS editor init -->
   <script>
-  jQuery(function($) {
-    try {
-      // Video sources for cinematic theme
-      var videoSources = [
-        "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-9161-large.mp4",
-        "https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4"
-      ];
+// Refactored Theme Switcher with Separate Light and Dark Arrays
+jQuery(function($) {
+  try {
+    const videoSources = [
+      "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-9161-large.mp4",
+      "https://assets.mixkit.co/videos/preview/mixkit-highway-traffic-at-night-with-light-trails-time-lapse-10364-large.mp4"
+    ];
+
+    const $themeStyle = $('#theme-style');
+    const $cssEditor = $('#css-editor');
+    const $heroSection = $('.hero-section');
+    const $contentWrapper = $('.content-wrapper');
+    const $video1 = $('#traffic_videos_1');
+    const $video2 = $('#traffic_videos_2');
+    const $underConstruction = $('#under-construction');
+    const $visitorCounter = $('.counter');
+
+    let current = 0;
+
+    const lightThemes = [{
+      id: 'vernacular',
+    handle: 'vernacularStyle',
+    name: 'Vernacular / Geocities',
+    lightCss: `
+        body { 
+          /* fill the full viewport */
+          min-height: 100vh;
+          margin: 0;
+          /* repeating diagonal stripes */
+          background-image: repeating-linear-gradient(
+              var(--stripe-angle),
+              var(--stripe-color) 0,
+              var(--stripe-color) var(--stripe-width),
+            transparent var(--stripe-width),
+              transparent var(--stripe-spacing)
+          );
+          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+        }
+        .content-wrapper {
+            display: block;
+            position: relative;
+            left: 0;
+            top: 0;
+          }
+          .header-content h1 { 
+            color: #ff0000; 
+            font-size: 3vw;
+            margin-bottom: 5px;
+          }
+          .header-content p { 
+            color: #ffa600; 
+            font-size: 1.5vw;
+          }
+        .era-timeline { 
+          display: block !important;
+          background: var(--bg-color);
+          opacity: var(--opacity);
+        }
+        .style-card {
+          background: #ffffcc;
+          border: 3px outset #cc9966;
+        }
+        .style-description {
+          color: #333333;
+        }
+        .style-title {
+          color: #990000;
+          font-weight: bold;
+        }
+        .style-links a {
+          color: #0000ff;
+          text-decoration: underline;
+        }
+        .extra-under { display: block !important; }
+        .mermaid {
+          background:rgb(245, 245, 243);
+          color:rgb(42, 44, 20);
+        }
+      `,
+    darkCss: {
+      `
+        body { 
+          /* fill the full viewport */
+          min-height: 100vh;
+          margin: 0;
+
+          /* repeating diagonal stripes */
+          background-image: repeating-linear-gradient(
+              calc(3.125 * var(--stripe-angle)),
+              var(--dark-stripe-color) 0,
+              var(--dark-stripe-color) var(--stripe-width),
+              rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
+              rgba(0, 0, 0, 0.8) var(--stripe-spacing)
+          );
+          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+        }
+        
+        .content-wrapper {
+          display: block;
+          position: relative;
+          left: 0;
+          top: 0;
+        }
+        .header-content h1 { 
+          color: #ff0000; 
+          font-size: 6vw;
+          margin-bottom: 5px;
+        }
+        .header-content p { 
+          color: #ffa600; 
+          font-size: 4vw;
+        }
+        .era-timeline { 
+          display: block !important;
+          background: var(--inverse-bg-color, #222);
+          opacity: var(--opacity, 0.8);
+        }
+        .style-links a {
+          color: #66ccff;
+          text-d#3554den: underline;
+        }
+        .extra-under { display: block !important; }
+        .mermaid {
+          background: #333300;
+          color: #f0f0f0;
+        }
+      `
+    },
+    {
+      id: 'table-frames',
+    handle: 'table-framesStyle',
+    name: 'Table-Based Design',
+    lightCss: `
+        body {
+          font-family: Arial, sans-serif;
+          background: #f0f0f0;
+          color: #333;
+        }
+        main {
+          display: table;
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .style-card {
+          display: table-cell;
+          border: 1px solid #999;
+          padding: 10px;
+          background: white;
+        }
+        #main-table { display: block !important; }
+    
+    `,
+    darkCss: {
+      `
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f0f0;
+        color: #333;
+      }
+      main {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .style-card {
+        display: table-cell;
+        border: 1px solid #999;
+        padding: 10px;
+        background: white;
+      }
+      #main-table { display: block !important; }
+    `
+    },
+    {
+      id: 'Framesets',
+    handle: 'framesetsStyle',
+    name: 'Framesets',
+    lightCss: `
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: Verdana, sans-serif;
+        }
+        .frame-nav, .frame-content {
+          display: block !important;
+          position: fixed;
+          border: 2px inset #ccc;
+          background: #f0f0f0;
+        }
+        .frame-nav {
+          left: 0;
+          top: 0;
+          width: 200px;
+          height: 100%;
+          overflow: auto;
+          padding: 10px;
+        }
+        .frame-content {
+          left: 200px;
+          top: 0;
+          width: calc(100% - 200px);
+          height: 100%;
+          overflow: auto;
+          padding: 10px;
+          background: white;
+        }
+        main {
+          margin-left: 200px;
+        }
+      `,
+    darkCss: {
+      `
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Verdana, sans-serif;
+      }
+      .frame-nav, .frame-content {
+        display: block !important;
+        position: fixed;
+        border: 2px inset #ccc;
+        background: #f0f0f0;
+      }
+      .frame-nav {
+        left: 0;
+        top: 0;
+        width: 200px;
+        height: 100%;
+        overflow: auto;
+        padding: 10px;
+      }
+      .frame-content {
+        left: 200px;
+        top: 0;
+        width: calc(100% - 200px);
+        height: 100%;
+        overflow: auto;
+        padding: 10px;
+        background: white;
+      }
+      main {
+        margin-left: 200px;
+      }
+    `
+    },
+    {
+      id: 'flash',
+    handle: 'flashStyle',
+    name: 'Flash-Based Design',
+    lightCss: `
+        body {
+          background: #000;
+          color: #fff;
+          font-family: Arial, sans-serif;
+          text-align: center;
+        }
+        .extra-flash-intro { 
+          display: block !important; 
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #000;
+          z-index: 1000;
+        }
+        .style-card {
+          background: #333;
+          border-radius: 0;
+          border: 1px solid #666;
+          color: #fff;
+        }
+        .style-title {
+          color: #ff9900;
+        }
+        .style-links a {
+          color: #66ccff;
+        }
+      `,
+    darkCss: {
+      `
+      body {
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .extra-flash-intro { 
+        display: block !important; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 1000;
+      }
+      .style-card {
+        background: #333;
+        border-radius: 0;
+        border: 1px solid #666;
+        color: #fff;
+      }
+      .style-title {
+        color: #ff9900;
+      }
+      .style-links a {
+        color: #66ccff;
+      }
+    `
+    },
+    {
+      id: 'web2',
+    handle: 'web2Style',
+    name: 'Web 2.0 Glossy',
+    lightCss: `
+        body {
+          font-family: 'Lucida Grande', Arial, sans-serif;
+          background: #f6f6f6;
+        }
+        .style-card {
+          border-radius: 8px;
+          border: 1px solid #ddd;
+          background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .style-title {
+          color: #0066cc;
+          text-shadow: 0 1px 0 white;
+        }
+        .beta-badge {
+          display: inline-block !important;
+          background: #ff6600;
+          color: white;
+          font-size: 10px;
+          padding: 2px 5px;
+          border-radius: 10px;
+          margin-left: 5px;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+      `,
+    darkCss: {
+    `body {
+        font-family: 'Lucida Grande', Arial, sans-serif;
+        background: #f6f6f6;
+      }
+      .style-card {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      .style-title {
+        color: #0066cc;
+        text-shadow: 0 1px 0 white;
+      }
+      .beta-badge {
+        display: inline-block !important;
+        background: #ff6600;
+        color: white;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 10px;
+        margin-left: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    `
+    },
+    {
+      id: 'skeuomorphic',
+    handle: 'skeuomorphicStyle',
+    name: 'Skeuomorphic Design',
+    lightCss: `
+        body {
+          
+          font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        .style-card {
+          background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
+          border-radius: 5px;
+          box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+          border: 1px solid #b8b8b8;
+        }
+        .card-texture {
+          display: block !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: url('https://i.imgur.com/FL3SmIu.jpeg');
+          opacity: 0.1;
+          pointer-events: none;
+        }
+        .era-timeline {
+          display: block !important;
+          background: url('https://img.freepik.com/free-photo/white-gypsum-wall_1194-6990.jpg?t=st=1746443052~exp=1746446652~hmac=a2420a81ff31a63454846c9c05c450b65b5a3982ffc27fd89a63d2b85f7ca563&w=1380');
+          pointer-events: none;
+          
+        }
+      `,
+    darkCss: {
+    `
+    body {
+          background: #222;
+          font-family: 'Helvetica Neue', Arial, sans-serif;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
+          border-radius: 5px;
+          box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+          border: 1px solid #444;
+          color: #e0e0e0;
+        }
+        .card-texture {
+          display: block !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: url('https://i.imgur.com/FL3SmIu.jpeg');
+          opacity: 0.05;
+          pointer-events: none;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        #css-editor {
+          background-color: #333;
+          color: #e0e0e0;
+          border-color: #444;
+          box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+      `
+    },
+    {
+      id: 'swiss',
+    handle: 'swissStyle',
+    name: 'Swiss Style Design',
+    lightCss: `
+        body {
+          font-family: Helvetica, Arial, sans-serif;
+          background: white;
+          color: black;
+          line-height: 1.5;
+        }
+        main {
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          grid-gap: 20px;
+        }
+        .style-card {
+          grid-column: span 4;
+          background: white;
+          border: none;
+          border-bottom: 2px solid black;
+          border-radius: 0;
+          padding: 20px 0;
+        }
+        .style-title {
+          font-size: 18px;
+          font-weight: bold;
+          color: black;
+        }
+        .grid-overlay {
+          display: block !important;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: repeating-linear-gradient(
+            90deg,
+            rgba(255,0,0,0.03),
+            rgba(255,0,0,0.03) 8.33%,
+            transparent 8.33%,
+            transparent 16.66%
+          );
+          pointer-events: none;
+          z-index: 1000;
+        }
+      `,
+    darkCss: {
+    `
+        body {
+          font-family: Helvetica, Arial, sans-serif;
+          background: #121212;
+          color: white;
+          line-height: 1.5;
+        }
+        main {
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          grid-gap: 20px;
+        }
+        .style-card {
+          grid-column: span 4;
+          background: #1a1a1a;
+          border: none;
+          border-bottom: 2px solid white;
+          border-radius: 0;
+          padding: 20px 0;
+          color: white;
+        }
+        .style-title {
+          font-size: 18px;
+          font-weight: bold;
+          color: white;
+        }
+        .style-links a {
+          color: #bb86fc;
+        }
+        #css-editor {
+          background-color: #1a1a1a;
+          color: white;
+          border-color: white;
+        }
+      `
+    },
+    {
+      id: 'minimalist',
+    handle: 'minimalistStyle',
+    name: 'Minimalist',
+    lightCss: `
+        body {
+          font-family: 'Inter', sans-serif;
+          background: white;
+          color: #333;
+          line-height: 1.6;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 0;
+          padding: 30px 0;
+          box-shadow: none;
+        }
+        .style-title {
+          font-weight: 300;
+          font-size: 24px;
+          color: #000;
+        }
+        .style-description {
+          font-weight: 300;
+        }
+        .style-links a {
+          color: #000;
+          text-decoration: none;
+          border-bottom: 1px solid #000;
+          padding-bottom: 2px;
+        }
+      `,
+    darkCss: { `
+    body {
+          font-family: 'Inter', sans-serif;
+          background: #121212;
+          color: #e0e0e0;
+          line-height: 1.6;
+        }
+        .style-card {
+          background: #1a1a1a;
+          border: none;
+          border-radius: 0;
+          padding: 30px 0;
+          box-shadow: none;
+          color: #e0e0e0;
+        }
+        .style-title {
+          font-weight: 300;
+          font-size: 24px;
+          color: #fff;
+        }
+        .style-description {
+          font-weight: 300;
+        }
+        .style-links a {
+          color: #bb86fc;
+          text-decoration: none;
+          border-bottom: 1px solid #bb86fc;
+          padding-bottom: 2px;
+        }
+        #css-editor {
+          background-color: #1a1a1a;
+          color: #e0e0e0;
+          border: none;
+          border-bottom: 1px solid #333;
+        }
+      `
+    },
+    {
+      id: 'responsive',
+    handle: 'responsiveStyle',
+    name: 'Responsive Design',
+    lightCss: `
+        body {
+          font-family: 'Open Sans', sans-serif;
+          background: #f9f9f9;
+        }
+        main {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+        .style-card {
+          flex: 0 0 calc(33.333% - 20px);
+          margin-bottom: 30px;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+        }
+        @media (max-width: 992px) {
+          .style-card {
+            flex: 0 0 calc(50% - 15px);
+          }
+        }
+        @media (max-width: 576px) {
+          .style-card {
+            flex: 0 0 100%;
+          }
+        }
+	  `,
+    darkCss: {
+    `
+      body {
+        font-family: 'Open Sans', sans-serif;
+        background: #f9f9f9;
+      }
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .style-card {
+        flex: 0 0 calc(33.333% - 20px);
+        margin-bottom: 30px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+      @media (max-width: 992px) {
+        .style-card {
+          flex: 0 0 calc(50% - 15px);
+        }
+      }
+      @media (max-width: 576px) {
+        .style-card {
+          flex: 0 0 100%;
+        }
+      }
+    `
+    },
+    {
+      id: 'mobile-first',
+    handle: 'mobile-firstStyle',
+    name: 'Mobile-First Design',
+    lightCss: `
+        body {
+          font-family: 'Roboto', sans-serif;
+          font-size: 16px;
+          line-height: 1.5;
+          color: #333;
+          background: #f5f5f5;
+        }
+        main {
+          padding: 10px;
+        }
+        .style-card {
+          width: 100%;
+          margin-bottom: 15px;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          padding: 15px;
+        }
+        @media (min-width: 768px) {
+          main {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+          .style-card {
+            width: calc(50% - 10px);
+          }
+        }
+        @media (min-width: 992px) {
+          .style-card {
+            width: calc(33.333% - 15px);
+          }
+        }
+      `,
+    darkCss: {
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+        background: #f5f5f5;
+      }
+      main {
+        padding: 10px;
+      }
+      .style-card {
+        width: 100%;
+        margin-bottom: 15px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        padding: 15px;
+      }
+      @media (min-width: 768px) {
+        main {
+          padding: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+        .style-card {
+          width: calc(50% - 10px);
+        }
+      }
+      @media (min-width: 992px) {
+        .style-card {
+          width: calc(33.333% - 15px);
+        }
+      }
+    `
+    },
+    {
+      id: 'flat',
+    handle: 'flatStyle',
+    name: 'Flat Design',
+    lightCss: `
+      name: "",
+      css: `
+        body {
+          font-family: 'Segoe UI', 'Roboto', sans-serif;
+          background: #f9f9f9;
+          color: #333;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 2px;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+          transition: all 0.2s ease;
+        }
+        .style-title {
+          color: #0078d7;
+        }
+        .style-links a {
+          color: #0078d7;
+          text-decoration: none;
+        }
+      `,
+    darkCss: {
+    `
+    body {
+        font-family: 'Segoe UI', 'Roboto', sans-serif;
+        background: #f9f9f9;
+        color: #333;
+      }
+      .style-card {
+        background: white;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        transition: all 0.2s ease;
+      }
+      .style-title {
+        color: #0078d7;
+      }
+      .style-links a {
+        color: #0078d7;
+        text-decoration: none;
+      }
+    `
+    },
+    {
+      id: 'semi-flat',
+    handle: 'semi-flatStyle',
+    name: 'Semi-Flat Design',
+    lightCss: `
+        body {
+          font-family: 'SF Pro Text', 'Roboto', sans-serif;
+          background: #f5f5f5;
+          color: #333;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+        }
+        .style-card:hover {
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          transform: translateY(-2px);
+        }
+        .style-title {
+          color: #007aff;
+        }
+      `,
+    darkCss: {
+      `
+    body {
+        font-family: 'SF Pro Text', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        color: #333;
+      }
+      .style-card {
+        background: white;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+      .style-card:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+      }
+      .style-title {
+        color: #007aff;
+      }
+    `
+    },
+    {
+      id: 'parallax',
+    handle: 'parallaxStyle',
+    name: 'Parallax Design',
+    lightCss: `
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background: #222;
+          color: white;
+          perspective: 1px;
+          height: 100vh;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+        main {
+          transform-style: preserve-3d;
+        }
+        .style-card {
+          background: rgba(255,255,255,0.9);
+          color: #333;
+          border: none;
+          border-radius: 5px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+          transform: translateZ(0);
+        }
+      `,
+    darkCss: {
+    `body {
+        font-family: 'Montserrat', sans-serif;
+        background: #222;
+        color: white;
+        perspective: 1px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      main {
+        transform-style: preserve-3d;
+      }
+      .style-card {
+        background: rgba(255,255,255,0.9);
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transform: translateZ(0);
+      }
+    `
+    },
+    {
+      id: 'spa',
+    handle: 'single-page-appStyle',
+    name: 'Single-Page App Design',
+    lightCss: `
+        body {
+          font-family: 'Roboto', sans-serif;
+          background: #fafafa;
+          color: #333;
+          padding-top: 60px;
+        }
+        header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background: white;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          z-index: 100;
+          padding: 15px 0;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 2px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+          transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        }
+      `,
+    darkCss: {
+    `body {
+        font-family: 'Roboto', sans-serif;
+        background: #fafafa;
+        color: #333;
+        padding-top: 60px;
+      }
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 100;
+        padding: 15px 0;
+      }
+      .style-card {
+        background: white;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+    `
+    },
+    {
+      id: 'pwa',
+    handle: 'pwaStyle',
+    name: 'Progressive Web App Design',
+    lightCss: `
+        body {
+          font-family: 'Google Sans', 'Roboto', sans-serif;
+          background: #f5f5f5;
+          color: #202124;
+          margin: 0;
+          padding: 0;
+        }
+        header {
+          background: #1a73e8;
+          color: white;
+          padding: 16px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .style-card {
+          background: white;
+          border-radius: 8px;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+          margin-bottom: 16px;
+          overflow: hidden;
+        }
+      `,
+    darkCss: {
+    `body {
+        font-family: 'Google Sans', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        color: #202124;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background: #1a73e8;
+        color: white;
+        padding: 16px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      .style-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        margin-bottom: 16px;
+        overflow: hidden;
+      }
+    `
+    },
+    {
+      id: 'cinematic',
+    handle: 'cinematicStyle',
+    name: 'Cinematic Design',
+    lightCss: `
+        body {
+          font-family: 'Playfair Display', serif;
+          color: #fff;
+          text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
+          margin: 0;
+          padding: 0;
+          background: #000;
+        }
+        .hero-section, .content-wrapper {
+          display: block !important;
+        }
+        .era-timeline {
+          top: 0;
+          left: 0;
+          width: 80%;
+          margin: auto;
+          padding: 2rem;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(--blur);
+          /* display: none; /* Hidden by default, shown in cinematic mode */
+        }
+        .video-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          overflow: hidden;
+        }
+        .style-card {
+          background: rgba(0,0,0,0.7);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #666;
+        }
+        .style-title {
+          color: #333;
+          font-size: 24px;
+        }
+        .mermaid {
+          background: var(--bg-color);
+          color: var(--text-color);
+          border: 1px solid var(--accent-color);
+          border-radius: var(--rounded);
+        }
+        .mermaid text.taskText, .mermaid text.sectionTitle {
+          color: var(--text-color);
+        }
+        .mermaid .task {
+          fill: var(--accent-color);
+        }
+      `,
+    darkCss: {
+    `body {
+          font-family: 'Playfair Display', serif;
+          color: #e0e0e0;
+        }
+        .era-timeline {
+          top: 0;
+          left: 0;
+          width: 80%;
+          margin: auto;
+          padding: 2rem;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(--blur);
+          /* display: none; /* Hidden by default, shown in cinematic mode */
+        }
+        .style-card {
+          background-color: var(--inverse-bg-color);
+          border-radius: var(--rounded);
+          box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+          border: 1px solid var(--inverse-accent-color);
+          padding: 20px;
+          color: var(--inverse-text-color);
+        }
+        .style-title {
+          color:rgb(255, 0, 55);
+        }
+        .style-links a {
+          color:rgba(226, 182, 4, 0.91);
+          text-decoration: none;
+        }
+        #css-editor {
+          background: #2d2d2d;
+          border-radius: var(--rounded);
+          box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+          border: 1px solid var(--accent-color);
+          color: #e0e0e0;
+        }
+        .mermaid {
+          background: var(--inverse-bg-color);
+          color: var(--inverse-text-color);
+          border: 1px solid var(--inverse-accent-color);
+          border-radius: var(--rounded);
+        }
+        .task, .mermaid text.taskText, .mermaid text.sectionTitle {
+          color: var(--inverse-text-color);
+        }
+      .mermaid .task {
+        fill: var(--inverse-accent-color);
+      }
+      `
+    },
+    {
+      id: 'brutalist',
+    handle: 'brutalistStyle',
+    name: 'Brutalist Design',
+    lightCss: `
+        body {
+          font-family: monospace;
+          background: white;
+          color: black;
+          margin: 0;
+          padding: 20px;
+          line-height: 1.2;
+        }
+        main {
+          max-width: none;
+          margin: 0;
+          padding: 0;
+        }
+        .style-card {
+          background: white;
+          border: 2px solid black;
+          border-radius: 0;
+          padding: 20px;
+          margin-bottom: 20px;
+          box-shadow: none;
+        }
+      `,
+    darkCss: {
+    `body {
+          font-family: monospace;
+          background: black;
+          color: white;
+          margin: 0;
+          padding: 20px;
+          line-height: 1.2;
+        }
+        main {
+          max-width: none;
+          margin: 0;
+          padding: 0;
+        }
+        .style-card {
+          background: black;
+          border: 2px solid white;
+          border-radius: 0;
+          padding: 20px;
+          margin-bottom: 20px;
+          box-shadow: none;
+          color: white;
+        }
+        .style-title {
+          color: #ff6666;
+        }
+        .style-links a {
+          color: #66ff66;
+        }
+        #css-editor {
+          background-color: black;
+          color: white;
+          border: 2px solid white;
+          font-family: monospace;
+        }
+      `
+    },
+    {
+      id: 'neo-brutalism',
+    handle: 'neo-brutalismStyle',
+    name: 'Neo-Brutalism Design',
+    lightCss: `
+        body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `,
+    darkCss: {
+    `body {
+          font-family: 'Arial', sans-serif;
+          background: #121212;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: #1a1a1a;
+          border: 3px solid #bb86fc;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 #bb86fc;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+        }
+        #css-editor {
+          background-color: #1a1a1a;
+          color: #e0e0e0;
+          border: 3px solid #bb86fc;
+          box-shadow: 5px 5px 0 #bb86fc;
+        }
+      `
+    },
+    {
+      id: 'dark-mode',
+    handle: 'dark-modeStyle',
+    name: 'Dark Mode Design',
+    lightCss: `
+        body {
+          font-family: 'SF Pro Text', 'Roboto', sans-serif;
+          background: #121212;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: #1e1e1e;
+          border: 1px solid #333;
+          border-radius: 8px;
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+        }
+        body.dark-mode #css-editor {
+          background-color: #2a2a2a;
+          color: #e0e0e0;
+          border-color: #444;
+        }
+      `,
+    darkCss: {
+    `body {
+        font-family: 'SF Pro Text', 'Roboto', sans-serif;
+        background: #121212;
+        color: #e0e0e0;
+      }
+      .style-card {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 8px;
+        color: #e0e0e0;
+      }
+      .style-title {
+        color: #bb86fc;
+      }
+      .style-links a {
+        color: #03dac6;
+      }
+      body.dark-mode #css-editor {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border-color: #444;
+      }
+    `
+    },
+    {
+      id: 'neumorphism',
+    handle: 'neumorphismStyle',
+    name: 'Neumorphism Design',
+    lightCss: `
+       body {
+          font-family: 'Poppins', sans-serif;
+          background: #e0e5ec;
+          color: #333;
+        }
+        .style-card {
+          background: #e0e5ec;
+          border-radius: 15px;
+          box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+          border: none;
+          padding: 20px;
+        }
+        .style-title {
+          color: #555;
+        }
+        .style-links a {
+          color: #555;
+          text-decoration: none;
+        }
+      `,
+    darkCss: {
+    `body {
+          font-family: 'Poppins', sans-serif;
+          background: #2d2d2d;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: #2d2d2d;
+          border-radius: 15px;
+          box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+          border: none;
+          padding: 20px;
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+          text-decoration: none;
+        }
+        #css-editor {
+          background: #2d2d2d;
+          border-radius: 15px;
+          box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+          border: none;
+          color: #e0e0e0;
+        }
+      `
+    },
+    {
+      id: 'glassmorphism',
+    handle: 'glassmorphismStyle',
+    name: 'Glassmorphism Design',
+    lightCss: `
+       body {
+          font-family: 'Segoe UI', 'Roboto', sans-serif;
+          background: #f9f9f9;
+          color: #333;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 2px;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+          transition: all 0.2s ease;
+        }
+        .style-title {
+          color: #0078d7;
+        }
+        .style-links a {
+          color: #0078d7;
+          text-decoration: none;
+        }
+      `,
+    darkCss: {
+    `body {
+          font-family: 'Segoe UI', 'Roboto', sans-serif;
+          background: linear-gradient(135deg, #121212, #2d2d2d);
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+        }
+        #css-editor {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #e0e0e0;
+        }
+      `
+    },
+    {
+      id: 'corporate-memphis',
+    handle: 'corporate-memphisStyle',
+    name: 'Corporate Memphis Design',
+    lightCss: `
+        body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `,
+    darkCss: {
+    `body {
+          background-color: #121212;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background-color: #1e1e1e;
+          border-color: #333;
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+        }
+        #css-editor {
+          background-color: #2a2a2a;
+          color: #e0e0e0;
+          border-color: #444;
+        }
+      `
+    },
+    {
+      id: 'retro-web',
+    handle: 'retro-webStyle',
+    name: 'Retro Web Design',
+    lightCss: `
+        body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `,
+    darkCss: {
+    `body {
+        font-family: 'Arial', sans-serif;
+        background: #ffde59;
+        color: black;
+      }
+      .style-card {
+        background: white;
+        border: 3px solid black;
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+    },
+    {
+      id: 'y2k-web',
+    handle: 'y2k-webStyle',
+    name: 'Y2K Web Design',
+    lightCss: `
+        body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        } `
+      ,
+    darkCss: {
+    `body {
+        font-family: 'Arial', sans-serif;
+        background: #ffde59;
+        color: black;
+      }
+      .style-card {
+        background: white;
+        border: 3px solid black;
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+    },
+    {
+      id: 'webgl-3d',
+    handle: 'webgl-3dStyle',
+    name: 'WebGL & 3D Design',
+    lightCss: `
+        body {
+          font-family: 'Arial', sans-serif;
+          color:rgba(230, 230, 230, 0.9);
+        }
+        .style-card {
+          background:rgba(1, 36, 0, 0.9);
+          border: 3px solid rgba(0, 255, 21, 0.9);
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `,
+    darkCss: {
+    `body {
+        font-family: 'Arial', sans-serif;
+        color:rgba(230, 230, 230, 0.9);
+      }
+      .style-card {
+        background:rgba(1, 36, 0, 0.9);
+        border: 3px solid rgba(0, 255, 21, 0.9);
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+    },
+    {
+      id: 'inclusive-design',
+    handle: 'inclusive-designStyle',
+    name: 'Inclusive Design',
+    lightCss: `
+        body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      ,
+    darkCss: {
+    `body {
+        font-family: 'Arial', sans-serif;
+        background: #ffde59;
+        color: black;
+      }
+      .style-card {
+        background: white;
+        border: 3px solid black;
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+  }
+}
+];
+    const darkThemes = [{
+      '
+        body { 
+          /* fill the full viewport */
+          min-height: 100vh;
+          margin: 0;
+
+          /* repeating diagonal stripes */
+          background-image: repeating-linear-gradient(
+              calc(3.125 * var(--stripe-angle)),
+              var(--dark-stripe-color) 0,
+              var(--dark-stripe-color) var(--stripe-width),
+              rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
+              rgba(0, 0, 0, 0.8) var(--stripe-spacing)
+          );
+          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+        }
+        
+        .content-wrapper {
+          display: block;
+          position: relative;
+          left: 0;
+          top: 0;
+        }
+        .header-content h1 { 
+          color: #ff0000; 
+          font-size: 6vw;
+          margin-bottom: 5px;
+        }
+        .header-content p { 
+          color: #ffa600; 
+          font-size: 4vw;
+        }
+        .era-timeline { 
+          display: block !important;
+          background: var(--inverse-bg-color, #222);
+          opacity: var(--opacity, 0.8);
+        }
+        .style-links a {
+          color: #66ccff;
+          text-d#3554den: underline;
+        }
+        .extra-under { display: block !important; }
+        .mermaid {
+          background: #333300;
+          color: #f0f0f0;
+        }
+      `
+    },
+    darkCss: {
+  
+
+  {
+    name: "Semi-Flat",
+    css: `
+      body {
+        font-family: 'SF Pro Text', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        color: #333;
+      }
+      .style-card {
+        background: white;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+      .style-card:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+      }
+      .style-title {
+        color: #007aff;
+      }
+    `
+  },
+  {
+    name: "Parallax",
+    css: `
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background: #222;
+        color: white;
+        perspective: 1px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      main {
+        transform-style: preserve-3d;
+      }
+      .style-card {
+        background: rgba(255,255,255,0.9);
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transform: translateZ(0);
+      }
+    `
+  },
+  {
+    name: "Single-Page App",
+    css: `
       
-      var $themeStyle = $('#theme-style'),
-          $cssEditor = $('#css-editor'),
-          $heroSection = $('.hero-section'),
-          $contentWrapper = $('.content-wrapper'),
-          $video1 = $('#traffic_videos_1'),
-          $video2 = $('#traffic_videos_2');
-          $underConstruction = $('#under-construction');
-          $$vistorCounter = $('.counter');
-      
-      var current = 0;
-
-      // Light Themes definitions
-      var themes = [
-        {
-          name: "Vernacular",
-          css: `
-            body { 
-              /* fill the full viewport */
-              min-height: 100vh;
-              margin: 0;
-              /* repeating diagonal stripes */
-              background-image: repeating-linear-gradient(
-                  var(--stripe-angle),
-                  var(--stripe-color) 0,
-                  var(--stripe-color) var(--stripe-width),
-                transparent var(--stripe-width),
-                  transparent var(--stripe-spacing)
-              );
-              font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-            }
-            .content-wrapper {
-                display: block;
-                position: relative;
-                left: 0;
-                top: 0;
-              }
-              .header-content h1 { 
-                color: #ff0000; 
-                font-size: 3vw;
-                margin-bottom: 5px;
-              }
-              .header-content p { 
-                color: #ffa600; 
-                font-size: 1.5vw;
-              }
-            .era-timeline { 
-              display: block !important;
-              background: var(--bg-color);
-              opacity: var(--opacity);
-            }
-            .style-card {
-              background: #ffffcc;
-              border: 3px outset #cc9966;
-            }
-            .style-description {
-              color: #333333;
-            }
-            .style-title {
-              color: #990000;
-              font-weight: bold;
-            }
-            .style-links a {
-              color: #0000ff;
-              text-decoration: underline;
-            }
-            .extra-under { display: block !important; }
-            .mermaid {
-              background:rgb(245, 245, 243);
-              color:rgb(42, 44, 20);
-            }
-          `
-        },
-        {
-          name: "Table-Based Design",
-          css: `
-            body {
-              font-family: Arial, sans-serif;
-              background: #f0f0f0;
-              color: #333;
-            }
-            main {
-              display: table;
-              width: 100%;
-              border-collapse: collapse;
-            }
-            .style-card {
-              display: table-cell;
-              border: 1px solid #999;
-              padding: 10px;
-              background: white;
-            }
-            #main-table { display: block !important; }
-          `
-        },
-        {
-          name: "Framesets",
-          css: `
-            body {
-              margin: 0;
-              padding: 0;
-              font-family: Verdana, sans-serif;
-            }
-            .frame-nav, .frame-content {
-              display: block !important;
-              position: fixed;
-              border: 2px inset #ccc;
-              background: #f0f0f0;
-            }
-            .frame-nav {
-              left: 0;
-              top: 0;
-              width: 200px;
-              height: 100%;
-              overflow: auto;
-              padding: 10px;
-            }
-            .frame-content {
-              left: 200px;
-              top: 0;
-              width: calc(100% - 200px);
-              height: 100%;
-              overflow: auto;
-              padding: 10px;
-              background: white;
-            }
-            main {
-              margin-left: 200px;
-            }
-          `
-        },
-        {
-          name: "Flash-Based Design",
-          css: `
-            body {
-              background: #000;
-              color: #fff;
-              font-family: Arial, sans-serif;
-              text-align: center;
-            }
-            .extra-flash-intro { 
-              display: block !important; 
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: #000;
-              z-index: 1000;
-            }
-            .style-card {
-              background: #333;
-              border-radius: 0;
-              border: 1px solid #666;
-              color: #fff;
-            }
-            .style-title {
-              color: #ff9900;
-            }
-            .style-links a {
-              color: #66ccff;
-            }
-          `
-        },
-        {
-          name: "Web 2.0 Glossy",
-          css: `
-            body {
-              font-family: 'Lucida Grande', Arial, sans-serif;
-              background: #f6f6f6;
-            }
-            .style-card {
-              border-radius: 8px;
-              border: 1px solid #ddd;
-              background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
-              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            }
-            .style-title {
-              color: #0066cc;
-              text-shadow: 0 1px 0 white;
-            }
-            .beta-badge {
-              display: inline-block !important;
-              background: #ff6600;
-              color: white;
-              font-size: 10px;
-              padding: 2px 5px;
-              border-radius: 10px;
-              margin-left: 5px;
-              text-transform: uppercase;
-              font-weight: bold;
-            }
-          `
-        },
-        {
-          name: "Skeuomorphic",
-          css: `
-            body {
-              
-              font-family: 'Helvetica Neue', Arial, sans-serif;
-            }
-            .style-card {
-              background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
-              border-radius: 5px;
-              box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-              border: 1px solid #b8b8b8;
-            }
-            .card-texture {
-              display: block !important;
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: url('https://i.imgur.com/FL3SmIu.jpeg');
-              opacity: 0.1;
-              pointer-events: none;
-            }
-            .era-timeline {
-              display: block !important;
-              background: url('https://img.freepik.com/free-photo/white-gypsum-wall_1194-6990.jpg?t=st=1746443052~exp=1746446652~hmac=a2420a81ff31a63454846c9c05c450b65b5a3982ffc27fd89a63d2b85f7ca563&w=1380');
-              pointer-events: none;
-              
-            }
-          `
-        },
-        {
-          name: "Swiss Style",
-          css: `
-            body {
-              font-family: Helvetica, Arial, sans-serif;
-              background: white;
-              color: black;
-              line-height: 1.5;
-            }
-            main {
-              display: grid;
-              grid-template-columns: repeat(12, 1fr);
-              grid-gap: 20px;
-            }
-            .style-card {
-              grid-column: span 4;
-              background: white;
-              border: none;
-              border-bottom: 2px solid black;
-              border-radius: 0;
-              padding: 20px 0;
-            }
-            .style-title {
-              font-size: 18px;
-              font-weight: bold;
-              color: black;
-            }
-            .grid-overlay {
-              display: block !important;
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: repeating-linear-gradient(
-                90deg,
-                rgba(255,0,0,0.03),
-                rgba(255,0,0,0.03) 8.33%,
-                transparent 8.33%,
-                transparent 16.66%
-              );
-              pointer-events: none;
-              z-index: 1000;
-            }
-          `
-        },
-        {
-          name: "Minimalist",
-          css: `
-            body {
-              font-family: 'Inter', sans-serif;
-              background: white;
-              color: #333;
-              line-height: 1.6;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 0;
-              padding: 30px 0;
-              box-shadow: none;
-            }
-            .style-title {
-              font-weight: 300;
-              font-size: 24px;
-              color: #000;
-            }
-            .style-description {
-              font-weight: 300;
-            }
-            .style-links a {
-              color: #000;
-              text-decoration: none;
-              border-bottom: 1px solid #000;
-              padding-bottom: 2px;
-            }
-          `
-        },
-        {
-          name: "Responsive",
-          css: `
-            body {
-              font-family: 'Open Sans', sans-serif;
-              background: #f9f9f9;
-            }
-            main {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: space-between;
-            }
-            .style-card {
-              flex: 0 0 calc(33.333% - 20px);
-              margin-bottom: 30px;
-              background: white;
-              border-radius: 5px;
-              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-              transition: all 0.3s ease;
-            }
-            @media (max-width: 992px) {
-              .style-card {
-                flex: 0 0 calc(50% - 15px);
-              }
-            }
-            @media (max-width: 576px) {
-              .style-card {
-                flex: 0 0 100%;
-              }
-            }
-          `
-        },
-        {
-          name: "Mobile-First",
-          css: `
-            body {
-              font-family: 'Roboto', sans-serif;
-              font-size: 16px;
-              line-height: 1.5;
-              color: #333;
-              background: #f5f5f5;
-            }
-            main {
-              padding: 10px;
-            }
-            .style-card {
-              width: 100%;
-              margin-bottom: 15px;
-              background: white;
-              border-radius: 5px;
-              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-              padding: 15px;
-            }
-            @media (min-width: 768px) {
-              main {
-                padding: 20px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-              }
-              .style-card {
-                width: calc(50% - 10px);
-              }
-            }
-            @media (min-width: 992px) {
-              .style-card {
-                width: calc(33.333% - 15px);
-              }
-            }
-          `
-        },
-        {
-          name: "Flat Design",
-          css: `
-            body {
-              font-family: 'Segoe UI', 'Roboto', sans-serif;
-              background: #f9f9f9;
-              color: #333;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 2px;
-              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-              transition: all 0.2s ease;
-            }
-            .style-title {
-              color: #0078d7;
-            }
-            .style-links a {
-              color: #0078d7;
-              text-decoration: none;
-            }
-          `
-        },
-        {
-          name: "Semi-Flat",
-          css: `
-            body {
-              font-family: 'SF Pro Text', 'Roboto', sans-serif;
-              background: #f5f5f5;
-              color: #333;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 8px;
-              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-              transition: all 0.3s ease;
-            }
-            .style-card:hover {
-              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-              transform: translateY(-2px);
-            }
-            .style-title {
-              color: #007aff;
-            }
-          `
-        },
-        {
-          name: "Parallax",
-          css: `
-            body {
-              font-family: 'Montserrat', sans-serif;
-              background: #222;
-              color: white;
-              perspective: 1px;
-              height: 100vh;
-              overflow-x: hidden;
-              overflow-y: auto;
-            }
-            main {
-              transform-style: preserve-3d;
-            }
-            .style-card {
-              background: rgba(255,255,255,0.9);
-              color: #333;
-              border: none;
-              border-radius: 5px;
-              box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-              transform: translateZ(0);
-            }
-          `
-        },
-        {
-          name: "Single-Page App",
-          css: `
-            body {
-              font-family: 'Roboto', sans-serif;
-              background: #fafafa;
-              color: #333;
-              padding-top: 60px;
-            }
-            header {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              background: white;
-              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-              z-index: 100;
-              padding: 15px 0;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 2px;
-              box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-              transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-            }
-          `
-        },
-        {
-          name: "Progressive Web App",
-          css: `
-            body {
-              font-family: 'Google Sans', 'Roboto', sans-serif;
-              background: #f5f5f5;
-              color: #202124;
-              margin: 0;
-              padding: 0;
-            }
-            header {
-              background: #1a73e8;
-              color: white;
-              padding: 16px;
-              box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            }
-            .style-card {
-              background: white;
-              border-radius: 8px;
-              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-              margin-bottom: 16px;
-              overflow: hidden;
-            }
-          `
-        },
-        {
-          name: "Cinematic",
-          css: `
-            body {
-              font-family: 'Playfair Display', serif;
-              color: #fff;
-              text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
-              margin: 0;
-              padding: 0;
-              background: #000;
-            }
-            .hero-section, .content-wrapper {
-              display: block !important;
-            }
-            .era-timeline {
-              top: 0;
-              left: 0;
-              width: 80%;
-              margin: auto;
-              padding: 2rem;
-              overflow: hidden;
-              background: rgba(255, 255, 255, 0.5);
-              backdrop-filter: blur(--blur);
-              /* display: none; /* Hidden by default, shown in cinematic mode */
-            }
-            .video-background {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              z-index: -1;
-              overflow: hidden;
-            }
-            .style-card {
-              background: rgba(0,0,0,0.7);
-              border: 1px solid rgba(255,255,255,0.2);
-              color: #666;
-            }
-            .style-title {
-              color: #333;
-              font-size: 24px;
-            }
-            .mermaid {
-              background: var(--bg-color);
-              color: var(--text-color);
-              border: 1px solid var(--accent-color);
-              border-radius: var(--rounded);
-            }
-            .mermaid text.taskText, .mermaid text.sectionTitle {
-              color: var(--text-color);
-            }
-            .mermaid .task {
-              fill: var(--accent-color);
-            }
-          `
-        },
-        {
-          name: "Brutalist",
-          css: `
-            body {
-              font-family: monospace;
-              background: white;
-              color: black;
-              margin: 0;
-              padding: 20px;
-              line-height: 1.2;
-            }
-            main {
-              max-width: none;
-              margin: 0;
-              padding: 0;
-            }
-            .style-card {
-              background: white;
-              border: 2px solid black;
-              border-radius: 0;
-              padding: 20px;
-              margin-bottom: 20px;
-              box-shadow: none;
-            }
-          `
-        },
-        {
-          name: "Neo-Brutalism",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "Dark Mode",
-          css: `
-            body {
-              font-family: 'SF Pro Text', 'Roboto', sans-serif;
-              background: #121212;
-              color: #e0e0e0;
-            }
-            .style-card {
-              background: #1e1e1e;
-              border: 1px solid #333;
-              border-radius: 8px;
-              color: #e0e0e0;
-            }
-            .style-title {
-              color: #bb86fc;
-            }
-            .style-links a {
-              color: #03dac6;
-            }
-            body.dark-mode #css-editor {
-              background-color: #2a2a2a;
-              color: #e0e0e0;
-              border-color: #444;
-            }
-          `
-        },
-        {
-          name: "Neumorphism",
-          css: `
-            body {
-              font-family: 'Poppins', sans-serif;
-              background: #e0e5ec;
-              color: #333;
-            }
-            .style-card {
-              background: #e0e5ec;
-              border-radius: 15px;
-              box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
-              border: none;
-              padding: 20px;
-            }
-            .style-title {
-              color: #555;
-            }
-            .style-links a {
-              color: #555;
-              text-decoration: none;
-            }
-          `
-        },
-        {
-          name: "Glassmorphism",
-          css: `
-            body {
-              font-family: 'Segoe UI', 'Roboto', sans-serif;
-              background: #f9f9f9;
-              color: #333;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 2px;
-              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-              transition: all 0.2s ease;
-            }
-            .style-title {
-              color: #0078d7;
-            }
-            .style-links a {
-              color: #0078d7;
-              text-decoration: none;
-            }
-          `
-        },
-        {
-          name: "Corporate Memphis",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "Retro Web",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "Y2K Web",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "WebGL & 3D",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              color:rgba(230, 230, 230, 0.9);
-            }
-            .style-card {
-              background:rgba(1, 36, 0, 0.9);
-              border: 3px solid rgba(0, 255, 21, 0.9);
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "Inclusive Design",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        }
-      ];
-
-      // Create custom dark CSS based on the theme
-      var darkThemes = [
-          {
-            name: "Vernacular",
-            css: `
-              body { 
-                /* fill the full viewport */
-                min-height: 100vh;
-                margin: 0;
-
-                /* repeating diagonal stripes */
-                background-image: repeating-linear-gradient(
-                    calc(3.125 * var(--stripe-angle)),
-                    var(--dark-stripe-color) 0,
-                    var(--dark-stripe-color) var(--stripe-width),
-                    rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
-                    rgba(0, 0, 0, 0.8) var(--stripe-spacing)
-                );
-                font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-              }
-              
-              .content-wrapper {
-                display: block;
-                position: relative;
-                left: 0;
-                top: 0;
-              }
-              .header-content h1 { 
-                color: #ff0000; 
-                font-size: 6vw;
-                margin-bottom: 5px;
-              }
-              .header-content p { 
-                color: #ffa600; 
-                font-size: 4vw;
-              }
-              .era-timeline { 
-                display: block !important;
-                background: var(--inverse-bg-color, #222);
-                opacity: var(--opacity, 0.8);
-              }
-              .style-links a {
-                color: #66ccff;
-                text-d#3554den: underline;
-              }
-              .extra-under { display: block !important; }
-              .mermaid {
-                background: #333300;
-                color: #f0f0f0;
-              }
-            `
-          },
-          },
-        {
-          name: "Table-Based Design",
-          css: `
-            body {
-              font-family: Arial, sans-serif;
-              background: #f0f0f0;
-              color: #333;
-            }
-            main {
-              display: table;
-              width: 100%;
-              border-collapse: collapse;
-            }
-            .style-card {
-              display: table-cell;
-              border: 1px solid #999;
-              padding: 10px;
-              background: white;
-            }
-            #main-table { display: block !important; }
-          `
-        },
-        {
-          name: "Framesets",
-          css: `
-            body {
-              margin: 0;
-              padding: 0;
-              font-family: Verdana, sans-serif;
-            }
-            .frame-nav, .frame-content {
-              display: block !important;
-              position: fixed;
-              border: 2px inset #ccc;
-              background: #f0f0f0;
-            }
-            .frame-nav {
-              left: 0;
-              top: 0;
-              width: 200px;
-              height: 100%;
-              overflow: auto;
-              padding: 10px;
-            }
-            .frame-content {
-              left: 200px;
-              top: 0;
-              width: calc(100% - 200px);
-              height: 100%;
-              overflow: auto;
-              padding: 10px;
-              background: white;
-            }
-            main {
-              margin-left: 200px;
-            }
-          `
-        },
-        {
-          name: "Framesets",
-          css: `
-            body {
-              margin: 0;
-              padding: 0;
-              font-family: Verdana, sans-serif;
-            }
-            .frame-nav, .frame-content {
-              display: block !important;
-              position: fixed;
-              border: 2px inset #ccc;
-              background: #f0f0f0;
-            }
-            .frame-nav {
-              left: 0;
-              top: 0;
-              width: 200px;
-              height: 100%;
-              overflow: auto;
-              padding: 10px;
-            }
-            .frame-content {
-              left: 200px;
-              top: 0;
-              width: calc(100% - 200px);
-              height: 100%;
-              overflow: auto;
-              padding: 10px;
-              background: white;
-            }
-            main {
-              margin-left: 200px;
-            }
-          `
-        },
-        {
-          name: "Flash-Based Design",
-          css: `
-            body {
-              background: #000;
-              color: #fff;
-              font-family: Arial, sans-serif;
-              text-align: center;
-            }
-            .extra-flash-intro { 
-              display: block !important; 
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: #000;
-              z-index: 1000;
-            }
-            .style-card {
-              background: #333;
-              border-radius: 0;
-              border: 1px solid #666;
-              color: #fff;
-            }
-            .style-title {
-              color: #ff9900;
-            }
-            .style-links a {
-              color: #66ccff;
-            }
-          `
-        },
-        {
-          name: "Web 2.0 Glossy",
-          css: `
-            body {
-              font-family: 'Lucida Grande', Arial, sans-serif;
-              background: #f6f6f6;
-            }
-            .style-card {
-              border-radius: 8px;
-              border: 1px solid #ddd;
-              background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
-              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            }
-            .style-title {
-              color: #0066cc;
-              text-shadow: 0 1px 0 white;
-            }
-            .beta-badge {
-              display: inline-block !important;
-              background: #ff6600;
-              color: white;
-              font-size: 10px;
-              padding: 2px 5px;
-              border-radius: 10px;
-              margin-left: 5px;
-              text-transform: uppercase;
-              font-weight: bold;
-            }
-          `
-        },
-        {
-            name: "Skeuomorphic",
-            css: `
-              body {
-                background: #222;
-                font-family: 'Helvetica Neue', Arial, sans-serif;
-                color: #e0e0e0;
-              }
-              .style-card {
-                background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
-                border-radius: 5px;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-                border: 1px solid #444;
-                color: #e0e0e0;
-              }
-              .card-texture {
-                display: block !important;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: url('https://i.imgur.com/FL3SmIu.jpeg');
-                opacity: 0.05;
-                pointer-events: none;
-              }
-              .style-title {
-                color: #bb86fc;
-              }
-              #css-editor {
-                background-color: #333;
-                color: #e0e0e0;
-                border-color: #444;
-                box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-              }
-            `
-          },
-          {
-            name: "Swiss Style",
-            css: `
-              body {
-                font-family: Helvetica, Arial, sans-serif;
-                background: #121212;
-                color: white;
-                line-height: 1.5;
-              }
-              main {
-                display: grid;
-                grid-template-columns: repeat(12, 1fr);
-                grid-gap: 20px;
-              }
-              .style-card {
-                grid-column: span 4;
-                background: #1a1a1a;
-                border: none;
-                border-bottom: 2px solid white;
-                border-radius: 0;
-                padding: 20px 0;
-                color: white;
-              }
-              .style-title {
-                font-size: 18px;
-                font-weight: bold;
-                color: white;
-              }
-              .style-links a {
-                color: #bb86fc;
-              }
-              #css-editor {
-                background-color: #1a1a1a;
-                color: white;
-                border-color: white;
-              }
-            `
-          },
-          {
-            name: "Minimalist",
-            css: `
-              body {
-                font-family: 'Inter', sans-serif;
-                background: #121212;
-                color: #e0e0e0;
-                line-height: 1.6;
-              }
-              .style-card {
-                background: #1a1a1a;
-                border: none;
-                border-radius: 0;
-                padding: 30px 0;
-                box-shadow: none;
-                color: #e0e0e0;
-              }
-              .style-title {
-                font-weight: 300;
-                font-size: 24px;
-                color: #fff;
-              }
-              .style-description {
-                font-weight: 300;
-              }
-              .style-links a {
-                color: #bb86fc;
-                text-decoration: none;
-                border-bottom: 1px solid #bb86fc;
-                padding-bottom: 2px;
-              }
-              #css-editor {
-                background-color: #1a1a1a;
-                color: #e0e0e0;
-                border: none;
-                border-bottom: 1px solid #333;
-              }
-            `
-          },
-        {
-          name: "Responsive",
-          css: `
-            body {
-              font-family: 'Open Sans', sans-serif;
-              background: #f9f9f9;
-            }
-            main {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: space-between;
-            }
-            .style-card {
-              flex: 0 0 calc(33.333% - 20px);
-              margin-bottom: 30px;
-              background: white;
-              border-radius: 5px;
-              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-              transition: all 0.3s ease;
-            }
-            @media (max-width: 992px) {
-              .style-card {
-                flex: 0 0 calc(50% - 15px);
-              }
-            }
-            @media (max-width: 576px) {
-              .style-card {
-                flex: 0 0 100%;
-              }
-            }
-          `
-        },
-        {
-          name: "Mobile-First",
-          css: `
-            body {
-              font-family: 'Roboto', sans-serif;
-              font-size: 16px;
-              line-height: 1.5;
-              color: #333;
-              background: #f5f5f5;
-            }
-            main {
-              padding: 10px;
-            }
-            .style-card {
-              width: 100%;
-              margin-bottom: 15px;
-              background: white;
-              border-radius: 5px;
-              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-              padding: 15px;
-            }
-            @media (min-width: 768px) {
-              main {
-                padding: 20px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-              }
-              .style-card {
-                width: calc(50% - 10px);
-              }
-            }
-            @media (min-width: 992px) {
-              .style-card {
-                width: calc(33.333% - 15px);
-              }
-            }
-          `
-        },
-        {
-          name: "Flat Design",
-          css: `
-            body {
-              font-family: 'Segoe UI', 'Roboto', sans-serif;
-              background: #f9f9f9;
-              color: #333;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 2px;
-              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-              transition: all 0.2s ease;
-            }
-            .style-title {
-              color: #0078d7;
-            }
-            .style-links a {
-              color: #0078d7;
-              text-decoration: none;
-            }
-          `
-        },
-        {
-          name: "Semi-Flat",
-          css: `
-            body {
-              font-family: 'SF Pro Text', 'Roboto', sans-serif;
-              background: #f5f5f5;
-              color: #333;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 8px;
-              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-              transition: all 0.3s ease;
-            }
-            .style-card:hover {
-              box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-              transform: translateY(-2px);
-            }
-            .style-title {
-              color: #007aff;
-            }
-          `
-        },
-        {
-          name: "Parallax",
-          css: `
-            body {
-              font-family: 'Montserrat', sans-serif;
-              background: #222;
-              color: white;
-              perspective: 1px;
-              height: 100vh;
-              overflow-x: hidden;
-              overflow-y: auto;
-            }
-            main {
-              transform-style: preserve-3d;
-            }
-            .style-card {
-              background: rgba(255,255,255,0.9);
-              color: #333;
-              border: none;
-              border-radius: 5px;
-              box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-              transform: translateZ(0);
-            }
-          `
-        },
-        {
-          name: "Single-Page App",
-          css: `
-            body {
-              font-family: 'Roboto', sans-serif;
-              background: #fafafa;
-              color: #333;
-              padding-top: 60px;
-            }
-            header {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              background: white;
-              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-              z-index: 100;
-              padding: 15px 0;
-            }
-            .style-card {
-              background: white;
-              border: none;
-              border-radius: 2px;
-              box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-              transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-            }
-          `
-        },
-        {
-          name: "Progressive Web App",
-          css: `
-            body {
-              font-family: 'Google Sans', 'Roboto', sans-serif;
-              background: #f5f5f5;
-              color: #202124;
-              margin: 0;
-              padding: 0;
-            }
-            header {
-              background: #1a73e8;
-              color: white;
-              padding: 16px;
-              box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            }
-            .style-card {
-              background: white;
-              border-radius: 8px;
-              box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-              margin-bottom: 16px;
-              overflow: hidden;
-            }
-          `
-        },
-          {
-            name: "Cinematic",
-            css: `
-              body {
-                font-family: 'Playfair Display', serif;
-                color: #e0e0e0;
-              }
-              .era-timeline {
-                top: 0;
-                left: 0;
-                width: 80%;
-                margin: auto;
-                padding: 2rem;
-                overflow: hidden;
-                background: rgba(255, 255, 255, 0.5);
-                backdrop-filter: blur(--blur);
-                /* display: none; /* Hidden by default, shown in cinematic mode */
-              }
-              .style-card {
-                background-color: var(--inverse-bg-color);
-                border-radius: var(--rounded);
-                box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
-                border: 1px solid var(--inverse-accent-color);
-                padding: 20px;
-                color: var(--inverse-text-color);
-              }
-              .style-title {
-                color:rgb(255, 0, 55);
-              }
-              .style-links a {
-                color:rgba(226, 182, 4, 0.91);
-                text-decoration: none;
-              }
-              #css-editor {
-                background: #2d2d2d;
-                border-radius: var(--rounded);
-                box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
-                border: 1px solid var(--accent-color);
-                color: #e0e0e0;
-              }
-              .mermaid {
-                background: var(--inverse-bg-color);
-                color: var(--inverse-text-color);
-                border: 1px solid var(--inverse-accent-color);
-                border-radius: var(--rounded);
-              }
-              .task, .mermaid text.taskText, .mermaid text.sectionTitle {
-                color: var(--inverse-text-color);
-              }
-            .mermaid .task {
-              fill: var(--inverse-accent-color);
-            }
-            `
-          },
-          {
-            name: "Brutalist",
-            css: `
-              body {
-                font-family: monospace;
-                background: black;
-                color: white;
-                margin: 0;
-                padding: 20px;
-                line-height: 1.2;
-              }
-              main {
-                max-width: none;
-                margin: 0;
-                padding: 0;
-              }
-              .style-card {
-                background: black;
-                border: 2px solid white;
-                border-radius: 0;
-                padding: 20px;
-                margin-bottom: 20px;
-                box-shadow: none;
-                color: white;
-              }
-              .style-title {
-                color: #ff6666;
-              }
-              .style-links a {
-                color: #66ff66;
-              }
-              #css-editor {
-                background-color: black;
-                color: white;
-                border: 2px solid white;
-                font-family: monospace;
-              }
-            `
-          },
-          {
-            name: "Neo-Brutalism",
-            css: `
-              body {
-                font-family: 'Arial', sans-serif;
-                background: #121212;
-                color: #e0e0e0;
-              }
-              .style-card {
-                background: #1a1a1a;
-                border: 3px solid #bb86fc;
-                border-radius: 0;
-                box-shadow: 5px 5px 0 #bb86fc;
-                transform: rotate(-1deg);
-                transition: all 0.2s ease;
-                color: #e0e0e0;
-              }
-              .style-title {
-                color: #bb86fc;
-              }
-              .style-links a {
-                color: #03dac6;
-              }
-              #css-editor {
-                background-color: #1a1a1a;
-                color: #e0e0e0;
-                border: 3px solid #bb86fc;
-                box-shadow: 5px 5px 0 #bb86fc;
-              }
-            `
-          },
-        {
-          name: "Dark Mode",
-          css: `
-            body {
-              font-family: 'SF Pro Text', 'Roboto', sans-serif;
-              background: #121212;
-              color: #e0e0e0;
-            }
-            .style-card {
-              background: #1e1e1e;
-              border: 1px solid #333;
-              border-radius: 8px;
-              color: #e0e0e0;
-            }
-            .style-title {
-              color: #bb86fc;
-            }
-            .style-links a {
-              color: #03dac6;
-            }
-            body.dark-mode #css-editor {
-              background-color: #2a2a2a;
-              color: #e0e0e0;
-              border-color: #444;
-            }
-          `
-        },
-        {
-            name: "Neumorphism",
-            css: `
-              body {
-                font-family: 'Poppins', sans-serif;
-                background: #2d2d2d;
-                color: #e0e0e0;
-              }
-              .style-card {
-                background: #2d2d2d;
-                border-radius: 15px;
-                box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
-                border: none;
-                padding: 20px;
-                color: #e0e0e0;
-              }
-              .style-title {
-                color: #bb86fc;
-              }
-              .style-links a {
-                color: #03dac6;
-                text-decoration: none;
-              }
-              #css-editor {
-                background: #2d2d2d;
-                border-radius: 15px;
-                box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
-                border: none;
-                color: #e0e0e0;
-              }
-            `
-          },
-          {
-            name: "Glassmorphism",
-            css: `
-              body {
-                font-family: 'Segoe UI', 'Roboto', sans-serif;
-                background: linear-gradient(135deg, #121212, #2d2d2d);
-                color: #e0e0e0;
-              }
-              .style-card {
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 10px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-                color: #e0e0e0;
-              }
-              .style-title {
-                color: #bb86fc;
-              }
-              .style-links a {
-                color: #03dac6;
-              }
-              #css-editor {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                color: #e0e0e0;
-              }
-            `
-          },
-          {
-            name: "Corporate Memphis",
-            css: `
-              body {
-                background-color: #121212;
-                color: #e0e0e0;
-              }
-              .style-card {
-                background-color: #1e1e1e;
-                border-color: #333;
-                color: #e0e0e0;
-              }
-              .style-title {
-                color: #bb86fc;
-              }
-              .style-links a {
-                color: #03dac6;
-              }
-              #css-editor {
-                background-color: #2a2a2a;
-                color: #e0e0e0;
-                border-color: #444;
-              }
-            ` + theme.css;
-        },
-        {
-          name: "Retro Web",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "Y2K Web",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "WebGL & 3D",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              color:rgba(230, 230, 230, 0.9);
-            }
-            .style-card {
-              background:rgba(1, 36, 0, 0.9);
-              border: 3px solid rgba(0, 255, 21, 0.9);
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        },
-        {
-          name: "Inclusive Design",
-          css: `
-            body {
-              font-family: 'Arial', sans-serif;
-              background: #ffde59;
-              color: black;
-            }
-            .style-card {
-              background: white;
-              border: 3px solid black;
-              border-radius: 0;
-              box-shadow: 5px 5px 0 black;
-              transform: rotate(-1deg);
-              transition: all 0.2s ease;
-            }
-          `
-        }
-      ];
-
-  // Format CSS for readability in the editor
-      function formatCss(css) {
-        try {
-          // Check if css is undefined or null
-          if (!css) {
-            console.warn('Received undefined or null CSS for formatting');
-            return '/* No CSS defined for this theme */';
-          }
-          
-          // Format the CSS
-          const formattedCss = css
-            .replace(/}/g, '}\n')
-            .replace(/{/g, ' {\n')
-            .replace(/;(?!.*\n)/g, ';\n')
-            .replace(/:/g, ': ')
-            .replace(/,(?=\S)/g, ', ')
-            .trim();
-          
-          // Send Google Analytics event for successful CSS formatting
-          if (typeof gtag === 'function') {
-            gtag('event', 'css_formatting', {
-              'event_category': 'CSS Editor',
-              'event_label': 'CSS Formatted Successfully',
-              'value': css.length
-            });
-          }
-          
-          return formattedCss;
-        } catch (e) {
-          console.error('formatCss failed:', e);
-          
-          // Send Google Analytics event for CSS formatting error
-          if (typeof gtag === 'function') {
-            gtag('event', 'error', {
-              'event_category': 'CSS Editor',
-              'event_label': 'CSS Formatting Error',
-              'value': 0,
-              'description': e.message || 'Unknown error'
-            });
-          }
-          
-          // Return a placeholder message instead of empty string
-          return '/* Error formatting CSS */';
-        }
+  },
+  {
+    name: "Progressive Web App",
+    css: `
+      body {
+        font-family: 'Google Sans', 'Roboto', sans-serif;
+        background: #f5f5f5;
+        color: #202124;
+        margin: 0;
+        padding: 0;
       }
-
-      // First, store the original themes without dark variants
-      var originalThemes = themes.slice();
-      var originalDarkThemes = darkThemes.slice();
-
-      // Then create dark variants and add them after the original themes
-      originalThemes.forEach(theme => {
-        // Create a dark variant of the theme
-        var darkTheme = {
-          name: theme.name + " (Dark)",
-          // Store the original CSS for reference
-          originalCss: theme.css
-        };
-
-
-      // Also keep the original theme.lightCss and theme.darkCss for the dark mode toggle
-      themes.forEach(theme => {
-        if (!theme.name.includes("(Dark)")) {
-          theme.lightCss = theme.css;
-          
-          // Find the corresponding dark theme
-          const darkTheme = themes.find(t => t.name === theme.name + " (Dark)");
-          if (darkTheme) {
-            theme.darkCss = darkTheme.css;
-          } else {
-            // Fallback if no dark theme was found
-            theme.darkCss = `
-              body {
-                background-color: #121212;
-                color: #e0e0e0;
-              }
-            ` + theme.css;
-          }
-        }
-      });
-
-      // Remove all classes from body
-      function dropTheme(index) {
-        try {
-          // Remove all theme-related classes from body
-          $('body').removeClass(function(index, className) {
-            return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
-          });
-
-        } catch (e) {
-          console.error('Failed to remove classes. Error: ', e);
-          // Send Google Analytics event for theme change
-          if (typeof gtag === 'function') {
-            gtag('event', 'theme_change', {
-              'event_category': 'Failed to Remove Classes',
-              'event_label': index.className,
-              'value': index
-            });
-          }
-        };
-      };
-
-      // Apply theme by index
-      function applyTheme(index) {
-        try {
-          if (index < 0 || index >= themes.length) {
-            console.error('Invalid theme index:', index);
-            return;
-          }
+      header {
+        background: #1a73e8;
+        color: white;
+        padding: 16px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      .style-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        margin-bottom: 16px;
+        overflow: hidden;
+      }
+    `
+  },
+    {
+      name: "Cinematic",
+      css: `
         
-          
-          current = index;
-          var theme = themes[current];
-          
-          console.log('Applying theme:', theme.name);
-          
-          /*
-          // Remove all theme-related classes from body
-          $('body').removeClass(function(index, className) {
-            return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
-          });
-          */
-          dropTheme(index)
-          
-          
-          
-          // Check dark mode state
-          const isDarkMode = $('#dark-mode-toggle').is(':checked');
-          
-          // Apply appropriate CSS based on dark mode state and theme type
-          let cssToApply;
-          
-          if (theme.name.includes("(Dark)")) {
-            // For dark themes, use the css property directly
-            cssToApply = theme.css || '';
-          } else {
-            // For regular themes, use lightCss or darkCss based on dark mode toggle
-            cssToApply = isDarkMode ? (theme.darkCss || theme.css || '') : (theme.lightCss || theme.css || '');
-          }
-          
-          // Ensure we have valid CSS before applying
-          if (!cssToApply) {
-            console.warn(`No CSS found for theme: ${theme.name}, using fallback`);
-            cssToApply = `/* Fallback CSS for ${theme.name} */
-              body { background: #f0f0f0; color: #333; }
-            `;
-          }
-          
-          // Add this line to register the CSS parser plugin
-          prettier.prettierPlugins = prettierPlugins;
-
-          // Tidy up CSS using Prettier
-          cssToApply = prettier.format(cssToApply, {
-            parser: "css",
-            plugins: prettierPlugins,
-            printWidth: 80,
-            tabWidth: 2,
-            useTabs: false
-          });
-          
-          $themeStyle.html(cssToApply);
-          
-          // Update CSS editor with formatted CSS
-          $cssEditor.val(formatCss(cssToApply));
-          
-          // Handle cinematic mode
-          if (theme.name === 'Cinematic' || theme.name === 'Cinematic (Dark)') {
-            $heroSection.show();
-            $contentWrapper.show();
-            startCinematicVideos();
-            
-            // Dispatch theme changed event for video.js
-            document.dispatchEvent(new CustomEvent('themeChanged', { 
-              detail: { themeName: 'Cinematic' } 
-            }));
-          } else {
-            $heroSection.hide();
-            
-            // Dispatch theme changed event for video.js
-            document.dispatchEvent(new CustomEvent('themeChanged', { 
-              detail: { themeName: theme.name } 
-            }));
-          }
-
-          // Handle Vernacular mode
-          if (theme.name === 'Vernacular' || theme.name === 'Vernacular (Dark)') {
-            dropTheme(index)
-            $underConstruction.show();
-            $contentWrapper.show();
-            $vistorCounter.show();
-          } else {
-            $heroSection.hide();
-            $underConstruction.hide();
-            $vistorCounter.hide();
-          }
-          
-          // Add current theme class to body
-          $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
-
-          // Update theme name display if it exists
-          if ($('#current-theme').length) {
-            $('#current-theme').text(theme.name);
-          }
-          
-          // Send Google Analytics event for theme change
-          if (typeof gtag === 'function') {
-            gtag('event', 'theme_change', {
-              'event_category': 'Theme Selection',
-              'event_label': theme.name,
-              'value': index
-            });
-          }
-          
-        } catch (e) {
-          console.error('applyTheme failed:', e);
-          
-          // Send Google Analytics event for theme application error
-          if (typeof gtag === 'function') {
-            gtag('event', 'error', {
-              'event_category': 'Theme Application',
-              'event_label': 'Theme Application Failed',
-              'value': current || 0,
-              'description': e.message || 'Unknown error'
-            });
-          }
-        }
+    },
+    {
+      name: "Brutalist",
+      css: `
+        
+    },
+    {
+      name: "Neo-Brutalism",
+      css: `
+        
+    },
+  {
+    name: "Dark Mode",
+    css: `
+      body {
+        font-family: 'SF Pro Text', 'Roboto', sans-serif;
+        background: #121212;
+        color: #e0e0e0;
       }
-
-      // Preload videos for cinematic mode
-      function preloadCinematicVideos() {
-        try {
-          console.log('Preloading cinematic videos...');
-          $video1.attr('src', videoSources[0]);
-          $video2.attr('src', videoSources[1]);
-          
-          $video1.on('loadeddata', function() {
-            console.log('Video 1 loaded successfully');
-          }).on('error', function(e) {
-            console.error('Error loading video 1:', e);
-          });
-          
-          $video2.on('loadeddata', function() {
-            console.log('Video 2 loaded successfully');
-          }).on('error', function(e) {
-            console.error('Error loading video 2:', e);
-          });
-        } catch (e) {
-          console.error('Failed to preload cinematic videos:', e);
-        }
+      .style-card {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 8px;
+        color: #e0e0e0;
       }
-
-      // Initialize cinematic video playback
-      function startCinematicVideos() {
-        try {
-          console.log('Starting cinematic video playback');
-          
-          // Start with video 1
-          $video1.css('opacity', '1');
-          $video1[0].play().catch(function(e) {
-            console.error('Failed to play video 1:', e);
-          });
-          
-          // Send Google Analytics event for video playback start
-          if (typeof gtag === 'function') {
-            gtag('event', 'video_playback', {
-              'event_category': 'Cinematic Theme',
-              'event_label': 'Started Video Playback',
-              'value': 1
-            });
-          }
-          
-          // Set up video switching
-          $video1.on('ended', function() {
-            console.log('Video 1 ended, switching to video 2');
-            $video1.css('opacity', '0');
-            $video2.css('opacity', '1');
-            $video2[0].play().catch(function(e) {
-              console.error('Failed to play video 2:', e);
-            });
-            
-            // Send Google Analytics event for video switch
-            if (typeof gtag === 'function') {
-              gtag('event', 'video_switch', {
-                'event_category': 'Cinematic Theme',
-                'event_label': 'Switched to Video 2',
-                'value': 2
-              });
-            }
-          });
-          
-          $video2.on('ended', function() {
-            console.log('Video 2 ended, switching to video 1');
-            $video2.css('opacity', '0');
-            $video1.css('opacity', '1');
-            $video1[0].currentTime = 0;
-            $video1[0].play().catch(function(e) {
-              console.error('Failed to replay video 1:', e);
-            });
-            
-            // Send Google Analytics event for video switch
-            if (typeof gtag === 'function') {
-              gtag('event', 'video_switch', {
-                'event_category': 'Cinematic Theme',
-                'event_label': 'Switched to Video 1',
-                'value': 1
-              });
-            }
-          });
-        } catch (e) {
-          console.error('Failed to start cinematic videos:', e);
-          
-          // Send Google Analytics event for video error
-          if (typeof gtag === 'function') {
-            gtag('event', 'video_error', {
-              'event_category': 'Cinematic Theme',
-              'event_label': e.message || 'Unknown error',
-              'value': 0
-            });
-          }
-        }
+      .style-title {
+        color: #bb86fc;
       }
+      .style-links a {
+        color: #03dac6;
+      }
+      body.dark-mode #css-editor {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border-color: #444;
+      }
+    `
+  },
+  {
+      name: "Neumorphism",
+      css: `
+        body {
+          font-family: 'Poppins', sans-serif;
+          background: #2d2d2d;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: #2d2d2d;
+          border-radius: 15px;
+          box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+          border: none;
+          padding: 20px;
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+          text-decoration: none;
+        }
+        #css-editor {
+          background: #2d2d2d;
+          border-radius: 15px;
+          box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+          border: none;
+          color: #e0e0e0;
+        }
+      `
+    },
+    {
+      name: "Glassmorphism",
+      css: `
+        body {
+          font-family: 'Segoe UI', 'Roboto', sans-serif;
+          background: linear-gradient(135deg, #121212, #2d2d2d);
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+        }
+        #css-editor {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #e0e0e0;
+        }
+      `
+    },
+    {
+      name: "Corporate Memphis",
+      css: `
+        body {
+          background-color: #121212;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background-color: #1e1e1e;
+          border-color: #333;
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+        }
+        #css-editor {
+          background-color: #2a2a2a;
+          color: #e0e0e0;
+          border-color: #444;
+        }
+      `
+  },
+  {
+    name: "Retro Web",
+    css: `
+      body {
+        font-family: 'Arial', sans-serif;
+        background: #ffde59;
+        color: black;
+      }
+      .style-card {
+        background: white;
+        border: 3px solid black;
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+  },
+  {
+    name: "Y2K Web",
+    css: `
+      body {
+        font-family: 'Arial', sans-serif;
+        background: #ffde59;
+        color: black;
+      }
+      .style-card {
+        background: white;
+        border: 3px solid black;
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+  },
+  {
+    name: "WebGL & 3D",
+    css: `
+      body {
+        font-family: 'Arial', sans-serif;
+        color:rgba(230, 230, 230, 0.9);
+      }
+      .style-card {
+        background:rgba(1, 36, 0, 0.9);
+        border: 3px solid rgba(0, 255, 21, 0.9);
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+  },
+  {
+    name: "Inclusive Design",
+    css: `
+      body {
+        font-family: 'Arial', sans-serif;
+        background: #ffde59;
+        color: black;
+      }
+      .style-card {
+        background: white;
+        border: 3px solid black;
+        border-radius: 0;
+        box-shadow: 5px 5px 0 black;
+        transform: rotate(-1deg);
+        transition: all 0.2s ease;
+      }
+    `
+  }
+  ];
 
-      // Preload cinematic videos on page load
-      preloadCinematicVideos();
+  // === Theme State Initialization ===
+  let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
-      // Initialize with first theme
-      applyTheme(0);
 
-      // Click handler for style cards
-      $('.style-card').on('click', function() {
-        var index = $(this).data('index');
-        applyTheme(index);
-      });
-
-      // Click handler for timeline elements in the Gantt chart
+    function formatCss(css) {
       try {
-        $('.mermaid').on('click', '.task, .taskText', function() {
-          var taskId = $(this).attr('id') || '';
-          
-          // Extract theme ID from task ID
-          var themeId = taskId.split('-')[0];
-          
-          // Find matching theme index
-          var themeIndex = themes.findIndex(function(theme) {
-            return theme.name.toLowerCase().replace(/\s+/g, '-') === themeId;
-          });
-          
-          if (themeIndex >= 0) {
-            applyTheme(themeIndex);
-            console.log('Theme applied from Gantt chart:', themes[themeIndex].name);
-            
-            // Send Google Analytics event for Gantt chart theme selection
-            if (typeof gtag === 'function') {
-              gtag('event', 'gantt_chart_selection', {
-                'event_category': 'Theme Navigation',
-                'event_label': themes[themeIndex].name,
-                'value': themeIndex
-              });
-            }
-          }
-        });
+        if (!css) return '/* No CSS defined */';
+        return css
+          .replace(/}/g, '};\n')
+          .replace(/{/g, ' {\n')
+          .replace(/;(?!\n)/g, ';\n')
+          .replace(/:(?! )/g, ': ')
+          .trim();
       } catch (e) {
-        console.error('Failed to set up Gantt chart click handlers:', e);
-        
-        // Send Google Analytics event for error
-        if (typeof gtag === 'function') {
-          gtag('event', 'error', {
-            'event_category': 'Error Handling',
-            'event_label': 'Gantt Chart Click Handler Error',
-            'value': 0,
-            'description': e.message || 'Unknown error'
-          });
-        }
+        console.error('CSS formatting error:', e);
+        return '/* CSS formatting error */';
       }
-
-      // Keyboard shortcut to cycle through themes
-      try {
-        $(document).on('keydown', function(e) {
-          // Ctrl + Shift + Space
-          if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
-            var nextIndex = (current + 1) % themes.length;
-            applyTheme(nextIndex);
-            console.log('Theme cycled to:', themes[nextIndex].name);
-            
-            // Send Google Analytics event
-            if (typeof gtag === 'function') {
-              gtag('event', 'keyboard_shortcut', {
-                'event_category': 'Theme Navigation',
-                'event_label': themes[nextIndex].name,
-                'value': nextIndex
-              });
-            }
-            
-            e.preventDefault();
-          }
-        });
-      } catch (e) {
-        console.error('Failed to set up keyboard shortcuts:', e);
-      }
-
-      // CSS Editor functionality
-      // Apply custom CSS when the editor content changes
-      $cssEditor.on('input', function() {
-        var customCss = $(this).val();
-        $themeStyle.html(customCss);
-        console.log('Custom CSS applied');
-      });
-
-      // Initialize Mermaid
-      if (typeof mermaid !== 'undefined') {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'default',
-          gantt: {
-            titleTopMargin: 25,
-            barHeight: 20,
-            barGap: 4,
-            topPadding: 50,
-            sidePadding: 50,
-            bottomPadding: 50
-          }
-        });
-      }
-
-      // Add event listener for dark mode toggle with enhanced analytics
-      $('#dark-mode-toggle').on('change', function() {
-        const isDarkMode = $(this).is(':checked');
-        const currentThemeName = themes[current].name;
-        
-        if (isDarkMode) {
-          // Find the dark version of the current theme
-          const darkThemeIndex = themes.findIndex(t => t.name === currentThemeName + " (Dark)");
-          if (darkThemeIndex >= 0) {
-            applyTheme(darkThemeIndex);
-          } else {
-            // If no specific dark theme, apply dark CSS to current theme
-            $('body').addClass('dark-mode');
-            $themeStyle.html(themes[current].darkCss);
-            $cssEditor.val(formatCss(themes[current].darkCss));
-          }
-        } else {
-          // If we're in a dark theme, find the light version
-          if (currentThemeName.includes("(Dark)")) {
-            const lightThemeName = currentThemeName.replace(" (Dark)", "");
-            const lightThemeIndex = themes.findIndex(t => t.name === lightThemeName);
-            if (lightThemeIndex >= 0) {
-              applyTheme(lightThemeIndex);
-            }
-          } else {
-            // Just apply light CSS to current theme
-            $('body').removeClass('dark-mode');
-            $themeStyle.html(themes[current].lightCss);
-            $cssEditor.val(formatCss(themes[current].lightCss));
-          }
-        }
-        
-        // Send Google Analytics event for dark mode toggle
-        if (typeof gtag === 'function') {
-          gtag('event', 'dark_mode_toggle', {
-            'event_category': 'Theme Settings',
-            'event_label': themes[current].name + (isDarkMode ? ' - Enabled' : ' - Disabled'),
-            'value': isDarkMode ? 1 : 0
-          });
-        }
-      });
-
-    } catch (e) {
-      console.error('Initialization failed:', e);
     }
+
+    function dropTheme() {
+      $('body').removeClass(function(i, c) {
+        return (c.match(/(^|\s)theme-\S+/g) || []).join(' ');
+      });
+    }
+
+    function getCurrentThemeSet() {
+      const isDark = $('#dark-mode-toggle').is(':checked');
+      return isDark ? darkThemes : lightThemes;
+    }
+
+// === Apply Theme by Index ===
+function applyTheme(index) {
+  const theme = themes[index];
+  if (!theme) {
+    console.error(`Invalid theme index: ${index}`);
+    return;
+  }
+
+  const cssVars = isDarkMode ? theme.darkCss : theme.lightCss;
+  if (!cssVars) {
+    console.error(`Missing ${isDarkMode ? 'dark' : 'light'} CSS for theme "${theme.name}"`);
+    return;
+  }
+
+  Object.entries(cssVars).forEach(([key, value]) => {
+    document.documentElement.style.setProperty(key, value);
   });
+
+  console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
+  localStorage.setItem('lastThemeIndex', index);
+}
+
+// === Dark Mode Toggle Handler ===
+$('#dark-mode-toggle').on('change', function () {
+  isDarkMode = this.checked;
+  localStorage.setItem('darkMode', isDarkMode);
+
+  const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
+  if (!isNaN(lastIndex)) {
+    applyTheme(lastIndex);
+  }
+
+  console.log(`Dark Mode toggled: ${isDarkMode}`);
+});
+
+// === Load Theme from Local Storage on Page Load ===
+$(document).ready(function () {
+  const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
+  if (!isNaN(lastIndex)) {
+    applyTheme(lastIndex);
+  }
+
+  $('#dark-mode-toggle').prop('checked', isDarkMode);
+});
+
+// === ID-Based Click Handler to Apply Theme ===
+$('[id]').on('click', function () {
+  const clickedId = this.id;
+  const index = themes.findIndex(theme => theme.id === clickedId);
+
+  if (index === -1) {
+    console.warn(`No theme found matching ID: "${clickedId}"`);
+    return;
+  }
+
+  console.log(`Clicked theme ID: "${clickedId}", applying index: ${index}`);
+  applyTheme(index);
+
+  // Google Analytics event
+  gtag('event', 'apply_theme_click', {
+    'event_category': 'Theme Interaction',
+    'event_label': themes[index].handle,
+    'value': index
+  });
+});
+
+
+
+    /*
+
+    function applyTheme(index) {
+      try {
+        const themes = getCurrentThemeSet();
+        if (index < 0 || index >= themes.length) throw new Error('Invalid theme index');
+
+        current = index;
+        const theme = themes[current];
+        const css = theme.css;
+
+        const prettyCss = prettier.format(css, {
+          parser: 'css',
+          plugins: prettierPlugins,
+          printWidth: 80,
+          tabWidth: 2,
+          useTabs: false
+        });
+
+        dropTheme();
+        $themeStyle.html(prettyCss);
+        $cssEditor.val(formatCss(prettyCss));
+
+        $('body').addClass('theme-' + theme.name.toLowerCase().replace(/\s+/g, '-'));
+        if ($('#current-theme').length) $('#current-theme').text(theme.name);
+
+        if (theme.name.includes('Cinematic')) {
+          $heroSection.show();
+          $contentWrapper.show();
+          startCinematicVideos();
+        } else {
+          $heroSection.hide();
+        }
+
+        if (theme.name.includes('Vernacular')) {
+          $underConstruction.show();
+          $visitorCounter.show();
+        } else {
+          $underConstruction.hide();
+          $visitorCounter.hide();
+        }
+
+        console.log('Theme applied:', theme.name);
+      } catch (e) {
+        console.error('Failed to apply theme:', e);
+      }
+    }
+*/
+    function preloadAndStartVideos() {
+      try {
+        $video1.attr('src', videoSources[0]);
+        $video2.attr('src', videoSources[1]);
+
+        let loadedVideos = 0;
+        const totalVideos = 2;
+
+        const checkAndStart = () => {
+          if (loadedVideos === totalVideos) {
+            startCinematicVideos();
+          }
+        };
+
+        $video1.on('loadeddata', () => {
+          console.log('Video 1 loaded');
+          loadedVideos++;
+          checkAndStart();
+        }).on('error', e => {
+          console.error('Error loading video 1:', e);
+        });
+
+        $video2.on('loadeddata', () => {
+          console.log('Video 2 loaded');
+          loadedVideos++;
+          checkAndStart();
+        }).on('error', e => {
+          console.error('Error loading video 2:', e);
+        });
+      } catch (e) {
+        console.error('Error during video preload:', e);
+      }
+    }
+
+    function startCinematicVideos() {
+      try {
+        $video1.css('opacity', '1');
+        $video2.css('opacity', '0');
+
+        $video1[0].play().catch(e => console.error('Play error video1:', e));
+
+        $video1.on('ended', () => {
+          $video1.css('opacity', '0');
+          $video2.css('opacity', '1');
+          $video2[0].play().catch(e => console.error('Play error video2:', e));
+        });
+
+        $video2.on('ended', () => {
+          $video2.css('opacity', '0');
+          $video1.css('opacity', '1');
+          $video1[0].currentTime = 0;
+          $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
+        });
+      } catch (e) {
+        console.error('Cinematic video error:', e);
+      }
+    }
+
+    applyTheme(0);
+
+$(document).on('click', '[id]', function () {
+  const elementId = this.id;
+  if (!elementId) {
+    console.warn('Clicked element has no ID.');
+    gtag('event', 'apply_theme_click_error', {
+      event_category: 'Mermaid Interaction',
+      event_label: 'Theme Failed: Missing ID',
+      non_interaction: true
+    });
+    return;
+  }
+/*
+  const themes = getCurrentThemeSet();
+
+  // Attempt exact ID-to-name match
+  let index = themes.findIndex(theme =>
+    theme.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').startsWith(elementId.toLowerCase())
+  );
+
+  // Try fallback: allow match by theme name *in* elementId (e.g., "vernacular-text")
+  if (index === -1) {
+    index = themes.findIndex(theme =>
+      elementId.toLowerCase().includes(theme.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
+    );
+  }
+
+  if (index === -1) {
+    console.warn(`No theme found matching ID: "${elementId}"`);
+    gtag('event', 'apply_theme_click_error', {
+      event_category: 'Mermaid Interaction',
+      event_label: `Theme Failed: No theme match for "${elementId}"`,
+      non_interaction: true
+    });
+    return;
+  }
+
+  console.log(`Applying theme by ID: "${elementId}" matched to index: ${index}`);
+
+  try {
+    applyTheme(index);
+    gtag('event', 'apply_theme_click', {
+      event_category: 'Mermaid Interaction',
+      event_label: `Theme Applied: ${elementId}`,
+      value: index
+    });
+  } catch (err) {
+    console.error(`Error applying theme for ID "${elementId}" at index ${index}:`, err);
+    gtag('event', 'apply_theme_click_error', {
+      event_category: 'Mermaid Interaction',
+      event_label: `Theme Failed: Exception for "${elementId}"`,
+      non_interaction: true
+    });
+  }
+});
+*/
+    $('.style-card').on('click', function() {
+      const index = $(this).data('index');
+      applyTheme(index);
+    });
+/*
+// Update: Add dark mode toggle functionality using lightThemes and darkThemes arrays
+$('#dark-mode-toggle').on('change', function () {
+  try {
+    const isDarkMode = $(this).is(':checked');
+    localStorage.setItem('darkModeEnabled', isDarkMode);
+
+    // Apply the corresponding theme variant (light or dark)
+    const selectedTheme = isDarkMode ? darkThemes[current] : lightThemes[current];
+    if (!selectedTheme || !selectedTheme.css) {
+      console.warn('No theme CSS found for current index in selected mode.');
+      return;
+    }
+
+    $('#theme-style').text(selectedTheme.css);
+    $('#css-editor').val(formatCss(selectedTheme.css));
+
+    console.log(`Dark mode ${isDarkMode ? 'enabled' : 'disabled'}. Applied theme: ${selectedTheme.name}`);
+
+    gtag('event', 'dark_mode_toggle', {
+      'event_category': 'UI Interaction',
+      'event_label': selectedTheme.name,
+      'value': isDarkMode ? 1 : 0
+    });
+  } catch (error) {
+    console.error('Error applying theme for dark mode toggle:', error);
+    gtag('event', 'dark_mode_toggle_error', {
+      'event_category': 'UI Interaction',
+      'event_label': 'Theme Switch Failure',
+      'non_interaction': true
+    });
+  }
+});
+
+// On page load, restore dark mode state from localStorage
+$(document).ready(function () {
+  const darkModeEnabled = localStorage.getItem('darkModeEnabled') === 'true';
+  $('#dark-mode-toggle').prop('checked', darkModeEnabled);
+
+  const selectedTheme = darkModeEnabled ? darkThemes[current] : lightThemes[current];
+  if (selectedTheme && selectedTheme.css) {
+    $('#theme-style').text(selectedTheme.css);
+    $('#css-editor').val(formatCss(selectedTheme.css));
+    console.log(`Restored ${darkModeEnabled ? 'dark' : 'light'} mode with theme: ${selectedTheme.name}`);
+  }
+});
+*/
+    $cssEditor.on('input', function() {
+      const customCss = $(this).val();
+      $themeStyle.html(customCss);
+      console.log('Custom CSS applied from editor');
+    });
+
+    $(document).on('keydown', function(e) {
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
+        const themes = getCurrentThemeSet();
+        const nextIndex = (current + 1) % themes.length;
+        applyTheme(nextIndex);
+        e.preventDefault();
+      }
+    });
+
+  
+});
   </script>
 </body>
 </html>

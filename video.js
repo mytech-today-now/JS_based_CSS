@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error(`[${this.setId}] Video loading failed:`, error);
                 // Try again with a delay
-                setTimeout(() => this.loadVideos(), 1000);
+                setTimeout(() => this.loadVideos(), 3000);
                 return false;
             }
         }
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Add error retry mechanism
                 let retryCount = 0;
-                const maxRetries = 3;
+                const maxRetries = 5;
                 
                 video.addEventListener('ended', () => {
                     if (!this.state.isTransitioning) {
