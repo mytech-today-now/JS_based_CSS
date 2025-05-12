@@ -7,582 +7,580 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR81E31MX4"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-YR81E31MX4');
+      window.dataLayer = window.dataLayer || []
+      
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-YR81E31MX4')
     </script>
     <style>
-    :root {
-      /* Customize these to change stripe look */
-      --stripe-color: rgba(252, 255, 75, 0.85);
-      /* color of the stripe */
-      --dark-stripe-color: rgba(64, 60, 0, 0.95);
-      /* color of the stripe */
-      --stripe-width: 25px;
-      /* thickness of each stripe */
-      --stripe-spacing: 50px;
-      /* distance from start of one stripe to the next */
-      --stripe-angle: 135deg;
-      /* direction of the stripes */
-      --opacity: 0.8;
-      /* opacity of the overlay */
-      --bg-color: rgba(255, 255, 255, 0.9);
-      /* background color of the overlay */
-      --inverse-bg-color: rgb(0, 0, 0);
-      /* background color of the inverse overlay */
-      --padding: 1rem;
-      /* padding of the overlay */
-      --blur: 10px;
-      /* blur effect */
-      --rounded: 10px;
-      /* border radius of the overlay */
-      --accent-color: rgba(0, 122, 204, 0.9);
-      /* color of the accent */
-      --inverse-accent-color: rgba(164, 163, 228, 0.9);
-      /* color of the inverse accent */
-      --text-color: rgba(51, 51, 51, 0.9);
-      /* color of the text */
-      --inverse-text-color: rgba(255, 255, 255, 0.9);
-      /* color of the inverse text */
-    }
-
-    /* Base styles */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-    }
-
-    /* Ensure site header stays at the very top */
-    #site-header {
-      position: sticky;
-      z-index: 100;
-      /* Ensure header stays above hero section */
-    }
-
-    .intro {
-      display: flex;
-      flex-direction: column;
-      padding: 2rem;
-      background-color: var(--bg-color);
-      backdrop-filter: var(--blur);
-      color: var(--text-color);
-      text-align: center;
-      margin: 0 auto;
-      max-width: 80%;
-      border-radius: var(--rounded);
-      box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
-      margin-bottom: 2rem;
-    }
-
-    .into h3 {
-      align-items: center;
-      justify-content: center;
-    }
-
-    .intro p {
-      align-items: left;
-      justify-content: center;
-
-    }
-
-    #outro {
-      padding-top: 5rem;
-    }
-
-    .flex-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .grid-item {
-      flex: 1 1 300px;
-      border: 1px solid var(--accent-color);
-      padding: 1rem;
-      margin: 0.5rem 0;
-      box-sizing: border-box;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      radius: var(--rounded);
-    }
-
-    .grid-item p {
-      margin: 0.5rem;
-    }
-
-    /* Hero Section and Video Background */
-    .hero-section {
-      position: fixed;
-      /* Change from relative to fixed */
-      top: 0;
-      /* Add top positioning */
-      left: 0;
-      /* Add left positioning */
-      width: 100%;
-      /* Simplify width */
-      height: 100vh;
-      /* Keep full viewport height */
-      z-index: -1;
-      /* Ensure it stays behind content */
-    }
-
-    .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    /* Video Container Styling */
-    #traffic_videos {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      /* Fallback color */
-    }
-
-    /* Individual Video Elements */
-    [id$="_videos_1"],
-    [id$="_videos_2"] {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* Maintain aspect ratio while covering */
-      transition: opacity 1s ease-in-out;
-      opacity: 0;
-      display: none;
-    }
-
-    /* Video Overlay */
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.2);
-      z-index: 1;
-    }
-
-    /* Content Wrapper Adjustments */
-    .content-wrapper {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--padding);
-      z-index: 2;
-      margin: 0;
-      /* Remove any margins */
-    }
-
-    .content-wrapper h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      align-items: center;
-      justify-content: center;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .content-wrapper p {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      align-items: left;
-      justify-content: left;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Header Content */
-    .header-content {
-      flex: 1 1 33%;
-      padding: 2rem;
-      border-radius: var(--rounded);
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-      backdrop-filter: var(--blur);
-      opacity: var(--opacity);
-      max-height: 35%;
-      max-width: 35%;
-    }
-
-    .header-content h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .header-content p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
-
-    .era-timeline {
-      top: 0;
-      left: 0;
-      width: 80%;
-      height: 80vh;
-      margin: auto;
-      padding: 2rem;
-      overflow: hidden;
-      /* display: none; /* Hidden by default, shown in cinematic mode */
-    }
-
-    article.style-card {
-      flex: 1 0 300px;
-      border: 2px solid #ccc;
-      border-radius: 6px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      background: #fff;
-      transition: transform .2s;
-      max-width: calc(33.333% - 20px);
-    }
-
-    @media (max-width: 992px) {
-      article.style-card {
-        max-width: calc(50% - 20px);
+      :root {
+        /* Customize these to change stripe look */
+        --stripe-color: rgba(252, 255, 75, 0.85);
+        /* color of the stripe */
+        --dark-stripe-color: rgba(64, 60, 0, 0.95);
+        /* color of the stripe */
+        --stripe-width: 25px;
+        /* thickness of each stripe */
+        --stripe-spacing: 50px;
+        /* distance from start of one stripe to the next */
+        --stripe-angle: 135deg;
+        /* direction of the stripes */
+        --opacity: 0.8;
+        /* opacity of the overlay */
+        --bg-color: rgba(255, 255, 255, 0.9);
+        /* background color of the overlay */
+        --inverse-bg-color: rgb(0, 0, 0);
+        /* background color of the inverse overlay */
+        --padding: 1rem;
+        /* padding of the overlay */
+        --blur: 10px;
+        /* blur effect */
+        --rounded: 10px;
+        /* border radius of the overlay */
+        --accent-color: rgba(0, 122, 204, 0.9);
+        /* color of the accent */
+        --inverse-accent-color: rgba(164, 163, 228, 0.9);
+        /* color of the inverse accent */
+        --text-color: rgba(51, 51, 51, 0.9);
+        /* color of the text */
+        --inverse-text-color: rgba(255, 255, 255, 0.9);
+        /* color of the inverse text */
       }
-    }
-
-    @media (max-width: 576px) {
-      article.style-card {
-        max-width: 100%;
+      
+      /* Base styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
       }
-    }
-
-    article.style-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .style-title {
-      font-size: 1.25rem;
-      cursor: pointer;
-      color: #007acc;
-      display: inline-block;
-      margin-bottom: .25rem;
-    }
-
-    .style-era {
-      font-style: italic;
-      margin-bottom: .5rem;
-    }
-
-    .style-description {
-      margin-bottom: .5rem;
-    }
-
-    .style-links a {
-      margin-right: .5rem;
-      color: #007acc;
-    }
-
-    /* Hide legacy extras */
-    .extra-under,
-    .extra-counter,
-    .extra-flash-intro,
-    #main-table,
-    .frame-nav,
-    .frame-content,
-    .beta-badge,
-    .card-texture,
-    .grid-overlay {
-      display: none !important;
-    }
-
-    /* Gantt chart interactive styles */
-    .mermaid .task,
-    .mermaid text.taskText,
-    .mermaid text.sectionTitle {
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .mermaid .task:hover {
-      opacity: 0.8;
-      transform: translateY(-2px);
-    }
-
-    .mermaid {
-      background-color: var(--bg-color);
-      backdrop-filter: var(--blur);
-    }
-
-    .mermaid text.taskText:hover {
-      font-weight: bold;
-    }
-
-    .mermaid text.sectionTitle:hover {
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    /* Style cards interactive styles */
-    .style-card {
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .style-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    /* CSS editor styles */
-    #css-editor,
-    #html-editor {
-      font-family: 'Courier New', monospace;
-      line-height: 1.5;
-      padding: 10px;
-      border-radius: 4px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-      resize: vertical;
-
-    }
-
-    .css-editor {
-      margin: auto;
-      max-width: 800vw;
-      min-width: 500px;
-      min-height: 150px;
-      text-align: center;
-      display: block;
-    }
-
-    .css-editor {
-      margin: auto;
-      max-width: 800vw;
-      min-width: 500px;
-      min-height: 150px;
-      text-align: center;
-      display: block;
-    }
-
-    .html-editor {
-      margin: auto;
-      max-width: calc(100% - 20px);
-      min-width: 500px;
-      min-height: 500px;
-      text-align: center;
-      display: block;
-    }
-
-    /* Tooltip to indicate clickable elements */
-    [data-tooltip]:before {
-      content: attr(data-tooltip);
-      position: absolute;
-      opacity: 0;
-      transition: all 0.15s ease;
-      padding: 5px 10px;
-      color: #fff;
-      border-radius: 4px;
-      background: rgba(0, 0, 0, 0.8);
-      pointer-events: none;
-      z-index: 10;
-      white-space: nowrap;
-      transform: translateY(10px);
-    }
-
-    [data-tooltip]:hover:before {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Add tooltips to Gantt elements */
-    .mermaid .task,
-    .mermaid text.taskText {
-      position: relative;
-    }
-
-    /* Container for all ads */
-    .ad-group {
-      width: 80%;
-      margin: 2rem auto;
-      padding: 1rem;
-      border-radius: var(--rounded);
-      background-color: var(--content-bg);
-      box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
-    }
-
-    /* Each ad line */
-    .ad-group .ad-line {
-      margin: 0.75rem 0;
-      padding: 0.75rem 1rem;
-      background-color: var(--bg-color);
-
-      transition: transform 0.3s ease;
-      border: 1px solid var(--accent-color);
-    }
-
-    /* Hover effect for ad lines */
-    .ad-group .ad-line:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 6px var(--shadow-dark);
-    }
-
-    /* Link styling */
-    .ad-group .ad-line a {
-      display: block;
-      color: var(--text-color);
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    /* Link hover state */
-    .ad-group .ad-line a:hover {
-      color: var(--text-color);
-      text-decoration: underline;
-    }
-
-    /* ===== Main Container & Layout ===== */
-    #main-core {
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    /* Ensure main content scrolls above video */
-    main {
-      position: relative;
-      max-width: 85%;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      /* Remove any padding */
-      margin: auto;
-      /* Remove any margins */
-      top: 5vh;
-      max-width: 1200px;
-      /* Adjust this value as needed */
-      display: flex;
-      flex-wrap: wrap !important;
-      gap: 20px;
-    }
-
-    #under-construction {
-      position: absolute;
-      margin: 2rem;
-      width: 100%;
-      height: 100%;
-      left: 40%
-    }
-
-    .counter {
-      display: flex;
-      flex: row wrap;
-      padding: 2rem;
-    }
+      
+      /* Ensure site header stays at the very top */
+      #site-header {
+        position: sticky;
+        z-index: 100;
+        /* Ensure header stays above hero section */
+      }
+      
+      .intro {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        background-color: var(--bg-color);
+        backdrop-filter: var(--blur);
+        color: var(--text-color);
+        text-align: center;
+        margin: 0 auto;
+        max-width: 80%;
+        border-radius: var(--rounded);
+        box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
+        margin-bottom: 2rem;
+      }
+      
+      .into h3 {
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .intro p {
+        align-items: left;
+        justify-content: center;
+      }
+      
+      #outro {
+        padding-top: 5rem;
+      }
+      
+      .flex-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .grid-item {
+        flex: 1 1 300px;
+        border: 1px solid var(--accent-color);
+        padding: 1rem;
+        margin: 0.5rem 0;
+        box-sizing: border-box;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        radius: var(--rounded);
+      }
+      
+      .grid-item p {
+        margin: 0.5rem;
+      }
+      
+      /* Hero Section and Video Background */
+      .hero-section {
+        position: fixed;
+        /* Change from relative to fixed */
+        top: 0;
+        /* Add top positioning */
+        left: 0;
+        /* Add left positioning */
+        width: 100%;
+        /* Simplify width */
+        height: 100vh;
+        /* Keep full viewport height */
+        z-index: -1;
+        /* Ensure it stays behind content */
+      }
+      
+      .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      
+      /* Video Container Styling */
+      #traffic_videos {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        /* Fallback color */
+      }
+      
+      /* Individual Video Elements */
+      [id$='_videos_1'],
+      [id$='_videos_2'] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Maintain aspect ratio while covering */
+        transition: opacity 1s ease-in-out;
+        opacity: 0;
+        display: none;
+      }
+      
+      /* Video Overlay */
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+      
+      /* Content Wrapper Adjustments */
+      .content-wrapper {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--padding);
+        z-index: 2;
+        margin: 0;
+        /* Remove any margins */
+      }
+      
+      .content-wrapper h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        align-items: center;
+        justify-content: center;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      
+      .content-wrapper p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        align-items: left;
+        justify-content: left;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      
+      /* Header Content */
+      .header-content {
+        flex: 1 1 33%;
+        padding: 2rem;
+        border-radius: var(--rounded);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        backdrop-filter: var(--blur);
+        opacity: var(--opacity);
+        max-height: 35%;
+        max-width: 35%;
+      }
+      
+      .header-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .header-content p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+      }
+      
+      .era-timeline {
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 80vh;
+        margin: auto;
+        padding: 2rem;
+        overflow: hidden;
+        /* display: none; /* Hidden by default, shown in cinematic mode */
+      }
+      
+      article.style-card {
+        flex: 1 0 300px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: #fff;
+        transition: transform 0.2s;
+        max-width: calc(33.333% - 20px);
+      }
+      
+      @media (max-width: 992px) {
+        article.style-card {
+          max-width: calc(50% - 20px);
+        }
+      }
+      
+      @media (max-width: 576px) {
+        article.style-card {
+          max-width: 100%;
+        }
+      }
+      
+      article.style-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .style-title {
+        font-size: 1.25rem;
+        cursor: pointer;
+        color: #007acc;
+        display: inline-block;
+        margin-bottom: 0.25rem;
+      }
+      
+      .style-era {
+        font-style: italic;
+        margin-bottom: 0.5rem;
+      }
+      
+      .style-description {
+        margin-bottom: 0.5rem;
+      }
+      
+      .style-links a {
+        margin-right: 0.5rem;
+        color: #007acc;
+      }
+      
+      /* Hide legacy extras */
+      .extra-under,
+      .extra-counter,
+      .extra-flash-intro,
+      #main-table,
+      .frame-nav,
+      .frame-content,
+      .beta-badge,
+      .card-texture,
+      .grid-overlay {
+        display: none !important;
+      }
+      
+      /* Gantt chart interactive styles */
+      .mermaid .task,
+      .mermaid text.taskText,
+      .mermaid text.sectionTitle {
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
+      .mermaid .task:hover {
+        opacity: 0.8;
+        transform: translateY(-2px);
+      }
+      
+      .mermaid {
+        background-color: var(--bg-color);
+        backdrop-filter: var(--blur);
+      }
+      
+      .mermaid text.taskText:hover {
+        font-weight: bold;
+      }
+      
+      .mermaid text.sectionTitle:hover {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      
+      /* Style cards interactive styles */
+      .style-card {
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      
+      .style-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* CSS editor styles */
+      #css-editor,
+      #html-editor {
+        font-family: 'Courier New', monospace;
+        line-height: 1.5;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        resize: vertical;
+      }
+      
+      .css-editor {
+        margin: auto;
+        max-width: 800vw;
+        min-width: 500px;
+        min-height: 150px;
+        text-align: center;
+        display: block;
+      }
+      
+      .css-editor {
+        margin: auto;
+        max-width: 800vw;
+        min-width: 500px;
+        min-height: 150px;
+        text-align: center;
+        display: block;
+      }
+      
+      .html-editor {
+        margin: auto;
+        max-width: calc(100% - 20px);
+        min-width: 500px;
+        min-height: 500px;
+        text-align: center;
+        display: block;
+      }
+      
+      /* Tooltip to indicate clickable elements */
+      [data-tooltip]:before {
+        content: attr(data-tooltip);
+        position: absolute;
+        opacity: 0;
+        transition: all 0.15s ease;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.8);
+        pointer-events: none;
+        z-index: 10;
+        white-space: nowrap;
+        transform: translateY(10px);
+      }
+      
+      [data-tooltip]:hover:before {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Add tooltips to Gantt elements */
+      .mermaid .task,
+      .mermaid text.taskText {
+        position: relative;
+      }
+      
+      /* Container for all ads */
+      .ad-group {
+        width: 80%;
+        margin: 2rem auto;
+        padding: 1rem;
+        border-radius: var(--rounded);
+        background-color: var(--content-bg);
+        box-shadow: 0 4px 8px var(--shadow-dark), 0 2px 4px var(--shadow-light);
+      }
+      
+      /* Each ad line */
+      .ad-group .ad-line {
+        margin: 0.75rem 0;
+        padding: 0.75rem 1rem;
+        background-color: var(--bg-color);
+      
+        transition: transform 0.3s ease;
+        border: 1px solid var(--accent-color);
+      }
+      
+      /* Hover effect for ad lines */
+      .ad-group .ad-line:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px var(--shadow-dark);
+      }
+      
+      /* Link styling */
+      .ad-group .ad-line a {
+        display: block;
+        color: var(--text-color);
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      
+      /* Link hover state */
+      .ad-group .ad-line a:hover {
+        color: var(--text-color);
+        text-decoration: underline;
+      }
+      
+      /* ===== Main Container & Layout ===== */
+      #main-core {
+        max-width: 1300px;
+        margin: 0 auto;
+      }
+      
+      /* Ensure main content scrolls above video */
+      main {
+        position: relative;
+        max-width: 85%;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        /* Remove any padding */
+        margin: auto;
+        /* Remove any margins */
+        top: 5vh;
+        max-width: 1200px;
+        /* Adjust this value as needed */
+        display: flex;
+        flex-wrap: wrap !important;
+        gap: 20px;
+      }
+      
+      #under-construction {
+        position: absolute;
+        margin: 2rem;
+        width: 100%;
+        height: 100%;
+        left: 40%;
+      }
+      
+      .counter {
+        display: flex;
+        flex: row wrap;
+        padding: 2rem;
+      }
     </style>
     <style>
-    /* Dark mode toggle styles */
-    .dark-mode-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 8px 12px;
-      border-radius: 20px;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .current-style-display {
-      position: fixed;
-      top: 70px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 8px 12px;
-      border-radius: 20px;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      color: white;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    #current-theme {
-      margin-left: 5px;
-      color: #2196F3;
-    }
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-      margin-right: 10px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-    }
-
-    input:checked+.slider {
-      background-color: #2196F3;
-    }
-
-    input:checked+.slider:before {
-      transform: translateX(26px);
-    }
-
-    .slider.round {
-      border-radius: 34px;
-    }
-
-    .slider.round:before {
-      border-radius: 50%;
-    }
-
-    .dark-mode-toggle span {
-      color: white;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
+      /* Dark mode toggle styles */
+      .dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 8px 12px;
+        border-radius: 20px;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+      
+      .current-style-display {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 8px 12px;
+        border-radius: 20px;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      
+      #current-theme {
+        margin-left: 5px;
+        color: #2196f3;
+      }
+      
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        margin-right: 10px;
+      }
+      
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+      }
+      
+      .slider:before {
+        position: absolute;
+        content: '';
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+      }
+      
+      input:checked + .slider {
+        background-color: #2196f3;
+      }
+      
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+      
+      .slider.round {
+        border-radius: 34px;
+      }
+      
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      
+      .dark-mode-toggle span {
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
     </style>
-
 
     <!-- Dynamic theme CSS will be injected here -->
     <style id="theme-style"></style>
@@ -607,72 +605,76 @@
     <div id="theme-style"></div>
     <div class="dark-mode-toggle">
       <label class="switch">
-        <input type="checkbox" id="dark-mode-toggle">
+        <input type="checkbox" id="dark-mode-toggle" />
         <span class="slider round"></span>
       </label>
       <span>Dark Mode</span>
     </div>
     <div class="current-style-display">
-      <span>Style: </span>
+      <span>Style:</span>
       <span id="current-theme">Default</span>
     </div>
     <div id="under-construction">
-      <img src="https://gifgifs.com/animations/webdesign-elements/under-construction/webpage_construction.gif" alt="Under Construction">
+      <img src="https://gifgifs.com/animations/webdesign-elements/under-construction/webpage_construction.gif" alt="Under Construction" />
     </div>
     <div class="content-wrapper">
       <div class="header-content">
         <h1>Interactive Web Design Styles Showcase</h1>
         <p>From then to now.</p>
-        <p><small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small></p>
+        <p>
+          <small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small>
+        </p>
       </div>
     </div>
 
     <section class="intro">
       <h3><strong>Overview</strong></h3>
-      <p>The Interactive Web Design Styles Showcase is designed to guide you through the evolution of web design—from the playful, “Under Construction” days of GeoCities to the sleek, glass-blur panels of Glassmorphism. At its core, the page presents a chronological Gantt-style timeline of major design movements and pairs each era with a corresponding “style card” that highlights its defining characteristics, key dates, and reference links. You can explore each style by clicking its title or by pressing <strong>Ctrl + Shift + Space</strong>, which cycles through the various themes in sequence. Below the timeline, a live CSS editor displays the exact rules being applied, so you can see how each design aesthetic is constructed in real time.</p>
+      <p>
+        The Interactive Web Design Styles Showcase is designed to guide you through the evolution of web design—from the playful, “Under Construction” days of GeoCities to the sleek, glass-blur panels of Glassmorphism. At its core, the page presents a chronological Gantt-style timeline of major design movements and pairs each era with a corresponding “style card” that highlights its defining characteristics, key dates, and reference links. You can explore each style by clicking its title or by pressing <strong>Ctrl + Shift + Space</strong>, which cycles through the various themes in sequence. Below the timeline, a live CSS editor displays the exact rules being applied, so you can see how each design aesthetic is constructed in real time.
+      </p>
     </section>
 
     <nav aria-label="Jump to era" class="era-timeline">
       <h3>Web Design Evolution Timeline</h3>
       <div class="mermaid-wrapper">
         <div class="mermaid" id="era-timeline">
-          gantt
-          title Web Design History
-          dateFormat YYYY
-          axisFormat %Y
-          todayMarker off
+gantt
+  title Web Design History
+  dateFormat YYYY
+  axisFormat %Y
+  todayMarker off
 
-          section 1990s
-          Vernacular / Geocities :vernacular, 1991, 1995
-          Table-Based Design :table-frames, 1993, 1998
-          Framesets :framesets, 1993, 1998
-          Flash-Based Design :flash, 1996, 2008
+  section 1990s
+    Vernacular / Geocities    :vernacular, 1991, 1995
+    Table-Based Design        :table-frames, 1993, 1998
+    Framesets                 :framesets, 1993, 1998
+    Flash-Based Design        :flash, 1996, 2008
 
-          section 2000s
-          Web 2.0 Glossy :web2, 2004, 2013
-          Skeuomorphic :skeuomorphic, 2004, 2013
-          Swiss Style :swiss, 2000, 2025
-          Minimalist :minimalist, 2000, 2025
+  section 2000s
+    Web 2.0 Glossy            :web2, 2004, 2013
+    Skeuomorphic              :skeuomorphic, 2004, 2013
+    Swiss Style               :swiss, 2000, 2025
+    Minimalist                :minimalist, 2000, 2025
 
-          section 2010s
-          Responsive Design :responsive, 2010, 2025
-          Flat Design :flat-design, 2010, 2025
-          Parallax :parallax, 2012, 2016
-          Single-Page App :spa, 2012, 2016
-          Progressive Web App :pwa, 2015, 2025
-          Cinematic :cinematic, 2010, 2019
-          Brutalist :brutalist, 2015, 2025
-          Neo-Brutalism :neo-brutalism, 2015, 2025
-          Corporate Memphis :corporate-memphis, 2018, 2025
-          WebGL & 3D :webgl-3d, 2015, 2025
+  section 2010s
+    Responsive Design         :responsive, 2010, 2025
+    Flat Design               :flat-design, 2010, 2025
+    Parallax                  :parallax, 2012, 2016
+    Single-Page App           :spa, 2012, 2016
+    Progressive Web App       :pwa, 2015, 2025
+    Cinematic                 :cinematic, 2010, 2019
+    Brutalist                 :brutalist, 2015, 2025
+    Neo-Brutalism             :neo-brutalism, 2015, 2025
+    Corporate Memphis         :corporate-memphis, 2018, 2025
+    WebGL & 3D                :webgl-3d, 2015, 2025
 
-          section 2020s
-          Dark Mode :dark-mode, 2020, 2025
-          Neumorphism :neumorphism, 2020, 2021
-          Glassmorphism :glassmorphism, 2020, 2021
-          Retro Web :retro-web, 2020, 2025
-          Y2K Web :y2k-web, 2020, 2025
-          Inclusive Design :inclusive-design, 2010, 2025
+  section 2020s
+    Dark Mode                 :dark-mode, 2020, 2025
+    Neumorphism               :neumorphism, 2020, 2021
+    Glassmorphism             :glassmorphism, 2020, 2021
+    Retro Web                 :retro-web, 2020, 2025
+    Y2K Web                   :y2k-web, 2020, 2025
+    Inclusive Design          :inclusive-design, 2010, 2025
         </div>
       </div>
     </nav>
@@ -682,316 +684,261 @@
       <textarea id="css-editor" editable></textarea>
     </section>
 
-
-
     <main>
       <!-- All 26 style cards -->
-      <article class="style-card" data-index="0" id="vernacular">
+      <article class="style-card" data-index="1" id="vernacular">
         <h3 class="style-title">Vernacular / Geocities</h3>
         <p class="style-era">1991–1995</p>
-        <p class="style-description">
-          Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs, and visitor counters.
-        </p>
+        <p class="style-description">Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs, and visitor counters.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/GeoCities" target="_blank">GeoCities</a>
           <a href="https://en.wikipedia.org/wiki/Under_Construction" target="_blank">Under Construction</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="1" id="table-frames">
+      <article class="style-card" data-index="2" id="table-frames">
         <h3 class="style-title">Table-Based Design</h3>
         <p class="style-era">1993–1998</p>
-        <p class="style-description">
-          Using HTML tables to approximate multi-column layouts before CSS adoption.
-        </p>
+        <p class="style-description">Using HTML tables to approximate multi-column layouts before CSS adoption.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/HTML_table" target="_blank">HTML Tables</a>
           <a href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="2" id="framesets">
+      <article class="style-card" data-index="3" id="framesets">
         <h3 class="style-title">Framesets</h3>
         <p class="style-era">1993–1998</p>
-        <p class="style-description">
-          Splitting the browser window into independent panes—navigation, content, etc.
-        </p>
+        <p class="style-description">Splitting the browser window into independent panes—navigation, content, etc.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/HTML_frame" target="_blank">HTML Frames</a>
           <a href="https://developer.mozilla.org/docs/Web/HTML/Element/frame" target="_blank">MDN Frames</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="3" id="flash">
+      <article class="style-card" data-index="4" id="flash">
         <h3 class="style-title">Flash-Based Design</h3>
         <p class="style-era">1996–2008</p>
-        <p class="style-description">
-          Rich animations, interactive menus, and full-screen intros created with Macromedia Flash.
-        </p>
+        <p class="style-description">Rich animations, interactive menus, and full-screen intros created with Macromedia Flash.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Adobe_Flash" target="_blank">Adobe Flash</a>
           <a href="https://en.wikipedia.org/wiki/Adobe_Animate" target="_blank">Adobe Animate</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="4" id="web2">
+      <article class="style-card" data-index="5" id="web2">
         <h3 class="style-title">Web 2.0 Glossy</h3>
         <p class="style-era">2004–2013</p>
-        <p class="style-description">
-          Glossy buttons, drop shadows, reflections, stock-photo headers, and “beta” tags.
-        </p>
+        <p class="style-description">Glossy buttons, drop shadows, reflections, stock-photo headers, and “beta” tags.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Web_2.0" target="_blank">Web 2.0</a>
           <a href="https://www.wired.com/" target="_blank">WIRED</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="5" id="skeuomorphic">
+      <article class="style-card" data-index="6" id="skeuomorphic">
         <h3 class="style-title">Skeuomorphic</h3>
         <p class="style-era">2004–2013</p>
-        <p class="style-description">
-          Interfaces mimicking real-world textures (leather, paper, metal).
-        </p>
+        <p class="style-description">Interfaces mimicking real-world textures (leather, paper, metal).</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Skeuomorph" target="_blank">Skeuomorph</a>
           <a href="https://en.wikipedia.org/wiki/Apple_Human_Interface_Guidelines#Skeuomorphism" target="_blank">iOS Skeuomorphism</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="6" id="swiss">
+      <article class="style-card" data-index="7" id="swiss">
         <h3 class="style-title">Swiss Style</h3>
         <p class="style-era">2000s–present</p>
-        <p class="style-description">
-          Grid-based layouts, strong typography, and generous whitespace.
-        </p>
+        <p class="style-description">Grid-based layouts, strong typography, and generous whitespace.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Swiss_Style" target="_blank">International Typographic Style</a>
           <a href="https://en.wikipedia.org/wiki/Helvetica" target="_blank">Helvetica</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="7" id="minimalist">
+      <article class="style-card" data-index="8" id="minimalist">
         <h3 class="style-title">Minimalist</h3>
         <p class="style-era">2000s–present</p>
-        <p class="style-description">
-          Stripping interfaces to essentials—white space, high-contrast typography, and minimal UI elements.
-        </p>
+        <p class="style-description">Stripping interfaces to essentials—white space, high-contrast typography, and minimal UI elements.</p>
         <p class="style-links">
           <a href="https://www.nngroup.com/articles/minimalist-web-design/" target="_blank">NNG Guide</a>
           <a href="https://en.wikipedia.org/wiki/Minimalism" target="_blank">Minimalism</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="8" id="responsive">
+      <article class="style-card" data-index="9" id="responsive">
         <h3 class="style-title">Responsive</h3>
         <p class="style-era">2010–present</p>
-        <p class="style-description">
-          Fluid grids, flexible images, and CSS media queries ensure layouts adapt.
-        </p>
+        <p class="style-description">Fluid grids, flexible images, and CSS media queries ensure layouts adapt.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Responsive_web_design" target="_blank">Responsive</a>
           <a href="https://developer.mozilla.org/docs/Web/CSS/Media_Queries" target="_blank">MDN Media Queries</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="9" id="mobile-first">
+      <article class="style-card" data-index="10" id="mobile-first">
         <h3 class="style-title">Mobile-First</h3>
         <p class="style-era">2010–present</p>
-        <p class="style-description">
-          Designing for small screens first, then enhancing for larger viewports.
-        </p>
+        <p class="style-description">Designing for small screens first, then enhancing for larger viewports.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Mobile-first_design" target="_blank">Mobile-First</a>
           <a href="https://www.smashingmagazine.com/2011/01/guidelines-for-responsive-web-design/" target="_blank">Smashing Mag.</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="10" id="flat-design">
+      <article class="style-card" data-index="11" id="flat-design">
         <h3 class="style-title">Flat Design</h3>
         <p class="style-era">2010–present</p>
-        <p class="style-description">
-          Minimalist UI with simple elements, flat colors, no textures.
-        </p>
+        <p class="style-description">Minimalist UI with simple elements, flat colors, no textures.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Flat_design" target="_blank">Flat Design</a>
           <a href="https://en.wikipedia.org/wiki/Metro_(design_language)" target="_blank">Metro UI</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="11" id="semi-flat">
+      <article class="style-card" data-index="12" id="semi-flat">
         <h3 class="style-title">Semi-Flat</h3>
         <p class="style-era">2010–present</p>
-        <p class="style-description">
-          Flat foundations augmented with subtle shadows or minimal gradients.
-        </p>
+        <p class="style-description">Flat foundations augmented with subtle shadows or minimal gradients.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Flat_design#Flat_2.0" target="_blank">Flat 2.0</a>
           <a href="https://uxplanet.org/semi-flat-design-principles-and-examples-6d1d90d82469" target="_blank">UX Planet</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="12" id="parallax">
+      <article class="style-card" data-index="13" id="parallax">
         <h3 class="style-title">Parallax</h3>
         <p class="style-era">2012–2016</p>
-        <p class="style-description">
-          Layered backgrounds move at different speeds for depth.
-        </p>
+        <p class="style-description">Layered backgrounds move at different speeds for depth.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Parallax_scrolling" target="_blank">Parallax</a>
           <a href="https://developer.mozilla.org/docs/Web/CSS/transform-function/translate3d" target="_blank">MDN</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="13" id="spa">
+      <article class="style-card" data-index="14" id="spa">
         <h3 class="style-title">Single-Page App</h3>
         <p class="style-era">2012–2016</p>
-        <p class="style-description">
-          JavaScript-driven sites loading content dynamically on one page.
-        </p>
+        <p class="style-description">JavaScript-driven sites loading content dynamically on one page.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Single-page_application" target="_blank">SPA</a>
           <a href="https://angular.io/guide/architecture" target="_blank">Angular</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="14" id="pwa">
+      <article class="style-card" data-index="15" id="pwa">
         <h3 class="style-title">Progressive Web App</h3>
         <p class="style-era">2015–present</p>
-        <p class="style-description">
-          App-like experiences with service workers, offline support, push notifications.
-        </p>
+        <p class="style-description">App-like experiences with service workers, offline support, push notifications.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Progressive_web_app" target="_blank">PWA</a>
           <a href="https://web.dev/what-are-pwas/" target="_blank">web.dev</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="15" id="cinematic">
+      <article class="style-card" data-index="16" id="cinematic">
         <h3 class="style-title">Cinematic</h3>
         <p class="style-era">2010s</p>
-        <p class="style-description">
-          Full-screen video headers, ambient soundscapes, story layouts.
-        </p>
+        <p class="style-description">Full-screen video headers, ambient soundscapes, story layouts.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Video_background" target="_blank">Video Background</a>
           <a href="https://webflow.com/blog/video-backgrounds" target="_blank">Webflow</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="16" id="brutalist">
+      <article class="style-card" data-index="17" id="brutalist">
         <h3 class="style-title">Brutalist</h3>
         <p class="style-era">2015–present</p>
-        <p class="style-description">
-          Stark pages emphasizing raw HTML, plain fonts, bare-bones layout.
-        </p>
+        <p class="style-description">Stark pages emphasizing raw HTML, plain fonts, bare-bones layout.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Brutalist_Web_Design" target="_blank">Brutalist Web</a>
           <a href="https://verpex.com/blog/brutalist-web-design/" target="_blank">Verpex</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="17" id="neo-brutalism">
+      <article class="style-card" data-index="18" id="neo-brutalism">
         <h3 class="style-title">Neo-Brutalism</h3>
         <p class="style-era">2015–present</p>
-        <p class="style-description">
-          Brutalist structure combined with neon or saturated color accents.
-        </p>
+        <p class="style-description">Brutalist structure combined with neon or saturated color accents.</p>
         <p class="style-links">
           <a href="https://web.dev/neo-brutalism/" target="_blank">web.dev</a>
           <a href="https://fireart.studio/blog/neo-brutalism/" target="_blank">Fireart</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="18" id="dark-mode">
+      <article class="style-card" data-index="19" id="dark-mode">
         <h3 class="style-title">Dark Mode</h3>
         <p class="style-era">2020–present</p>
-        <p class="style-description">
-          Light-on-dark color schemes reduce eye strain and feel modern.
-        </p>
+        <p class="style-description">Light-on-dark color schemes reduce eye strain and feel modern.</p>
         <p class="style-links">
           <a href="https://bluecompass.com/articles/dark-mode-web-design/" target="_blank">Bluecompass</a>
           <a href="https://css-tricks.com/dark-modes-with-css/" target="_blank">CSS-Tricks</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="19" id="neumorphism">
+      <article class="style-card" data-index="20" id="neumorphism">
         <h3 class="style-title">Neumorphism</h3>
         <p class="style-era">2020</p>
-        <p class="style-description">
-          Soft inner/outer shadows create embossed UI elements.
-        </p>
+        <p class="style-description">Soft inner/outer shadows create embossed UI elements.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Neumorphism" target="_blank">Wikipedia</a>
           <a href="https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6" target="_blank">UX Design</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="20" id="glassmorphism">
+      <article class="style-card" data-index="21" id="glassmorphism">
         <h3 class="style-title">Glassmorphism</h3>
         <p class="style-era">2020</p>
-        <p class="style-description">
-          Translucent panels with backdrop blur convey depth.
-        </p>
+        <p class="style-description">Translucent panels with backdrop blur convey depth.</p>
         <p class="style-links">
           <a href="https://www.nngroup.com/articles/glassmorphism/" target="_blank">NNG</a>
           <a href="https://css-tricks.com/glassmorphism-using-backdrop-filter/" target="_blank">CSS-Tricks</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="21" id="corporate-memphis">
+      <article class="style-card" data-index="22" id="corporate-memphis">
         <h3 class="style-title">Corporate Memphis</h3>
         <p class="style-era">2018–present</p>
-        <p class="style-description">
-          Flat geometric illustrations with bendy characters and bright color.
-        </p>
+        <p class="style-description">Flat geometric illustrations with bendy characters and bright color.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Corporate_Memphis" target="_blank">Wikipedia</a>
           <a href="https://medium.com/corporate-memphis" target="_blank">Medium</a>
         </p>
       </article>
-
-      <article class="style-card" data-index="22" id="retro-web">
+      <article class="style-card" data-index="23" id="retro-web">
         <h3 class="style-title">Retro Web</h3>
         <p class="style-era">2020s</p>
-        <p class="style-description">
-          Nostalgic callbacks to ’90s/00s—pixel art, marquee text, neon palettes.
-        </p>
+        <p class="style-description">Nostalgic callbacks to ’90s/00s—pixel art, marquee text, neon palettes.</p>
         <p class="style-links">
           <a href="https://fireart.studio/blog/retro-web-design/" target="_blank">Fireart</a>
           <a href="https://99designs.com/blog/web-design/trends/nostalgic-web-design-trends/" target="_blank">99designs</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="23" id="y2k-web">
+      <article class="style-card" data-index="24" id="y2k-web">
         <h3 class="style-title">Y2K Web</h3>
         <p class="style-era">2020s</p>
-        <p class="style-description">
-          Chrome buttons, metallic gradients, playful typography.
-        </p>
+        <p class="style-description">Chrome buttons, metallic gradients, playful typography.</p>
         <p class="style-links">
           <a href="https://fireart.studio/blog/y2k-web-design/" target="_blank">Fireart</a>
           <a href="https://medium.com/y2k-web" target="_blank">Medium</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="24" id="webgl-3d">
+      <article class="style-card" data-index="25" id="webgl-3d">
         <h3 class="style-title">WebGL & 3D</h3>
         <p class="style-era">2015–present</p>
-        <p class="style-description">
-          Interactive 3D graphics, model viewers, VR/AR in browser.
-        </p>
+        <p class="style-description">Interactive 3D graphics, model viewers, VR/AR in browser.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a>
           <a href="https://threejs.org/" target="_blank">three.js</a>
         </p>
       </article>
 
-      <article class="style-card" data-index="25" id="inclusive-design">
+      <article class="style-card" data-index="26" id="inclusive-design">
         <h3 class="style-title">Inclusive Design</h3>
         <p class="style-era">Ongoing</p>
-        <p class="style-description">
-          ARIA roles, semantic HTML, user-centric accessibility.
-        </p>
+        <p class="style-description">ARIA roles, semantic HTML, user-centric accessibility.</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Accessible_design" target="_blank">Accessible Design</a>
           <a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">W3C</a>
@@ -1016,47 +963,1657 @@
     <script src="./video.js"></script>
 
     <script>
-    var counterContainer = document.querySelector("#vistor-counter");
-    var resetButton = document.querySelector("#reset");
-    var visitCount = localStorage.getItem("page_view");
-
-    // Check if page_view entry is present
-    if (visitCount) {
-      visitCount = Number(visitCount) + 1;
-      localStorage.setItem("page_view", visitCount);
-    } else {
-      visitCount = 1;
-      localStorage.setItem("page_view", 1);
-    }
-    counterContainer.innerHTML = visitCount;
-
-
-    // Keyboard shortcut to cycle through themes
-    try {
-      $(document).on('keydown', function(e) {
-        // Ctrl + Shift + Space
-        if (e.ctrlKey && e.shiftKey && e.keyCode === 82) {
-          visitCount = 1;
-          localStorage.setItem("page_view", 1);
-          counterContainer.innerHTML = visitCount;
-          console.log('Vernacular Visitor Counter Reset by R');
-
-          // Send Google Analytics event
-          if (typeof gtag === 'function') {
-            gtag('event', 'keyboard_shortcut', {
-              'event_category': 'Visitor Counter Reset',
-              'event_label': themes[nextIndex].name,
-              'value': nextIndex
-            });
+      var counterContainer = document.querySelector('#vistor-counter')
+      var resetButton = document.querySelector('#reset')
+      var visitCount = localStorage.getItem('page_view')
+      
+      // Check if page_view entry is present
+      if (visitCount) {
+        visitCount = Number(visitCount) + 1
+        localStorage.setItem('page_view', visitCount)
+      } else {
+        visitCount = 1
+        localStorage.setItem('page_view', 1)
+      }
+      counterContainer.innerHTML = visitCount
+      
+      // Keyboard shortcut to cycle through themes
+      try {
+        $(document).on('keydown', function (e) {
+          // Ctrl + Shift + Space
+          if (e.ctrlKey && e.shiftKey && e.keyCode === 82) {
+            visitCount = 1
+            localStorage.setItem('page_view', 1)
+            counterContainer.innerHTML = visitCount
+            console.log('Vernacular Visitor Counter Reset by R')
+      
+            // Send Google Analytics event
+            if (typeof gtag === 'function') {
+              gtag('event', 'keyboard_shortcut', {
+                event_category: 'Visitor Counter Reset',
+                event_label: themes[nextIndex].name,
+                value: nextIndex
+              })
+            }
+            e.preventDefault()
           }
-          e.preventDefault();
-        }
-      });
-    } catch (e) {
-      console.error('Failed to set up keyboard shortcuts:', e);
-    }
+        })
+      } catch (e) {
+        console.error('Failed to set up keyboard shortcuts:', e)
+      }
     </script>
-
+    <script>
+    // Create Light and Cark Arrays 
+    const lightThemes = [{
+      'id': 'default',
+      'handle': 'defaultStyle',
+      'name': 'Default',
+      'lightCss': `
+          body { 
+            /* fill the full viewport */
+            min-height: 100vh;
+            margin: 0;
+            /* repeating diagonal stripes */
+            background-image: repeating-linear-gradient(
+                var(--stripe-angle),
+                var(--stripe-color) 0,
+                var(--stripe-color) var(--stripe-width),
+              transparent var(--stripe-width),
+                transparent var(--stripe-spacing)
+            );
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+          }
+          .content-wrapper {
+              display: block;
+              position: relative;
+              left: 0;
+              top: 0;
+            }
+            .header-content h1 { 
+              color: #ff0000; 
+              font-size: 3vw;
+              margin-bottom: 5px;
+            }
+            .header-content p { 
+              color: #ffa600; 
+              font-size: 1.5vw;
+            }
+          .era-timeline { 
+            display: block !important;
+            background: var(--bg-color);
+            opacity: var(--opacity);
+          }
+          .style-card {
+            background: #ffffcc;
+            border: 3px outset #cc9966;
+          }
+          .style-description {
+            color: #333333;
+          }
+          .style-title {
+            color: #990000;
+            font-weight: bold;
+          }
+          .style-links a {
+            color: #0000ff;
+            text-decoration: underline;
+          }
+          .extra-under { display: block !important; }
+          .mermaid {
+            background:rgb(245, 245, 243);
+            color:rgb(42, 44, 20);
+          }
+        `,
+                  'darkCss': `
+          body { 
+            /* fill the full viewport */
+            min-height: 100vh;
+            margin: 0;
+  
+            /* repeating diagonal stripes */
+            background-image: repeating-linear-gradient(
+                calc(3.125 * var(--stripe-angle)),
+                var(--dark-stripe-color) 0,
+                var(--dark-stripe-color) var(--stripe-width),
+                rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
+                rgba(0, 0, 0, 0.8) var(--stripe-spacing)
+            );
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+          }
+          
+          .content-wrapper {
+            display: block;
+            position: relative;
+            left: 0;
+            top: 0;
+          }
+          .header-content h1 { 
+            color: #ff0000; 
+            font-size: 6vw;
+            margin-bottom: 5px;
+          }
+          .header-content p { 
+            color: #ffa600; 
+            font-size: 4vw;
+          }
+          .era-timeline { 
+            display: block !important;
+            background: var(--inverse-bg-color, #222);
+            opacity: var(--opacity, 0.8);
+          }
+          .style-links a {
+            color: #66ccff;
+            text-decoration: underline;
+          }
+          .extra-under { display: block !important; }
+          .mermaid {
+            background: #333300;
+            color: #f0f0f0;
+          }
+        `
+                }, {
+                  'id': 'vernacular',
+                  'handle': 'vernacularStyle',
+                  'name': 'Vernacular / Geocities',
+                  'lightCss': `
+          body { 
+            /* fill the full viewport */
+            min-height: 100vh;
+            margin: 0;
+            /* repeating diagonal stripes */
+            background-image: repeating-linear-gradient(
+                var(--stripe-angle),
+                var(--stripe-color) 0,
+                var(--stripe-color) var(--stripe-width),
+              transparent var(--stripe-width),
+                transparent var(--stripe-spacing)
+            );
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+          }
+          .content-wrapper {
+              display: block;
+              position: relative;
+              left: 0;
+              top: 0;
+            }
+            .header-content h1 { 
+              color: #ff0000; 
+              font-size: 3vw;
+              margin-bottom: 5px;
+            }
+            .header-content p { 
+              color: #ffa600; 
+              font-size: 1.5vw;
+            }
+          .era-timeline { 
+            display: block !important;
+            background: var(--bg-color);
+            opacity: var(--opacity);
+          }
+          .style-card {
+            background: #ffffcc;
+            border: 3px outset #cc9966;
+          }
+          .style-description {
+            color: #333333;
+          }
+          .style-title {
+            color: #990000;
+            font-weight: bold;
+          }
+          .style-links a {
+            color: #0000ff;
+            text-decoration: underline;
+          }
+          .extra-under { display: block !important; }
+          .mermaid {
+            background:rgb(245, 245, 243);
+            color:rgb(42, 44, 20);
+          }
+        `,
+                  'darkCss': `
+          body { 
+            /* fill the full viewport */
+            min-height: 100vh;
+            margin: 0;
+  
+            /* repeating diagonal stripes */
+            background-image: repeating-linear-gradient(
+                calc(3.125 * var(--stripe-angle)),
+                var(--dark-stripe-color) 0,
+                var(--dark-stripe-color) var(--stripe-width),
+                rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
+                rgba(0, 0, 0, 0.8) var(--stripe-spacing)
+            );
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+          }
+          
+          .content-wrapper {
+            display: block;
+            position: relative;
+            left: 0;
+            top: 0;
+          }
+          .header-content h1 { 
+            color: #ff0000; 
+            font-size: 6vw;
+            margin-bottom: 5px;
+          }
+          .header-content p { 
+            color: #ffa600; 
+            font-size: 4vw;
+          }
+          .era-timeline { 
+            display: block !important;
+            background: var(--inverse-bg-color, #222);
+            opacity: var(--opacity, 0.8);
+          }
+          .style-links a {
+            color: #66ccff;
+          }
+          .extra-under { display: block !important; }
+          .mermaid {
+            background: #333300;
+            color: #f0f0f0;
+          }
+        `
+                },
+                {
+                  'id': 'table-frames',
+                  'handle': 'table-framesStyle',
+                  'name': 'Table-Based Design',
+                  'lightCss': `
+          body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            color: #333;
+          }
+          main {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+          }
+          .style-card {
+            display: table-cell;
+            border: 1px solid #999;
+            padding: 10px;
+            background: white;
+          }
+          #main-table { display: block !important; }
+      
+      `,
+                  'darkCss': `
+        body {
+          font-family: Arial, sans-serif;
+          background: #f0f0f0;
+          color: #333;
+        }
+        main {
+          display: table;
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .style-card {
+          display: table-cell;
+          border: 1px solid #999;
+          padding: 10px;
+          background: white;
+        }
+        #main-table { display: block !important; }
+      `
+                },
+                {
+                  'id': 'framesets',
+                  'handle': 'framesetsStyle',
+                  'name': 'Framesets',
+                  'lightCss': `
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, sans-serif;
+          }
+          .frame-nav, .frame-content {
+            display: block !important;
+            position: fixed;
+            border: 2px inset #ccc;
+            background: #f0f0f0;
+          }
+          .frame-nav {
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            overflow: auto;
+            padding: 10px;
+          }
+          .frame-content {
+            left: 200px;
+            top: 0;
+            width: calc(100% - 200px);
+            height: 100%;
+            overflow: auto;
+            padding: 10px;
+            background: white;
+          }
+          main {
+            margin-left: 200px;
+          }
+        `,
+                  'darkCss': `
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: Verdana, sans-serif;
+        }
+        .frame-nav, .frame-content {
+          display: block !important;
+          position: fixed;
+          border: 2px inset #ccc;
+          background: #f0f0f0;
+        }
+        .frame-nav {
+          left: 0;
+          top: 0;
+          width: 200px;
+          height: 100%;
+          overflow: auto;
+          padding: 10px;
+        }
+        .frame-content {
+          left: 200px;
+          top: 0;
+          width: calc(100% - 200px);
+          height: 100%;
+          overflow: auto;
+          padding: 10px;
+          background: white;
+        }
+        main {
+          margin-left: 200px;
+        }
+      `
+                },
+                {
+                  'id': 'flash',
+                  'handle': 'flashStyle',
+                  'name': 'Flash-Based Design',
+                  'lightCss': `
+          body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+          }
+          .extra-flash-intro { 
+            display: block !important; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1000;
+          }
+          .style-card {
+            background: #333;
+            border-radius: 0;
+            border: 1px solid #666;
+            color: #fff;
+          }
+          .style-title {
+            color: #ff9900;
+          }
+          .style-links a {
+            color: #66ccff;
+          }
+        `,
+                  'darkCss': `
+        body {
+          background: #000;
+          color: #fff;
+          font-family: Arial, sans-serif;
+          text-align: center;
+        }
+        .extra-flash-intro { 
+          display: block !important; 
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #000;
+          z-index: 1000;
+        }
+        .style-card {
+          background: #333;
+          border-radius: 0;
+          border: 1px solid #666;
+          color: #fff;
+        }
+        .style-title {
+          color: #ff9900;
+        }
+        .style-links a {
+          color: #66ccff;
+        }
+      `
+                },
+                {
+                  'id': 'web2',
+                  'handle': 'web2Style',
+                  'name': 'Web 2.0 Glossy',
+                  'lightCss': `
+          body {
+            font-family: 'Lucida Grande', Arial, sans-serif;
+            background: #f6f6f6;
+          }
+          .style-card {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          }
+          .style-title {
+            color: #0066cc;
+            text-shadow: 0 1px 0 white;
+          }
+          .beta-badge {
+            display: inline-block !important;
+            background: #ff6600;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 10px;
+            margin-left: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+          }
+        `,
+                  'darkCss': `body {
+          font-family: 'Lucida Grande', Arial, sans-serif;
+          background: #f6f6f6;
+        }
+        .style-card {
+          border-radius: 8px;
+          border: 1px solid #ddd;
+          background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .style-title {
+          color: #0066cc;
+          text-shadow: 0 1px 0 white;
+        }
+        .beta-badge {
+          display: inline-block !important;
+          background: #ff6600;
+          color: white;
+          font-size: 10px;
+          padding: 2px 5px;
+          border-radius: 10px;
+          margin-left: 5px;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+      `
+                },
+                {
+                  'id': 'skeuomorphic',
+                  'handle': 'skeuomorphicStyle',
+                  'name': 'Skeuomorphic Design',
+                  'lightCss': `
+          body {
+            
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+          }
+          .style-card {
+            background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 1px solid #b8b8b8;
+          }
+          .card-texture {
+            display: block !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/FL3SmIu.jpeg');
+            opacity: 0.1;
+            pointer-events: none;
+          }
+          .era-timeline {
+            display: block !important;
+            background: url('https://img.freepik.com/free-photo/white-gypsum-wall_1194-6990.jpg?t=st=1746443052~exp=1746446652~hmac=a2420a81ff31a63454846c9c05c450b65b5a3982ffc27fd89a63d2b85f7ca563&w=1380');
+            pointer-events: none;
+            
+          }
+        `,
+                  'darkCss': `
+      body {
+            background: #222;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #e0e0e0;
+          }
+          .style-card {
+            background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            border: 1px solid #444;
+            color: #e0e0e0;
+          }
+          .card-texture {
+            display: block !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/FL3SmIu.jpeg');
+            opacity: 0.05;
+            pointer-events: none;
+          }
+          .style-title {
+            color: #bb86fc;
+          }
+          #css-editor {
+            background-color: #333;
+            color: #e0e0e0;
+            border-color: #444;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+          }
+        `
+                },
+                {
+                  'id': 'swiss',
+                  'handle': 'swissStyle',
+                  'name': 'Swiss Style Design',
+                  'lightCss': `
+          body {
+            font-family: Helvetica, Arial, sans-serif;
+            background: white;
+            color: black;
+            line-height: 1.5;
+          }
+          main {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 20px;
+          }
+          .style-card {
+            grid-column: span 4;
+            background: white;
+            border: none;
+            border-bottom: 2px solid black;
+            border-radius: 0;
+            padding: 20px 0;
+          }
+          .style-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+          }
+          .grid-overlay {
+            display: block !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+              90deg,
+              rgba(255,0,0,0.03),
+              rgba(255,0,0,0.03) 8.33%,
+              transparent 8.33%,
+              transparent 16.66%
+            );
+            pointer-events: none;
+            z-index: 1000;
+          }
+        `,
+                  'darkCss': `
+          body {
+            font-family: Helvetica, Arial, sans-serif;
+            background: #121212;
+            color: white;
+            line-height: 1.5;
+          }
+          main {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 20px;
+          }
+          .style-card {
+            grid-column: span 4;
+            background: #1a1a1a;
+            border: none;
+            border-bottom: 2px solid white;
+            border-radius: 0;
+            padding: 20px 0;
+            color: white;
+          }
+          .style-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+          }
+          .style-links a {
+            color: #bb86fc;
+          }
+          #css-editor {
+            background-color: #1a1a1a;
+            color: white;
+            border-color: white;
+          }
+        `
+                },
+                {
+                  'id': 'minimalist',
+                  'handle': 'minimalistStyle',
+                  'name': 'Minimalist',
+                  'lightCss': `
+          body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: #333;
+            line-height: 1.6;
+          }
+          .style-card {
+            background: white;
+            border: none;
+            border-radius: 0;
+            padding: 30px 0;
+            box-shadow: none;
+          }
+          .style-title {
+            font-weight: 300;
+            font-size: 24px;
+            color: #000;
+          }
+          .style-description {
+            font-weight: 300;
+          }
+          .style-links a {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+          }
+        `,
+                  'darkCss': `
+      body {
+            font-family: 'Inter', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+          }
+          .style-card {
+            background: #1a1a1a;
+            border: none;
+            border-radius: 0;
+            padding: 30px 0;
+            box-shadow: none;
+            color: #e0e0e0;
+          }
+          .style-title {
+            font-weight: 300;
+            font-size: 24px;
+            color: #fff;
+          }
+          .style-description {
+            font-weight: 300;
+          }
+          .style-links a {
+            color: #bb86fc;
+            text-decoration: none;
+            border-bottom: 1px solid #bb86fc;
+            padding-bottom: 2px;
+          }
+          #css-editor {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            border: none;
+            border-bottom: 1px solid #333;
+          }
+        `
+                },
+                {
+                  'id': 'responsive',
+                  'handle': 'responsiveStyle',
+                  'name': 'Responsive Design',
+                  'lightCss': `
+          body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f9f9f9;
+          }
+          main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+          .style-card {
+            flex: 0 0 calc(33.333% - 20px);
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+          }
+          @media (max-width: 992px) {
+            .style-card {
+              flex: 0 0 calc(50% - 15px);
+            }
+          }
+          @media (max-width: 576px) {
+            .style-card {
+              flex: 0 0 100%;
+            }
+          }
+      `,
+                  'darkCss': `
+        body {
+          font-family: 'Open Sans', sans-serif;
+          background: #f9f9f9;
+        }
+        main {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+        .style-card {
+          flex: 0 0 calc(33.333% - 20px);
+          margin-bottom: 30px;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+        }
+        @media (max-width: 992px) {
+          .style-card {
+            flex: 0 0 calc(50% - 15px);
+          }
+        }
+        @media (max-width: 576px) {
+          .style-card {
+            flex: 0 0 100%;
+          }
+        }
+      `
+                },
+                {
+                  'id': 'mobile-first',
+                  'handle': 'mobile-firstStyle',
+                  'name': 'Mobile-First Design',
+                  'lightCss': `
+          body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            background: #f5f5f5;
+          }
+          main {
+            padding: 10px;
+          }
+          .style-card {
+            width: 100%;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 15px;
+          }
+          @media (min-width: 768px) {
+            main {
+              padding: 20px;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+            }
+            .style-card {
+              width: calc(50% - 10px);
+            }
+          }
+          @media (min-width: 992px) {
+            .style-card {
+              width: calc(33.333% - 15px);
+            }
+          }
+        `,
+                  'darkCss': `
+      body {
+          font-family: 'Roboto', sans-serif;
+          font-size: 16px;
+          line-height: 1.5;
+          color: #333;
+          background: #f5f5f5;
+        }
+        main {
+          padding: 10px;
+        }
+        .style-card {
+          width: 100%;
+          margin-bottom: 15px;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          padding: 15px;
+        }
+        @media (min-width: 768px) {
+          main {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+          .style-card {
+            width: calc(50% - 10px);
+          }
+        }
+        @media (min-width: 992px) {
+          .style-card {
+            width: calc(33.333% - 15px);
+          }
+        }
+      `
+                },
+                {
+                  'id': 'flat',
+                  'handle': 'flatStyle',
+                  'name': 'Flat Design',
+                  'lightCss': `
+          body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: #f9f9f9;
+            color: #333;
+          }
+          .style-card {
+            background: white;
+            border: none;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+          }
+          .style-title {
+            color: #0078d7;
+          }
+          .style-links a {
+            color: #0078d7;
+            text-decoration: none;
+          }
+        `,
+                  'darkCss': `
+      body {
+          font-family: 'Segoe UI', 'Roboto', sans-serif;
+          background: #f9f9f9;
+          color: #333;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 2px;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+          transition: all 0.2s ease;
+        }
+        .style-title {
+          color: #0078d7;
+        }
+        .style-links a {
+          color: #0078d7;
+          text-decoration: none;
+        }
+      `
+                },
+                {
+                  'id': 'semi-flat',
+                  'handle': 'semi-flatStyle',
+                  'name': 'Semi-Flat Design',
+                  'lightCss': `
+          body {
+            font-family: 'SF Pro Text', 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+          }
+          .style-card {
+            background: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+          }
+          .style-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+          }
+          .style-title {
+            color: #007aff;
+          }
+        `,
+                  'darkCss': `
+      body {
+          font-family: 'SF Pro Text', 'Roboto', sans-serif;
+          background: #f5f5f5;
+          color: #333;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+        }
+        .style-card:hover {
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          transform: translateY(-2px);
+        }
+        .style-title {
+          color: #007aff;
+        }
+      `
+                },
+                {
+                  'id': 'parallax',
+                  'handle': 'parallaxStyle',
+                  'name': 'Parallax Design',
+                  'lightCss': `
+          body {
+            font-family: 'Montserrat', sans-serif;
+            background: #222;
+            color: white;
+            perspective: 1px;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+          }
+          main {
+            transform-style: preserve-3d;
+          }
+          .style-card {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateZ(0);
+          }
+        `,
+                  'darkCss': `body {
+          font-family: 'Montserrat', sans-serif;
+          background: #222;
+          color: white;
+          perspective: 1px;
+          height: 100vh;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+        main {
+          transform-style: preserve-3d;
+        }
+        .style-card {
+          background: rgba(255,255,255,0.9);
+          color: #333;
+          border: none;
+          border-radius: 5px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+          transform: translateZ(0);
+        }
+      `
+                },
+                {
+                  'id': 'spa',
+                  'handle': 'single-page-appStyle',
+                  'name': 'Single-Page App Design',
+                  'lightCss': `
+          body {
+            font-family: 'Roboto', sans-serif;
+            background: #fafafa;
+            color: #333;
+            padding-top: 60px;
+          }
+          header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 100;
+            padding: 15px 0;
+          }
+          .style-card {
+            background: white;
+            border: none;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+          }
+        `,
+                  'darkCss': `body {
+          font-family: 'Roboto', sans-serif;
+          background: #fafafa;
+          color: #333;
+          padding-top: 60px;
+        }
+        header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background: white;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          z-index: 100;
+          padding: 15px 0;
+        }
+        .style-card {
+          background: white;
+          border: none;
+          border-radius: 2px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+          transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        }
+      `
+                },
+                {
+                  'id': 'pwa',
+                  'handle': 'pwaStyle',
+                  'name': 'Progressive Web App Design',
+                  'lightCss': `
+          body {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #202124;
+            margin: 0;
+            padding: 0;
+          }
+          header {
+            background: #1a73e8;
+            color: white;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          }
+          .style-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+            overflow: hidden;
+          }
+        `,
+                  'darkCss': `body {
+          font-family: 'Google Sans', 'Roboto', sans-serif;
+          background: #f5f5f5;
+          color: #202124;
+          margin: 0;
+          padding: 0;
+        }
+        header {
+          background: #1a73e8;
+          color: white;
+          padding: 16px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .style-card {
+          background: white;
+          border-radius: 8px;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+          margin-bottom: 16px;
+          overflow: hidden;
+        }
+      `
+                },
+                {
+                  'id': 'cinematic',
+                  'handle': 'cinematicStyle',
+                  'name': 'Cinematic Design',
+                  'lightCss': `
+          body {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
+            margin: 0;
+            padding: 0;
+            background: #000;
+          }
+          .hero-section, .content-wrapper {
+            display: block !important;
+          }
+          .era-timeline {
+            top: 0;
+            left: 0;
+            width: 80%;
+            margin: auto;
+            padding: 2rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(--blur);
+            /* display: none; /* Hidden by default, shown in cinematic mode */
+          }
+          .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+          }
+          .style-card {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #666;
+          }
+          .style-title {
+            color: #333;
+            font-size: 24px;
+          }
+          .mermaid {
+            background: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+            border-radius: var(--rounded);
+          }
+          .mermaid text.taskText, .mermaid text.sectionTitle {
+            color: var(--text-color);
+          }
+          .mermaid .task {
+            fill: var(--accent-color);
+          }
+        `,
+                  'darkCss': `body {
+            font-family: 'Playfair Display', serif;
+            color: #e0e0e0;
+          }
+          .era-timeline {
+            top: 0;
+            left: 0;
+            width: 80%;
+            margin: auto;
+            padding: 2rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(--blur);
+            /* display: none; /* Hidden by default, shown in cinematic mode */
+          }
+          .style-card {
+            background-color: var(--inverse-bg-color);
+            border-radius: var(--rounded);
+            box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+            border: 1px solid var(--inverse-accent-color);
+            padding: 20px;
+            color: var(--inverse-text-color);
+          }
+          .style-title {
+            color:rgb(255, 0, 55);
+          }
+          .style-links a {
+            color:rgba(226, 182, 4, 0.91);
+            text-decoration: none;
+          }
+          #css-editor {
+            background: #2d2d2d;
+            border-radius: var(--rounded);
+            box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+            border: 1px solid var(--accent-color);
+            color: #e0e0e0;
+          }
+          .mermaid {
+            background: var(--inverse-bg-color);
+            color: var(--inverse-text-color);
+            border: 1px solid var(--inverse-accent-color);
+            border-radius: var(--rounded);
+          }
+          .task, .mermaid text.taskText, .mermaid text.sectionTitle {
+            color: var(--inverse-text-color);
+          }
+        .mermaid .task {
+          fill: var(--inverse-accent-color);
+        }
+        `
+                },
+                {
+                  'id': 'brutalist',
+                  'handle': 'brutalistStyle',
+                  'name': 'Brutalist Design',
+                  'lightCss': `
+          body {
+            font-family: monospace;
+            background: white;
+            color: black;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.2;
+          }
+          main {
+            max-width: none;
+            margin: 0;
+            padding: 0;
+          }
+          .style-card {
+            background: white;
+            border: 2px solid black;
+            border-radius: 0;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: none;
+          }
+        `,
+                  'darkCss': `body {
+            font-family: monospace;
+            background: black;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.2;
+          }
+          main {
+            max-width: none;
+            margin: 0;
+            padding: 0;
+          }
+          .style-card {
+            background: black;
+            border: 2px solid white;
+            border-radius: 0;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: none;
+            color: white;
+          }
+          .style-title {
+            color: #ff6666;
+          }
+          .style-links a {
+            color: #66ff66;
+          }
+          #css-editor {
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            font-family: monospace;
+          }
+        `
+                },
+                {
+                  'id': 'neo-brutalism',
+                  'handle': 'neo-brutalismStyle',
+                  'name': 'Neo-Brutalism Design',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `,
+                  'darkCss': `body {
+            font-family: 'Arial', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+          }
+          .style-card {
+            background: #1a1a1a;
+            border: 3px solid #bb86fc;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 #bb86fc;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+            color: #e0e0e0;
+          }
+          .style-title {
+            color: #bb86fc;
+          }
+          .style-links a {
+            color: #03dac6;
+          }
+          #css-editor {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            border: 3px solid #bb86fc;
+            box-shadow: 5px 5px 0 #bb86fc;
+          }
+        `
+                },
+                {
+                  'id': 'dark-mode',
+                  'handle': 'dark-modeStyle',
+                  'name': 'Dark Mode Design',
+                  'lightCss': `
+          body {
+            font-family: 'SF Pro Text', 'Roboto', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+          }
+          .style-card {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #e0e0e0;
+          }
+          .style-title {
+            color: #bb86fc;
+          }
+          .style-links a {
+            color: #03dac6;
+          }
+          body.dark-mode #css-editor {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            border-color: #444;
+          }
+        `,
+                  'darkCss': `body {
+          font-family: 'SF Pro Text', 'Roboto', sans-serif;
+          background: #121212;
+          color: #e0e0e0;
+        }
+        .style-card {
+          background: #1e1e1e;
+          border: 1px solid #333;
+          border-radius: 8px;
+          color: #e0e0e0;
+        }
+        .style-title {
+          color: #bb86fc;
+        }
+        .style-links a {
+          color: #03dac6;
+        }
+        body.dark-mode #css-editor {
+          background-color: #2a2a2a;
+          color: #e0e0e0;
+          border-color: #444;
+        }
+      `
+                },
+                {
+                  'id': 'neumorphism',
+                  'handle': 'neumorphismStyle',
+                  'name': 'Neumorphism Design',
+                  'lightCss': `
+         body {
+            font-family: 'Poppins', sans-serif;
+            background: #e0e5ec;
+            color: #333;
+          }
+          .style-card {
+            background: #e0e5ec;
+            border-radius: 15px;
+            box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+            border: none;
+            padding: 20px;
+          }
+          .style-title {
+            color: #555;
+          }
+          .style-links a {
+            color: #555;
+            text-decoration: none;
+          }
+        `,
+                  'darkCss': `body {
+            font-family: 'Poppins', sans-serif;
+            background: #2d2d2d;
+            color: #e0e0e0;
+          }
+          .style-card {
+            background: #2d2d2d;
+            border-radius: 15px;
+            box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
+            border: none;
+            padding: 20px;
+            color: #e0e0e0;
+          }
+          .style-title {
+            color: #bb86fc;
+          }
+          .style-links a {
+            color: #03dac6;
+            text-decoration: none;
+          }
+          #css-editor {
+            background: #2d2d2d;
+            border-radius: 15px;
+            box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
+            border: none;
+            color: #e0e0e0;
+          }
+        `
+                },
+                {
+                  'id': 'glassmorphism',
+                  'handle': 'glassmorphismStyle',
+                  'name': 'Glassmorphism Design',
+                  'lightCss': `
+         body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: #f9f9f9;
+            color: #333;
+          }
+          .style-card {
+            background: white;
+            border: none;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+          }
+          .style-title {
+            color: #0078d7;
+          }
+          .style-links a {
+            color: #0078d7;
+            text-decoration: none;
+          }
+        `,
+                  'darkCss': `body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #121212, #2d2d2d);
+            color: #e0e0e0;
+          }
+          .style-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            color: #e0e0e0;
+          }
+          .style-title {
+            color: #bb86fc;
+          }
+          .style-links a {
+            color: #03dac6;
+          }
+          #css-editor {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+          }
+        `
+                },
+                {
+                  'id': 'corporate-memphis',
+                  'handle': 'corporate-memphisStyle',
+                  'name': 'Corporate Memphis Design',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `,
+                  'darkCss': `body {
+            background-color: #121212;
+            color: #e0e0e0;
+          }
+          .style-card {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #e0e0e0;
+          }
+          .style-title {
+            color: #bb86fc;
+          }
+          .style-links a {
+            color: #03dac6;
+          }
+          #css-editor {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            border-color: #444;
+          }
+        `
+                },
+                {
+                  'id': 'retro-web',
+                  'handle': 'retro-webStyle',
+                  'name': 'Retro Web Design',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `,
+                  'darkCss': `body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `
+                },
+                {
+                  'id': 'y2k-web',
+                  'handle': 'y2k-webStyle',
+                  'name': 'Y2K Web Design',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          } `,
+                  'darkCss': `body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `
+                },
+                {
+                  'id': 'webgl-3d',
+                  'handle': 'webgl-3dStyle',
+                  'name': 'WebGL & 3D Design',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            color:rgba(230, 230, 230, 0.9);
+          }
+          .style-card {
+            background:rgba(1, 36, 0, 0.9);
+            border: 3px solid rgba(0, 255, 21, 0.9);
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `,
+                  'darkCss': `body {
+          font-family: 'Arial', sans-serif;
+          color:rgba(230, 230, 230, 0.9);
+        }
+        .style-card {
+          background:rgba(1, 36, 0, 0.9);
+          border: 3px solid rgba(0, 255, 21, 0.9);
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `
+                },
+                {
+                  'id': 'inclusive-design',
+                  'handle': 'inclusive-designStyle',
+                  'name': 'Inclusive Design',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }`,
+                  'darkCss': `body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+        }
+        .style-card {
+          background: white;
+          border: 3px solid black;
+          border-radius: 0;
+          box-shadow: 5px 5px 0 black;
+          transform: rotate(-1deg);
+          transition: all 0.2s ease;
+        }
+      `
+  }]
+    </script>
     <!-- Theme-switcher + CSS editor init -->
     <script>
     // Refactored Theme Switcher with Separate Light and Dark Arrays
@@ -1077,6 +2634,7 @@
             const $visitorCounter = $('.counter');
 
             let current = 0;
+            const themes = getCurrentThemeSet();
 
             function preloadAndStartVideos() {
               try {
@@ -1136,1618 +2694,6 @@
               }
             }
 
-            const lightThemes = [{
-                id: 'default',
-                handle: 'defaultStyle',
-                name: 'Default',
-                lightCss: `
-        body { 
-          /* fill the full viewport */
-          min-height: 100vh;
-          margin: 0;
-          /* repeating diagonal stripes */
-          background-image: repeating-linear-gradient(
-              var(--stripe-angle),
-              var(--stripe-color) 0,
-              var(--stripe-color) var(--stripe-width),
-            transparent var(--stripe-width),
-              transparent var(--stripe-spacing)
-          );
-          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-        }
-        .content-wrapper {
-            display: block;
-            position: relative;
-            left: 0;
-            top: 0;
-          }
-          .header-content h1 { 
-            color: #ff0000; 
-            font-size: 3vw;
-            margin-bottom: 5px;
-          }
-          .header-content p { 
-            color: #ffa600; 
-            font-size: 1.5vw;
-          }
-        .era-timeline { 
-          display: block !important;
-          background: var(--bg-color);
-          opacity: var(--opacity);
-        }
-        .style-card {
-          background: #ffffcc;
-          border: 3px outset #cc9966;
-        }
-        .style-description {
-          color: #333333;
-        }
-        .style-title {
-          color: #990000;
-          font-weight: bold;
-        }
-        .style-links a {
-          color: #0000ff;
-          text-decoration: underline;
-        }
-        .extra-under { display: block !important; }
-        .mermaid {
-          background:rgb(245, 245, 243);
-          color:rgb(42, 44, 20);
-        }
-      `,
-                darkCss: `
-        body { 
-          /* fill the full viewport */
-          min-height: 100vh;
-          margin: 0;
-
-          /* repeating diagonal stripes */
-          background-image: repeating-linear-gradient(
-              calc(3.125 * var(--stripe-angle)),
-              var(--dark-stripe-color) 0,
-              var(--dark-stripe-color) var(--stripe-width),
-              rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
-              rgba(0, 0, 0, 0.8) var(--stripe-spacing)
-          );
-          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-        }
-        
-        .content-wrapper {
-          display: block;
-          position: relative;
-          left: 0;
-          top: 0;
-        }
-        .header-content h1 { 
-          color: #ff0000; 
-          font-size: 6vw;
-          margin-bottom: 5px;
-        }
-        .header-content p { 
-          color: #ffa600; 
-          font-size: 4vw;
-        }
-        .era-timeline { 
-          display: block !important;
-          background: var(--inverse-bg-color, #222);
-          opacity: var(--opacity, 0.8);
-        }
-        .style-links a {
-          color: #66ccff;
-          text-d#3554den: underline;
-        }
-        .extra-under { display: block !important; }
-        .mermaid {
-          background: #333300;
-          color: #f0f0f0;
-        }
-      `
-              }, {
-                id: 'vernacular',
-                handle: 'vernacularStyle',
-                name: 'Vernacular / Geocities',
-                lightCss: `
-        body { 
-          /* fill the full viewport */
-          min-height: 100vh;
-          margin: 0;
-          /* repeating diagonal stripes */
-          background-image: repeating-linear-gradient(
-              var(--stripe-angle),
-              var(--stripe-color) 0,
-              var(--stripe-color) var(--stripe-width),
-            transparent var(--stripe-width),
-              transparent var(--stripe-spacing)
-          );
-          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-        }
-        .content-wrapper {
-            display: block;
-            position: relative;
-            left: 0;
-            top: 0;
-          }
-          .header-content h1 { 
-            color: #ff0000; 
-            font-size: 3vw;
-            margin-bottom: 5px;
-          }
-          .header-content p { 
-            color: #ffa600; 
-            font-size: 1.5vw;
-          }
-        .era-timeline { 
-          display: block !important;
-          background: var(--bg-color);
-          opacity: var(--opacity);
-        }
-        .style-card {
-          background: #ffffcc;
-          border: 3px outset #cc9966;
-        }
-        .style-description {
-          color: #333333;
-        }
-        .style-title {
-          color: #990000;
-          font-weight: bold;
-        }
-        .style-links a {
-          color: #0000ff;
-          text-decoration: underline;
-        }
-        .extra-under { display: block !important; }
-        .mermaid {
-          background:rgb(245, 245, 243);
-          color:rgb(42, 44, 20);
-        }
-      `,
-                darkCss: `
-        body { 
-          /* fill the full viewport */
-          min-height: 100vh;
-          margin: 0;
-
-          /* repeating diagonal stripes */
-          background-image: repeating-linear-gradient(
-              calc(3.125 * var(--stripe-angle)),
-              var(--dark-stripe-color) 0,
-              var(--dark-stripe-color) var(--stripe-width),
-              rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
-              rgba(0, 0, 0, 0.8) var(--stripe-spacing)
-          );
-          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-        }
-        
-        .content-wrapper {
-          display: block;
-          position: relative;
-          left: 0;
-          top: 0;
-        }
-        .header-content h1 { 
-          color: #ff0000; 
-          font-size: 6vw;
-          margin-bottom: 5px;
-        }
-        .header-content p { 
-          color: #ffa600; 
-          font-size: 4vw;
-        }
-        .era-timeline { 
-          display: block !important;
-          background: var(--inverse-bg-color, #222);
-          opacity: var(--opacity, 0.8);
-        }
-        .style-links a {
-          color: #66ccff;
-          text-d#3554den: underline;
-        }
-        .extra-under { display: block !important; }
-        .mermaid {
-          background: #333300;
-          color: #f0f0f0;
-        }
-      `
-              },
-              {
-                id: 'table-frames',
-                handle: 'table-framesStyle',
-                name: 'Table-Based Design',
-                lightCss: `
-        body {
-          font-family: Arial, sans-serif;
-          background: #f0f0f0;
-          color: #333;
-        }
-        main {
-          display: table;
-          width: 100%;
-          border-collapse: collapse;
-        }
-        .style-card {
-          display: table-cell;
-          border: 1px solid #999;
-          padding: 10px;
-          background: white;
-        }
-        #main-table { display: block !important; }
-    
-    `,
-                darkCss: `
-      body {
-        font-family: Arial, sans-serif;
-        background: #f0f0f0;
-        color: #333;
-      }
-      main {
-        display: table;
-        width: 100%;
-        border-collapse: collapse;
-      }
-      .style-card {
-        display: table-cell;
-        border: 1px solid #999;
-        padding: 10px;
-        background: white;
-      }
-      #main-table { display: block !important; }
-    `
-              },
-              {
-                id: 'Framesets',
-                handle: 'framesetsStyle',
-                name: 'Framesets',
-                lightCss: `
-        body {
-          margin: 0;
-          padding: 0;
-          font-family: Verdana, sans-serif;
-        }
-        .frame-nav, .frame-content {
-          display: block !important;
-          position: fixed;
-          border: 2px inset #ccc;
-          background: #f0f0f0;
-        }
-        .frame-nav {
-          left: 0;
-          top: 0;
-          width: 200px;
-          height: 100%;
-          overflow: auto;
-          padding: 10px;
-        }
-        .frame-content {
-          left: 200px;
-          top: 0;
-          width: calc(100% - 200px);
-          height: 100%;
-          overflow: auto;
-          padding: 10px;
-          background: white;
-        }
-        main {
-          margin-left: 200px;
-        }
-      `,
-                darkCss: `
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Verdana, sans-serif;
-      }
-      .frame-nav, .frame-content {
-        display: block !important;
-        position: fixed;
-        border: 2px inset #ccc;
-        background: #f0f0f0;
-      }
-      .frame-nav {
-        left: 0;
-        top: 0;
-        width: 200px;
-        height: 100%;
-        overflow: auto;
-        padding: 10px;
-      }
-      .frame-content {
-        left: 200px;
-        top: 0;
-        width: calc(100% - 200px);
-        height: 100%;
-        overflow: auto;
-        padding: 10px;
-        background: white;
-      }
-      main {
-        margin-left: 200px;
-      }
-    `
-              },
-              {
-                id: 'flash',
-                handle: 'flashStyle',
-                name: 'Flash-Based Design',
-                lightCss: `
-        body {
-          background: #000;
-          color: #fff;
-          font-family: Arial, sans-serif;
-          text-align: center;
-        }
-        .extra-flash-intro { 
-          display: block !important; 
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: #000;
-          z-index: 1000;
-        }
-        .style-card {
-          background: #333;
-          border-radius: 0;
-          border: 1px solid #666;
-          color: #fff;
-        }
-        .style-title {
-          color: #ff9900;
-        }
-        .style-links a {
-          color: #66ccff;
-        }
-      `,
-                darkCss: `
-      body {
-        background: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        text-align: center;
-      }
-      .extra-flash-intro { 
-        display: block !important; 
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        z-index: 1000;
-      }
-      .style-card {
-        background: #333;
-        border-radius: 0;
-        border: 1px solid #666;
-        color: #fff;
-      }
-      .style-title {
-        color: #ff9900;
-      }
-      .style-links a {
-        color: #66ccff;
-      }
-    `
-              },
-              {
-                id: 'web2',
-                handle: 'web2Style',
-                name: 'Web 2.0 Glossy',
-                lightCss: `
-        body {
-          font-family: 'Lucida Grande', Arial, sans-serif;
-          background: #f6f6f6;
-        }
-        .style-card {
-          border-radius: 8px;
-          border: 1px solid #ddd;
-          background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .style-title {
-          color: #0066cc;
-          text-shadow: 0 1px 0 white;
-        }
-        .beta-badge {
-          display: inline-block !important;
-          background: #ff6600;
-          color: white;
-          font-size: 10px;
-          padding: 2px 5px;
-          border-radius: 10px;
-          margin-left: 5px;
-          text-transform: uppercase;
-          font-weight: bold;
-        }
-      `,
-                darkCss: `body {
-        font-family: 'Lucida Grande', Arial, sans-serif;
-        background: #f6f6f6;
-      }
-      .style-card {
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      }
-      .style-title {
-        color: #0066cc;
-        text-shadow: 0 1px 0 white;
-      }
-      .beta-badge {
-        display: inline-block !important;
-        background: #ff6600;
-        color: white;
-        font-size: 10px;
-        padding: 2px 5px;
-        border-radius: 10px;
-        margin-left: 5px;
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-    `
-              },
-              {
-                id: 'skeuomorphic',
-                handle: 'skeuomorphicStyle',
-                name: 'Skeuomorphic Design',
-                lightCss: `
-        body {
-          
-          font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-        .style-card {
-          background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
-          border-radius: 5px;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-          border: 1px solid #b8b8b8;
-        }
-        .card-texture {
-          display: block !important;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: url('https://i.imgur.com/FL3SmIu.jpeg');
-          opacity: 0.1;
-          pointer-events: none;
-        }
-        .era-timeline {
-          display: block !important;
-          background: url('https://img.freepik.com/free-photo/white-gypsum-wall_1194-6990.jpg?t=st=1746443052~exp=1746446652~hmac=a2420a81ff31a63454846c9c05c450b65b5a3982ffc27fd89a63d2b85f7ca563&w=1380');
-          pointer-events: none;
-          
-        }
-      `,
-                darkCss: `
-    body {
-          background: #222;
-          font-family: 'Helvetica Neue', Arial, sans-serif;
-          color: #e0e0e0;
-        }
-        .style-card {
-          background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
-          border-radius: 5px;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-          border: 1px solid #444;
-          color: #e0e0e0;
-        }
-        .card-texture {
-          display: block !important;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: url('https://i.imgur.com/FL3SmIu.jpeg');
-          opacity: 0.05;
-          pointer-events: none;
-        }
-        .style-title {
-          color: #bb86fc;
-        }
-        #css-editor {
-          background-color: #333;
-          color: #e0e0e0;
-          border-color: #444;
-          box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-        }
-      `
-              },
-              {
-                id: 'swiss',
-                handle: 'swissStyle',
-                name: 'Swiss Style Design',
-                lightCss: `
-        body {
-          font-family: Helvetica, Arial, sans-serif;
-          background: white;
-          color: black;
-          line-height: 1.5;
-        }
-        main {
-          display: grid;
-          grid-template-columns: repeat(12, 1fr);
-          grid-gap: 20px;
-        }
-        .style-card {
-          grid-column: span 4;
-          background: white;
-          border: none;
-          border-bottom: 2px solid black;
-          border-radius: 0;
-          padding: 20px 0;
-        }
-        .style-title {
-          font-size: 18px;
-          font-weight: bold;
-          color: black;
-        }
-        .grid-overlay {
-          display: block !important;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: repeating-linear-gradient(
-            90deg,
-            rgba(255,0,0,0.03),
-            rgba(255,0,0,0.03) 8.33%,
-            transparent 8.33%,
-            transparent 16.66%
-          );
-          pointer-events: none;
-          z-index: 1000;
-        }
-      `,
-                darkCss: `
-        body {
-          font-family: Helvetica, Arial, sans-serif;
-          background: #121212;
-          color: white;
-          line-height: 1.5;
-        }
-        main {
-          display: grid;
-          grid-template-columns: repeat(12, 1fr);
-          grid-gap: 20px;
-        }
-        .style-card {
-          grid-column: span 4;
-          background: #1a1a1a;
-          border: none;
-          border-bottom: 2px solid white;
-          border-radius: 0;
-          padding: 20px 0;
-          color: white;
-        }
-        .style-title {
-          font-size: 18px;
-          font-weight: bold;
-          color: white;
-        }
-        .style-links a {
-          color: #bb86fc;
-        }
-        #css-editor {
-          background-color: #1a1a1a;
-          color: white;
-          border-color: white;
-        }
-      `
-              },
-              {
-                id: 'minimalist',
-                handle: 'minimalistStyle',
-                name: 'Minimalist',
-                lightCss: `
-        body {
-          font-family: 'Inter', sans-serif;
-          background: white;
-          color: #333;
-          line-height: 1.6;
-        }
-        .style-card {
-          background: white;
-          border: none;
-          border-radius: 0;
-          padding: 30px 0;
-          box-shadow: none;
-        }
-        .style-title {
-          font-weight: 300;
-          font-size: 24px;
-          color: #000;
-        }
-        .style-description {
-          font-weight: 300;
-        }
-        .style-links a {
-          color: #000;
-          text-decoration: none;
-          border-bottom: 1px solid #000;
-          padding-bottom: 2px;
-        }
-      `,
-                darkCss: `
-    body {
-          font-family: 'Inter', sans-serif;
-          background: #121212;
-          color: #e0e0e0;
-          line-height: 1.6;
-        }
-        .style-card {
-          background: #1a1a1a;
-          border: none;
-          border-radius: 0;
-          padding: 30px 0;
-          box-shadow: none;
-          color: #e0e0e0;
-        }
-        .style-title {
-          font-weight: 300;
-          font-size: 24px;
-          color: #fff;
-        }
-        .style-description {
-          font-weight: 300;
-        }
-        .style-links a {
-          color: #bb86fc;
-          text-decoration: none;
-          border-bottom: 1px solid #bb86fc;
-          padding-bottom: 2px;
-        }
-        #css-editor {
-          background-color: #1a1a1a;
-          color: #e0e0e0;
-          border: none;
-          border-bottom: 1px solid #333;
-        }
-      `
-              },
-              {
-                id: 'responsive',
-                handle: 'responsiveStyle',
-                name: 'Responsive Design',
-                lightCss: `
-        body {
-          font-family: 'Open Sans', sans-serif;
-          background: #f9f9f9;
-        }
-        main {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
-        .style-card {
-          flex: 0 0 calc(33.333% - 20px);
-          margin-bottom: 30px;
-          background: white;
-          border-radius: 5px;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-          transition: all 0.3s ease;
-        }
-        @media (max-width: 992px) {
-          .style-card {
-            flex: 0 0 calc(50% - 15px);
-          }
-        }
-        @media (max-width: 576px) {
-          .style-card {
-            flex: 0 0 100%;
-          }
-        }
-    `,
-                darkCss: `
-      body {
-        font-family: 'Open Sans', sans-serif;
-        background: #f9f9f9;
-      }
-      main {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      .style-card {
-        flex: 0 0 calc(33.333% - 20px);
-        margin-bottom: 30px;
-        background: white;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-      }
-      @media (max-width: 992px) {
-        .style-card {
-          flex: 0 0 calc(50% - 15px);
-        }
-      }
-      @media (max-width: 576px) {
-        .style-card {
-          flex: 0 0 100%;
-        }
-      }
-    `
-              },
-              {
-                id: 'mobile-first',
-                handle: 'mobile-firstStyle',
-                name: 'Mobile-First Design',
-                lightCss: `
-        body {
-          font-family: 'Roboto', sans-serif;
-          font-size: 16px;
-          line-height: 1.5;
-          color: #333;
-          background: #f5f5f5;
-        }
-        main {
-          padding: 10px;
-        }
-        .style-card {
-          width: 100%;
-          margin-bottom: 15px;
-          background: white;
-          border-radius: 5px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-          padding: 15px;
-        }
-        @media (min-width: 768px) {
-          main {
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-          }
-          .style-card {
-            width: calc(50% - 10px);
-          }
-        }
-        @media (min-width: 992px) {
-          .style-card {
-            width: calc(33.333% - 15px);
-          }
-        }
-      `,
-                darkCss: `
-    body {
-        font-family: 'Roboto', sans-serif;
-        font-size: 16px;
-        line-height: 1.5;
-        color: #333;
-        background: #f5f5f5;
-      }
-      main {
-        padding: 10px;
-      }
-      .style-card {
-        width: 100%;
-        margin-bottom: 15px;
-        background: white;
-        border-radius: 5px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        padding: 15px;
-      }
-      @media (min-width: 768px) {
-        main {
-          padding: 20px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
-        .style-card {
-          width: calc(50% - 10px);
-        }
-      }
-      @media (min-width: 992px) {
-        .style-card {
-          width: calc(33.333% - 15px);
-        }
-      }
-    `
-              },
-              {
-                id: 'flat',
-                handle: 'flatStyle',
-                name: 'Flat Design',
-                lightCss: `
-        body {
-          font-family: 'Segoe UI', 'Roboto', sans-serif;
-          background: #f9f9f9;
-          color: #333;
-        }
-        .style-card {
-          background: white;
-          border: none;
-          border-radius: 2px;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-          transition: all 0.2s ease;
-        }
-        .style-title {
-          color: #0078d7;
-        }
-        .style-links a {
-          color: #0078d7;
-          text-decoration: none;
-        }
-      `,
-                darkCss: `
-    body {
-        font-family: 'Segoe UI', 'Roboto', sans-serif;
-        background: #f9f9f9;
-        color: #333;
-      }
-      .style-card {
-        background: white;
-        border: none;
-        border-radius: 2px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        transition: all 0.2s ease;
-      }
-      .style-title {
-        color: #0078d7;
-      }
-      .style-links a {
-        color: #0078d7;
-        text-decoration: none;
-      }
-    `
-              },
-              {
-                id: 'semi-flat',
-                handle: 'semi-flatStyle',
-                name: 'Semi-Flat Design',
-                lightCss: `
-        body {
-          font-family: 'SF Pro Text', 'Roboto', sans-serif;
-          background: #f5f5f5;
-          color: #333;
-        }
-        .style-card {
-          background: white;
-          border: none;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-          transition: all 0.3s ease;
-        }
-        .style-card:hover {
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-          transform: translateY(-2px);
-        }
-        .style-title {
-          color: #007aff;
-        }
-      `,
-                darkCss: `
-    body {
-        font-family: 'SF Pro Text', 'Roboto', sans-serif;
-        background: #f5f5f5;
-        color: #333;
-      }
-      .style-card {
-        background: white;
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-      }
-      .style-card:hover {
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transform: translateY(-2px);
-      }
-      .style-title {
-        color: #007aff;
-      }
-    `
-              },
-              {
-                id: 'parallax',
-                handle: 'parallaxStyle',
-                name: 'Parallax Design',
-                lightCss: `
-        body {
-          font-family: 'Montserrat', sans-serif;
-          background: #222;
-          color: white;
-          perspective: 1px;
-          height: 100vh;
-          overflow-x: hidden;
-          overflow-y: auto;
-        }
-        main {
-          transform-style: preserve-3d;
-        }
-        .style-card {
-          background: rgba(255,255,255,0.9);
-          color: #333;
-          border: none;
-          border-radius: 5px;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-          transform: translateZ(0);
-        }
-      `,
-                darkCss: `body {
-        font-family: 'Montserrat', sans-serif;
-        background: #222;
-        color: white;
-        perspective: 1px;
-        height: 100vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-      main {
-        transform-style: preserve-3d;
-      }
-      .style-card {
-        background: rgba(255,255,255,0.9);
-        color: #333;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        transform: translateZ(0);
-      }
-    `
-              },
-              {
-                id: 'spa',
-                handle: 'single-page-appStyle',
-                name: 'Single-Page App Design',
-                lightCss: `
-        body {
-          font-family: 'Roboto', sans-serif;
-          background: #fafafa;
-          color: #333;
-          padding-top: 60px;
-        }
-        header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          background: white;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-          z-index: 100;
-          padding: 15px 0;
-        }
-        .style-card {
-          background: white;
-          border: none;
-          border-radius: 2px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-          transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-        }
-      `,
-                darkCss: `body {
-        font-family: 'Roboto', sans-serif;
-        background: #fafafa;
-        color: #333;
-        padding-top: 60px;
-      }
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: white;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        z-index: 100;
-        padding: 15px 0;
-      }
-      .style-card {
-        background: white;
-        border: none;
-        border-radius: 2px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-      }
-    `
-              },
-              {
-                id: 'pwa',
-                handle: 'pwaStyle',
-                name: 'Progressive Web App Design',
-                lightCss: `
-        body {
-          font-family: 'Google Sans', 'Roboto', sans-serif;
-          background: #f5f5f5;
-          color: #202124;
-          margin: 0;
-          padding: 0;
-        }
-        header {
-          background: #1a73e8;
-          color: white;
-          padding: 16px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .style-card {
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-          margin-bottom: 16px;
-          overflow: hidden;
-        }
-      `,
-                darkCss: `body {
-        font-family: 'Google Sans', 'Roboto', sans-serif;
-        background: #f5f5f5;
-        color: #202124;
-        margin: 0;
-        padding: 0;
-      }
-      header {
-        background: #1a73e8;
-        color: white;
-        padding: 16px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      }
-      .style-card {
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        margin-bottom: 16px;
-        overflow: hidden;
-      }
-    `
-              },
-              {
-                id: 'cinematic',
-                handle: 'cinematicStyle',
-                name: 'Cinematic Design',
-                lightCss: `
-        body {
-          font-family: 'Playfair Display', serif;
-          color: #fff;
-          text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
-          margin: 0;
-          padding: 0;
-          background: #000;
-        }
-        .hero-section, .content-wrapper {
-          display: block !important;
-        }
-        .era-timeline {
-          top: 0;
-          left: 0;
-          width: 80%;
-          margin: auto;
-          padding: 2rem;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.5);
-          backdrop-filter: blur(--blur);
-          /* display: none; /* Hidden by default, shown in cinematic mode */
-        }
-        .video-background {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: -1;
-          overflow: hidden;
-        }
-        .style-card {
-          background: rgba(0,0,0,0.7);
-          border: 1px solid rgba(255,255,255,0.2);
-          color: #666;
-        }
-        .style-title {
-          color: #333;
-          font-size: 24px;
-        }
-        .mermaid {
-          background: var(--bg-color);
-          color: var(--text-color);
-          border: 1px solid var(--accent-color);
-          border-radius: var(--rounded);
-        }
-        .mermaid text.taskText, .mermaid text.sectionTitle {
-          color: var(--text-color);
-        }
-        .mermaid .task {
-          fill: var(--accent-color);
-        }
-      `,
-                darkCss: `body {
-          font-family: 'Playfair Display', serif;
-          color: #e0e0e0;
-        }
-        .era-timeline {
-          top: 0;
-          left: 0;
-          width: 80%;
-          margin: auto;
-          padding: 2rem;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.5);
-          backdrop-filter: blur(--blur);
-          /* display: none; /* Hidden by default, shown in cinematic mode */
-        }
-        .style-card {
-          background-color: var(--inverse-bg-color);
-          border-radius: var(--rounded);
-          box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
-          border: 1px solid var(--inverse-accent-color);
-          padding: 20px;
-          color: var(--inverse-text-color);
-        }
-        .style-title {
-          color:rgb(255, 0, 55);
-        }
-        .style-links a {
-          color:rgba(226, 182, 4, 0.91);
-          text-decoration: none;
-        }
-        #css-editor {
-          background: #2d2d2d;
-          border-radius: var(--rounded);
-          box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
-          border: 1px solid var(--accent-color);
-          color: #e0e0e0;
-        }
-        .mermaid {
-          background: var(--inverse-bg-color);
-          color: var(--inverse-text-color);
-          border: 1px solid var(--inverse-accent-color);
-          border-radius: var(--rounded);
-        }
-        .task, .mermaid text.taskText, .mermaid text.sectionTitle {
-          color: var(--inverse-text-color);
-        }
-      .mermaid .task {
-        fill: var(--inverse-accent-color);
-      }
-      `
-              },
-              {
-                id: 'brutalist',
-                handle: 'brutalistStyle',
-                name: 'Brutalist Design',
-                lightCss: `
-        body {
-          font-family: monospace;
-          background: white;
-          color: black;
-          margin: 0;
-          padding: 20px;
-          line-height: 1.2;
-        }
-        main {
-          max-width: none;
-          margin: 0;
-          padding: 0;
-        }
-        .style-card {
-          background: white;
-          border: 2px solid black;
-          border-radius: 0;
-          padding: 20px;
-          margin-bottom: 20px;
-          box-shadow: none;
-        }
-      `,
-                darkCss: `body {
-          font-family: monospace;
-          background: black;
-          color: white;
-          margin: 0;
-          padding: 20px;
-          line-height: 1.2;
-        }
-        main {
-          max-width: none;
-          margin: 0;
-          padding: 0;
-        }
-        .style-card {
-          background: black;
-          border: 2px solid white;
-          border-radius: 0;
-          padding: 20px;
-          margin-bottom: 20px;
-          box-shadow: none;
-          color: white;
-        }
-        .style-title {
-          color: #ff6666;
-        }
-        .style-links a {
-          color: #66ff66;
-        }
-        #css-editor {
-          background-color: black;
-          color: white;
-          border: 2px solid white;
-          font-family: monospace;
-        }
-      `
-              },
-              {
-                id: 'neo-brutalism',
-                handle: 'neo-brutalismStyle',
-                name: 'Neo-Brutalism Design',
-                lightCss: `
-        body {
-          font-family: 'Arial', sans-serif;
-          background: #ffde59;
-          color: black;
-        }
-        .style-card {
-          background: white;
-          border: 3px solid black;
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        }
-      `,
-                darkCss: `body {
-          font-family: 'Arial', sans-serif;
-          background: #121212;
-          color: #e0e0e0;
-        }
-        .style-card {
-          background: #1a1a1a;
-          border: 3px solid #bb86fc;
-          border-radius: 0;
-          box-shadow: 5px 5px 0 #bb86fc;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-          color: #e0e0e0;
-        }
-        .style-title {
-          color: #bb86fc;
-        }
-        .style-links a {
-          color: #03dac6;
-        }
-        #css-editor {
-          background-color: #1a1a1a;
-          color: #e0e0e0;
-          border: 3px solid #bb86fc;
-          box-shadow: 5px 5px 0 #bb86fc;
-        }
-      `
-              },
-              {
-                id: 'dark-mode',
-                handle: 'dark-modeStyle',
-                name: 'Dark Mode Design',
-                lightCss: `
-        body {
-          font-family: 'SF Pro Text', 'Roboto', sans-serif;
-          background: #121212;
-          color: #e0e0e0;
-        }
-        .style-card {
-          background: #1e1e1e;
-          border: 1px solid #333;
-          border-radius: 8px;
-          color: #e0e0e0;
-        }
-        .style-title {
-          color: #bb86fc;
-        }
-        .style-links a {
-          color: #03dac6;
-        }
-        body.dark-mode #css-editor {
-          background-color: #2a2a2a;
-          color: #e0e0e0;
-          border-color: #444;
-        }
-      `,
-                darkCss: `body {
-        font-family: 'SF Pro Text', 'Roboto', sans-serif;
-        background: #121212;
-        color: #e0e0e0;
-      }
-      .style-card {
-        background: #1e1e1e;
-        border: 1px solid #333;
-        border-radius: 8px;
-        color: #e0e0e0;
-      }
-      .style-title {
-        color: #bb86fc;
-      }
-      .style-links a {
-        color: #03dac6;
-      }
-      body.dark-mode #css-editor {
-        background-color: #2a2a2a;
-        color: #e0e0e0;
-        border-color: #444;
-      }
-    `
-              },
-              {
-                id: 'neumorphism',
-                handle: 'neumorphismStyle',
-                name: 'Neumorphism Design',
-                lightCss: `
-       body {
-          font-family: 'Poppins', sans-serif;
-          background: #e0e5ec;
-          color: #333;
-        }
-        .style-card {
-          background: #e0e5ec;
-          border-radius: 15px;
-          box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
-          border: none;
-          padding: 20px;
-        }
-        .style-title {
-          color: #555;
-        }
-        .style-links a {
-          color: #555;
-          text-decoration: none;
-        }
-      `,
-                darkCss: `body {
-          font-family: 'Poppins', sans-serif;
-          background: #2d2d2d;
-          color: #e0e0e0;
-        }
-        .style-card {
-          background: #2d2d2d;
-          border-radius: 15px;
-          box-shadow: 8px 8px 15px #1a1a1a, -8px -8px 15px #3d3d3d;
-          border: none;
-          padding: 20px;
-          color: #e0e0e0;
-        }
-        .style-title {
-          color: #bb86fc;
-        }
-        .style-links a {
-          color: #03dac6;
-          text-decoration: none;
-        }
-        #css-editor {
-          background: #2d2d2d;
-          border-radius: 15px;
-          box-shadow: inset 5px 5px 10px #1a1a1a, inset -5px -5px 10px #3d3d3d;
-          border: none;
-          color: #e0e0e0;
-        }
-      `
-              },
-              {
-                id: 'glassmorphism',
-                handle: 'glassmorphismStyle',
-                name: 'Glassmorphism Design',
-                lightCss: `
-       body {
-          font-family: 'Segoe UI', 'Roboto', sans-serif;
-          background: #f9f9f9;
-          color: #333;
-        }
-        .style-card {
-          background: white;
-          border: none;
-          border-radius: 2px;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-          transition: all 0.2s ease;
-        }
-        .style-title {
-          color: #0078d7;
-        }
-        .style-links a {
-          color: #0078d7;
-          text-decoration: none;
-        }
-      `,
-                darkCss: `body {
-          font-family: 'Segoe UI', 'Roboto', sans-serif;
-          background: linear-gradient(135deg, #121212, #2d2d2d);
-          color: #e0e0e0;
-        }
-        .style-card {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-          color: #e0e0e0;
-        }
-        .style-title {
-          color: #bb86fc;
-        }
-        .style-links a {
-          color: #03dac6;
-        }
-        #css-editor {
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #e0e0e0;
-        }
-      `
-              },
-              {
-                id: 'corporate-memphis',
-                handle: 'corporate-memphisStyle',
-                name: 'Corporate Memphis Design',
-                lightCss: `
-        body {
-          font-family: 'Arial', sans-serif;
-          background: #ffde59;
-          color: black;
-        }
-        .style-card {
-          background: white;
-          border: 3px solid black;
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        }
-      `,
-                darkCss: `body {
-          background-color: #121212;
-          color: #e0e0e0;
-        }
-        .style-card {
-          background-color: #1e1e1e;
-          border-color: #333;
-          color: #e0e0e0;
-        }
-        .style-title {
-          color: #bb86fc;
-        }
-        .style-links a {
-          color: #03dac6;
-        }
-        #css-editor {
-          background-color: #2a2a2a;
-          color: #e0e0e0;
-          border-color: #444;
-        }
-      `
-              },
-              {
-                id: 'retro-web',
-                handle: 'retro-webStyle',
-                name: 'Retro Web Design',
-                lightCss: `
-        body {
-          font-family: 'Arial', sans-serif;
-          background: #ffde59;
-          color: black;
-        }
-        .style-card {
-          background: white;
-          border: 3px solid black;
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        }
-      `,
-                darkCss: `body {
-        font-family: 'Arial', sans-serif;
-        background: #ffde59;
-        color: black;
-      }
-      .style-card {
-        background: white;
-        border: 3px solid black;
-        border-radius: 0;
-        box-shadow: 5px 5px 0 black;
-        transform: rotate(-1deg);
-        transition: all 0.2s ease;
-      }
-    `
-              },
-              {
-                id: 'y2k-web',
-                handle: 'y2k-webStyle',
-                name: 'Y2K Web Design',
-                lightCss: `
-        body {
-          font-family: 'Arial', sans-serif;
-          background: #ffde59;
-          color: black;
-        }
-        .style-card {
-          background: white;
-          border: 3px solid black;
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        } `,
-                darkCss: `body {
-        font-family: 'Arial', sans-serif;
-        background: #ffde59;
-        color: black;
-      }
-      .style-card {
-        background: white;
-        border: 3px solid black;
-        border-radius: 0;
-        box-shadow: 5px 5px 0 black;
-        transform: rotate(-1deg);
-        transition: all 0.2s ease;
-      }
-    `
-              },
-              {
-                id: 'webgl-3d',
-                handle: 'webgl-3dStyle',
-                name: 'WebGL & 3D Design',
-                lightCss: `
-        body {
-          font-family: 'Arial', sans-serif;
-          color:rgba(230, 230, 230, 0.9);
-        }
-        .style-card {
-          background:rgba(1, 36, 0, 0.9);
-          border: 3px solid rgba(0, 255, 21, 0.9);
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        }
-      `,
-                darkCss: `body {
-        font-family: 'Arial', sans-serif;
-        color:rgba(230, 230, 230, 0.9);
-      }
-      .style-card {
-        background:rgba(1, 36, 0, 0.9);
-        border: 3px solid rgba(0, 255, 21, 0.9);
-        border-radius: 0;
-        box-shadow: 5px 5px 0 black;
-        transform: rotate(-1deg);
-        transition: all 0.2s ease;
-      }
-    `
-              },
-              {
-                id: 'inclusive-design',
-                handle: 'inclusive-designStyle',
-                name: 'Inclusive Design',
-                lightCss: `
-        body {
-          font-family: 'Arial', sans-serif;
-          background: #ffde59;
-          color: black;
-        }
-        .style-card {
-          background: white;
-          border: 3px solid black;
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        }`,
-                darkCss: `body {
-        font-family: 'Arial', sans-serif;
-        background: #ffde59;
-        color: black;
-      }
-      .style-card {
-        background: white;
-        border: 3px solid black;
-        border-radius: 0;
-        box-shadow: 5px 5px 0 black;
-        transform: rotate(-1deg);
-        transition: all 0.2s ease;
-      }
-    `
-              }
-            ];
-
             // === Theme State Initialization ===
             let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
@@ -2780,7 +2726,8 @@
 
             // === Apply Theme by Index ===
             function applyTheme(index) {
-              const theme = themes[index];
+              const themeSet = getCurrentThemeSet();
+              const theme = themeSet[index];
               if (!theme) {
                 console.error(`Invalid theme index: ${index}`);
                 return;
@@ -2809,6 +2756,24 @@
 
               console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
               localStorage.setItem('lastThemeIndex', index);
+
+              // Move conditional display logic here
+              if (theme.name.includes('Cinematic')) {
+                $heroSection.show();
+                $contentWrapper.show();
+                startCinematicVideos();
+              } else {
+                $heroSection.hide();
+              }
+
+              if (theme.name.includes('Vernacular')) {
+                $underConstruction.show();
+                $visitorCounter.show();
+              } else {
+                $underConstruction.hide();
+                $visitorCounter.hide();
+              }
+
             }
 
             // === Dark Mode Toggle Handler ===
@@ -2820,7 +2785,6 @@
               if (!isNaN(lastIndex)) {
                 applyTheme(lastIndex);
               }
-
               console.log(`Dark Mode toggled: ${isDarkMode}`);
             });
 
@@ -2834,82 +2798,80 @@
               $('#dark-mode-toggle').prop('checked', isDarkMode);
             });
 
-            // === ID-Based Click Handler to Apply Theme ===
-            $('[id]').on('click', function() {
-              const clickedId = this.id;
-              const index = themes.findIndex(theme => theme.id === clickedId);
+            // Remove all previous click handlers on .style-card and Mermaid elements to avoid stacking
+            $('.style-card').off('click');
+            $('.mermaid .task, .mermaid text.taskText').off('click');
+            $cssEditor.off('input');
+            $(document).off('keydown.themeCycle');
+
+            function applyThemeById(elementId) {
+              const themes = getCurrentThemeSet();
+              const index = themes.findIndex(theme => theme.id === elementId);
 
               if (index === -1) {
-                console.warn(`No theme found matching ID: "${clickedId}"`);
-                return;
-              }
-
-              console.log(`Clicked theme ID: "${clickedId}", applying index: ${index}`);
-              applyTheme(index);
-
-              // Google Analytics event
-              gtag('event', 'apply_theme_click', {
-                'event_category': 'Theme Interaction',
-                'event_label': themes[index].handle,
-                'value': index
-              });
-            });
-
-            if (theme.name.includes('Cinematic')) {
-              $heroSection.show();
-              $contentWrapper.show();
-              startCinematicVideos();
-            } else {
-              $heroSection.hide();
-            }
-
-            if (theme.name.includes('Vernacular')) {
-              $underConstruction.show();
-              $visitorCounter.show();
-            } else {
-              $underConstruction.hide();
-              $visitorCounter.hide();
-            }
-
-            $(document).on('click', '[id]', function() {
-              const elementId = this.id;
-              if (!elementId) {
-                console.warn('Clicked element has no ID.');
+                console.warn(`No theme found matching ID: "${elementId}"`);
                 gtag('event', 'apply_theme_click_error', {
                   event_category: 'Mermaid Interaction',
-                  event_label: 'Theme Failed: Missing ID',
+                  event_label: `Missing theme for ID: ${elementId}`,
                   non_interaction: true
                 });
                 return;
               }
 
-              $('.style-card').on('click', function() {
-                const index = $(this).data('index');
+              console.log(`Applying theme by ID: "${elementId}" at index: ${index}`);
+              applyTheme(index);
+
+              gtag('event', 'apply_theme_click', {
+                event_category: 'Theme Interaction',
+                event_label: themes[index].handle,
+                value: index
+              });
+            }
+
+            // Style card click binding
+            $('.style-card').on('click', function () {
+              const index = $(this).data('index');
+              if (typeof index === 'number') {
+                console.log(`Style card clicked. Applying index: ${index}`);
                 applyTheme(index);
-              });
-
-              $cssEditor.on('input', function() {
-                const customCss = $(this).val();
-                $themeStyle.html(customCss);
-                console.log('Custom CSS applied from editor');
-              });
-
-              $(document).on('keydown', function(e) {
-                if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
-                  const themes = getCurrentThemeSet();
-                  const nextIndex = (current + 1) % themes.length;
-                  applyTheme(nextIndex);
-                  e.preventDefault();
-                }
-              });
-            
-            } catch (e) {
-                console.error('Error with script', e);
+                gtag('event', 'apply_theme_click', {
+                  event_category: 'Theme Card Click',
+                  event_label: getCurrentThemeSet()[index].handle,
+                  value: index
+                });
               }
-              });
-        }); // <-- Add this closing line to fix the syntax error
+            });
+
+            // Mermaid timeline task clicks (either rect or text)
+            $('.mermaid .task, .mermaid text.taskText').on('click', function () {
+              const elementId = this.id;
+              if (elementId) {
+                applyThemeById(elementId);
+              } else {
+                console.warn('Clicked Mermaid element has no ID');
+              }
+            });
+
+            // CSS editor live updates
+            $cssEditor.on('input', function () {
+              const customCss = $(this).val();
+              $themeStyle.html(customCss);
+              console.log('Custom CSS applied from editor');
+            });
+
+            // Keyboard shortcut: Ctrl + Shift + Space to cycle styles
+            $(document).on('keydown.themeCycle', function (e) {
+              if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
+                const themes = getCurrentThemeSet();
+                const nextIndex = (current + 1) % themes.length;
+                applyTheme(nextIndex);
+                e.preventDefault();
+              }
+            });
+          } catch (e) {
+        console.error('Error with script', e);
+          }
+    });
     </script>
-
   </body>
-
 </html>
