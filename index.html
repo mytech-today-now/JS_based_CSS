@@ -681,7 +681,8 @@ gantt
 
     <section class="css-editor">
       <h2>Current CSS</h2>
-      <textarea id="css-editor" editable></textarea>
+      <label for="css-editor">Edit CSS:</label>
+      <textarea id="css-editor" editable placeholder="Enter your CSS here"></textarea>
     </section>
 
     <main>
@@ -1003,7 +1004,7 @@ gantt
       }
     </script>
     <script>
-    // Create Light and Cark Arrays 
+    // Create Light and Dark Arrays 
     const lightThemes = [{
       'id': 'default',
       'handle': 'defaultStyle',
@@ -1111,11 +1112,11 @@ gantt
             color: #f0f0f0;
           }
         `
-                }, {
-                  'id': 'vernacular',
-                  'handle': 'vernacularStyle',
-                  'name': 'Vernacular / Geocities',
-                  'lightCss': `
+          }, {
+            'id': 'vernacular',
+            'handle': 'vernacularStyle',
+            'name': 'Vernacular / Geocities',
+            'lightCss': `
           body { 
             /* fill the full viewport */
             min-height: 100vh;
@@ -1171,7 +1172,7 @@ gantt
             color:rgb(42, 44, 20);
           }
         `,
-                  'darkCss': `
+          'darkCss': `
           body { 
             /* fill the full viewport */
             min-height: 100vh;
@@ -1242,7 +1243,7 @@ gantt
           #main-table { display: block !important; }
       
       `,
-                  'darkCss': `
+'darkCss': `
         body {
           font-family: Arial, sans-serif;
           background: #f0f0f0;
@@ -1261,12 +1262,12 @@ gantt
         }
         #main-table { display: block !important; }
       `
-                },
-                {
-                  'id': 'framesets',
-                  'handle': 'framesetsStyle',
-                  'name': 'Framesets',
-                  'lightCss': `
+      },
+      {
+        'id': 'framesets',
+        'handle': 'framesetsStyle',
+        'name': 'Framesets',
+        'lightCss': `
           body {
             margin: 0;
             padding: 0;
@@ -1299,7 +1300,7 @@ gantt
             margin-left: 200px;
           }
         `,
-                  'darkCss': `
+        'darkCss': `
         body {
           margin: 0;
           padding: 0;
@@ -1332,12 +1333,12 @@ gantt
           margin-left: 200px;
         }
       `
-                },
-                {
-                  'id': 'flash',
-                  'handle': 'flashStyle',
-                  'name': 'Flash-Based Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'flash',
+        'handle': 'flashStyle',
+        'name': 'Flash-Based Design',
+        'lightCss': `
           body {
             background: #000;
             color: #fff;
@@ -1367,7 +1368,7 @@ gantt
             color: #66ccff;
           }
         `,
-                  'darkCss': `
+        'darkCss': `
         body {
           background: #000;
           color: #fff;
@@ -1397,12 +1398,12 @@ gantt
           color: #66ccff;
         }
       `
-                },
-                {
-                  'id': 'web2',
-                  'handle': 'web2Style',
-                  'name': 'Web 2.0 Glossy',
-                  'lightCss': `
+      },
+      {
+        'id': 'web2',
+        'handle': 'web2Style',
+        'name': 'Web 2.0 Glossy',
+        'lightCss': `
           body {
             font-family: 'Lucida Grande', Arial, sans-serif;
             background: #f6f6f6;
@@ -1429,7 +1430,7 @@ gantt
             font-weight: bold;
           }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
           font-family: 'Lucida Grande', Arial, sans-serif;
           background: #f6f6f6;
         }
@@ -1455,12 +1456,12 @@ gantt
           font-weight: bold;
         }
       `
-                },
-                {
-                  'id': 'skeuomorphic',
-                  'handle': 'skeuomorphicStyle',
-                  'name': 'Skeuomorphic Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'skeuomorphic',
+        'handle': 'skeuomorphicStyle',
+        'name': 'Skeuomorphic Design',
+        'lightCss': `
           body {
             
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -1489,8 +1490,8 @@ gantt
             
           }
         `,
-                  'darkCss': `
-      body {
+        'darkCss': `
+          body {
             background: #222;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #e0e0e0;
@@ -1710,7 +1711,7 @@ gantt
             }
           }
       `,
-                  'darkCss': `
+'darkCss': `
         body {
           font-family: 'Open Sans', sans-serif;
           background: #f9f9f9;
@@ -2098,6 +2099,98 @@ gantt
             overflow: hidden;
           }
           .style-card {
+            background: #ffffcc;
+            border: 3px outset #cc9966;
+          }
+          .style-description {
+            color: #333333;
+          }
+          .style-title {
+            color: #990000;
+            font-weight: bold;
+          }
+          .style-links a {
+            color: #0000ff;
+            text-decoration: underline;
+          }
+          .extra-under { display: block !important; }
+          .mermaid {
+            background:rgb(245, 245, 243);
+            color:rgb(42, 44, 20);
+          }
+        `,
+                  'darkCss': `
+          body {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
+            margin: 0;
+            padding: 0;
+            background: #000;
+          }
+          .hero-section, .content-wrapper {
+            display: block !important;
+          }
+          .era-timeline {
+            top: 0;
+            left: 0;
+            width: 80%;
+            margin: auto;
+            padding: 2rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(--blur);
+            /* display: none; /* Hidden by default, shown in cinematic mode */
+          }
+          .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+          }
+          .style-card {
+            background: #ffffcc;
+            border: 3px outset #cc9966;
+          }
+          .style-description {
+            color: #333333;
+          }
+          .style-title {
+            color: #990000;
+            font-weight: bold;
+          }
+          .style-links a {
+            color: #0000ff;
+            text-decoration: underline;
+          }
+          .extra-under { display: block !important; }
+          .mermaid {
+            background:rgb(245, 245, 243);
+            color:rgb(42, 44, 20);
+          }
+        `
+                },
+                {
+                  'id': 'corporate-memphis',
+                  'handle': 'corporate-memphisStyle',
+                  'name': 'Corporate Memphis',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+            color: #333;
+          }
+          .style-card {
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+          }
+          .style
             background: rgba(0,0,0,0.7);
             border: 1px solid rgba(255,255,255,0.2);
             color: #666;
@@ -2258,6 +2351,103 @@ gantt
             color: #e0e0e0;
           }
           .style-card {
+            background: #1a1a1a;
+            border: 3px solid white;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 white;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `
+                },
+                {
+                  'id': 'corporate-memphis',
+                  'handle': 'corporate-memphisStyle',
+                  'name': 'Corporate Memphis',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `,
+                  'darkCss': `body {
+            font-family: 'Arial', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+          }
+          .style-card {
+            background: #1a1a1a;
+            border: 3px solid white;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 white;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `
+                },
+                {
+                  'id': 'retro-web',
+                  'handle': 'retro-webStyle',
+                  'name': 'Retro Web',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `,
+                  'darkCss': `body {
+            font-family: 'Arial', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+          }
+          .style-card {
+            background: #1a1a1a;
+            border: 3px solid white;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 white;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `
+                },
+                {
+                  'id': 'y2k-web',
+                  'handle': 'y2k-webStyle',
+                  'name': 'Y2K Web',
+                  'lightCss': `
+          body {
+            font-family: 'Arial', sans-serif;
+            background: #ffde59;
+            color: black;
+          }
+          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+        `,
+                  'darkCss': `body {
             background: #1a1a1a;
             border: 3px solid #bb86fc;
             border-radius: 0;
@@ -2612,7 +2802,16 @@ gantt
           transition: all 0.2s ease;
         }
       `
-  }]
+  }];
+
+  // Create Dark Themes Array from existing themes
+  const darkThemes = lightThemes.map(theme => ({
+    id: theme.id,
+    handle: theme.handle,
+    name: theme.name,
+    lightCss: theme.darkCss, // Use darkCss as lightCss for dark themes
+    darkCss: theme.darkCss   // Keep darkCss the same
+  }));
     </script>
     <!-- Theme-switcher + CSS editor init -->
     <script>
@@ -2750,9 +2949,17 @@ gantt
               $themeStyle.html(prettyCss);
               $cssEditor.val(formatCss(prettyCss));
 
+              // Update the current theme display
+              $('#current-theme').text(theme.name);
+
               Object.entries(prettyCss).forEach(([key, value]) => {
                 document.documentElement.style.setProperty(key, value);
               });
+
+              // Dispatch theme changed event
+              document.dispatchEvent(new CustomEvent('themeChanged', {
+                detail: { themeName: theme.name, isDarkMode: isDarkMode }
+              }));
 
               console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
               localStorage.setItem('lastThemeIndex', index);
@@ -2781,10 +2988,10 @@ gantt
               isDarkMode = this.checked;
               localStorage.setItem('darkMode', isDarkMode);
 
-              const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
-              if (!isNaN(lastIndex)) {
-                applyTheme(lastIndex);
-              }
+              // Reapply the current theme with the new dark/light mode setting
+              const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10) || 0;
+              applyTheme(lastIndex);
+              
               console.log(`Dark Mode toggled: ${isDarkMode}`);
             });
 
@@ -2798,29 +3005,36 @@ gantt
               $('#dark-mode-toggle').prop('checked', isDarkMode);
             });
 
-            // Remove all previous click handlers on .style-card and Mermaid elements to avoid stacking
-            $('.style-card').off('click');
-            $('.mermaid .task, .mermaid text.taskText').off('click');
-            $cssEditor.off('input');
-            $(document).off('keydown.themeCycle');
+            // Function to rebind all click handlers
+            function rebindClickHandlers() {
+              // Remove existing handlers first
+              $('.style-card').off('click');
+              $('.mermaid .task, .mermaid text.taskText').off('click');
+              
+              // Rebind style card clicks
+              $('.style-card').on('click', function () {
+                const index = $(this).data('index');
+                if (typeof index === 'number') {
+                  console.log(`Style card clicked. Applying index: ${index}`);
+                  applyTheme(index);
+                  gtag('event', 'apply_theme_click', {
+                    event_category: 'Theme Card Click',
+                    event_label: getCurrentThemeSet()[index].handle,
+                    value: index
+                  });
+                }
+              });
 
-            function applyThemeById(elementId) {
-              const themes = getCurrentThemeSet();
-              const index = themes.findIndex(theme => theme.id === elementId);
-
-              if (index === -1) {
-                console.warn(`No theme found matching ID: "${elementId}"`);
-                gtag('event', 'apply_theme_click_error', {
-                  event_category: 'Mermaid Interaction',
-                  event_label: `Missing theme for ID: ${elementId}`,
-                  non_interaction: true
-                });
-                return;
-              }
-
-              console.log(`Applying theme by ID: "${elementId}" at index: ${index}`);
-              applyTheme(index);
-
+              // Rebind Mermaid timeline task clicks
+              $('.mermaid .task, .mermaid text.taskText').on('click', function () {
+                const elementId = this.id;
+                if (elementId) {
+                  applyThemeById(elementId);
+                } else {
+                  console.warn('Clicked Mermaid element has no ID');
+                }
+              });
+            
               gtag('event', 'apply_theme_click', {
                 event_category: 'Theme Interaction',
                 event_label: themes[index].handle,
