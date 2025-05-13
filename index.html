@@ -340,47 +340,7 @@
         transform: translateY(-3px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
-      
-      /* CSS editor styles */
-      #css-editor,
-      #html-editor {
-        font-family: 'Courier New', monospace;
-        line-height: 1.5;
-        padding: 10px;
-        border-radius: 4px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-        resize: vertical;
-      }
-      
-      .css-editor {
-        margin: auto;
-        max-width: 800vw;
-        min-width: 500px;
-        min-height: 150px;
-        text-align: center;
-        display: block;
-      }
-      
-      .css-editor {
-        margin: auto;
-        max-width: 800vw;
-        min-width: 500px;
-        min-height: 150px;
-        text-align: center;
-        display: block;
-      }
-      
-      .html-editor {
-        margin: auto;
-        max-width: calc(100% - 20px);
-        min-width: 500px;
-        min-height: 500px;
-        text-align: center;
-        display: block;
-      }
-      
+            
       /* Tooltip to indicate clickable elements */
       [data-tooltip]:before {
         content: attr(data-tooltip);
@@ -454,38 +414,9 @@
         max-width: 1300px;
         margin: 0 auto;
       }
+
       
-      /* Ensure main content scrolls above video */
-      main {
-        position: relative;
-        max-width: 85%;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        /* Remove any padding */
-        margin: auto;
-        /* Remove any margins */
-        top: 5vh;
-        max-width: 1200px;
-        /* Adjust this value as needed */
-        display: flex;
-        flex-wrap: wrap !important;
-        gap: 20px;
-      }
       
-      #under-construction {
-        position: absolute;
-        margin: 2rem;
-        width: 100%;
-        height: 100%;
-        left: 40%;
-      }
-      
-      .counter {
-        display: flex;
-        flex: row wrap;
-        padding: 2rem;
-      }
     </style>
     <style>
       /* Dark mode toggle styles */
@@ -1024,6 +955,23 @@ gantt
             );
             font-family: 'Comic Sans MS', 'Comic Sans', cursive;
           }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
           .content-wrapper {
               display: block;
               position: relative;
@@ -1064,8 +1012,47 @@ gantt
             background:rgb(245, 245, 243);
             color:rgb(42, 44, 20);
           }
+          /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `
+        'darkCss': `
           body { 
             /* fill the full viewport */
             min-height: 100vh;
@@ -1081,7 +1068,22 @@ gantt
             );
             font-family: 'Comic Sans MS', 'Comic Sans', cursive;
           }
-          
+              main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
           .content-wrapper {
             display: block;
             position: relative;
@@ -1111,32 +1113,71 @@ gantt
             background: #333300;
             color: #f0f0f0;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
           }, {
             'id': 'vernacular',
             'handle': 'vernacularStyle',
             'name': 'Vernacular / Geocities',
             'lightCss': `
-          body { 
-            /* fill the full viewport */
-            min-height: 100vh;
-            margin: 0;
-            /* repeating diagonal stripes */
-            background-image: repeating-linear-gradient(
-                var(--stripe-angle),
-                var(--stripe-color) 0,
-                var(--stripe-color) var(--stripe-width),
-              transparent var(--stripe-width),
-                transparent var(--stripe-spacing)
-            );
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-          }
-          .content-wrapper {
-              display: block;
-              position: relative;
-              left: 0;
-              top: 0;
-            }
+              body { 
+                /* fill the full viewport */
+                min-height: 100vh;
+                margin: 0;
+                /* repeating diagonal stripes */
+                background-image: repeating-linear-gradient(
+                    var(--stripe-angle),
+                    var(--stripe-color) 0,
+                    var(--stripe-color) var(--stripe-width),
+                  transparent var(--stripe-width),
+                    transparent var(--stripe-spacing)
+                );
+                font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+              }
+              .content-wrapper {
+                  display: block;
+                  position: relative;
+                  left: 0;
+                  top: 0;
+                }
             .header-content h1 { 
               color: #ff0000; 
               font-size: 3vw;
@@ -1153,7 +1194,6 @@ gantt
           }
           .style-card {
             background: #ffffcc;
-            border: 3px outset #cc9966;
           }
           .style-description {
             color: #333333;
@@ -1170,6 +1210,57 @@ gantt
           .mermaid {
             background:rgb(245, 245, 243);
             color:rgb(42, 44, 20);
+          }
+          .counter {
+            display: flex;
+            flex: row wrap;
+            padding: 2rem;
+          }
+          #under-construction {
+            position: absolute;
+            margin: 2rem;
+            width: 100%;
+            height: 100%;
+            left: 40%;
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
           }
         `,
           'darkCss': `
@@ -1188,42 +1279,104 @@ gantt
             );
             font-family: 'Comic Sans MS', 'Comic Sans', cursive;
           }
-          
           .content-wrapper {
-            display: block;
-            position: relative;
-            left: 0;
-            top: 0;
-          }
-          .header-content h1 { 
-            color: #ff0000; 
-            font-size: 6vw;
-            margin-bottom: 5px;
-          }
-          .header-content p { 
-            color: #ffa600; 
-            font-size: 4vw;
-          }
+              display: block;
+              position: relative;
+              left: 0;
+              top: 0;
+            }
+            .header-content h1 { 
+              color: #ff0000; 
+              font-size: 3vw;
+              margin-bottom: 5px;
+            }
+            .header-content p { 
+              color: #ffa600; 
+              font-size: 1.5vw;
+            }
           .era-timeline { 
             display: block !important;
-            background: var(--inverse-bg-color, #222);
-            opacity: var(--opacity, 0.8);
+            background: var(--bg-color);
+            opacity: var(--opacity);
+          }
+          .style-card {
+            background: #ffffcc;
+          }
+          .style-description {
+            color: #333333;
+          }
+          .style-title {
+            color: #990000;
+            font-weight: bold;
           }
           .style-links a {
-            color: #66ccff;
+            color: #0000ff;
+            text-decoration: underline;
           }
           .extra-under { display: block !important; }
           .mermaid {
-            background: #333300;
-            color: #f0f0f0;
+            background:rgb(245, 245, 243);
+            color:rgb(42, 44, 20);
+          }
+          .counter {
+            display: flex;
+            flex: row wrap;
+            padding: 2rem;
+            color: #dddddd;
+          }
+          #under-construction {
+            position: absolute;
+            margin: 2rem;
+            width: 100%;
+            height: 100%;
+            left: 40%;
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
           }
         `
-                },
-                {
-                  'id': 'table-frames',
-                  'handle': 'table-framesStyle',
-                  'name': 'Table-Based Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'table-frames',
+          'handle': 'table-framesStyle',
+          'name': 'Table-Based Design',
+          'lightCss': `
           body {
             font-family: Arial, sans-serif;
             background: #f0f0f0;
@@ -1233,6 +1386,16 @@ gantt
             display: table;
             width: 100%;
             border-collapse: collapse;
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
           }
           .style-card {
             display: table-cell;
@@ -1241,9 +1404,47 @@ gantt
             background: white;
           }
           #main-table { display: block !important; }
-      
-      `,
-'darkCss': `
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
+        `,
+        'darkCss': `
         body {
           font-family: Arial, sans-serif;
           background: #f0f0f0;
@@ -1253,6 +1454,16 @@ gantt
           display: table;
           width: 100%;
           border-collapse: collapse;
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
         }
         .style-card {
           display: table-cell;
@@ -1261,6 +1472,45 @@ gantt
           background: white;
         }
         #main-table { display: block !important; }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
       },
       {
@@ -1299,6 +1549,45 @@ gantt
           main {
             margin-left: 200px;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
         'darkCss': `
         body {
@@ -1332,6 +1621,45 @@ gantt
         main {
           margin-left: 200px;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
       },
       {
@@ -1344,6 +1672,23 @@ gantt
             color: #fff;
             font-family: Arial, sans-serif;
             text-align: center;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .extra-flash-intro { 
             display: block !important; 
@@ -1367,6 +1712,45 @@ gantt
           .style-links a {
             color: #66ccff;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
         'darkCss': `
         body {
@@ -1374,6 +1758,23 @@ gantt
           color: #fff;
           font-family: Arial, sans-serif;
           text-align: center;
+        }
+        /* Ensure main content scrolls above video */
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .extra-flash-intro { 
           display: block !important; 
@@ -1397,6 +1798,45 @@ gantt
         .style-links a {
           color: #66ccff;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
       },
       {
@@ -1407,6 +1847,23 @@ gantt
           body {
             font-family: 'Lucida Grande', Arial, sans-serif;
             background: #f6f6f6;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             border-radius: 8px;
@@ -1429,10 +1886,66 @@ gantt
             text-transform: uppercase;
             font-weight: bold;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-        'darkCss': `body {
+        'darkCss': `
+        body {
           font-family: 'Lucida Grande', Arial, sans-serif;
           background: #f6f6f6;
+        }
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .style-card {
           border-radius: 8px;
@@ -1455,6 +1968,45 @@ gantt
           text-transform: uppercase;
           font-weight: bold;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
       },
       {
@@ -1463,8 +2015,23 @@ gantt
         'name': 'Skeuomorphic Design',
         'lightCss': `
           body {
-            
             font-family: 'Helvetica Neue', Arial, sans-serif;
+          }
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
@@ -1489,12 +2056,67 @@ gantt
             pointer-events: none;
             
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
         'darkCss': `
           body {
             background: #222;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #e0e0e0;
+          }
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: url('https://i.imgur.com/Ncrkb8L.png') repeat;
@@ -1523,18 +2145,73 @@ gantt
             border-color: #444;
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'swiss',
-                  'handle': 'swissStyle',
-                  'name': 'Swiss Style Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'swiss',
+          'handle': 'swissStyle',
+          'name': 'Swiss Style Design',
+          'lightCss': `
           body {
             font-family: Helvetica, Arial, sans-serif;
             background: white;
             color: black;
             line-height: 1.5;
+          }
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           main {
             display: grid;
@@ -1571,8 +2248,47 @@ gantt
             pointer-events: none;
             z-index: 1000;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `
+          'darkCss': `
           body {
             font-family: Helvetica, Arial, sans-serif;
             background: #121212;
@@ -1583,6 +2299,20 @@ gantt
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             grid-gap: 20px;
+        
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+
+            gap: 20px;
           }
           .style-card {
             grid-column: span 4;
@@ -1606,19 +2336,75 @@ gantt
             color: white;
             border-color: white;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'minimalist',
-                  'handle': 'minimalistStyle',
-                  'name': 'Minimalist',
-                  'lightCss': `
+        },
+        {
+          'id': 'minimalist',
+          'handle': 'minimalistStyle',
+          'name': 'Minimalist',
+          'lightCss': `
           body {
             font-family: 'Inter', sans-serif;
             background: white;
             color: #333;
             line-height: 1.6;
           }
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
+
           .style-card {
             background: white;
             border: none;
@@ -1640,14 +2426,70 @@ gantt
             border-bottom: 1px solid #000;
             padding-bottom: 2px;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `
-      body {
+        'darkCss': `
+        body {
             font-family: 'Inter', sans-serif;
             background: #121212;
             color: #e0e0e0;
             line-height: 1.6;
           }
+            main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
+
           .style-card {
             background: #1a1a1a;
             border: none;
@@ -1676,18 +2518,68 @@ gantt
             border: none;
             border-bottom: 1px solid #333;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'responsive',
-                  'handle': 'responsiveStyle',
-                  'name': 'Responsive Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'responsive',
+          'handle': 'responsiveStyle',
+          'name': 'Responsive Design',
+          'lightCss': `
           body {
             font-family: 'Open Sans', sans-serif;
             background: #f9f9f9;
           }
           main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -1710,17 +2602,67 @@ gantt
               flex: 0 0 100%;
             }
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `,
-'darkCss': `
+      'darkCss': `
         body {
           font-family: 'Open Sans', sans-serif;
           background: #f9f9f9;
         }
         main {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
         .style-card {
           flex: 0 0 calc(33.333% - 20px);
           margin-bottom: 30px;
@@ -1739,13 +2681,52 @@ gantt
             flex: 0 0 100%;
           }
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'mobile-first',
-                  'handle': 'mobile-firstStyle',
-                  'name': 'Mobile-First Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'mobile-first',
+        'handle': 'mobile-firstStyle',
+        'name': 'Mobile-First Design',
+        'lightCss': `
           body {
             font-family: 'Roboto', sans-serif;
             font-size: 16px;
@@ -1755,6 +2736,19 @@ gantt
           }
           main {
             padding: 10px;
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             width: 100%;
@@ -1780,9 +2774,48 @@ gantt
               width: calc(33.333% - 15px);
             }
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `
-      body {
+        'darkCss': `
+        body {
           font-family: 'Roboto', sans-serif;
           font-size: 16px;
           line-height: 1.5;
@@ -1791,6 +2824,19 @@ gantt
         }
         main {
           padding: 10px;
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .style-card {
           width: 100%;
@@ -1817,16 +2863,32 @@ gantt
           }
         }
       `
-                },
-                {
-                  'id': 'flat',
-                  'handle': 'flatStyle',
-                  'name': 'Flat Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'flat',
+        'handle': 'flatStyle',
+        'name': 'Flat Design',
+        'lightCss': `
           body {
             font-family: 'Segoe UI', 'Roboto', sans-serif;
             background: #f9f9f9;
             color: #333;
+          }
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -1842,12 +2904,67 @@ gantt
             color: #0078d7;
             text-decoration: none;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `
+        'darkCss': `
       body {
           font-family: 'Segoe UI', 'Roboto', sans-serif;
           background: #f9f9f9;
           color: #333;
+        }
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .style-card {
           background: white;
@@ -1863,17 +2980,72 @@ gantt
           color: #0078d7;
           text-decoration: none;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'semi-flat',
-                  'handle': 'semi-flatStyle',
-                  'name': 'Semi-Flat Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'semi-flat',
+        'handle': 'semi-flatStyle',
+        'name': 'Semi-Flat Design',
+        'lightCss': `
           body {
             font-family: 'SF Pro Text', 'Roboto', sans-serif;
             background: #f5f5f5;
             color: #333;
+          }
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -1889,12 +3061,67 @@ gantt
           .style-title {
             color: #007aff;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `
-      body {
+        'darkCss': `
+        body {
           font-family: 'SF Pro Text', 'Roboto', sans-serif;
           background: #f5f5f5;
           color: #333;
+        }
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .style-card {
           background: white;
@@ -1910,13 +3137,52 @@ gantt
         .style-title {
           color: #007aff;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'parallax',
-                  'handle': 'parallaxStyle',
-                  'name': 'Parallax Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'parallax',
+        'handle': 'parallaxStyle',
+        'name': 'Parallax Design',
+        'lightCss': `
           body {
             font-family: 'Montserrat', sans-serif;
             background: #222;
@@ -1927,6 +3193,20 @@ gantt
             overflow-y: auto;
           }
           main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
             transform-style: preserve-3d;
           }
           .style-card {
@@ -1937,8 +3217,48 @@ gantt
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             transform: translateZ(0);
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `
+        body {
           font-family: 'Montserrat', sans-serif;
           background: #222;
           color: white;
@@ -1948,6 +3268,20 @@ gantt
           overflow-y: auto;
         }
         main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
           transform-style: preserve-3d;
         }
         .style-card {
@@ -1958,18 +3292,74 @@ gantt
           box-shadow: 0 5px 15px rgba(0,0,0,0.2);
           transform: translateZ(0);
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'spa',
-                  'handle': 'single-page-appStyle',
-                  'name': 'Single-Page App Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'spa',
+        'handle': 'single-page-appStyle',
+        'name': 'Single-Page App Design',
+        'lightCss': `
           body {
             font-family: 'Roboto', sans-serif;
             background: #fafafa;
             color: #333;
             padding-top: 60px;
+          }
+              /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           header {
             position: fixed;
@@ -1988,12 +3378,68 @@ gantt
             box-shadow: 0 1px 3px rgba(0,0,0,0.12);
             transition: all 0.3s cubic-bezier(.25,.8,.25,1);
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `
+        body {
           font-family: 'Roboto', sans-serif;
           background: #fafafa;
           color: #333;
           padding-top: 60px;
+        }
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         header {
           position: fixed;
@@ -2012,19 +3458,75 @@ gantt
           box-shadow: 0 1px 3px rgba(0,0,0,0.12);
           transition: all 0.3s cubic-bezier(.25,.8,.25,1);
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'pwa',
-                  'handle': 'pwaStyle',
-                  'name': 'Progressive Web App Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'pwa',
+        'handle': 'pwaStyle',
+        'name': 'Progressive Web App Design',
+        'lightCss': `
           body {
             font-family: 'Google Sans', 'Roboto', sans-serif;
             background: #f5f5f5;
             color: #202124;
             margin: 0;
             padding: 0;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           header {
             background: #1a73e8;
@@ -2039,13 +3541,70 @@ gantt
             margin-bottom: 16px;
             overflow: hidden;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `
+        body {
           font-family: 'Google Sans', 'Roboto', sans-serif;
           background: #f5f5f5;
           color: #202124;
           margin: 0;
           padding: 0;
+        }
+        /* Ensure main content scrolls above video */
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         header {
           background: #1a73e8;
@@ -2060,13 +3619,52 @@ gantt
           margin-bottom: 16px;
           overflow: hidden;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'cinematic',
-                  'handle': 'cinematicStyle',
-                  'name': 'Cinematic Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'cinematic',
+        'handle': 'cinematicStyle',
+        'name': 'Cinematic Design',
+        'lightCss': `
           body {
             font-family: 'Playfair Display', serif;
             color: #fff;
@@ -2077,6 +3675,23 @@ gantt
           }
           .hero-section, .content-wrapper {
             display: block !important;
+          }
+                /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .era-timeline {
             top: 0;
@@ -2117,9 +3732,48 @@ gantt
           .mermaid {
             background:rgb(245, 245, 243);
             color:rgb(42, 44, 20);
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
           }
         `,
-                  'darkCss': `
+        'darkCss': `
           body {
             font-family: 'Playfair Display', serif;
             color: #fff;
@@ -2130,6 +3784,22 @@ gantt
           }
           .hero-section, .content-wrapper {
             display: block !important;
+          }
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .era-timeline {
             top: 0;
@@ -2171,17 +3841,73 @@ gantt
             background:rgb(245, 245, 243);
             color:rgb(42, 44, 20);
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'corporate-memphis',
-                  'handle': 'corporate-memphisStyle',
-                  'name': 'Corporate Memphis',
-                  'lightCss': `
+        },
+        {
+          'id': 'corporate-memphis',
+          'handle': 'corporate-memphisStyle',
+          'name': 'Corporate Memphis',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #f0f0f0;
             color: #333;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: #ffffff;
@@ -2211,11 +3937,68 @@ gantt
           .mermaid .task {
             fill: var(--accent-color);
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `
+        body {
             font-family: 'Playfair Display', serif;
             color: #e0e0e0;
           }
+              /* Ensure main content scrolls above video */
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
+        }
           .era-timeline {
             top: 0;
             left: 0;
@@ -2261,13 +4044,52 @@ gantt
         .mermaid .task {
           fill: var(--inverse-accent-color);
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'brutalist',
-                  'handle': 'brutalistStyle',
-                  'name': 'Brutalist Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'brutalist',
+          'handle': 'brutalistStyle',
+          'name': 'Brutalist Design',
+          'lightCss': `
           body {
             font-family: monospace;
             background: white;
@@ -2280,6 +4102,14 @@ gantt
             max-width: none;
             margin: 0;
             padding: 0;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            top: 5vh;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -2290,7 +4120,7 @@ gantt
             box-shadow: none;
           }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
             font-family: monospace;
             background: black;
             color: white;
@@ -2298,10 +4128,18 @@ gantt
             padding: 20px;
             line-height: 1.2;
           }
-          main {
+                    main {
             max-width: none;
             margin: 0;
             padding: 0;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            top: 5vh;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: black;
@@ -2324,17 +4162,73 @@ gantt
             border: 2px solid white;
             font-family: monospace;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'neo-brutalism',
-                  'handle': 'neo-brutalismStyle',
-                  'name': 'Neo-Brutalism Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'neo-brutalism',
+          'handle': 'neo-brutalismStyle',
+          'name': 'Neo-Brutalism Design',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -2344,11 +4238,68 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `
+          body {
             font-family: 'Arial', sans-serif;
             background: #121212;
             color: #e0e0e0;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: #1a1a1a;
@@ -2358,17 +4309,73 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'corporate-memphis',
-                  'handle': 'corporate-memphisStyle',
-                  'name': 'Corporate Memphis',
-                  'lightCss': `
+        },
+        {
+          'id': 'corporate-memphis',
+          'handle': 'corporate-memphisStyle',
+          'name': 'Corporate Memphis',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -2378,12 +4385,69 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
             font-family: 'Arial', sans-serif;
             background: #121212;
             color: #e0e0e0;
           }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
+
           .style-card {
             background: #1a1a1a;
             border: 3px solid white;
@@ -2392,18 +4456,75 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'retro-web',
-                  'handle': 'retro-webStyle',
-                  'name': 'Retro Web',
-                  'lightCss': `
+        },
+        {
+          'id': 'retro-web',
+          'handle': 'retro-webStyle',
+          'name': 'Retro Web',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
           }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
+
           .style-card {
             background: white;
             border: 3px solid black;
@@ -2412,12 +4533,69 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
             font-family: 'Arial', sans-serif;
             background: #121212;
             color: #e0e0e0;
           }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
+
           .style-card {
             background: #1a1a1a;
             border: 3px solid white;
@@ -2426,18 +4604,75 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'y2k-web',
-                  'handle': 'y2k-webStyle',
-                  'name': 'Y2K Web',
-                  'lightCss': `
+        },
+        {
+          'id': 'y2k-web',
+          'handle': 'y2k-webStyle',
+          'name': 'Y2K Web',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
           }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
+
           .style-card {
             background: white;
             border: 3px solid black;
@@ -2447,7 +4682,7 @@ gantt
             transition: all 0.2s ease;
           }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
             background: #1a1a1a;
             border: 3px solid #bb86fc;
             border-radius: 0;
@@ -2455,6 +4690,23 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
             color: #e0e0e0;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-title {
             color: #bb86fc;
@@ -2468,17 +4720,73 @@ gantt
             border: 3px solid #bb86fc;
             box-shadow: 5px 5px 0 #bb86fc;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `
-                },
-                {
-                  'id': 'dark-mode',
-                  'handle': 'dark-modeStyle',
-                  'name': 'Dark Mode Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'dark-mode',
+          'handle': 'dark-modeStyle',
+          'name': 'Dark Mode Design',
+          'lightCss': `
           body {
             font-family: 'SF Pro Text', 'Roboto', sans-serif;
             background: #121212;
             color: #e0e0e0;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: #1e1e1e;
@@ -2497,12 +4805,69 @@ gantt
             color: #e0e0e0;
             border-color: #444;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `
+        body {
           font-family: 'SF Pro Text', 'Roboto', sans-serif;
           background: #121212;
           color: #e0e0e0;
         }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }
         .style-card {
           background: #1e1e1e;
           border: 1px solid #333;
@@ -2520,17 +4885,73 @@ gantt
           color: #e0e0e0;
           border-color: #444;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'neumorphism',
-                  'handle': 'neumorphismStyle',
-                  'name': 'Neumorphism Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'neumorphism',
+        'handle': 'neumorphismStyle',
+        'name': 'Neumorphism Design',
+        'lightCss': `
          body {
             font-family: 'Poppins', sans-serif;
             background: #e0e5ec;
             color: #333;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: #e0e5ec;
@@ -2546,11 +4967,67 @@ gantt
             color: #555;
             text-decoration: none;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
             font-family: 'Poppins', sans-serif;
             background: #2d2d2d;
             color: #e0e0e0;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: #2d2d2d;
@@ -2567,6 +5044,45 @@ gantt
             color: #03dac6;
             text-decoration: none;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
           #css-editor {
             background: #2d2d2d;
             border-radius: 15px;
@@ -2575,16 +5091,33 @@ gantt
             color: #e0e0e0;
           }
         `
-                },
-                {
-                  'id': 'glassmorphism',
-                  'handle': 'glassmorphismStyle',
-                  'name': 'Glassmorphism Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'glassmorphism',
+          'handle': 'glassmorphismStyle',
+          'name': 'Glassmorphism Design',
+          'lightCss': `
          body {
             font-family: 'Segoe UI', 'Roboto', sans-serif;
             background: #f9f9f9;
             color: #333;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -2600,11 +5133,68 @@ gantt
             color: #0078d7;
             text-decoration: none;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `
+        body {
             font-family: 'Segoe UI', 'Roboto', sans-serif;
             background: linear-gradient(135deg, #121212, #2d2d2d);
             color: #e0e0e0;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: rgba(255, 255, 255, 0.1);
@@ -2621,6 +5211,45 @@ gantt
           .style-links a {
             color: #03dac6;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
           #css-editor {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -2629,16 +5258,33 @@ gantt
             color: #e0e0e0;
           }
         `
-                },
-                {
-                  'id': 'corporate-memphis',
-                  'handle': 'corporate-memphisStyle',
-                  'name': 'Corporate Memphis Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'corporate-memphis',
+          'handle': 'corporate-memphisStyle',
+          'name': 'Corporate Memphis Design',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
+          }
+            /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -2648,10 +5294,66 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
             background-color: #121212;
             color: #e0e0e0;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background-color: #1e1e1e;
@@ -2664,22 +5366,73 @@ gantt
           .style-links a {
             color: #03dac6;
           }
-          #css-editor {
-            background-color: #2a2a2a;
-            color: #e0e0e0;
-            border-color: #444;
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
           }
         `
-                },
-                {
-                  'id': 'retro-web',
-                  'handle': 'retro-webStyle',
-                  'name': 'Retro Web Design',
-                  'lightCss': `
+        },
+        {
+          'id': 'retro-web',
+          'handle': 'retro-webStyle',
+          'name': 'Retro Web Design',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -2688,12 +5441,68 @@ gantt
             box-shadow: 5px 5px 0 black;
             transform: rotate(-1deg);
             transition: all 0.2s ease;
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
           }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
           font-family: 'Arial', sans-serif;
           background: #ffde59;
           color: black;
+        }
+        /* Ensure main content scrolls above video */
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .style-card {
           background: white;
@@ -2703,18 +5512,142 @@ gantt
           transform: rotate(-1deg);
           transition: all 0.2s ease;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'y2k-web',
-                  'handle': 'y2k-webStyle',
-                  'name': 'Y2K Web Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'y2k-web',
+        'handle': 'y2k-webStyle',
+        'name': 'Y2K Web Design',
+        'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
           }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+          }          .style-card {
+            background: white;
+            border: 3px solid black;
+            border-radius: 0;
+            box-shadow: 5px 5px 0 black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          } 
+        `,
+          'darkCss': `
+          body {
+          font-family: 'Arial', sans-serif;
+          background: #ffde59;
+          color: black;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+
           .style-card {
             background: white;
             border: 3px solid black;
@@ -2722,30 +5655,73 @@ gantt
             box-shadow: 5px 5px 0 black;
             transform: rotate(-1deg);
             transition: all 0.2s ease;
-          } `,
-                  'darkCss': `body {
-          font-family: 'Arial', sans-serif;
-          background: #ffde59;
-          color: black;
-        }
-        .style-card {
-          background: white;
-          border: 3px solid black;
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        }
-      `
-                },
-                {
-                  'id': 'webgl-3d',
-                  'handle': 'webgl-3dStyle',
-                  'name': 'WebGL & 3D Design',
-                  'lightCss': `
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
+        `
+        },
+        {
+          'id': 'webgl-3d',
+          'handle': 'webgl-3dStyle',
+          'name': 'WebGL & 3D Design',
+          'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             color:rgba(230, 230, 230, 0.9);
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background:rgba(1, 36, 0, 0.9);
@@ -2755,10 +5731,66 @@ gantt
             transform: rotate(-1deg);
             transition: all 0.2s ease;
           }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
         `,
-                  'darkCss': `body {
+        'darkCss': `body {
           font-family: 'Arial', sans-serif;
           color:rgba(230, 230, 230, 0.9);
+        }
+        /* Ensure main content scrolls above video */
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .style-card {
           background:rgba(1, 36, 0, 0.9);
@@ -2768,17 +5800,73 @@ gantt
           transform: rotate(-1deg);
           transition: all 0.2s ease;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
-                },
-                {
-                  'id': 'inclusive-design',
-                  'handle': 'inclusive-designStyle',
-                  'name': 'Inclusive Design',
-                  'lightCss': `
+      },
+      {
+        'id': 'inclusive-design',
+        'handle': 'inclusive-designStyle',
+        'name': 'Inclusive Design',
+        'lightCss': `
           body {
             font-family: 'Arial', sans-serif;
             background: #ffde59;
             color: black;
+          }
+          /* Ensure main content scrolls above video */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            /* Remove any padding */
+            margin: auto;
+            /* Remove any margins */
+            top: 5vh;
+            max-width: 1200px;
+            /* Adjust this value as needed */
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
           }
           .style-card {
             background: white;
@@ -2787,11 +5875,69 @@ gantt
             box-shadow: 5px 5px 0 black;
             transform: rotate(-1deg);
             transition: all 0.2s ease;
-          }`,
-                  'darkCss': `body {
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
+        `,
+        'darkCss': `
+        body {
           font-family: 'Arial', sans-serif;
           background: #ffde59;
           color: black;
+        }
+        /* Ensure main content scrolls above video */
+        main {
+          position: relative;
+          max-width: 85%;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          /* Remove any padding */
+          margin: auto;
+          /* Remove any margins */
+          top: 5vh;
+          max-width: 1200px;
+          /* Adjust this value as needed */
+          display: flex;
+          flex-wrap: wrap !important;
+          gap: 20px;
         }
         .style-card {
           background: white;
@@ -2801,6 +5947,45 @@ gantt
           transform: rotate(-1deg);
           transition: all 0.2s ease;
         }
+                  /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            resize: vertical;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
       `
   }];
 
