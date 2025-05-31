@@ -67,7 +67,15 @@ document.addEventListener('DOMContentLoaded', function() {
               	'https://mytech.today/wp-content/uploads/2025/05/a-Bubble-Buildings-Downtown.mp4'
             ],
             loadingImage: 'https://mytech.today/wp-content/uploads/2025/04/stephan-cassara-VguAb_4yJ_Q-unsplash.jpg'
+        },
+        'color_videos': {
+            videos: [
+                'https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-01.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-02.mp4'
+            ],
+            loadingImage: 'https://mytech.today/wp-content/uploads/2025/04/stephan-cassara-VguAb_4yJ_Q-unsplash.jpg'
         }
+
     };
 
     class VideoPlayer {
