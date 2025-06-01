@@ -1977,6 +1977,73 @@ gantt
           main {
             display: flex;
             flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+          }
+          .style-card {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.2s;
+          }
+          .style-card:hover {
+            transform: translateY(-5px);
+          }
+          .style-title {
+            color: #007acc;
+            font-weight: bold;
+          }
+          .style-links a {
+            color: #007acc;
+            text-decoration: underline;
+          }
+                    /* CSS editor styles */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .css-editor {
+            margin: auto;
+            max-width: 800vw;
+            min-width: 500px;
+            min-height: 150px;
+            text-align: center;
+            display: block;
+          }
+          
+          .html-editor {
+            margin: auto;
+            max-width: calc(100% - 20px);
+            min-width: 500px;
+            min-height: 500px;
+            text-align: center;
+            display: block;
+          }
+      `
+      },
+      {
+        'id': 'skeuomorphic',
+        'handle': 'skeuomorphicStyle',
+        'name': 'Skeuomorphic',
+        'lightCss': `
+          body {
+            background: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+          }
+          main {
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px
             min-width: 500px;
             min-height: 500px;
@@ -6311,8 +6378,8 @@ gantt
     jQuery(function($) {
           try {
             const videoSources = [
-              "https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-01.mp4",
-              "https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-02.mp4"
+              "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4",
+              "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4"
             ];
 
             const $themeStyle = $('#theme-style');
@@ -6507,12 +6574,16 @@ gantt
               }
 
               $('#dark-mode-toggle').prop('checked', isDarkMode);
+              
+              // Bind all click handlers
+              rebindClickHandlers();
             });
 
             // Function to rebind all click handlers
             function rebindClickHandlers() {
               // Remove existing handlers first
               $('.style-card').off('click');
+              $('.style-title').off('click');
               $('.mermaid .task, .mermaid text.taskText').off('click');
               
               // Rebind style card clicks
@@ -6521,8 +6592,26 @@ gantt
                 if (typeof index === 'number') {
                   console.log(`Style card clicked. Applying index: ${index}`);
                   applyTheme(index);
+                  current = index;
                   gtag('event', 'apply_theme_click', {
                     event_category: 'Theme Card Click',
+                    event_label: getCurrentThemeSet()[index].handle,
+                    value: index
+                  });
+                }
+              });
+              
+              // Rebind style title clicks
+              $('.style-title').on('click', function (e) {
+                e.stopPropagation();
+                const $card = $(this).closest('.style-card');
+                const index = $card.data('index');
+                if (typeof index === 'number') {
+                  console.log(`Style title clicked. Applying index: ${index}`);
+                  applyTheme(index);
+                  current = index;
+                  gtag('event', 'apply_theme_click', {
+                    event_category: 'Theme Title Click',
                     event_label: getCurrentThemeSet()[index].handle,
                     value: index
                   });
@@ -6533,16 +6622,19 @@ gantt
               $('.mermaid .task, .mermaid text.taskText').on('click', function () {
                 const elementId = this.id;
                 if (elementId) {
-                  applyThemeById(elementId);
+                  // Find the theme with matching ID and apply it
+                  const themeSet = getCurrentThemeSet();
+                  const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
+                  if (themeIndex !== -1) {
+                    applyTheme(themeIndex);
+                    current = index;
+                    console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
+                  } else {
+                    console.warn(`No theme found with ID: ${elementId}`);
+                  }
                 } else {
                   console.warn('Clicked Mermaid element has no ID');
                 }
-              });
-            
-              gtag('event', 'apply_theme_click', {
-                event_category: 'Theme Interaction',
-                event_label: themes[index].handle,
-                value: index
               });
             }
 
@@ -6560,11 +6652,37 @@ gantt
               }
             });
 
+            // Style title click binding
+            $('.style-title').on('click', function (e) {
+              e.stopPropagation(); // Prevent triggering the parent card's click event
+              const $card = $(this).closest('.style-card');
+              const index = $card.data('index');
+              if (typeof index === 'number') {
+                console.log(`Style title clicked. Applying index: ${index}`);
+                applyTheme(index);
+                current = index;
+                gtag('event', 'apply_theme_click', {
+                  event_category: 'Theme Title Click',
+                  event_label: getCurrentThemeSet()[index].handle,
+                  value: index
+                });
+              }
+            });
+
             // Mermaid timeline task clicks (either rect or text)
             $('.mermaid .task, .mermaid text.taskText').on('click', function () {
               const elementId = this.id;
               if (elementId) {
-                applyThemeById(elementId);
+                // Find the theme with matching ID and apply it
+                const themeSet = getCurrentThemeSet();
+                const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
+                if (themeIndex !== -1) {
+                  applyTheme(themeIndex);
+                  current = themeIndex;
+                  console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
+                } else {
+                  console.warn(`No theme found with ID: ${elementId}`);
+                }
               } else {
                 console.warn('Clicked Mermaid element has no ID');
               }
