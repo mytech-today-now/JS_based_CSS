@@ -908,86 +908,6 @@ gantt
       }
       counterContainer.innerHTML = visitCount
 
-      // Add video functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        // Video configuration
-        const videoSources = [
-          "https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-01.mp4",
-          "https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-02.mp4"
-        ];
-
-        function preloadAndStartVideos() {
-          try {
-            const $video1 = $('#color_videos_1');
-            const $video2 = $('#color_videos_2');
-            
-            $video1.attr('src', videoSources[0]);
-            $video2.attr('src', videoSources[1]);
-
-            let loadedVideos = 0;
-            const totalVideos = 2;
-
-            const checkAndStart = () => {
-              if (loadedVideos === totalVideos) {
-                startCinematicVideos();
-              }
-            };
-
-            $video1.on('loadeddata', () => {
-              console.log('Video 1 loaded');
-              loadedVideos++;
-              checkAndStart();
-            }).on('error', e => {
-              console.error('Error loading video 1:', e);
-            });
-
-            $video2.on('loadeddata', () => {
-              console.log('Video 2 loaded');
-              loadedVideos++;
-              checkAndStart();
-            }).on('error', e => {
-              console.error('Error loading video 2:', e);
-            });
-          } catch (e) {
-            console.error('Error during video preload:', e);
-          }
-        }
-
-        function startCinematicVideos() {
-          try {
-            const $video1 = $('#color_videos_1');
-            const $video2 = $('#color_videos_2');
-            
-            $video1.css('opacity', '1');
-            $video2.css('opacity', '0');
-            $video1.css('display', 'block');
-
-            $video1[0].play().catch(e => console.error('Play error video1:', e));
-
-            $video1.on('ended', () => {
-              $video1.css('opacity', '0');
-              $video2.css('opacity', '1');
-              $video2.css('display', 'block');
-              $video2[0].play().catch(e => console.error('Play error video2:', e));
-            });
-
-            $video2.on('ended', () => {
-              $video2.css('opacity', '0');
-              $video1.css('opacity', '1');
-              $video1[0].currentTime = 0;
-              $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
-            });
-          } catch (e) {
-            console.error('Cinematic video error:', e);
-          }
-        }
-
-        // Initialize videos if we're on a page with color_videos
-        if (document.getElementById('color_videos')) {
-          console.log('Initializing color_videos player');
-          preloadAndStartVideos();
-        }
-      });
 
       // Create Light and Dark Arrays 
       const lightThemes = [{
@@ -6406,63 +6326,78 @@ gantt
 
             let current = 0;
             const themes = getCurrentThemeSet();
-
-            function preloadAndStartVideos() {
-              try {
-                $video1.attr('src', videoSources[0]);
-                $video2.attr('src', videoSources[1]);
-
-                let loadedVideos = 0;
-                const totalVideos = 2;
-
-                const checkAndStart = () => {
-                  if (loadedVideos === totalVideos) {
-                    startCinematicVideos();
-                  }
-                };
-
-                $video1.on('loadeddata', () => {
-                  console.log('Video 1 loaded');
-                  loadedVideos++;
-                  checkAndStart();
-                }).on('error', e => {
-                  console.error('Error loading video 1:', e);
-                });
-
-                $video2.on('loadeddata', () => {
-                  console.log('Video 2 loaded');
-                  loadedVideos++;
-                  checkAndStart();
-                }).on('error', e => {
-                  console.error('Error loading video 2:', e);
-                });
-              } catch (e) {
-                console.error('Error during video preload:', e);
+            
+            // Single video handling function
+            function handleCinematicVideos(action) {
+              if (action === 'start') {
+                $heroSection.show();
+                $contentWrapper.show();
+                
+                // Preload videos if not already loaded
+                if (!$video1.attr('src')) {
+                  $video1.attr('src', videoSources[0]);
+                  $video2.attr('src', videoSources[1]);
+                  
+                  // Wait for videos to load before starting
+                  let loadedVideos = 0;
+                  const totalVideos = 2;
+                  
+                  const checkAndStart = () => {
+                    if (loadedVideos === totalVideos) {
+                      startVideoPlayback();
+                    }
+                  };
+                  
+                  $video1.on('loadeddata', () => {
+                    console.log('Video 1 loaded');
+                    loadedVideos++;
+                    checkAndStart();
+                  }).on('error', e => {
+                    console.error('Error loading video 1:', e);
+                  });
+                  
+                  $video2.on('loadeddata', () => {
+                    console.log('Video 2 loaded');
+                    loadedVideos++;
+                    checkAndStart();
+                  }).on('error', e => {
+                    console.error('Error loading video 2:', e);
+                  });
+                } else {
+                  // Videos already loaded, just start playback
+                  startVideoPlayback();
+                }
+              } else if (action === 'stop') {
+                $heroSection.hide();
+                if ($video1[0]) $video1[0].pause();
+                if ($video2[0]) $video2[0].pause();
               }
             }
-
-            function startCinematicVideos() {
-              try {
-                $video1.css('opacity', '1');
+            
+            function startVideoPlayback() {
+              $video1.css('opacity', '1');
+              $video2.css('opacity', '0');
+              $video1.css('display', 'block');
+              
+              // Clear previous event handlers to prevent duplicates
+              $video1.off('ended');
+              $video2.off('ended');
+              
+              $video1[0].play().catch(e => console.error('Play error video1:', e));
+              
+              $video1.on('ended', () => {
+                $video1.css('opacity', '0');
+                $video2.css('opacity', '1');
+                $video2.css('display', 'block');
+                $video2[0].play().catch(e => console.error('Play error video2:', e));
+              });
+              
+              $video2.on('ended', () => {
                 $video2.css('opacity', '0');
-
-                $video1[0].play().catch(e => console.error('Play error video1:', e));
-
-                $video1.on('ended', () => {
-                  $video1.css('opacity', '0');
-                  $video2.css('opacity', '1');
-                  $video2[0].play().catch(e => console.error('Play error video2:', e));
-                });
-
-                $video2.on('ended', () => {
-                  $video2.css('opacity', '0');
-                  $video1.css('opacity', '1');
-                  $video1[0].currentTime = 0;
-                  $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
-                });
-              } catch (e) {
-                console.error('Cinematic video error:', e);
-              }
+                $video1.css('opacity', '1');
+                $video1[0].currentTime = 0;
+                $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
+              });
             }
 
             // === Theme State Initialization ===
@@ -6536,13 +6471,11 @@ gantt
               console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
               localStorage.setItem('lastThemeIndex', index);
 
-              // Move conditional display logic here
+              // Handle cinematic mode
               if (theme.name.includes('Cinematic')) {
-                $heroSection.show();
-                $contentWrapper.show();
-                startCinematicVideos();
+                handleCinematicVideos('start');
               } else {
-                $heroSection.hide();
+                handleCinematicVideos('stop');
               }
 
               if (theme.name.includes('Vernacular')) {
@@ -6552,7 +6485,6 @@ gantt
                 $underConstruction.hide();
                 $visitorCounter.hide();
               }
-
             }
 
             // === Dark Mode Toggle Handler ===
