@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         'color_videos': {
             videos: [
-                'https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-01.mp4',
-              	'https://mytech.today/wp-content/uploads/2025/05/2010-cinematic-bg-02.mp4'
+                'https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4',
+              	'https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4'
             ],
             loadingImage: 'https://mytech.today/wp-content/uploads/2025/04/stephan-cassara-VguAb_4yJ_Q-unsplash.jpg'
         }
@@ -468,4 +468,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Only initialize the color_videos player if we're on a page that has it
+    if (document.getElementById('color_videos')) {
+        console.log('Initializing color_videos player');
+        try {
+            // Create player with color_videos set directly
+            window.videoPlayers.colorVideos = new VideoPlayer('color_videos');
+            
+            // Add event listener for theme changes
+            document.addEventListener('themeChanged', function(e) {
+                const themeName = e.detail.themeName;
+                if (themeName === 'Cinematic Design') {
+                    window.videoPlayers.colorVideos.startPlayback();
+                } else {
+                    window.videoPlayers.colorVideos.stopPlayback();
+                }
+            });
+        } catch (error) {
+            console.error('Failed to initialize color_videos player:', error);
+        }
+    }
 });
