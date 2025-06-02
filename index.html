@@ -246,7 +246,6 @@
         border-radius: 6px;
         padding: 1rem;
         margin-bottom: 1rem;
-        background: #fff;
         transition: transform 0.2s;
         max-width: calc(33.333% - 20px);
       }
@@ -3642,30 +3641,28 @@ gantt
           body {
             font-family: 'Playfair Display', serif;
             color: #fff;
-            text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
             margin: 0;
             padding: 0;
             background: #000;
+            letter-spacing: 0.03em;
           }
           .hero-section, .content-wrapper {
             display: block !important;
           }
-                /* Ensure main content scrolls above video */
           main {
             position: relative;
             max-width: 85%;
             align-items: center;
             justify-content: center;
             padding: 0;
-            /* Remove any padding */
             margin: auto;
-            /* Remove any margins */
             top: 5vh;
             max-width: 1200px;
-            /* Adjust this value as needed */
             display: flex;
             flex-wrap: wrap !important;
             gap: 20px;
+            z-index: 1;
           }
           .era-timeline {
             top: 0;
@@ -3674,9 +3671,10 @@ gantt
             margin: auto;
             padding: 2rem;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(--blur);
-            /* display: none; /* Hidden by default, shown in cinematic mode */
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
           }
           .video-background {
             position: fixed;
@@ -3686,63 +3684,79 @@ gantt
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            filter: contrast(1.1) saturate(1.2);
           }
           .style-card {
-            background: #ffffcc;
-            border: 3px outset #cc9966;
+            background: rgb(15, 15, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            transform: perspective(1000px) rotateX(0deg);
+          }
+          .style-card:hover {
+            transform: perspective(1000px) rotateX(2deg) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+            border-color: rgba(255, 255, 255, 0.4);
           }
           .style-description {
-            color: #333333;
+            color: #ccc;
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
           }
           .style-title {
-            color: #990000;
+            color: #e6c07b;
             font-weight: bold;
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(230, 192, 123, 0.3);
+            padding-bottom: 0.5rem;
           }
           .style-links a {
-            color: #0000ff;
-            text-decoration: underline;
+            color: #61afef;
+            text-decoration: none;
+            border: 1px solid rgba(97, 175, 239, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+            display: inline-block;
+          }
+          .style-links a:hover {
+            background: rgba(97, 175, 239, 0.1);
+            border-color: rgba(97, 175, 239, 0.6);
+            transform: translateY(-2px);
           }
           .extra-under { display: block !important; }
           .mermaid {
-            background:rgb(245, 245, 243);
-            color:rgb(42, 44, 20);
+            background: rgba(20, 20, 25, 0.9);
+            color: #ddd;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
           }
-                    /* CSS editor styles */
           #css-editor,
           #html-editor {
-            font-family: 'Courier New', monospace;
+            font-family: 'Fira Code', monospace;
             line-height: 1.5;
-            padding: 10px;
+            padding: 15px;
             border-radius: 4px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(20, 20, 25, 0.9);
+            color: #ddd;
             resize: vertical;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
           }
-          
-          .css-editor {
+          .css-editor, .html-editor {
             margin: auto;
-            max-width: 800vw;
+            max-width: 800px;
             min-width: 500px;
             min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .html-editor {
-            margin: auto;
-            max-width: calc(100% - 20px);
-            min-width: 500px;
-            min-height: 500px;
             text-align: center;
             display: block;
           }
@@ -3751,10 +3765,11 @@ gantt
           body {
             font-family: 'Playfair Display', serif;
             color: #fff;
-            text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
             margin: 0;
             padding: 0;
             background: #000;
+            letter-spacing: 0.03em;
           }
           .hero-section, .content-wrapper {
             display: block !important;
@@ -3765,15 +3780,13 @@ gantt
             align-items: center;
             justify-content: center;
             padding: 0;
-            /* Remove any padding */
             margin: auto;
-            /* Remove any margins */
             top: 5vh;
             max-width: 1200px;
-            /* Adjust this value as needed */
             display: flex;
             flex-wrap: wrap !important;
             gap: 20px;
+            z-index: 1;
           }
           .era-timeline {
             top: 0;
@@ -3782,9 +3795,10 @@ gantt
             margin: auto;
             padding: 2rem;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(--blur);
-            /* display: none; /* Hidden by default, shown in cinematic mode */
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
           }
           .video-background {
             position: fixed;
@@ -3794,63 +3808,79 @@ gantt
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            filter: contrast(1.1) saturate(1.2);
           }
           .style-card {
-            background: #ffffcc;
-            border: 3px outset #cc9966;
+            background: rgba(15, 15, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            transform: perspective(1000px) rotateX(0deg);
+          }
+          .style-card:hover {
+            transform: perspective(1000px) rotateX(2deg) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+            border-color: rgba(255, 255, 255, 0.4);
           }
           .style-description {
-            color: #333333;
+            color: #ccc;
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
           }
           .style-title {
-            color: #990000;
+            color: #e6c07b;
             font-weight: bold;
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(230, 192, 123, 0.3);
+            padding-bottom: 0.5rem;
           }
           .style-links a {
-            color: #0000ff;
-            text-decoration: underline;
+            color: #61afef;
+            text-decoration: none;
+            border: 1px solid rgba(97, 175, 239, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+            display: inline-block;
+          }
+          .style-links a:hover {
+            background: rgba(97, 175, 239, 0.1);
+            border-color: rgba(97, 175, 239, 0.6);
+            transform: translateY(-2px);
           }
           .extra-under { display: block !important; }
           .mermaid {
-            background:rgb(245, 245, 243);
-            color:rgb(42, 44, 20);
+            background: rgba(20, 20, 25, 0.9);
+            color: #ddd;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
           }
-                    /* CSS editor styles */
           #css-editor,
           #html-editor {
-            font-family: 'Courier New', monospace;
+            font-family: 'Fira Code', monospace;
             line-height: 1.5;
-            padding: 10px;
+            padding: 15px;
             border-radius: 4px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(20, 20, 25, 0.9);
+            color: #ddd;
             resize: vertical;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
           }
-          
-          .css-editor {
+          .css-editor, .html-editor {
             margin: auto;
-            max-width: 800vw;
+            max-width: 800px;
             min-width: 500px;
             min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .html-editor {
-            margin: auto;
-            max-width: calc(100% - 20px);
-            min-width: 500px;
-            min-height: 500px;
             text-align: center;
             display: block;
           }
@@ -3870,18 +3900,20 @@ gantt
             line-height: 1;
           }
           main {
-            max-width: 100%;
-            margin: 0;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(500px, 2fr));
             gap: 30px;
+            justify-content: center;
           }
           .style-card {
             background: white;
             border: 4px solid black;
             border-radius: 0;
-            padding: 20px;
+            padding: 1rem;
             margin: 0;
             box-shadow: none;
           }
@@ -3913,6 +3945,20 @@ gantt
             color: black;
             outline: 4px solid black;
           }
+          #css-editor, #html-editor {
+            background-color: black;
+            color: white;
+            border: 4px solid white;
+            font-family: monospace;
+            border-radius: 0;
+            padding: 20px;
+            resize: none;
+          }
+          .css-editor, .html-editor {
+            margin: 30px 0;
+            width: 100%;
+            min-height: 200px;
+          }
         `,
         'darkCss': `
           body {
@@ -3935,7 +3981,7 @@ gantt
             background: black;
             border: 4px solid white;
             border-radius: 0;
-            padding: 20px;
+            padding: 1rem;
             margin: 0;
             box-shadow: none;
             color: white;
@@ -5453,343 +5499,376 @@ gantt
     lightCss: theme.darkCss, // Use darkCss as lightCss for dark themes
     darkCss: theme.darkCss   // Keep darkCss the same
   }));
-    </script>
-    <!-- Theme-switcher + CSS editor init -->
-    <script>
-    // Refactored Theme Switcher with Separate Light and Dark Arrays
-    jQuery(function($) {
-          try {
-            const videoSources = [
-              "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4",
-              "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4"
-            ];
 
-            const $themeStyle = $('#theme-style');
-            const $cssEditor = $('#css-editor');
-            const $heroSection = $('.hero-section');
-            const $contentWrapper = $('.content-wrapper');
-            const $video1 = $('#color_videos_1');
-            const $video2 = $('#color_videos_2');
-            const $underConstruction = $('#under-construction');
-            const $visitorCounter = $('.counter');
+  // Define separate video sources for light and dark modes
+  const videoSources = [
+    "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4",
+    "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4"
+  ];
 
-            let current = 0;
-            const themes = getCurrentThemeSet();
+  const videoSources2 = [
+    "https://mytech.today/wp-content/uploads/2025/06/dark-cinematic-bg-01.mp4",
+    "https://mytech.today/wp-content/uploads/2025/06/dark-cinematic-bg-02.mp4"
+  ];
+
+  // Define isDarkMode in the global scope
+  let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+  // Function to get the appropriate video sources based on dark mode
+  function getVideoSources() {
+    return isDarkMode ? videoSources2 : videoSources;
+  }
+
+  // Refactored Theme Switcher with Separate Light and Dark Arrays
+  jQuery(function($) {
+    try {
+      const videoSources = [
+        "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4",
+        "https://mytech.today/wp-content/uploads/2025/06/2010-Cinematic-Bg-05.mp4"
+      ];
+
+      const videoSources2 = [
+        "https://mytech.today/wp-content/uploads/2025/04/tTrucks.mp4",
+        "https://mytech.today/wp-content/uploads/2025/04/Notgridlock.mp4",
+        "https://mytech.today/wp-content/uploads/2025/04/Gridlock.mp4",
+        "https://mytech.today/wp-content/uploads/2025/04/RTA_bus-2-12043240-3840-2160-24Fps.mp4",
+        "https://mytech.today/wp-content/uploads/2025/04/lsd-01-12057787-3840-2160-24Fps.mp4",
+        "https://mytech.today/wp-content/uploads/2025/04/lsd-02-.mp4",
+        "https://mytech.today/wp-content/uploads/2025/04/lower-waker-bridge-2-2005974-Hd-1920-1080-24Fps.mp4"
+      ];
+
+      const $themeStyle = $('#theme-style');
+      const $cssEditor = $('#css-editor');
+      const $heroSection = $('.hero-section');
+      const $contentWrapper = $('.content-wrapper');
+      const $video1 = $('#color_videos_1');
+      const $video2 = $('#color_videos_2');
+      const $underConstruction = $('#under-construction');
+      const $visitorCounter = $('.counter');
+
+      let current = 0;
+      const themes = getCurrentThemeSet();
+      
+      // Single video handling function
+      function handleCinematicVideos(action) {
+        if (action === 'start') {
+          $heroSection.show();
+          $contentWrapper.show();
+          
+          // Get the appropriate video sources based on dark mode
+          const currentSources = getVideoSources();
+          
+          $video1.attr('src', currentSources[0]);
+          $video2.attr('src', currentSources[1]);
+          
+          // Rest of your video handling code
+          if (!$video1.attr('src')) {
+            $video1.attr('src', videoSources[0]);
+            $video2.attr('src', videoSources[1]);
             
-            // Single video handling function
-            function handleCinematicVideos(action) {
-              if (action === 'start') {
-                $heroSection.show();
-                $contentWrapper.show();
-                
-                // Preload videos if not already loaded
-                if (!$video1.attr('src')) {
-                  $video1.attr('src', videoSources[0]);
-                  $video2.attr('src', videoSources[1]);
-                  
-                  // Wait for videos to load before starting
-                  let loadedVideos = 0;
-                  const totalVideos = 2;
-                  
-                  const checkAndStart = () => {
-                    if (loadedVideos === totalVideos) {
-                      startVideoPlayback();
-                    }
-                  };
-                  
-                  $video1.on('loadeddata', () => {
-                    console.log('Video 1 loaded');
-                    loadedVideos++;
-                    checkAndStart();
-                  }).on('error', e => {
-                    console.error('Error loading video 1:', e);
-                  });
-                  
-                  $video2.on('loadeddata', () => {
-                    console.log('Video 2 loaded');
-                    loadedVideos++;
-                    checkAndStart();
-                  }).on('error', e => {
-                    console.error('Error loading video 2:', e);
-                  });
-                } else {
-                  // Videos already loaded, just start playback
-                  startVideoPlayback();
-                }
-              } else if (action === 'stop') {
-                $heroSection.hide();
-                if ($video1[0]) $video1[0].pause();
-                if ($video2[0]) $video2[0].pause();
-              }
-            }
+            // Wait for videos to load before starting
+            let loadedVideos = 0;
+            const totalVideos = 2;
             
-            function startVideoPlayback() {
-              $video1.css('opacity', '1');
-              $video2.css('opacity', '0');
-              $video1.css('display', 'block');
-              
-              // Clear previous event handlers to prevent duplicates
-              $video1.off('ended');
-              $video2.off('ended');
-              
-              $video1[0].play().catch(e => console.error('Play error video1:', e));
-              
-              $video1.on('ended', () => {
-                $video1.css('opacity', '0');
-                $video2.css('opacity', '1');
-                $video2.css('display', 'block');
-                $video2[0].play().catch(e => console.error('Play error video2:', e));
-              });
-              
-              $video2.on('ended', () => {
-                $video2.css('opacity', '0');
-                $video1.css('opacity', '1');
-                $video1[0].currentTime = 0;
-                $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
-              });
-            }
-
-            // === Theme State Initialization ===
-            let isDarkMode = localStorage.getItem('darkMode') === 'true';
-
-
-            function formatCss(css) {
-              try {
-                if (!css) return '/* No CSS defined */';
-                return css
-                  .replace(/}/g, '};\n')
-                  .replace(/{/g, ' {\n')
-                  .replace(/;(?!\n)/g, ';\n')
-                  .replace(/:(?! )/g, ': ')
-                  .trim();
-              } catch (e) {
-                console.error('CSS formatting error:', e);
-                return '/* CSS formatting error */';
+            const checkAndStart = () => {
+              if (loadedVideos === totalVideos) {
+                startVideoPlayback();
               }
-            }
-
-            function dropTheme() {
-              $('body').removeClass(function(i, c) {
-                return (c.match(/(^|\s)theme-\S+/g) || []).join(' ');
-              });
-            }
-
-            function getCurrentThemeSet() {
-              const isDark = $('#dark-mode-toggle').is(':checked');
-              return isDark ? darkThemes : lightThemes;
-            }
-
-            // === Apply Theme by Index ===
-            function applyTheme(index) {
-              const themeSet = getCurrentThemeSet();
-              const theme = themeSet[index];
-              if (!theme) {
-                console.error(`Invalid theme index: ${index}`);
-                return;
-              }
-
-              const cssVars = isDarkMode ? theme.darkCss : theme.lightCss;
-              if (!cssVars) {
-                console.error(`Missing ${isDarkMode ? 'dark' : 'light'} CSS for theme "${theme.name}"`);
-                return;
-              }
-
-              const prettyCss = prettier.format(cssVars, {
-                parser: 'css',
-                plugins: prettierPlugins,
-                printWidth: 80,
-                tabWidth: 2,
-                useTabs: false
-              });
-
-              $themeStyle.html(prettyCss);
-              $cssEditor.val(formatCss(prettyCss));
-
-              // Update the current theme display
-              $('#current-theme').text(theme.name);
-
-              Object.entries(prettyCss).forEach(([key, value]) => {
-                document.documentElement.style.setProperty(key, value);
-              });
-
-              // Dispatch theme changed event
-              document.dispatchEvent(new CustomEvent('themeChanged', {
-                detail: { themeName: theme.name, isDarkMode: isDarkMode }
-              }));
-
-              console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
-              localStorage.setItem('lastThemeIndex', index);
-
-              // Handle cinematic mode
-              if (theme.name.includes('Cinematic')) {
-                handleCinematicVideos('start');
-              } else {
-                handleCinematicVideos('stop');
-              }
-
-              if (theme.name.includes('Vernacular')) {
-                $underConstruction.show();
-                $visitorCounter.show();
-              } else {
-                $underConstruction.hide();
-                $visitorCounter.hide();
-              }
-            }
-
-            // === Dark Mode Toggle Handler ===
-            $('#dark-mode-toggle').on('change', function() {
-              isDarkMode = this.checked;
-              localStorage.setItem('darkMode', isDarkMode);
-
-              // Reapply the current theme with the new dark/light mode setting
-              const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10) || 0;
-              applyTheme(lastIndex);
-              
-              console.log(`Dark Mode toggled: ${isDarkMode}`);
+            };
+            
+            $video1.on('loadeddata', () => {
+              console.log('Video 1 loaded');
+              loadedVideos++;
+              checkAndStart();
+            }).on('error', e => {
+              console.error('Error loading video 1:', e);
             });
-
-            // === Load Theme from Local Storage on Page Load ===
-            $(document).ready(function() {
-              const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
-              if (!isNaN(lastIndex)) {
-                applyTheme(lastIndex);
-              }
-
-              $('#dark-mode-toggle').prop('checked', isDarkMode);
-              
-              // Bind all click handlers
-              rebindClickHandlers();
+            
+            $video2.on('loadeddata', () => {
+              console.log('Video 2 loaded');
+              loadedVideos++;
+              checkAndStart();
+            }).on('error', e => {
+              console.error('Error loading video 2:', e);
             });
-
-            // Function to rebind all click handlers
-            function rebindClickHandlers() {
-              // Remove existing handlers first
-              $('.style-card').off('click');
-              $('.style-title').off('click');
-              $('.mermaid .task, .mermaid text.taskText').off('click');
-              
-              // Rebind style card clicks
-              $('.style-card').on('click', function () {
-                const index = $(this).data('index');
-                if (typeof index === 'number') {
-                  console.log(`Style card clicked. Applying index: ${index}`);
-                  applyTheme(index);
-                  current = index;
-                  gtag('event', 'apply_theme_click', {
-                    event_category: 'Theme Card Click',
-                    event_label: getCurrentThemeSet()[index].handle,
-                    value: index
-                  });
-                }
-              });
-              
-              // Rebind style title clicks
-              $('.style-title').on('click', function (e) {
-                e.stopPropagation();
-                const $card = $(this).closest('.style-card');
-                const index = $card.data('index');
-                if (typeof index === 'number') {
-                  console.log(`Style title clicked. Applying index: ${index}`);
-                  applyTheme(index);
-                  current = index;
-                  gtag('event', 'apply_theme_click', {
-                    event_category: 'Theme Title Click',
-                    event_label: getCurrentThemeSet()[index].handle,
-                    value: index
-                  });
-                }
-              });
-
-              // Rebind Mermaid timeline task clicks
-              $('.mermaid .task, .mermaid text.taskText').on('click', function () {
-                const elementId = this.id;
-                if (elementId) {
-                  // Find the theme with matching ID and apply it
-                  const themeSet = getCurrentThemeSet();
-                  const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
-                  if (themeIndex !== -1) {
-                    applyTheme(themeIndex);
-                    current = index;
-                    console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
-                  } else {
-                    console.warn(`No theme found with ID: ${elementId}`);
-                  }
-                } else {
-                  console.warn('Clicked Mermaid element has no ID');
-                }
-              });
-            }
-
-            // Style card click binding
-            $('.style-card').on('click', function () {
-              const index = $(this).data('index');
-              if (typeof index === 'number') {
-                console.log(`Style card clicked. Applying index: ${index}`);
-                applyTheme(index);
-                gtag('event', 'apply_theme_click', {
-                  event_category: 'Theme Card Click',
-                  event_label: getCurrentThemeSet()[index].handle,
-                  value: index
-                });
-              }
-            });
-
-            // Style title click binding
-            $('.style-title').on('click', function (e) {
-              e.stopPropagation(); // Prevent triggering the parent card's click event
-              const $card = $(this).closest('.style-card');
-              const index = $card.data('index');
-              if (typeof index === 'number') {
-                console.log(`Style title clicked. Applying index: ${index}`);
-                applyTheme(index);
-                current = index;
-                gtag('event', 'apply_theme_click', {
-                  event_category: 'Theme Title Click',
-                  event_label: getCurrentThemeSet()[index].handle,
-                  value: index
-                });
-              }
-            });
-
-            // Mermaid timeline task clicks (either rect or text)
-            $('.mermaid .task, .mermaid text.taskText').on('click', function () {
-              const elementId = this.id;
-              if (elementId) {
-                // Find the theme with matching ID and apply it
-                const themeSet = getCurrentThemeSet();
-                const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
-                if (themeIndex !== -1) {
-                  applyTheme(themeIndex);
-                  current = themeIndex;
-                  console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
-                } else {
-                  console.warn(`No theme found with ID: ${elementId}`);
-                }
-              } else {
-                console.warn('Clicked Mermaid element has no ID');
-              }
-            });
-
-            // CSS editor live updates
-            $cssEditor.on('input', function () {
-              const customCss = $(this).val();
-              $themeStyle.html(customCss);
-              console.log('Custom CSS applied from editor');
-            });
-
-            // Keyboard shortcut: Ctrl + Shift + Space to cycle styles
-            $(document).on('keydown.themeCycle', function (e) {
-              if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
-                const themes = getCurrentThemeSet();
-                const nextIndex = (current + 1) % themes.length;
-                applyTheme(nextIndex);
-                e.preventDefault();
-              }
-            });
-          } catch (e) {
-        console.error('Error with script', e);
+          } else {
+            // Videos already loaded, just start playback
+            startVideoPlayback();
           }
-    });
-    </script>
+        } else if (action === 'stop') {
+          $heroSection.hide();
+          if ($video1[0]) $video1[0].pause();
+          if ($video2[0]) $video2[0].pause();
+        }
+      }
+      
+      function startVideoPlayback() {
+        $video1.css('opacity', '1');
+        $video2.css('opacity', '0');
+        $video1.css('display', 'block');
+        
+        // Clear previous event handlers to prevent duplicates
+        $video1.off('ended');
+        $video2.off('ended');
+        
+        $video1[0].play().catch(e => console.error('Play error video1:', e));
+        
+        $video1.on('ended', () => {
+          $video1.css('opacity', '0');
+          $video2.css('opacity', '1');
+          $video2.css('display', 'block');
+          $video2[0].play().catch(e => console.error('Play error video2:', e));
+        });
+        
+        $video2.on('ended', () => {
+          $video2.css('opacity', '0');
+          $video1.css('opacity', '1');
+          $video1[0].currentTime = 0;
+          $video1[0].play().catch(e => console.error('Replay video1 failed:', e));
+        });
+      }
+
+      // === Theme State Initialization ===
+      let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+
+      function formatCss(css) {
+        try {
+          if (!css) return '/* No CSS defined */';
+          return css
+            .replace(/}/g, '};\n')
+            .replace(/{/g, ' {\n')
+            .replace(/;(?!\n)/g, ';\n')
+            .replace(/:(?! )/g, ': ')
+            .trim();
+        } catch (e) {
+          console.error('CSS formatting error:', e);
+          return '/* CSS formatting error */';
+        }
+      }
+
+      function dropTheme() {
+        $('body').removeClass(function(i, c) {
+          return (c.match(/(^|\s)theme-\S+/g) || []).join(' ');
+        });
+      }
+
+      function getCurrentThemeSet() {
+        const isDark = $('#dark-mode-toggle').is(':checked');
+        return isDark ? darkThemes : lightThemes;
+      }
+
+      // === Apply Theme by Index ===
+      function applyTheme(index) {
+        const themeSet = getCurrentThemeSet();
+        const theme = themeSet[index];
+        if (!theme) {
+          console.error(`Invalid theme index: ${index}`);
+          return;
+        }
+
+        const cssVars = isDarkMode ? theme.darkCss : theme.lightCss;
+        if (!cssVars) {
+          console.error(`Missing ${isDarkMode ? 'dark' : 'light'} CSS for theme "${theme.name}"`);
+          return;
+        }
+
+        const prettyCss = prettier.format(cssVars, {
+          parser: 'css',
+          plugins: prettierPlugins,
+          printWidth: 80,
+          tabWidth: 2,
+          useTabs: false
+        });
+
+        $themeStyle.html(prettyCss);
+        $cssEditor.val(formatCss(prettyCss));
+
+        // Update the current theme display
+        $('#current-theme').text(theme.name);
+
+        Object.entries(prettyCss).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(key, value);
+        });
+
+        // Dispatch theme changed event
+        document.dispatchEvent(new CustomEvent('themeChanged', {
+          detail: { themeName: theme.name, isDarkMode: isDarkMode }
+        }));
+
+        console.log(`Applied theme "${theme.name}" (index: ${index}) in ${isDarkMode ? 'Dark' : 'Light'} Mode`);
+        localStorage.setItem('lastThemeIndex', index);
+
+        // Handle cinematic mode
+        if (theme.name.includes('Cinematic')) {
+          handleCinematicVideos('start');
+        } else {
+          handleCinematicVideos('stop');
+        }
+
+        if (theme.name.includes('Vernacular')) {
+          $underConstruction.show();
+          $visitorCounter.show();
+        } else {
+          $underConstruction.hide();
+          $visitorCounter.hide();
+        }
+      }
+
+      // === Dark Mode Toggle Handler ===
+      $('#dark-mode-toggle').on('change', function() {
+        isDarkMode = this.checked;
+        localStorage.setItem('darkMode', isDarkMode);
+
+        // Reapply the current theme with the new dark/light mode setting
+        const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10) || 0;
+        applyTheme(lastIndex);
+        
+        console.log(`Dark Mode toggled: ${isDarkMode}`);
+      });
+
+      // === Load Theme from Local Storage on Page Load ===
+      $(document).ready(function() {
+        const lastIndex = parseInt(localStorage.getItem('lastThemeIndex'), 10);
+        if (!isNaN(lastIndex)) {
+          applyTheme(lastIndex);
+        }
+
+        $('#dark-mode-toggle').prop('checked', isDarkMode);
+        
+        // Bind all click handlers
+        rebindClickHandlers();
+      });
+
+      // Function to rebind all click handlers
+      function rebindClickHandlers() {
+        // Remove existing handlers first
+        $('.style-card').off('click');
+        $('.style-title').off('click');
+        $('.mermaid .task, .mermaid text.taskText').off('click');
+        
+        // Rebind style card clicks
+        $('.style-card').on('click', function () {
+          const index = $(this).data('index');
+          if (typeof index === 'number') {
+            console.log(`Style card clicked. Applying index: ${index}`);
+            applyTheme(index);
+            current = index;
+            gtag('event', 'apply_theme_click', {
+              event_category: 'Theme Card Click',
+              event_label: getCurrentThemeSet()[index].handle,
+              value: index
+            });
+          }
+        });
+        
+        // Rebind style title clicks
+        $('.style-title').on('click', function (e) {
+          e.stopPropagation();
+          const $card = $(this).closest('.style-card');
+          const index = $card.data('index');
+          if (typeof index === 'number') {
+            console.log(`Style title clicked. Applying index: ${index}`);
+            applyTheme(index);
+            current = index;
+            gtag('event', 'apply_theme_click', {
+              event_category: 'Theme Title Click',
+              event_label: getCurrentThemeSet()[index].handle,
+              value: index
+            });
+          }
+        });
+
+        // Rebind Mermaid timeline task clicks
+        $('.mermaid .task, .mermaid text.taskText').on('click', function () {
+          const elementId = this.id;
+          if (elementId) {
+            // Find the theme with matching ID and apply it
+            const themeSet = getCurrentThemeSet();
+            const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
+            if (themeIndex !== -1) {
+              applyTheme(themeIndex);
+              current = index;
+              console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
+            } else {
+              console.warn(`No theme found with ID: ${elementId}`);
+            }
+          } else {
+            console.warn('Clicked Mermaid element has no ID');
+          }
+        });
+      }
+
+      // Style card click binding
+      $('.style-card').on('click', function () {
+        const index = $(this).data('index');
+        if (typeof index === 'number') {
+          console.log(`Style card clicked. Applying index: ${index}`);
+          applyTheme(index);
+          gtag('event', 'apply_theme_click', {
+            event_category: 'Theme Card Click',
+            event_label: getCurrentThemeSet()[index].handle,
+            value: index
+          });
+        }
+      });
+
+      // Style title click binding
+      $('.style-title').on('click', function (e) {
+        e.stopPropagation(); // Prevent triggering the parent card's click event
+        const $card = $(this).closest('.style-card');
+        const index = $card.data('index');
+        if (typeof index === 'number') {
+          console.log(`Style title clicked. Applying index: ${index}`);
+          applyTheme(index);
+          current = index;
+          gtag('event', 'apply_theme_click', {
+            event_category: 'Theme Title Click',
+            event_label: getCurrentThemeSet()[index].handle,
+            value: index
+          });
+        }
+      });
+
+      // Mermaid timeline task clicks (either rect or text)
+      $('.mermaid .task, .mermaid text.taskText').on('click', function () {
+        const elementId = this.id;
+        if (elementId) {
+          // Find the theme with matching ID and apply it
+          const themeSet = getCurrentThemeSet();
+          const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
+          if (themeIndex !== -1) {
+            applyTheme(themeIndex);
+            current = themeIndex;
+            console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
+          } else {
+            console.warn(`No theme found with ID: ${elementId}`);
+          }
+        } else {
+          console.warn('Clicked Mermaid element has no ID');
+        }
+      });
+
+      // CSS editor live updates
+      $cssEditor.on('input', function () {
+        const customCss = $(this).val();
+        $themeStyle.html(customCss);
+        console.log('Custom CSS applied from editor');
+      });
+
+      // Keyboard shortcut: Ctrl + Shift + Space to cycle styles
+      $(document).on('keydown.themeCycle', function (e) {
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 32) {
+          const themes = getCurrentThemeSet();
+          const nextIndex = (current + 1) % themes.length;
+          applyTheme(nextIndex);
+          e.preventDefault();
+        }
+      });
+    } catch (e) {
+      console.error('Error with script', e);
+    }
+  });
+  </script>
   </body>
 </html>
