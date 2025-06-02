@@ -16,6 +16,7 @@
       gtag('config', 'G-YR81E31MX4')
     </script>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Permanent+Marker&display=swap');
       :root {
         /* Customize these to change stripe look */
         --stripe-color: rgba(252, 255, 75, 0.85);
@@ -265,7 +266,7 @@
       .style-title {
         font-size: 1.25rem;
         cursor: pointer;
-        color: #007acc;
+        color: rgba(0, 122, 204, 0.9);
         display: inline-block;
         margin-bottom: 0.25rem;
       }
@@ -322,38 +323,6 @@
       .mermaid text.sectionTitle:hover {
         font-weight: bold;
         text-decoration: underline;
-      }
-      
-      /* Style cards interactive styles */
-      .style-card {
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-      
-      .style-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-            
-      /* Tooltip to indicate clickable elements */
-      [data-tooltip]:before {
-        content: attr(data-tooltip);
-        position: absolute;
-        opacity: 0;
-        transition: all 0.15s ease;
-        padding: 5px 10px;
-        color: #fff;
-        border-radius: 4px;
-        background: rgba(0, 0, 0, 0.8);
-        pointer-events: none;
-        z-index: 10;
-        white-space: nowrap;
-        transform: translateY(10px);
-      }
-      
-      [data-tooltip]:hover:before {
-        opacity: 1;
-        transform: translateY(0);
       }
       
       /* Add tooltips to Gantt elements */
@@ -665,7 +634,7 @@ gantt
       <article class="style-card" data-index="6" id="skeuomorphic">
         <h3 class="style-title">Skeuomorphic</h3>
         <p class="style-era">2004–2013</p>
-        <p class="style-description">Interfaces mimicking real-world textures (leather, paper, metal).</p>
+        <p class="style-description">Interfaces mimicking real-world textures (leather, metal, PostIt Notes).</p>
         <p class="style-links">
           <a href="https://en.wikipedia.org/wiki/Skeuomorph" target="_blank">Skeuomorph</a>
           <a href="https://en.wikipedia.org/wiki/Apple_Human_Interface_Guidelines#Skeuomorphism" target="_blank">iOS Skeuomorphism</a>
@@ -1019,6 +988,33 @@ gantt
               text-align: center;
               display: block;
             }
+            .style-card {
+              cursor: pointer;
+              transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .style-card:hover {
+              transform: translateY(-3px);
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            /* Tooltip to indicate clickable elements */
+            [data-tooltip]:before {
+              content: attr(data-tooltip);
+              position: absolute;
+              opacity: 0;
+              transition: all 0.15s ease;
+              padding: 5px 10px;
+              color: #fff;
+              border-radius: 4px;
+              background: rgba(0, 0, 0, 0.8);
+              pointer-events: none;
+              z-index: 10;
+              white-space: nowrap;
+              transform: translateY(10px);
+            }
+            [data-tooltip]:hover:before {
+              opacity: 1;
+              transform: translateY(0);
+            }
           `,
         'darkCss': `
           body { 
@@ -1119,6 +1115,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `
           }, {
@@ -1230,6 +1257,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
           'darkCss': `
           body { 
@@ -1338,6 +1396,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `
         },
         {
@@ -1411,6 +1500,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -1478,6 +1598,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -1556,6 +1707,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -1627,6 +1809,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -1719,6 +1932,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -1804,6 +2048,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -1893,6 +2168,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -1975,6 +2281,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
       `
       },
       {
@@ -2009,7 +2346,22 @@ gantt
             background: #fff;
             border-radius: 1px;
           }
-
+          /* Post-it note colors for each card */
+          .style-card:nth-child(5n+1) {
+            background: #FFFA99; /* Classic yellow */
+          }
+          .style-card:nth-child(5n+2) {
+            background: #FF9E9E; /* Salmon pink */
+          }
+          .style-card:nth-child(5n+3) {
+            background: #9EEBFF; /* Sky blue */
+          }
+          .style-card:nth-child(5n+4) {
+            background: #B1FF9E; /* Mint green */
+          }
+          .style-card:nth-child(5n+5) {
+            background: #E19EFF; /* Lavender */
+          }
           .style-card::before,
           .style-card::after {
             content: '';
@@ -2043,6 +2395,45 @@ gantt
 
           .style-card:hover::after {
             right: 5px;
+          }
+          .style-title {
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: rgba(0, 122, 204, 0.9);
+            display: inline-block;
+            margin-bottom: 0.25rem;
+            font-family: "Permanent Marker", cursive;
+            font-weight: 400;
+            font-style: normal;
+            padding: 0 0 0 2rem;
+          }
+          .style-era {
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            padding: 0 0 0 2rem;
+            font-family: "Permanent Marker", cursive;
+            font-weight: 300;
+            font-style: normal;
+            opacity: 0.7;
+          }
+          
+          .style-description {
+            margin-bottom: 0.5rem;
+            padding: 0 1rem 0 2rem;
+            font-family: "Permanent Marker", cursive;
+            font-weight: 300;
+            font-style: normal;
+            opacity: 0.7;
+          }
+          
+          .style-links a {
+            margin-right: 0.5rem;
+            color: #007acc;
+            padding: 0 0 0 2rem;
+            font-family: "Permanent Marker", cursive;
+            font-weight: 100;
+            font-style: normal;
+            opacity: 0.7;
           }
           .era-timeline {
             display: block !important;
@@ -2178,6 +2569,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `
         },
         {
@@ -2281,6 +2703,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
           'darkCss': `
           body {
@@ -2368,6 +2821,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `
         },
@@ -2458,6 +2942,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `,
         'darkCss': `
@@ -2551,6 +3066,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `
         },
         {
@@ -2635,6 +3181,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
       `,
       'darkCss': `
         body {
@@ -2713,6 +3290,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -2807,6 +3415,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -2856,6 +3495,37 @@ gantt
             width: calc(33.333% - 15px);
           }
         }
+        /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
       `
       },
       {
@@ -2937,6 +3607,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
       body {
@@ -3012,6 +3713,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -3094,6 +3826,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -3169,6 +3932,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -3293,6 +4087,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -3414,6 +4239,37 @@ gantt
           text-align: center;
           display: block;
         }
+        /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
       `
       },
       {
@@ -3500,6 +4356,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -3580,6 +4467,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
       `
       },
       {
@@ -3657,6 +4575,37 @@ gantt
             max-width: 800px;
             min-height: 150px;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
           body {
@@ -3729,6 +4678,37 @@ gantt
             width: 100%;
             max-width: 800px;
             min-height: 150px;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -3859,6 +4839,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
           body {
@@ -3983,6 +4994,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `
         },
         {
@@ -4058,6 +5100,37 @@ gantt
             width: 100%;
             min-height: 200px;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
           body {
@@ -4127,6 +5200,37 @@ gantt
             margin: 30px 0;
             width: 100%;
             min-height: 200px;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `
         },
@@ -4201,6 +5305,37 @@ gantt
             min-width: 500px;
             min-height: 150px;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
           body {
@@ -4269,6 +5404,37 @@ gantt
             margin: 2rem auto;
             min-width: 500px;
             min-height: 150px;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `
         },
@@ -4341,6 +5507,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `,
         'darkCss': `
@@ -4420,6 +5617,37 @@ gantt
           text-align: center;
           display: block;
         }
+        /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
       `
       },
       {
@@ -4508,6 +5736,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
           body {
@@ -4592,6 +5851,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `
       },
         {
@@ -4668,6 +5958,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -4740,6 +6061,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `
         },
@@ -4817,6 +6169,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `body {
             font-family: 'Arial', sans-serif;
@@ -4887,6 +6270,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `
         },
@@ -4965,6 +6379,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `body {
             font-family: 'Arial', sans-serif;
@@ -5036,6 +6481,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `
         },
         {
@@ -5073,6 +6549,37 @@ gantt
             box-shadow: 5px 5px 0 black;
             transform: rotate(-1deg);
             transition: all 0.2s ease;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `,
         'darkCss': `body {
@@ -5152,6 +6659,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `
         },
       {
@@ -5227,6 +6765,37 @@ gantt
             text-align: center;
             display: block;
           } 
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
           'darkCss': `
           body {
@@ -5295,6 +6864,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
         `
         },
@@ -5371,6 +6971,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `body {
           font-family: 'Arial', sans-serif;
@@ -5439,6 +7070,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
       },
@@ -5516,6 +7178,37 @@ gantt
             text-align: center;
             display: block;
           }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
+          }
         `,
         'darkCss': `
         body {
@@ -5586,6 +7279,37 @@ gantt
             min-height: 500px;
             text-align: center;
             display: block;
+          }
+          /* Style cards interactive styles */
+          .style-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+          }
+          
+          .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          }
+                
+          /* Tooltip to indicate clickable elements */
+          [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            opacity: 0;
+            transition: all 0.15s ease;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            transform: translateY(10px);
+          }
+          
+          [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateY(0);
           }
       `
   }];
