@@ -796,6 +796,154 @@ gantt
         </p>
       </article>
 
+      <!-- Table-Based Design Elements (hidden by default, shown when table-based theme is active) -->
+      <div id="main-table" style="display: none;">
+        <!-- Main Layout Table -->
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+          <tr>
+            <!-- Header Row -->
+            <td colspan="3" bgcolor="#cccccc" height="80">
+              <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <font face="Times New Roman" size="5" color="#000080">
+                      <b>Interactive Web Design Styles Showcase</b>
+                    </font>
+                    <br>
+                    <font face="Arial" size="2" color="#666666">
+                      From then to now - A journey through web design history
+                    </font>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <!-- Navigation Column -->
+            <td width="150" bgcolor="#eeeeee" valign="top">
+              <table width="100%" border="0" cellpadding="3" cellspacing="1">
+                <tr bgcolor="#999999">
+                  <td align="center">
+                    <font face="Arial" size="2" color="white"><b>NAVIGATION</b></font>
+                  </td>
+                </tr>
+                <tr bgcolor="#ffffff">
+                  <td>
+                    <font face="Arial" size="1">
+                      <a href="#vernacular">• Vernacular</a><br>
+                      <a href="#table-frames">• Table Design</a><br>
+                      <a href="#framesets">• Framesets</a><br>
+                      <a href="#flash">• Flash Design</a><br>
+                      <a href="#web2">• Web 2.0</a><br>
+                      <a href="#skeuomorphic">• Skeuomorphic</a><br>
+                      <a href="#swiss">• Swiss Style</a><br>
+                      <a href="#minimalist">• Minimalist</a><br>
+                    </font>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Spacer -->
+              <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr><td height="10"></td></tr>
+              </table>
+
+              <!-- Stats Table -->
+              <table width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="#999999">
+                <tr bgcolor="#cccccc">
+                  <td align="center">
+                    <font face="Arial" size="1"><b>SITE STATS</b></font>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <font face="Arial" size="1">
+                      Last Updated:<br>
+                      <b>Dec 31, 1998</b><br><br>
+                      Best viewed in:<br>
+                      <b>Netscape 4.0+</b><br><br>
+                      Resolution:<br>
+                      <b>800x600</b>
+                    </font>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+            <!-- Spacer Column -->
+            <td width="10" bgcolor="#ffffff">
+              <!-- Spacer GIF simulation -->
+              <div style="width: 10px; height: 1px; background: transparent;"></div>
+            </td>
+
+            <!-- Main Content Column -->
+            <td bgcolor="#ffffff" valign="top">
+              <table width="100%" border="0" cellpadding="10" cellspacing="0">
+                <tr>
+                  <td>
+                    <font face="Times New Roman" size="4" color="#000080">
+                      <b>Welcome to the Table-Based Design Era!</b>
+                    </font>
+                    <br><br>
+                    <font face="Arial" size="2">
+                      This layout demonstrates how web designers in the mid-1990s used HTML tables
+                      to create complex multi-column layouts before CSS was widely supported.
+                      Every element you see is positioned using table cells, rows, and columns.
+                    </font>
+                    <br><br>
+
+                    <!-- Content Table -->
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0" bordercolor="#cccccc">
+                      <tr bgcolor="#f0f0f0">
+                        <td colspan="2">
+                          <font face="Arial" size="2"><b>Table-Based Layout Features:</b></font>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="50%" valign="top">
+                          <font face="Arial" size="1">
+                            • Nested tables for complex layouts<br>
+                            • Spacer GIFs for precise positioning<br>
+                            • Fixed-width columns<br>
+                            • Border attributes for styling<br>
+                          </font>
+                        </td>
+                        <td width="50%" valign="top">
+                          <font face="Arial" size="1">
+                            • Bgcolor for background colors<br>
+                            • Cellpadding and cellspacing<br>
+                            • Font tags for typography<br>
+                            • Align attributes for positioning<br>
+                          </font>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer Row -->
+          <tr>
+            <td colspan="3" bgcolor="#cccccc" height="40">
+              <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                <tr>
+                  <td align="center">
+                    <font face="Arial" size="1" color="#666666">
+                      © 1998 Web Design Showcase | Best viewed with Netscape Navigator 4.0 |
+                      <a href="mailto:webmaster@example.com">Contact Webmaster</a> |
+                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="1" height="1" alt="spacer">
+                      This page is <font color="#FF0000"><b>Y2K COMPLIANT</b></font>
+                    </font>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
       <article class="style-card" data-index="3" id="framesets">
         <h3 class="style-title">Framesets</h3>
         <p class="style-era">1993–1998</p>
@@ -1856,202 +2004,255 @@ gantt
           'handle': 'table-framesStyle',
           'name': 'Table-Based Design',
           'lightCss': `
+          /* Authentic 1990s Table-Based Design */
           body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            color: #333;
-          }
-          main {
-            display: table;
-            width: 100%;
-            border-collapse: collapse;
-            position: relative;
-            max-width: 85%;
-            align-items: center;
-            justify-content: center;
+            font-family: "Times New Roman", Times, serif;
+            background: #ffffff;
+            color: #000000;
+            margin: 0;
             padding: 0;
-            /* Remove any padding */
-            margin: auto;
-            /* Remove any margins */
-            top: 5vh;
-            max-width: 1200px;
+            font-size: 12px;
           }
-          .style-card {
-            display: table-cell;
-            border: 1px solid #999;
-            padding: 10px;
-            background: white;
+
+          /* Hide modern layout, show table layout */
+          main, .intro, .era-timeline, .css-editor, .html-editor,
+          .content-wrapper, .header-content, .floating-3d-panels {
+            display: none !important;
           }
-          #main-table { display: block !important; }
-                    /* CSS editor styles */
-          #css-editor,
-          #html-editor {
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            resize: vertical;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .html-editor {
-            margin: auto;
-            max-width: calc(100% - 20px);
-            min-width: 500px;
-            min-height: 500px;
-            text-align: center;
-            display: block;
-          }
-          /* Style cards interactive styles */
-          .style-card {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-          }
-          
-          .style-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-          }
-                
-          /* Tooltip to indicate clickable elements */
-          [data-tooltip]:before {
-            content: attr(data-tooltip);
+
+          #main-table {
+            display: block !important;
             position: absolute;
-            opacity: 0;
-            transition: all 0.15s ease;
-            padding: 5px 10px;
-            color: #fff;
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.8);
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
             z-index: 10;
-            white-space: nowrap;
-            transform: translateY(10px);
           }
-          
-          [data-tooltip]:hover:before {
-            opacity: 1;
-            transform: translateY(0);
+
+          /* Authentic table styling */
+          #main-table table {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12px;
+          }
+
+          #main-table td {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12px;
+          }
+
+          #main-table font {
+            line-height: 1.2;
+          }
+
+          /* Navigation links styling */
+          #main-table a {
+            color: #0000EE;
+            text-decoration: underline;
+          }
+
+          #main-table a:visited {
+            color: #551A8B;
+          }
+
+          #main-table a:hover {
+            color: #FF0000;
+          }
+
+          /* Period-appropriate button styling using table cells */
+          .table-button {
+            background: #C0C0C0;
+            border: 2px outset #C0C0C0;
+            padding: 2px 6px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            cursor: pointer;
+          }
+
+          .table-button:hover {
+            background: #E0E0E0;
+          }
+
+          .table-button:active {
+            border: 2px inset #C0C0C0;
+          }
+
+          /* Hide modern UI elements */
+          .dark-mode-toggle, .current-style-display {
+            display: none !important;
+          }
+
+          /* Authentic 1990s scrollbar styling (where supported) */
+          ::-webkit-scrollbar {
+            width: 16px;
+            background: #C0C0C0;
+          }
+
+          ::-webkit-scrollbar-track {
+            background: #C0C0C0;
+            border: 1px inset #C0C0C0;
+          }
+
+          ::-webkit-scrollbar-thumb {
+            background: #C0C0C0;
+            border: 1px outset #C0C0C0;
+          }
+
+          ::-webkit-scrollbar-thumb:hover {
+            background: #E0E0E0;
+          }
+
+          /* Period-appropriate form styling */
+          input, textarea, select {
+            font-family: "MS Sans Serif", sans-serif;
+            font-size: 11px;
+            border: 2px inset #C0C0C0;
+            background: white;
+            padding: 1px 3px;
+          }
+
+          /* Authentic status bar styling */
+          .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #C0C0C0;
+            border-top: 1px solid #808080;
+            font-family: "MS Sans Serif", sans-serif;
+            font-size: 11px;
+            line-height: 20px;
+            padding: 0 5px;
+            z-index: 1000;
           }
         `,
         'darkCss': `
+        /* Authentic 1990s Monochrome Monitor Style */
         body {
-          font-family: Arial, sans-serif;
-          background: #f0f0f0;
-          color: #333;
-        }
-        main {
-          display: table;
-          width: 100%;
-          border-collapse: collapse;
-          position: relative;
-          max-width: 85%;
-          align-items: center;
-          justify-content: center;
+          font-family: "Courier New", monospace;
+          background: #000000;
+          color: #00FF00;
+          margin: 0;
           padding: 0;
-          /* Remove any padding */
-          margin: auto;
-          /* Remove any margins */
-          top: 5vh;
-          max-width: 1200px;
+          font-size: 12px;
         }
-        .style-card {
-          display: table-cell;
-          border: 1px solid #999;
-          padding: 10px;
-          background: white;
+
+        /* Hide modern layout, show table layout */
+        main, .intro, .era-timeline, .css-editor, .html-editor,
+        .content-wrapper, .header-content, .floating-3d-panels {
+          display: none !important;
         }
-        #main-table { display: block !important; }
-                  /* CSS editor styles */
-          #css-editor,
-          #html-editor {
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            resize: vertical;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .html-editor {
-            margin: auto;
-            max-width: calc(100% - 20px);
-            min-width: 500px;
-            min-height: 500px;
-            text-align: center;
-            display: block;
-          }
-          /* Style cards interactive styles */
-          .style-card {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-          }
-          
-          .style-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-          }
-                
-          /* Tooltip to indicate clickable elements */
-          [data-tooltip]:before {
-            content: attr(data-tooltip);
-            position: absolute;
-            opacity: 0;
-            transition: all 0.15s ease;
-            padding: 5px 10px;
-            color: #fff;
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.8);
-            pointer-events: none;
-            z-index: 10;
-            white-space: nowrap;
-            transform: translateY(10px);
-          }
-          
-          [data-tooltip]:hover:before {
-            opacity: 1;
-            transform: translateY(0);
-          }
+
+        #main-table {
+          display: block !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          z-index: 10;
+        }
+
+        /* Monochrome table styling */
+        #main-table table {
+          font-family: "Courier New", monospace;
+          font-size: 12px;
+          border-color: #00FF00;
+        }
+
+        #main-table td {
+          font-family: "Courier New", monospace;
+          font-size: 12px;
+          color: #00FF00;
+          border-color: #00FF00;
+        }
+
+        #main-table td[bgcolor="#cccccc"],
+        #main-table td[bgcolor="#eeeeee"],
+        #main-table td[bgcolor="#f0f0f0"] {
+          background: #003300 !important;
+        }
+
+        #main-table td[bgcolor="#999999"] {
+          background: #006600 !important;
+        }
+
+        #main-table td[bgcolor="#ffffff"] {
+          background: #000000 !important;
+        }
+
+        /* Monochrome navigation links */
+        #main-table a {
+          color: #00FFFF;
+          text-decoration: underline;
+        }
+
+        #main-table a:visited {
+          color: #FFFF00;
+        }
+
+        #main-table a:hover {
+          color: #FFFFFF;
+          background: #006600;
+        }
+
+        #main-table font[color="#000080"],
+        #main-table font[color="#666666"] {
+          color: #00FF00 !important;
+        }
+
+        /* Hide modern UI elements */
+        .dark-mode-toggle, .current-style-display {
+          display: none !important;
+        }
+
+        /* Monochrome scrollbar styling */
+        ::-webkit-scrollbar {
+          width: 16px;
+          background: #000000;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #000000;
+          border: 1px solid #00FF00;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: #003300;
+          border: 1px solid #00FF00;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: #006600;
+        }
+
+        /* Monochrome form styling */
+        input, textarea, select {
+          font-family: "Courier New", monospace;
+          font-size: 11px;
+          border: 1px solid #00FF00;
+          background: #000000;
+          color: #00FF00;
+          padding: 1px 3px;
+        }
+
+        /* Monochrome status bar */
+        .status-bar {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 20px;
+          background: #000000;
+          border-top: 1px solid #00FF00;
+          font-family: "Courier New", monospace;
+          font-size: 11px;
+          line-height: 20px;
+          padding: 0 5px;
+          z-index: 1000;
+          color: #00FF00;
+        }
       `
       },
       {
@@ -11129,6 +11330,13 @@ gantt
           }
         }
 
+        // Handle Table-Based Design theme special effects
+        if (theme.name.includes('Table-Based Design')) {
+          initTableBasedEffects();
+        } else {
+          cleanupTableBasedEffects();
+        }
+
         // Handle Glassmorphism theme special effects
         if (theme.name.includes('Glassmorphism')) {
           document.body.classList.add('glassmorphism-active');
@@ -11675,6 +11883,195 @@ gantt
       if (currentTheme.includes('Glassmorphism')) {
         document.body.classList.add('glassmorphism-active');
         initGlassmorphismEffects();
+      }
+    });
+
+    // ===== Table-Based Design Theme JavaScript =====
+    let tableStatusInterval;
+    let tableBlinkInterval;
+
+    function initTableBasedEffects() {
+      console.log('Initializing Table-Based Design effects...');
+
+      // Show the table layout
+      $('#main-table').show();
+
+      // Add authentic 1990s interactions
+      addTableInteractions();
+
+      // Start status bar updates
+      startTableStatusBar();
+
+      // Add period-appropriate sound effects
+      addTableSounds();
+
+      // Initialize table navigation
+      initTableNavigation();
+    }
+
+    function cleanupTableBasedEffects() {
+      console.log('Cleaning up Table-Based Design effects...');
+
+      // Hide the table layout
+      $('#main-table').hide();
+
+      // Clear intervals
+      if (tableStatusInterval) clearInterval(tableStatusInterval);
+      if (tableBlinkInterval) clearInterval(tableBlinkInterval);
+
+      // Remove event listeners
+      $('#main-table').off('click.table');
+      $(document).off('mousemove.table');
+    }
+
+    function addTableInteractions() {
+      // Add hover effects to table cells
+      $('#main-table td').on('mouseenter', function() {
+        if ($(this).attr('bgcolor')) {
+          $(this).data('original-bg', $(this).attr('bgcolor'));
+          const currentBg = $(this).attr('bgcolor');
+          // Lighten the background color on hover
+          if (currentBg === '#cccccc') $(this).attr('bgcolor', '#dddddd');
+          else if (currentBg === '#eeeeee') $(this).attr('bgcolor', '#f5f5f5');
+          else if (currentBg === '#ffffff') $(this).attr('bgcolor', '#f9f9f9');
+        }
+      }).on('mouseleave', function() {
+        const originalBg = $(this).data('original-bg');
+        if (originalBg) {
+          $(this).attr('bgcolor', originalBg);
+        }
+      });
+
+      // Add click effects to navigation links
+      $('#main-table a').on('click.table', function(e) {
+        e.preventDefault();
+        $(this).css('color', '#FF0000');
+        setTimeout(() => {
+          $(this).css('color', '');
+        }, 200);
+
+        // Simulate page loading
+        showTableLoading();
+      });
+    }
+
+    function startTableStatusBar() {
+      const statusMessages = [
+        'Document: Done',
+        'Loading images...',
+        'Connecting to server...',
+        'Best viewed with Netscape Navigator 4.0',
+        'Optimized for 800x600 resolution',
+        'Last modified: December 31, 1998',
+        'Web page complete'
+      ];
+
+      let messageIndex = 0;
+
+      // Create status bar if it doesn't exist
+      if (!$('.table-status-bar').length) {
+        $('<div class="table-status-bar">').css({
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: '20px',
+          background: '#C0C0C0',
+          border: '1px inset #C0C0C0',
+          fontFamily: '"MS Sans Serif", sans-serif',
+          fontSize: '11px',
+          lineHeight: '18px',
+          padding: '0 5px',
+          zIndex: 1001,
+          color: '#000000'
+        }).appendTo('body');
+      }
+
+      tableStatusInterval = setInterval(() => {
+        $('.table-status-bar').text(statusMessages[messageIndex]);
+        messageIndex = (messageIndex + 1) % statusMessages.length;
+      }, 2000);
+    }
+
+    function addTableSounds() {
+      // Add authentic Windows 95/98 style click sounds
+      $('#main-table a, #main-table td[bgcolor]').on('click.table', function() {
+        try {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
+          // Windows 95 style click sound
+          oscillator.frequency.setValueAtTime(1000, audioContext.currentTime);
+          oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.1);
+          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.1);
+        } catch (e) {
+          console.log('Click!');
+        }
+      });
+    }
+
+    function initTableNavigation() {
+      // Make navigation links functional within the table layout
+      $('#main-table a[href^="#"]').on('click.table', function(e) {
+        e.preventDefault();
+        const target = $(this).attr('href');
+
+        // Simulate navigation by updating the content area
+        const contentArea = $('#main-table').find('td').last();
+        contentArea.html(`
+          <table width="100%" border="0" cellpadding="10" cellspacing="0">
+            <tr>
+              <td>
+                <font face="Times New Roman" size="4" color="#000080">
+                  <b>Navigated to: ${$(this).text()}</b>
+                </font>
+                <br><br>
+                <font face="Arial" size="2">
+                  This demonstrates how navigation worked in table-based layouts.
+                  Each "page" would typically be a separate HTML file with its own table structure.
+                </font>
+                <br><br>
+                <font face="Arial" size="1">
+                  <a href="#" onclick="history.back(); return false;">← Back</a>
+                </font>
+              </td>
+            </tr>
+          </table>
+        `);
+      });
+    }
+
+    function showTableLoading() {
+      // Simulate 1990s page loading
+      const loadingMessages = ['Loading...', 'Please wait...', 'Connecting...', 'Done'];
+      let messageIndex = 0;
+
+      const loadingInterval = setInterval(() => {
+        $('.table-status-bar').text(loadingMessages[messageIndex]);
+        messageIndex++;
+
+        if (messageIndex >= loadingMessages.length) {
+          clearInterval(loadingInterval);
+          setTimeout(() => {
+            $('.table-status-bar').text('Document: Done');
+          }, 500);
+        }
+      }, 300);
+    }
+
+    // Initialize table-based effects if table-based theme is already active
+    $(document).ready(function() {
+      const currentTheme = $('#current-theme').text();
+      if (currentTheme.includes('Table-Based Design')) {
+        initTableBasedEffects();
       }
     });
 
