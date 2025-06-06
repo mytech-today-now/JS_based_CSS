@@ -381,6 +381,56 @@
         margin: 0 auto;
       }
 
+      /* Header Controls Styling */
+      .header-controls {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: var(--bg-color);
+        -webkit-backdrop-filter: var(--blur);
+        backdrop-filter: var(--blur);
+        border-radius: var(--rounded);
+        opacity: var(--opacity);
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .control-section {
+        text-align: center;
+        flex: 1;
+        margin: 0 1rem;
+      }
+
+      .control-section h3 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--accent-color);
+        margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .control-section p {
+        font-size: 1rem;
+        color: var(--text-color);
+        margin: 0;
+        letter-spacing: 0.1em;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .header-controls {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .control-section {
+          margin: 0.5rem 0;
+        }
+      }
+
       
       
     </style>
@@ -525,6 +575,22 @@
         <p>
           <small>Click a title or press <strong>Ctrl + Shift + Space</strong> to cycle styles</small>
         </p>
+      </div>
+
+      <!-- 3D Controls Header Section -->
+      <div class="header-controls">
+        <div class="control-section">
+          <h3>GEOMETRY</h3>
+          <p>CUBE SPHERE TORUS DODECA</p>
+        </div>
+        <div class="control-section">
+          <h3>MATERIALS</h3>
+          <p>METAL GLASS NEON HOLO</p>
+        </div>
+        <div class="control-section">
+          <h3>LIGHTING</h3>
+          <p>AMBIENT DIRECTIONAL</p>
+        </div>
       </div>
     </div>
 
