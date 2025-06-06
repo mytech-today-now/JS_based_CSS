@@ -16,7 +16,7 @@
       gtag('config', 'G-YR81E31MX4')
     </script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Permanent+Marker&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Permanent+Marker&family=Orbitron:wght@400;700;900&display=swap');
       :root {
         /* Customize these to change stripe look */
         --stripe-color: rgba(252, 255, 75, 0.85);
@@ -484,6 +484,10 @@
 
     <!-- Add Mermaid JS library -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+    <!-- Add Three.js library for WebGL & 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   </head>
 
   <body>
@@ -997,6 +1001,109 @@ gantt
           <a href="https://threejs.org/" target="_blank">three.js</a>
         </p>
       </article>
+
+      <!-- WebGL & 3D Elements (hidden by default, shown when WebGL theme is active) -->
+      <div id="webgl-3d-elements" style="display: none;">
+        <!-- 3D Scene Container -->
+        <div class="webgl-scene-container">
+          <canvas id="webgl-canvas" class="webgl-canvas"></canvas>
+          <div class="scene-overlay">
+            <div class="hud-element hud-top-left">
+              <div class="hud-title">3D RENDERER</div>
+              <div class="hud-stats">
+                <div class="stat-line">FPS: <span id="fps-counter">60</span></div>
+                <div class="stat-line">VERTICES: <span id="vertex-counter">1,024</span></div>
+                <div class="stat-line">TRIANGLES: <span id="triangle-counter">512</span></div>
+              </div>
+            </div>
+            <div class="hud-element hud-top-right">
+              <div class="hud-title">CONTROLS</div>
+              <div class="control-hint">MOUSE: Rotate</div>
+              <div class="control-hint">WHEEL: Zoom</div>
+              <div class="control-hint">CLICK: Interact</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating 3D Panels -->
+        <div class="floating-3d-panels">
+          <div class="panel-3d panel-1" data-depth="100">
+            <div class="panel-header">GEOMETRY</div>
+            <div class="panel-content">
+              <div class="geometry-controls">
+                <button class="geo-btn active" data-shape="cube">CUBE</button>
+                <button class="geo-btn" data-shape="sphere">SPHERE</button>
+                <button class="geo-btn" data-shape="torus">TORUS</button>
+                <button class="geo-btn" data-shape="dodecahedron">DODECA</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-3d panel-2" data-depth="150">
+            <div class="panel-header">MATERIALS</div>
+            <div class="panel-content">
+              <div class="material-controls">
+                <button class="mat-btn active" data-material="metallic">METAL</button>
+                <button class="mat-btn" data-material="glass">GLASS</button>
+                <button class="mat-btn" data-material="neon">NEON</button>
+                <button class="mat-btn" data-material="hologram">HOLO</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-3d panel-3" data-depth="200">
+            <div class="panel-header">LIGHTING</div>
+            <div class="panel-content">
+              <div class="lighting-controls">
+                <div class="light-slider">
+                  <label>AMBIENT</label>
+                  <input type="range" min="0" max="100" value="30" class="slider" id="ambient-light">
+                </div>
+                <div class="light-slider">
+                  <label>DIRECTIONAL</label>
+                  <input type="range" min="0" max="100" value="70" class="slider" id="directional-light">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Particle System Background -->
+        <div class="particle-field" id="particle-field-3d"></div>
+
+        <!-- 3D Navigation Cube -->
+        <div class="nav-cube-container">
+          <div class="nav-cube">
+            <div class="cube-face front">F</div>
+            <div class="cube-face back">B</div>
+            <div class="cube-face right">R</div>
+            <div class="cube-face left">L</div>
+            <div class="cube-face top">T</div>
+            <div class="cube-face bottom">Bot</div>
+          </div>
+        </div>
+
+        <!-- Holographic UI Elements -->
+        <div class="holographic-ui">
+          <div class="holo-ring ring-1"></div>
+          <div class="holo-ring ring-2"></div>
+          <div class="holo-ring ring-3"></div>
+          <div class="holo-grid"></div>
+        </div>
+
+        <!-- 3D Model Showcase -->
+        <div class="model-showcase">
+          <div class="model-viewer" id="model-viewer-1">
+            <div class="model-placeholder">
+              <div class="wireframe-cube"></div>
+            </div>
+            <div class="model-info">
+              <div class="model-name">GEOMETRIC PRIMITIVE</div>
+              <div class="model-details">Vertices: 8 | Faces: 6</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <article class="style-card" data-index="26" id="inclusive-design">
         <h3 class="style-title">Inclusive Design</h3>
@@ -8983,204 +9090,785 @@ gantt
           'handle': 'webgl-3dStyle',
           'name': 'WebGL & 3D Design',
           'lightCss': `
+          /* WebGL & 3D Theme - Light Mode */
           body {
-            font-family: 'Arial', sans-serif;
-            color:rgba(230, 230, 230, 0.9);
+            font-family: 'Orbitron', 'Arial', monospace;
+            background: linear-gradient(135deg,
+              #0a0a0a 0%,
+              #1a1a2e 25%,
+              #16213e 50%,
+              #0f3460 75%,
+              #533483 100%);
+            color: #e0e6ed;
+            overflow-x: hidden;
+            perspective: 1000px;
+            min-height: 100vh;
           }
-          /* Ensure main content scrolls above video */
+
+          /* 3D Scene Container */
+          .webgl-scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            background: radial-gradient(ellipse at center,
+              rgba(83, 52, 131, 0.3) 0%,
+              rgba(15, 52, 96, 0.5) 50%,
+              rgba(10, 10, 10, 0.8) 100%);
+          }
+
+          .webgl-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+          }
+
+          /* HUD Elements */
+          .scene-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+          }
+
+          .hud-element {
+            position: absolute;
+            background: rgba(0, 20, 40, 0.8);
+            border: 1px solid #00ffff;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #00ffff;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            pointer-events: auto;
+          }
+
+          .hud-top-left {
+            top: 20px;
+            left: 20px;
+          }
+
+          .hud-top-right {
+            top: 20px;
+            right: 20px;
+          }
+
+          .hud-title {
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          .stat-line, .control-hint {
+            margin: 4px 0;
+            color: #00ffff;
+          }
+
+          /* Main Content */
           main {
             position: relative;
             max-width: 85%;
             align-items: center;
             justify-content: center;
             padding: 0;
-            /* Remove any padding */
             margin: auto;
-            /* Remove any margins */
             top: 5vh;
             max-width: 1200px;
-            /* Adjust this value as needed */
             display: flex;
             flex-wrap: wrap !important;
             gap: 20px;
+            z-index: 10;
           }
+
+          /* 3D Style Cards */
           .style-card {
-            background:rgba(1, 36, 0, 0.9);
-            border: 3px solid rgba(0, 255, 21, 0.9);
-            border-radius: 0;
-            box-shadow: 5px 5px 0 black;
-            transform: rotate(-1deg);
-            transition: all 0.2s ease;
+            background: linear-gradient(145deg,
+              rgba(20, 30, 48, 0.9),
+              rgba(30, 40, 60, 0.9));
+            border: 2px solid rgba(0, 255, 255, 0.6);
+            border-radius: 12px;
+            box-shadow:
+              0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
           }
-                    /* CSS editor styles */
+
+          .style-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+              transparent,
+              rgba(0, 255, 255, 0.2),
+              transparent);
+            transition: left 0.5s;
+          }
+
+          .style-card:hover {
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px);
+            box-shadow:
+              0 20px 40px rgba(0, 255, 255, 0.3),
+              0 0 0 1px rgba(0, 255, 255, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border-color: rgba(0, 255, 255, 1);
+          }
+
+          .style-card:hover::before {
+            left: 100%;
+          }
+
+          .style-title {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          .style-description {
+            color: #b0c4de;
+          }
+
+          .style-links a {
+            color: #87ceeb;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+          }
+
+          .style-links a:hover {
+            color: #00ffff;
+            border-bottom-color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+          }
+
+          /* Floating 3D Panels */
+          .floating-3d-panels {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: none; /* Hidden by default, shown when WebGL theme is active */
+          }
+
+          .panel-3d {
+            background: linear-gradient(145deg,
+              rgba(15, 25, 40, 0.95),
+              rgba(25, 35, 50, 0.95));
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            backdrop-filter: blur(15px);
+            box-shadow:
+              0 8px 32px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            min-width: 200px;
+          }
+
+          .panel-3d:hover {
+            transform: translateZ(10px);
+            box-shadow:
+              0 12px 40px rgba(0, 255, 255, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.8);
+          }
+
+          .panel-header {
+            color: #00ffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 12px;
+          }
+
+          .geo-btn, .mat-btn {
+            background: linear-gradient(145deg,
+              rgba(0, 255, 255, 0.1),
+              rgba(0, 255, 255, 0.05));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #00ffff;
+            padding: 8px 12px;
+            margin: 4px 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+
+          .geo-btn:hover, .mat-btn:hover {
+            background: linear-gradient(145deg,
+              rgba(0, 255, 255, 0.3),
+              rgba(0, 255, 255, 0.2));
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
+          }
+
+          .geo-btn.active, .mat-btn.active {
+            background: linear-gradient(145deg,
+              rgba(0, 255, 255, 0.4),
+              rgba(0, 255, 255, 0.3));
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+          }
+
+          /* Lighting Controls */
+          .light-slider {
+            margin: 10px 0;
+          }
+
+          .light-slider label {
+            display: block;
+            color: #b0c4de;
+            font-size: 10px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+
+          .slider {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(0, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+          }
+
+          .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00ffff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+          }
+
+          .slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00ffff;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+          }
+
+          /* Particle Field */
+          .particle-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            display: none; /* Hidden by default, shown when WebGL theme is active */
+          }
+
+          /* Navigation Cube */
+          .nav-cube-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: none; /* Hidden by default, shown when WebGL theme is active */
+          }
+
+          .nav-cube {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-15deg) rotateY(15deg);
+            animation: cubeRotate 10s infinite linear;
+          }
+
+          .cube-face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #00ffff;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+          }
+
+          .cube-face.front { transform: rotateY(0deg) translateZ(30px); }
+          .cube-face.back { transform: rotateY(180deg) translateZ(30px); }
+          .cube-face.right { transform: rotateY(90deg) translateZ(30px); }
+          .cube-face.left { transform: rotateY(-90deg) translateZ(30px); }
+          .cube-face.top { transform: rotateX(90deg) translateZ(30px); }
+          .cube-face.bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+          @keyframes cubeRotate {
+            0% { transform: rotateX(-15deg) rotateY(15deg); }
+            25% { transform: rotateX(-15deg) rotateY(105deg); }
+            50% { transform: rotateX(-15deg) rotateY(195deg); }
+            75% { transform: rotateX(-15deg) rotateY(285deg); }
+            100% { transform: rotateX(-15deg) rotateY(375deg); }
+          }
+
+          /* Holographic UI Elements */
+          .holographic-ui {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+            display: none; /* Hidden by default, shown when WebGL theme is active */
+          }
+
+          .holo-ring {
+            position: absolute;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: holoRotate 20s infinite linear;
+          }
+
+          .ring-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-duration: 20s;
+          }
+
+          .ring-2 {
+            width: 500px;
+            height: 500px;
+            top: -250px;
+            left: -250px;
+            animation-duration: 30s;
+            animation-direction: reverse;
+          }
+
+          .ring-3 {
+            width: 700px;
+            height: 700px;
+            top: -350px;
+            left: -350px;
+            animation-duration: 40s;
+          }
+
+          @keyframes holoRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+
+          .holo-grid {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            top: -400px;
+            left: -400px;
+            background-image:
+              linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridPulse 4s infinite ease-in-out;
+          }
+
+          @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+          }
+
+          /* Model Showcase */
+          .model-showcase {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            display: none; /* Hidden by default, shown when WebGL theme is active */
+          }
+
+          .model-viewer {
+            background: rgba(15, 25, 40, 0.9);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 8px;
+            padding: 15px;
+            backdrop-filter: blur(15px);
+            width: 200px;
+          }
+
+          .wireframe-cube {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            border: 1px solid #00ffff;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(20deg) rotateY(20deg);
+            animation: wireframeRotate 6s infinite linear;
+          }
+
+          .wireframe-cube::before,
+          .wireframe-cube::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 1px solid #00ffff;
+          }
+
+          .wireframe-cube::before {
+            transform: translateZ(30px);
+          }
+
+          .wireframe-cube::after {
+            transform: translateZ(-30px);
+          }
+
+          @keyframes wireframeRotate {
+            0% { transform: rotateX(20deg) rotateY(20deg); }
+            100% { transform: rotateX(20deg) rotateY(380deg); }
+          }
+
+          .model-name {
+            color: #00ffff;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 5px;
+          }
+
+          .model-details {
+            color: #b0c4de;
+            font-size: 10px;
+            text-align: center;
+          }
+
+          /* CSS Editor Styles */
           #css-editor,
           #html-editor {
             font-family: 'Courier New', monospace;
             line-height: 1.5;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 15px;
+            border-radius: 8px;
             margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            background: rgba(15, 25, 40, 0.9);
+            color: #00ffff;
             resize: vertical;
+            backdrop-filter: blur(10px);
           }
-          
+
           .css-editor {
             margin: auto;
-            max-width: 800vw;
+            max-width: 800px;
             min-width: 500px;
             min-height: 150px;
-            text-align: center;
+            text-align: left;
             display: block;
           }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
+
           .html-editor {
             margin: auto;
             max-width: calc(100% - 20px);
             min-width: 500px;
             min-height: 500px;
-            text-align: center;
+            text-align: left;
             display: block;
           }
-          /* Style cards interactive styles */
-          .style-card {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+          /* Timeline Styles */
+          .era-timeline {
+            background: rgba(15, 25, 40, 0.9) !important;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
           }
-          
-          .style-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+          .mermaid {
+            background: rgba(15, 25, 40, 0.95) !important;
+            color: #e0e6ed !important;
+            border-radius: 8px;
           }
-                
-          /* Tooltip to indicate clickable elements */
-          [data-tooltip]:before {
-            content: attr(data-tooltip);
-            position: absolute;
-            opacity: 0;
-            transition: all 0.15s ease;
-            padding: 5px 10px;
-            color: #fff;
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.8);
-            pointer-events: none;
-            z-index: 10;
-            white-space: nowrap;
-            transform: translateY(10px);
+
+          /* Show WebGL elements when theme is active */
+          body.webgl-3d-active #webgl-3d-elements {
+            display: block !important;
           }
-          
-          [data-tooltip]:hover:before {
-            opacity: 1;
-            transform: translateY(0);
+
+          body.webgl-3d-active .floating-3d-panels,
+          body.webgl-3d-active .particle-field,
+          body.webgl-3d-active .nav-cube-container,
+          body.webgl-3d-active .holographic-ui,
+          body.webgl-3d-active .model-showcase {
+            display: block !important;
           }
         `,
-        'darkCss': `body {
-          font-family: 'Arial', sans-serif;
-          color:rgba(230, 230, 230, 0.9);
-        }
-        /* Ensure main content scrolls above video */
-        main {
-          position: relative;
-          max-width: 85%;
-          align-items: center;
-          justify-content: center;
-          padding: 0;
-          /* Remove any padding */
-          margin: auto;
-          /* Remove any margins */
-          top: 5vh;
-          max-width: 1200px;
-          /* Adjust this value as needed */
-          display: flex;
-          flex-wrap: wrap !important;
-          gap: 20px;
-        }
-        .style-card {
-          background:rgba(1, 36, 0, 0.9);
-          border: 3px solid rgba(0, 255, 21, 0.9);
-          border-radius: 0;
-          box-shadow: 5px 5px 0 black;
-          transform: rotate(-1deg);
-          transition: all 0.2s ease;
-        }
-                  /* CSS editor styles */
+        'darkCss': `
+          /* WebGL & 3D Theme - Dark Mode */
+          body {
+            font-family: 'Orbitron', 'Arial', monospace;
+            background: linear-gradient(135deg,
+              #000000 0%,
+              #0d1421 25%,
+              #1a1a2e 50%,
+              #16213e 75%,
+              #0f3460 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            perspective: 1000px;
+            min-height: 100vh;
+          }
+
+          /* 3D Scene Container - Dark Mode */
+          .webgl-scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            background: radial-gradient(ellipse at center,
+              rgba(15, 52, 96, 0.4) 0%,
+              rgba(10, 10, 10, 0.7) 50%,
+              rgba(0, 0, 0, 0.9) 100%);
+          }
+
+          /* HUD Elements - Dark Mode */
+          .hud-element {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+          }
+
+          .hud-title {
+            color: #ffffff;
+          }
+
+          .stat-line, .control-hint {
+            color: #ff6b35;
+          }
+
+          /* Main Content - Dark Mode */
+          main {
+            position: relative;
+            max-width: 85%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: auto;
+            top: 5vh;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap !important;
+            gap: 20px;
+            z-index: 10;
+          }
+
+          /* 3D Style Cards - Dark Mode */
+          .style-card {
+            background: linear-gradient(145deg,
+              rgba(10, 10, 10, 0.95),
+              rgba(20, 20, 20, 0.95));
+            border: 2px solid rgba(255, 107, 53, 0.6);
+            border-radius: 12px;
+            box-shadow:
+              0 8px 32px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+          }
+
+          .style-card::before {
+            background: linear-gradient(90deg,
+              transparent,
+              rgba(255, 107, 53, 0.3),
+              transparent);
+          }
+
+          .style-card:hover {
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px);
+            box-shadow:
+              0 20px 40px rgba(255, 107, 53, 0.4),
+              0 0 0 1px rgba(255, 107, 53, 0.7),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 107, 53, 1);
+          }
+
+          .style-title {
+            color: #ff6b35;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
+          }
+
+          .style-description {
+            color: #cccccc;
+          }
+
+          .style-links a {
+            color: #ffaa80;
+          }
+
+          .style-links a:hover {
+            color: #ff6b35;
+            border-bottom-color: #ff6b35;
+            text-shadow: 0 0 5px rgba(255, 107, 53, 0.6);
+          }
+
+          /* Floating 3D Panels - Dark Mode */
+          .panel-3d {
+            background: linear-gradient(145deg,
+              rgba(5, 5, 5, 0.98),
+              rgba(15, 15, 15, 0.98));
+            border: 1px solid rgba(255, 107, 53, 0.5);
+          }
+
+          .panel-3d:hover {
+            border-color: rgba(255, 107, 53, 0.9);
+            box-shadow:
+              0 12px 40px rgba(255, 107, 53, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          }
+
+          .panel-header {
+            color: #ff6b35;
+          }
+
+          .geo-btn, .mat-btn {
+            background: linear-gradient(145deg,
+              rgba(255, 107, 53, 0.1),
+              rgba(255, 107, 53, 0.05));
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            color: #ff6b35;
+          }
+
+          .geo-btn:hover, .mat-btn:hover {
+            background: linear-gradient(145deg,
+              rgba(255, 107, 53, 0.3),
+              rgba(255, 107, 53, 0.2));
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+          }
+
+          .geo-btn.active, .mat-btn.active {
+            background: linear-gradient(145deg,
+              rgba(255, 107, 53, 0.5),
+              rgba(255, 107, 53, 0.4));
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.7);
+          }
+
+          /* Slider - Dark Mode */
+          .slider {
+            background: rgba(255, 107, 53, 0.3);
+          }
+
+          .slider::-webkit-slider-thumb {
+            background: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
+          }
+
+          .slider::-moz-range-thumb {
+            background: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
+          }
+
+          /* Navigation Cube - Dark Mode */
+          .cube-face {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.6);
+            color: #ff6b35;
+          }
+
+          /* Holographic UI - Dark Mode */
+          .holo-ring {
+            border-color: rgba(255, 107, 53, 0.4);
+          }
+
+          .holo-grid {
+            background-image:
+              linear-gradient(rgba(255, 107, 53, 0.15) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 107, 53, 0.15) 1px, transparent 1px);
+          }
+
+          /* Model Showcase - Dark Mode */
+          .model-viewer {
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid rgba(255, 107, 53, 0.5);
+          }
+
+          .wireframe-cube {
+            border-color: #ff6b35;
+          }
+
+          .wireframe-cube::before,
+          .wireframe-cube::after {
+            border-color: #ff6b35;
+          }
+
+          .model-name {
+            color: #ff6b35;
+          }
+
+          /* CSS Editor - Dark Mode */
           #css-editor,
           #html-editor {
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            resize: vertical;
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            background: rgba(5, 5, 5, 0.95);
+            color: #ff6b35;
           }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
+
+          /* Timeline - Dark Mode */
+          .era-timeline {
+            background: rgba(5, 5, 5, 0.95) !important;
+            border: 1px solid rgba(255, 107, 53, 0.4);
           }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
+
+          .mermaid {
+            background: rgba(5, 5, 5, 0.98) !important;
+            color: #ffffff !important;
           }
-          
-          .html-editor {
-            margin: auto;
-            max-width: calc(100% - 20px);
-            min-width: 500px;
-            min-height: 500px;
-            text-align: center;
-            display: block;
+
+          /* Show WebGL elements when theme is active - Dark Mode */
+          body.webgl-3d-active #webgl-3d-elements {
+            display: block !important;
           }
-          /* Style cards interactive styles */
-          .style-card {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-          }
-          
-          .style-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-          }
-                
-          /* Tooltip to indicate clickable elements */
-          [data-tooltip]:before {
-            content: attr(data-tooltip);
-            position: absolute;
-            opacity: 0;
-            transition: all 0.15s ease;
-            padding: 5px 10px;
-            color: #fff;
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.8);
-            pointer-events: none;
-            z-index: 10;
-            white-space: nowrap;
-            transform: translateY(10px);
-          }
-          
-          [data-tooltip]:hover:before {
-            opacity: 1;
-            transform: translateY(0);
+
+          body.webgl-3d-active .floating-3d-panels,
+          body.webgl-3d-active .particle-field,
+          body.webgl-3d-active .nav-cube-container,
+          body.webgl-3d-active .holographic-ui,
+          body.webgl-3d-active .model-showcase {
+            display: block !important;
           }
       `
       },
@@ -9630,6 +10318,19 @@ gantt
         } else {
           cleanupY2KEffects();
         }
+
+        // Handle WebGL & 3D theme special effects
+        if (theme.name.includes('WebGL & 3D')) {
+          setTimeout(() => {
+            if (typeof initWebGL3DEffects === 'function') {
+              initWebGL3DEffects();
+            }
+          }, 100);
+        } else {
+          if (typeof cleanupWebGL3DEffects === 'function') {
+            cleanupWebGL3DEffects();
+          }
+        }
       }
 
       // === Dark Mode Toggle Handler ===
@@ -10016,6 +10717,337 @@ gantt
         initRetroEffects();
       }
     });
+
+    // ===== WebGL & 3D Theme JavaScript =====
+    let webglScene, webglRenderer, webglCamera, webglMesh;
+    let webglAnimationId;
+
+    function initWebGL3DEffects() {
+      console.log('Initializing WebGL & 3D effects...');
+
+      // Add body class for CSS targeting
+      document.body.classList.add('webgl-3d-active');
+
+      // Initialize Three.js scene if available
+      if (typeof THREE !== 'undefined') {
+        initThreeJSScene();
+        animateWebGL();
+      }
+
+      // Initialize particle system
+      initParticleSystem();
+
+      // Initialize interactive controls
+      initWebGLControls();
+
+      // Update HUD stats
+      updateHUDStats();
+    }
+
+    function initThreeJSScene() {
+      const canvas = document.getElementById('webgl-canvas');
+      if (!canvas) return;
+
+      try {
+        // Scene setup
+        webglScene = new THREE.Scene();
+        webglCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        webglRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+        webglRenderer.setSize(window.innerWidth, window.innerHeight);
+        webglRenderer.setClearColor(0x000000, 0);
+
+        // Create geometry
+        const geometry = new THREE.BoxGeometry(2, 2, 2);
+        const material = new THREE.MeshPhongMaterial({
+          color: 0x00ffff,
+          transparent: true,
+          opacity: 0.8,
+          wireframe: false
+        });
+        webglMesh = new THREE.Mesh(geometry, material);
+        webglScene.add(webglMesh);
+
+        // Add lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
+        webglScene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0x00ffff, 0.7);
+        directionalLight.position.set(5, 5, 5);
+        webglScene.add(directionalLight);
+
+        // Position camera
+        webglCamera.position.z = 5;
+
+        // Handle window resize
+        window.addEventListener('resize', onWebGLWindowResize, false);
+      } catch (error) {
+        console.error('Error initializing Three.js scene:', error);
+      }
+    }
+
+    function initParticleSystem() {
+      const particleField = document.getElementById('particle-field-3d');
+      if (!particleField) return;
+
+      // Clear existing particles
+      particleField.innerHTML = '';
+
+      // Create floating particles
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle-3d';
+        particle.style.cssText = `
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          background: #00ffff;
+          border-radius: 50%;
+          box-shadow: 0 0 6px #00ffff;
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation: particleFloat ${3 + Math.random() * 4}s infinite ease-in-out;
+          animation-delay: ${Math.random() * 2}s;
+        `;
+        particleField.appendChild(particle);
+      }
+
+      // Add particle animation CSS if not already added
+      if (!document.getElementById('webgl-particle-styles')) {
+        const style = document.createElement('style');
+        style.id = 'webgl-particle-styles';
+        style.textContent = `
+          @keyframes particleFloat {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+            25% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+            50% { transform: translateY(-10px) translateX(-15px); opacity: 0.7; }
+            75% { transform: translateY(-30px) translateX(5px); opacity: 1; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+
+    function initWebGLControls() {
+      // Geometry controls
+      $('.geo-btn').off('click.webgl').on('click.webgl', function() {
+        $('.geo-btn').removeClass('active');
+        $(this).addClass('active');
+
+        const shape = $(this).data('shape');
+        changeGeometry(shape);
+      });
+
+      // Material controls
+      $('.mat-btn').off('click.webgl').on('click.webgl', function() {
+        $('.mat-btn').removeClass('active');
+        $(this).addClass('active');
+
+        const material = $(this).data('material');
+        changeMaterial(material);
+      });
+
+      // Lighting controls
+      $('#ambient-light').off('input.webgl').on('input.webgl', function() {
+        const value = $(this).val() / 100;
+        if (webglScene) {
+          const ambientLight = webglScene.children.find(child => child.type === 'AmbientLight');
+          if (ambientLight) ambientLight.intensity = value;
+        }
+      });
+
+      $('#directional-light').off('input.webgl').on('input.webgl', function() {
+        const value = $(this).val() / 100;
+        if (webglScene) {
+          const directionalLight = webglScene.children.find(child => child.type === 'DirectionalLight');
+          if (directionalLight) directionalLight.intensity = value;
+        }
+      });
+    }
+
+    function changeGeometry(shape) {
+      if (!webglMesh || typeof THREE === 'undefined') return;
+
+      let geometry;
+      try {
+        switch(shape) {
+          case 'sphere':
+            geometry = new THREE.SphereGeometry(1.5, 32, 32);
+            break;
+          case 'torus':
+            geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
+            break;
+          case 'dodecahedron':
+            geometry = new THREE.DodecahedronGeometry(1.5);
+            break;
+          default:
+            geometry = new THREE.BoxGeometry(2, 2, 2);
+        }
+
+        webglMesh.geometry.dispose();
+        webglMesh.geometry = geometry;
+
+        // Update vertex counter
+        $('#vertex-counter').text(geometry.attributes.position.count.toLocaleString());
+        $('#triangle-counter').text((geometry.attributes.position.count / 3).toFixed(0));
+      } catch (error) {
+        console.error('Error changing geometry:', error);
+      }
+    }
+
+    function changeMaterial(materialType) {
+      if (!webglMesh || typeof THREE === 'undefined') return;
+
+      let material;
+      try {
+        switch(materialType) {
+          case 'glass':
+            material = new THREE.MeshPhongMaterial({
+              color: 0x88ccff,
+              transparent: true,
+              opacity: 0.3,
+              wireframe: false
+            });
+            break;
+          case 'neon':
+            material = new THREE.MeshBasicMaterial({
+              color: 0xff00ff,
+              wireframe: true
+            });
+            break;
+          case 'hologram':
+            material = new THREE.MeshPhongMaterial({
+              color: 0x00ffff,
+              transparent: true,
+              opacity: 0.6,
+              wireframe: true
+            });
+            break;
+          default:
+            material = new THREE.MeshPhongMaterial({
+              color: 0x00ffff,
+              transparent: true,
+              opacity: 0.8,
+              wireframe: false
+            });
+        }
+
+        webglMesh.material.dispose();
+        webglMesh.material = material;
+      } catch (error) {
+        console.error('Error changing material:', error);
+      }
+    }
+
+    function animateWebGL() {
+      if (!document.body.classList.contains('webgl-3d-active')) return;
+
+      webglAnimationId = requestAnimationFrame(animateWebGL);
+
+      if (webglMesh) {
+        webglMesh.rotation.x += 0.01;
+        webglMesh.rotation.y += 0.01;
+      }
+
+      if (webglRenderer && webglScene && webglCamera) {
+        webglRenderer.render(webglScene, webglCamera);
+      }
+    }
+
+    function updateHUDStats() {
+      let fps = 60;
+      let lastTime = performance.now();
+
+      function calculateFPS() {
+        const now = performance.now();
+        fps = Math.round(1000 / (now - lastTime));
+        lastTime = now;
+
+        $('#fps-counter').text(fps);
+
+        if (document.body.classList.contains('webgl-3d-active')) {
+          setTimeout(calculateFPS, 100);
+        }
+      }
+
+      calculateFPS();
+    }
+
+    function onWebGLWindowResize() {
+      if (webglCamera && webglRenderer) {
+        webglCamera.aspect = window.innerWidth / window.innerHeight;
+        webglCamera.updateProjectionMatrix();
+        webglRenderer.setSize(window.innerWidth, window.innerHeight);
+      }
+    }
+
+    function cleanupWebGL3DEffects() {
+      console.log('Cleaning up WebGL & 3D effects...');
+
+      // Remove body class
+      document.body.classList.remove('webgl-3d-active');
+
+      // Stop animation
+      if (webglAnimationId) {
+        cancelAnimationFrame(webglAnimationId);
+        webglAnimationId = null;
+      }
+
+      // Cleanup Three.js resources
+      if (webglRenderer) {
+        webglRenderer.dispose();
+        webglRenderer = null;
+      }
+
+      if (webglMesh && webglMesh.geometry && webglMesh.material) {
+        webglMesh.geometry.dispose();
+        webglMesh.material.dispose();
+        webglMesh = null;
+      }
+
+      webglScene = null;
+      webglCamera = null;
+
+      // Clear particle field
+      const particleField = document.getElementById('particle-field-3d');
+      if (particleField) {
+        particleField.innerHTML = '';
+      }
+
+      // Remove event listeners
+      $('.geo-btn, .mat-btn').off('click.webgl');
+      $('#ambient-light, #directional-light').off('input.webgl');
+      window.removeEventListener('resize', onWebGLWindowResize);
+    }
+
+    // Add WebGL theme handling to the existing applyTheme function
+    const originalApplyTheme = window.applyTheme;
+    if (originalApplyTheme) {
+      window.applyTheme = function(index) {
+        // Call original function
+        originalApplyTheme(index);
+
+        // Get current theme
+        const themeSet = getCurrentThemeSet();
+        const theme = themeSet[index];
+
+        if (theme && theme.name.includes('WebGL & 3D')) {
+          setTimeout(initWebGL3DEffects, 100);
+        } else {
+          cleanupWebGL3DEffects();
+        }
+      };
+    }
+
+    // Initialize WebGL effects if WebGL theme is already active
+    $(document).ready(function() {
+      setTimeout(() => {
+        const currentTheme = $('#current-theme').text();
+        if (currentTheme.includes('WebGL & 3D')) {
+          initWebGL3DEffects();
+        }
+      }, 500);
+    });
+
   });
   </script>
   </body>
