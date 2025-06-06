@@ -396,7 +396,7 @@
 
       /* Floating 3D Panels in Header Styling */
       .floating-3d-panels {
-        display: flex;
+        display: none; /* Hidden by default, only shown when WebGL & 3D theme is active */
         justify-content: space-around;
         align-items: flex-start;
         margin-top: 2rem;
@@ -410,6 +410,11 @@
         margin-left: auto;
         margin-right: auto;
         gap: 1rem;
+      }
+
+      /* Show floating 3D panels only when WebGL & 3D theme is active */
+      body.webgl-3d-active .floating-3d-panels {
+        display: flex !important;
       }
 
       .panel-3d {
@@ -9401,11 +9406,9 @@ gantt
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
           }
 
-          /* Floating 3D Panels - Now in Header */
-          .floating-3d-panels {
-            /* Header positioning styles are defined in the main CSS section above */
-            display: flex; /* Always visible in header */
-          }
+          /* Floating 3D Panels - Visibility controlled by main CSS section */
+          /* The floating-3d-panels visibility is controlled by the main CSS section
+             using body.webgl-3d-active .floating-3d-panels { display: flex !important; } */
 
           .panel-3d {
             background: linear-gradient(145deg,
