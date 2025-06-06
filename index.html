@@ -93,7 +93,15 @@
       }
       
       #outro {
-        padding-top: 5rem;
+        clear: both;
+        margin-top: 3rem;
+        padding: 2rem 1rem;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
+        flex-basis: 100%;
       }
       
       .flex-grid {
@@ -381,8 +389,13 @@
         margin: 0 auto;
       }
 
-      /* Header Controls Styling */
-      .header-controls {
+      /* Ensure main element has proper bottom margin for outro section */
+      main {
+        margin-bottom: 3rem !important;
+      }
+
+      /* Floating 3D Panels in Header Styling */
+      .floating-3d-panels {
         display: flex;
         justify-content: space-around;
         align-items: flex-start;
@@ -396,15 +409,28 @@
         max-width: 80%;
         margin-left: auto;
         margin-right: auto;
+        gap: 1rem;
       }
 
-      .control-section {
+      .panel-3d {
         text-align: center;
         flex: 1;
-        margin: 0 1rem;
+        margin: 0 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: var(--rounded);
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
-      .control-section h3 {
+      .panel-3d:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .panel-header {
         font-size: 1.2rem;
         font-weight: bold;
         color: var(--accent-color);
@@ -412,7 +438,7 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
       }
 
-      .control-section p {
+      .panel-content {
         font-size: 1rem;
         color: var(--text-color);
         margin: 0;
@@ -420,14 +446,78 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
       }
 
+      .geometry-controls, .material-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+
+      .geo-btn, .mat-btn {
+        background: rgba(0, 122, 204, 0.8);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      .geo-btn:hover, .mat-btn:hover {
+        background: rgba(0, 122, 204, 1);
+        transform: scale(1.05);
+      }
+
+      .geo-btn.active, .mat-btn.active {
+        background: rgba(255, 165, 0, 0.9);
+      }
+
+      .lighting-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .light-slider {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .light-slider label {
+        font-size: 0.9rem;
+        font-weight: bold;
+        min-width: 80px;
+      }
+
+      .slider {
+        flex: 1;
+        height: 5px;
+        border-radius: 5px;
+        background: #ddd;
+        outline: none;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
       @media (max-width: 768px) {
-        .header-controls {
+        .floating-3d-panels {
           flex-direction: column;
           text-align: center;
         }
 
-        .control-section {
+        .panel-3d {
           margin: 0.5rem 0;
+        }
+
+        .geometry-controls, .material-controls {
+          flex-direction: column;
         }
       }
 
@@ -577,19 +667,46 @@
         </p>
       </div>
 
-      <!-- 3D Controls Header Section -->
-      <div class="header-controls">
-        <div class="control-section">
-          <h3>GEOMETRY</h3>
-          <p>CUBE SPHERE TORUS DODECA</p>
+      <!-- Floating 3D Panels in Header -->
+      <div class="floating-3d-panels">
+        <div class="panel-3d panel-1" data-depth="100">
+          <div class="panel-header">GEOMETRY</div>
+          <div class="panel-content">
+            <div class="geometry-controls">
+              <button class="geo-btn active" data-shape="cube">CUBE</button>
+              <button class="geo-btn" data-shape="sphere">SPHERE</button>
+              <button class="geo-btn" data-shape="torus">TORUS</button>
+              <button class="geo-btn" data-shape="dodecahedron">DODECA</button>
+            </div>
+          </div>
         </div>
-        <div class="control-section">
-          <h3>MATERIALS</h3>
-          <p>METAL GLASS NEON HOLO</p>
+
+        <div class="panel-3d panel-2" data-depth="150">
+          <div class="panel-header">MATERIALS</div>
+          <div class="panel-content">
+            <div class="material-controls">
+              <button class="mat-btn active" data-material="metallic">METAL</button>
+              <button class="mat-btn" data-material="glass">GLASS</button>
+              <button class="mat-btn" data-material="neon">NEON</button>
+              <button class="mat-btn" data-material="hologram">HOLO</button>
+            </div>
+          </div>
         </div>
-        <div class="control-section">
-          <h3>LIGHTING</h3>
-          <p>AMBIENT DIRECTIONAL</p>
+
+        <div class="panel-3d panel-3" data-depth="200">
+          <div class="panel-header">LIGHTING</div>
+          <div class="panel-content">
+            <div class="lighting-controls">
+              <div class="light-slider">
+                <label>AMBIENT</label>
+                <input type="range" min="0" max="100" value="30" class="slider" id="ambient-light">
+              </div>
+              <div class="light-slider">
+                <label>DIRECTIONAL</label>
+                <input type="range" min="0" max="100" value="70" class="slider" id="directional-light">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1091,48 +1208,7 @@ gantt
           </div>
         </div>
 
-        <!-- Floating 3D Panels -->
-        <div class="floating-3d-panels">
-          <div class="panel-3d panel-1" data-depth="100">
-            <div class="panel-header">GEOMETRY</div>
-            <div class="panel-content">
-              <div class="geometry-controls">
-                <button class="geo-btn active" data-shape="cube">CUBE</button>
-                <button class="geo-btn" data-shape="sphere">SPHERE</button>
-                <button class="geo-btn" data-shape="torus">TORUS</button>
-                <button class="geo-btn" data-shape="dodecahedron">DODECA</button>
-              </div>
-            </div>
-          </div>
 
-          <div class="panel-3d panel-2" data-depth="150">
-            <div class="panel-header">MATERIALS</div>
-            <div class="panel-content">
-              <div class="material-controls">
-                <button class="mat-btn active" data-material="metallic">METAL</button>
-                <button class="mat-btn" data-material="glass">GLASS</button>
-                <button class="mat-btn" data-material="neon">NEON</button>
-                <button class="mat-btn" data-material="hologram">HOLO</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel-3d panel-3" data-depth="200">
-            <div class="panel-header">LIGHTING</div>
-            <div class="panel-content">
-              <div class="lighting-controls">
-                <div class="light-slider">
-                  <label>AMBIENT</label>
-                  <input type="range" min="0" max="100" value="30" class="slider" id="ambient-light">
-                </div>
-                <div class="light-slider">
-                  <label>DIRECTIONAL</label>
-                  <input type="range" min="0" max="100" value="70" class="slider" id="directional-light">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- Particle System Background -->
         <div class="particle-field" id="particle-field-3d"></div>
@@ -9325,14 +9401,10 @@ gantt
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
           }
 
-          /* Floating 3D Panels */
+          /* Floating 3D Panels - Now in Header */
           .floating-3d-panels {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: none; /* Hidden by default, shown when WebGL theme is active */
+            /* Header positioning styles are defined in the main CSS section above */
+            display: flex; /* Always visible in header */
           }
 
           .panel-3d {
@@ -9689,7 +9761,6 @@ gantt
             display: block !important;
           }
 
-          body.webgl-3d-active .floating-3d-panels,
           body.webgl-3d-active .particle-field,
           body.webgl-3d-active .nav-cube-container,
           body.webgl-3d-active .holographic-ui,
@@ -9929,7 +10000,6 @@ gantt
             display: block !important;
           }
 
-          body.webgl-3d-active .floating-3d-panels,
           body.webgl-3d-active .particle-field,
           body.webgl-3d-active .nav-cube-container,
           body.webgl-3d-active .holographic-ui,
