@@ -7622,56 +7622,6 @@ gantt
         });
       }
 
-      // Style card click binding
-      $('.style-card').on('click', function () {
-        const index = $(this).data('index');
-        if (typeof index === 'number') {
-          console.log(`Style card clicked. Applying index: ${index}`);
-          applyTheme(index);
-          gtag('event', 'apply_theme_click', {
-            event_category: 'Theme Card Click',
-            event_label: getCurrentThemeSet()[index].handle,
-            value: index
-          });
-        }
-      });
-
-      // Style title click binding
-      $('.style-title').on('click', function (e) {
-        e.stopPropagation(); // Prevent triggering the parent card's click event
-        const $card = $(this).closest('.style-card');
-        const index = $card.data('index');
-        if (typeof index === 'number') {
-          console.log(`Style title clicked. Applying index: ${index}`);
-          applyTheme(index);
-          current = index;
-          gtag('event', 'apply_theme_click', {
-            event_category: 'Theme Title Click',
-            event_label: getCurrentThemeSet()[index].handle,
-            value: index
-          });
-        }
-      });
-
-      // Mermaid timeline task clicks (either rect or text)
-      $('.mermaid .task, .mermaid text.taskText').on('click', function () {
-        const elementId = this.id;
-        if (elementId) {
-          // Find the theme with matching ID and apply it
-          const themeSet = getCurrentThemeSet();
-          const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
-          if (themeIndex !== -1) {
-            applyTheme(themeIndex);
-            current = themeIndex;
-            console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
-          } else {
-            console.warn(`No theme found with ID: ${elementId}`);
-          }
-        } else {
-          console.warn('Clicked Mermaid element has no ID');
-        }
-      });
-
       // CSS editor live updates
       $cssEditor.on('input', function () {
         const customCss = $(this).val();
