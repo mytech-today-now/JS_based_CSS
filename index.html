@@ -4767,7 +4767,7 @@ gantt
           }
           .style-card {
             background: rgb(15, 15, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.2);
             border-radius: 4px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
@@ -7611,7 +7611,7 @@ gantt
             const themeIndex = themeSet.findIndex(theme => theme.id === elementId);
             if (themeIndex !== -1) {
               applyTheme(themeIndex);
-              current = index;
+              current = themeIndex;
               console.log(`Applied theme by ID: ${elementId}, index: ${themeIndex}`);
             } else {
               console.warn(`No theme found with ID: ${elementId}`);
