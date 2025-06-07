@@ -250,6 +250,10 @@
         overflow: hidden;
         /* display: none; /* Hidden by default, shown in cinematic mode */
       }
+
+      .era-timeline h3 {
+        text-align: center;
+      }
       
       article.style-card {
         padding: 1rem;
@@ -295,7 +299,7 @@
         color: #007acc;
       }
       
-      /* Hide legacy extras */
+      /* Hide legacy extras and theme-specific elements */
       .extra-under,
       .extra-counter,
       .extra-flash-intro,
@@ -304,7 +308,12 @@
       .frame-content,
       .beta-badge,
       .card-texture,
-      .grid-overlay {
+      .grid-overlay,
+      #geocities-elements,
+      .geocities-original-counter,
+      .parallax-container,
+      .parallax-layer,
+      .parallax-section {
         display: none !important;
       }
       
@@ -622,6 +631,20 @@
         font-weight: bold;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
       }
+
+      /* Global override for table-based design visibility */
+      html body #main-table.table-active {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        overflow: auto !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
     </style>
 
     <!-- Dynamic theme CSS will be injected here -->
@@ -644,7 +667,118 @@
         </div>
       </div>
     </div>
-    <div class="counter">
+    <!-- Parallax Elements Container -->
+    <div class="parallax-container">
+      <div class="parallax-layer parallax-layer-1"></div>
+      <div class="parallax-layer parallax-layer-2"></div>
+      <div class="parallax-layer parallax-layer-3"></div>
+      <div class="parallax-layer parallax-layer-4"></div>
+    </div>
+
+    <!-- Geocities Elements Container -->
+    <div id="geocities-elements">
+      <!-- Visitor Counter -->
+      <div class="counter extra-counter">
+        <div style="font-size: 1.2em; color: #ff0000; font-weight: bold;">🎉 WELCOME TO MY HOMEPAGE! 🎉</div>
+        <div style="margin: 10px 0;">You are visitor number:</div>
+        <div id="vistor-counter" style="font-size: 2em; color: #ff0000; font-weight: bold; background: #ffff00; padding: 5px 10px; border: 3px ridge #808080;"></div>
+        <div style="margin-top: 10px; font-size: 0.9em;">Since January 1, 1995!</div>
+      </div>
+
+      <!-- Animated GIFs and Under Construction -->
+      <div class="extra-under" style="position: fixed; top: 50px; left: 10px; z-index: 1000;">
+        <img src="https://web.archive.org/web/19961017235908im_/http://www2.cruzio.com/~dgoldber/construction.gif"
+             alt="Under Construction"
+             style="border: 2px solid #ff0000; background: #ffff00; padding: 5px;"
+             onerror="this.src='data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH5BAEKAAAALAAAAAAQABAAAAMuGLrc/jDKSatlQtScKdceCAjDII7HyaHgSxoqiRqwNi5Hi7aEQF7Q2O963+4NCgA7'; this.alt='🚧 UNDER CONSTRUCTION 🚧';" />
+      </div>
+
+      <!-- Blinking "NEW" and "HOT" badges -->
+      <div class="geocities-badges" style="position: fixed; top: 120px; left: 10px; z-index: 1000;">
+        <div style="background: #ff0000; color: #ffff00; padding: 3px 8px; margin: 2px 0; border: 2px outset #808080; font-weight: bold; animation: geocitiesBlink 1s infinite;">NEW!</div>
+        <div style="background: #ff6600; color: #ffffff; padding: 3px 8px; margin: 2px 0; border: 2px outset #808080; font-weight: bold; animation: geocitiesBlink 1.5s infinite;">HOT!</div>
+        <div style="background: #0066ff; color: #ffffff; padding: 3px 8px; margin: 2px 0; border: 2px outset #808080; font-weight: bold; animation: geocitiesBlink 2s infinite;">COOL!</div>
+      </div>
+
+      <!-- Webring Navigation -->
+      <div class="geocities-webring" style="position: fixed; bottom: 80px; right: 10px; z-index: 1000; background: linear-gradient(to bottom, #cccccc, #999999); border: 3px ridge #808080; padding: 10px; font-family: Arial, sans-serif; font-size: 11px;">
+        <div style="text-align: center; font-weight: bold; margin-bottom: 5px;">[ GEOCITIES WEBRING ]</div>
+        <div style="text-align: center; margin-bottom: 8px;">Member #42 of 1337</div>
+        <div style="text-align: center;">
+          <a href="#" style="color: #0000ff; text-decoration: none; margin: 0 2px;">&lt;&lt; PREV</a> |
+          <a href="#" style="color: #0000ff; text-decoration: none; margin: 0 2px;">RANDOM</a> |
+          <a href="#" style="color: #0000ff; text-decoration: none; margin: 0 2px;">NEXT &gt;&gt;</a>
+        </div>
+      </div>
+
+      <!-- Best Viewed In Badge -->
+      <div class="geocities-badge-netscape" style="position: fixed; bottom: 10px; left: 10px; z-index: 1000;">
+        <img src="data:image/gif;base64,R0lGODlhPAA8AOMAAAAAAP///wAAAP///wAAAP///wAAAP///wAAAP///wAAAP///wAAAP///wAAACH5BAEAAAwALAAAAAA8ADwAAAT/kMlJq7046827/2AojmRpnmiqrmzrvnAsz3Rt33iu73zv/8CgcEgsGo/IpHLJbDqf0Kh0Sq1ar9isdsvter/gsHhMLpvP6LR6zW673/C4fE6v2+/4vH7P7/v/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v8AAwocSLCgwYMIEypcyLChw4cQI0qcSLGixYsYM2rcyLGjx48gQ4ocSbKkyZMoU6pcybKly5cwY8qcSbOmzZs4c+rcybOnz59AgwodSrSo0aNIkypdyrSp06dQo0qdSrWq1atYs2rdyrWr169gw4odS7as2bNo06pdy7at27dw48qdS7eu3bt48+rdy7ev37+AAwseTLiw4cOIEytezLix48eQI0ueTLmy5cuYM2vezLmz58+gQ4seTbq06dOoU6tezbq169ewY8ueTbu27du4c+vezbu379/AgwsfTry48ePIkytfzry58+fQo0ufTr269evYs2vfzr279+/gw4sfT768+fPo06tfz769+/fw48ufT7++/fv48+vfz7+///8ABijggAQWaOCBCCao4IIMNujggxBGKOGEFFZo4YUYZqjhhhx26OGHIIYo4ogklmjiiSimqOKKLLbo4oswxijjjDTWaOONOOao44489ujjj0AGKeSQRBZp5JFIJqnkkkw26eSTUEYp5ZRUVmnllVhmqeWWXHbp5ZdghinmmGSWaeaZaKap5ppstunmm3DGKeecdNZp55145qnnnnz26eefgAYq6KCEFmrooYgmquiijDbq6KOQRirppJRWaumlmGaq6aacdurpp6CGKuqopJZq6qmopqrqqqy26uqrsMYq66y01mrrrbjmquuuvPbq66/ABivssMQWa+yxyCar7LLMNuvss9BGK+201FZr7bXYZqvtttx26+234IYr7rjklmvuueimq+667Lbr7rvwxivvvPTWa++9+Oar77789uvvvwAHLPDABBds8MEIJ6zwwgw37PDDEEcs8cQUV2zxxRhnrPHGHHfs8ccghyzyyCSXbPLJKKes8sost+zyyzDHLPPMNNds880456zzzjz37PPPQAct9NBEF2300UgnrfTSTDft9NNQRy311FRXbfXVWGet9dZcd+3112CHLfbYZJdt9tlop6322my37fbbcMct99x012333XjnrffefPft99+ABy744IQXbvjhiCeu+OKMN+7445BHLvnklFdu+eWYZ6755px37vnnoIcu+uikl2766ainrvrqrLfu+uuwxy777LTXbvvtuOeu++689+7778AHL/zwxBdv/PHIJ6/88sw37/zzz0MfvfTTU1+99ddj/6/99tx37/334Icv/vjkl2/++einr/767Lfv/vvwxy///PTXb//9+Oev//789+///wAMoAAHSMACGvCACEygAhfIwAY68IEQjKAEJ0jBClrwghjMoAY3yMEOevCDIAyhCEdIwhKa8IQoTKEKV8jCFrrwhTCMoQxnSMMa2vCGOMyhDnfIwx768IdADKIQh0jEIhrxiEhMohKXyMQmOvGJUIyiFKdIxSpa8YpYzKIWt8jFLnrxi2AMoxjHSMYymvGMaEyjGtfIxja68Y1wjKMc50jHOtrxjnjMox73yMc++vGPgAykIAdJyEIa8pCITKQiF8nIRjrykZCMpCQnSclKWvKSmMykJjfJyU568pOgDKUoR0nKUprylKhMpSpXycpWuvKVsIylLGdJy1ra8pa4zKUud8nLXvryl8AMpjCHScxiGvOYyEymMpfJzGY685nQjKY0p0nNalrzmtjMpja3yc1uevOb4AynOMdJznKa85zoTKc610nPetrznvjMpz73yc9++vOfAA2oQAdK0IIa9KAITahCF8rQhjr0oRCNqEQnStGKWvSiGM2oRjfK0Y569KMgDalIR0rSkpr0pChNqUpXytKWuvSlMI2pTGdK05ra9KY4zalOd8rTnvr0p0ANqlCHStSiGvWoSE2qUpfK1KY69alQjapUp0rVqlr1qljNqla3ytWuevWrYA2rWMdK1rKa9axoTata18rWtrr1rXCNq1znSte62vWueM2rXvfK1776/6+ABjSgAhfI1776NbCCHSxhC2vYwyI2sYpdrGIXy9jGOvaxkI2sZCdL2cpa9rKYzaxmN8vZznr2s6ANrWhHS9rSmva0qE2taldr2ta69rWwja1sZ0vb2tr2trjNrW53y9ve+va3wA2ucIdL3OIa97jITa5yl8vc5jr3udCNrnSnS93qWve62M2udrfL3e5697vgDa94x0ve8pr3vOhNr3rXy972uve98I2vfOdL3/ra9774za9++8vf/vr3vwAOsIAHTOACG/jACE6wghfM4AY7+MEQjrCEJ0zhClv4whjOsIY3zOEOe/jDIA6xiEdM4hKb+MQoTrGKV8ziFrv4xTCOsYxnTOMa2/jGOM6xjnfM4x77+MdADrKQh0zkIhv5yEhOspKXzOQmO/nJUI6ylKdM5Spb+cpYzrKWt8zlLnv5y2AOs5jHTOYym/nMaE6zmtfM5ja7+c1wjrOc50znOtv5znjOs573zOc++/nPgA60oAdN6EIb+tCITrSiF83oRjv60ZCOtKQnTelKW/rSmM60pjfN6U57+tOgDrWoR03qUpv61KhOtapXzepWu/rVsI61rGdN61rb+ta4zrWud83rXvv618AOtrCHTexiG/vYyE62spfN7GY7+9nQjra0p03talv72tjOtra3ze1ue/vb4A63uMdN7nKb+9zoTre6183udrv73fCOt7znTe962/ve+M63vvfN7377+98AD7jAB07wghv84AhPuMIXzvCGO/zhEI+4xCdO8Ypb/OIYz7jGN87xjnv84yAPuchHTvKSm/zkKE+5ylfO8pa7/OUwj7nMZ07zmtv85jjPuc53zvOe+/znQA+60IdO9KIb/ehIT7rSl870pjv96VCPutSnTvWqW/3qWM+61rfO9a57/etgD7vYx072spv97GhPu9rXzva2u/3tcI+73OdO97rb/e54z7ve9873vvv978APvvCHT/ziG//4yE++8pfP/OY7//nQj770p0/96lv/+tjPvva3z/3ue//74A+/+MdP/vKb//zoT7/618/+9rv//fCPv/znT//62//++M+//vfP//77//8ADAAAOw=="
+             alt="Best viewed in Netscape Navigator"
+             style="border: 1px solid #808080;" />
+      </div>
+
+      <!-- Scrolling Marquee -->
+      <div class="geocities-marquee" style="position: fixed; bottom: 50px; left: 0; right: 0; z-index: 1000; background: #ffff00; border-top: 2px solid #ff0000; border-bottom: 2px solid #ff0000; padding: 5px 0;">
+        <marquee behavior="scroll" direction="left" scrollamount="3" style="color: #ff0000; font-weight: bold; font-family: 'Comic Sans MS', cursive;">
+          ★ Welcome to my awesome homepage! ★ Last updated: Never! ★ Email me at coolkid@geocities.com ★ Check out my guestbook! ★ This site is Y2K compliant! ★
+        </marquee>
+      </div>
+
+      <!-- Guestbook Section -->
+      <div class="geocities-guestbook" style="position: fixed; top: 200px; right: 10px; z-index: 1000; background: linear-gradient(to bottom, #ffffcc, #ccffcc); border: 3px ridge #808080; padding: 15px; width: 200px; box-shadow: 3px 3px 6px rgba(0,0,0,0.3); font-family: 'Comic Sans MS', cursive;">
+        <div style="text-align: center; font-weight: bold; color: #ff0000; margin-bottom: 10px; text-decoration: underline;">📝 GUESTBOOK 📝</div>
+        <div style="font-size: 11px; margin-bottom: 8px; color: #000080;">
+          <strong>CoolKid95:</strong><br>
+          "Awesome site dude! Check out mine!"
+        </div>
+        <div style="font-size: 11px; margin-bottom: 8px; color: #000080;">
+          <strong>WebMaster2000:</strong><br>
+          "Nice animated GIFs! 🔥"
+        </div>
+        <div style="font-size: 11px; margin-bottom: 10px; color: #000080;">
+          <strong>SkateBoy99:</strong><br>
+          "This page rocks! Add more blink tags!"
+        </div>
+        <div style="text-align: center;">
+          <button onclick="alert('Thanks for signing my guestbook!')" style="background: #cccccc; border: 2px outset #808080; padding: 3px 8px; font-family: Arial; font-size: 10px; cursor: pointer;">
+            Sign Guestbook
+          </button>
+        </div>
+      </div>
+
+      <!-- Awards and Badges -->
+      <div class="geocities-awards" style="position: fixed; top: 400px; right: 10px; z-index: 1000; background: linear-gradient(to bottom, #ffcccc, #ccccff); border: 3px ridge #808080; padding: 10px; width: 150px; box-shadow: 3px 3px 6px rgba(0,0,0,0.3); font-family: Arial, sans-serif; font-size: 10px; text-align: center;">
+        <div style="font-weight: bold; color: #ff0000; margin-bottom: 8px;">🏆 AWARDS 🏆</div>
+        <div style="margin-bottom: 5px; color: #000080;">⭐ Cool Site Award</div>
+        <div style="margin-bottom: 5px; color: #000080;">🎖️ Best Homepage 1999</div>
+        <div style="margin-bottom: 5px; color: #000080;">🏅 Awesome Graphics</div>
+        <div style="margin-bottom: 5px; color: #000080;">💎 Diamond Site</div>
+        <div style="color: #666666; font-size: 8px; margin-top: 8px;">
+          All awards are 100% real and not made up!
+        </div>
+      </div>
+
+      <!-- Email Link -->
+      <div class="geocities-email" style="position: fixed; top: 580px; right: 10px; z-index: 1000; background: #ffff99; border: 2px solid #ff0000; padding: 8px; font-family: 'Comic Sans MS', cursive; font-size: 11px; box-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+        <div style="text-align: center; font-weight: bold; color: #ff0000;">📧 EMAIL ME! 📧</div>
+        <div style="text-align: center; margin-top: 5px;">
+          <a href="mailto:webmaster@geocities.com" style="color: #0000ff; text-decoration: underline;">
+            webmaster@geocities.com
+          </a>
+        </div>
+      </div>
+
+      <!-- Last Updated -->
+      <div class="geocities-updated" style="position: fixed; bottom: 120px; right: 10px; z-index: 1000; background: #cccccc; border: 1px solid #808080; padding: 5px; font-family: Arial, sans-serif; font-size: 9px; color: #000000;">
+        Last updated: Never!<br>
+        Created: 1995<br>
+        Hits today: ∞
+      </div>
+    </div>
+
+    <!-- Original counter (will be enhanced) - Hidden by default, shown only in Geocities theme -->
+    <div class="counter geocities-original-counter" style="display: none;">
       <div>Website visit count:</div>
       <div id="vistor-counter"></div>
     </div>
@@ -775,16 +909,31 @@ gantt
     </section>
 
     <main>
-      <!-- All 26 style cards -->
-      <article class="style-card" data-index="1" id="vernacular">
-        <h3 class="style-title">Vernacular / Geocities</h3>
-        <p class="style-era">1991–1995</p>
-        <p class="style-description">Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs, and visitor counters.</p>
-        <p class="style-links">
-          <a href="https://en.wikipedia.org/wiki/GeoCities" target="_blank">GeoCities</a>
-          <a href="https://en.wikipedia.org/wiki/Under_Construction" target="_blank">Under Construction</a>
-        </p>
-      </article>
+      <!-- Parallax Section 1: Early Web Era -->
+      <div class="parallax-section">
+        <div class="parallax-content">
+          <div class="intro">
+            <div class="header-content">
+              <h1>CSS Style Evolution</h1>
+              <p>A journey through the visual history of web design</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parallax Section 2: 1990s Web Styles -->
+      <div class="parallax-section">
+        <div class="parallax-content">
+          <!-- All 26 style cards -->
+          <article class="style-card" data-index="1" id="vernacular">
+            <h3 class="style-title">Vernacular / Geocities</h3>
+            <p class="style-era">1991–1995</p>
+            <p class="style-description">Amateur pages built with tiled backgrounds, animated GIFs, “Under Construction” signs, and visitor counters.</p>
+            <p class="style-links">
+              <a href="https://en.wikipedia.org/wiki/GeoCities" target="_blank">GeoCities</a>
+              <a href="https://en.wikipedia.org/wiki/Under_Construction" target="_blank">Under Construction</a>
+            </p>
+          </article>
 
       <article class="style-card" data-index="2" id="table-frames">
         <h3 class="style-title">Table-Based Design</h3>
@@ -797,9 +946,9 @@ gantt
       </article>
 
       <!-- Table-Based Design Elements (hidden by default, shown when table-based theme is active) -->
-      <div id="main-table" style="display: none;">
+      <div id="main-table" style="display: none; position: absolute; top: -9999px; left: -9999px;">
         <!-- Main Layout Table -->
-        <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+        <table width="100%" border="1" cellpadding="5" cellspacing="0" bgcolor="#ffffff" style="height: 80vh;">
           <tr>
             <!-- Header Row -->
             <td colspan="3" bgcolor="#cccccc" height="80">
@@ -1409,6 +1558,8 @@ gantt
           <a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/" target="_blank">W3C</a>
         </p>
       </article>
+        </div>
+      </div>
     </main>
     <section id="outro" class="intro outro">
       <h3><strong>Under The Hood</strong></h3>
@@ -1514,7 +1665,6 @@ gantt
               color: #0000ff;
               text-decoration: underline;
             }
-            .extra-under { display: block !important; }
             .mermaid {
               background:rgb(245, 245, 243);
               color:rgb(42, 44, 20);
@@ -1642,7 +1792,6 @@ gantt
             color: #66ccff;
             text-decoration: underline;
           }
-          .extra-under { display: block !important; }
           .mermaid {
             background: #333300;
             color: #f0f0f0;
@@ -1723,83 +1872,375 @@ gantt
             'handle': 'vernacularStyle',
             'name': 'Vernacular / Geocities',
             'lightCss': `
-              body { 
-                /* fill the full viewport */
+              /* Authentic Geocities Background with Tiled Pattern */
+              body {
                 min-height: 100vh;
                 margin: 0;
-                /* repeating diagonal stripes */
-                background-image: repeating-linear-gradient(
-                    var(--stripe-angle),
-                    var(--stripe-color) 0,
-                    var(--stripe-color) var(--stripe-width),
-                  transparent var(--stripe-width),
-                    transparent var(--stripe-spacing)
-                );
+                /* Classic tiled background pattern */
+                background-image:
+                  url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wjRLEuQRNnGt7QpVdNhHJBkaK0VGJQCdHjyOl5Q2FiQDEisM+xmGzyhcAAA=='),
+                  repeating-linear-gradient(
+                    45deg,
+                    #ffff99 0px,
+                    #ffff99 10px,
+                    #ffcccc 10px,
+                    #ffcccc 20px
+                  );
+                background-size: 16px 16px, 40px 40px;
                 font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+                color: #000080;
+                overflow-x: auto;
               }
+
+              /* Authentic Geocities Header Styling */
               .content-wrapper {
-                  display: block;
-                  position: relative;
-                  left: 0;
-                  top: 0;
-                }
-            .header-content h1 { 
-              color: #ff0000; 
-              font-size: 3vw;
-              margin-bottom: 5px;
-            }
-            .header-content p { 
-              color: #ffa600; 
-              font-size: 1.5vw;
-            }
-          .era-timeline { 
-            display: block !important;
-            background: var(--bg-color);
-            opacity: var(--opacity);
-          }
-          .style-card {
-            background: #ffffcc;
-          }
-          .style-description {
-            color: #333333;
-          }
-          .style-title {
-            color: #990000;
-            font-weight: bold;
-          }
-          .style-links a {
-            color: #0000ff;
-            text-decoration: underline;
-          }
-          .extra-under { display: block !important; }
-          .mermaid {
-            background:rgb(245, 245, 243);
-            color:rgb(42, 44, 20);
-          }
-          .counter {
-            display: flex;
-            flex: row wrap;
-            padding: 2rem;
-          }
-          #under-construction {
-            position: absolute;
-            margin: 2rem;
-            width: 100%;
-            height: 100%;
-            left: 40%;
-          }
-                    /* CSS editor styles */
-          #css-editor,
-          #html-editor {
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            resize: vertical;
-          }
+                display: block;
+                position: relative;
+                left: 0;
+                top: 0;
+                background: none;
+              }
+
+              .header-content {
+                background: linear-gradient(to bottom, #ffff99, #ffcccc);
+                border: 3px ridge #808080;
+                padding: 20px;
+                text-align: center;
+                margin: 10px;
+                box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+              }
+
+              .header-content h1 {
+                color: #ff0000;
+                font-size: 4vw;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px #000000;
+                font-weight: bold;
+                text-decoration: underline;
+                animation: geocitiesBlink 2s infinite;
+              }
+
+              .header-content p {
+                color: #000080;
+                font-size: 2vw;
+                font-weight: bold;
+                margin: 5px 0;
+              }
+
+              /* Blinking Animation */
+              @keyframes geocitiesBlink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0.3; }
+              }
+
+              /* Timeline and Cards Styling */
+              .era-timeline {
+                display: block !important;
+                background: #ffffcc;
+                border: 2px solid #000080;
+                margin: 10px auto;
+                padding: 15px;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+              }
+
+              .style-card {
+                background: linear-gradient(to bottom, #ffffcc, #ccffcc);
+                border: 2px outset #808080;
+                margin: 10px;
+                padding: 15px;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+              }
+
+              .style-description {
+                color: #000080;
+                font-weight: bold;
+              }
+
+              .style-title {
+                color: #ff0000;
+                font-weight: bold;
+                font-size: 1.3em;
+                text-decoration: underline;
+                cursor: pointer;
+              }
+
+              .style-title:hover {
+                color: #ffff00;
+                background-color: #ff0000;
+                padding: 2px;
+              }
+
+              .style-links a {
+                color: #0000ff;
+                text-decoration: underline;
+                font-weight: bold;
+              }
+
+              .style-links a:visited {
+                color: #800080;
+              }
+
+              .style-links a:hover {
+                color: #ffff00;
+                background-color: #0000ff;
+                padding: 2px;
+              }
+
+              /* Show Geocities Elements */
+              .extra-under { display: block !important; }
+              .extra-counter { display: block !important; }
+              #geocities-elements { display: block !important; }
+              .geocities-original-counter { display: block !important; }
+
+              /* Geocities Elements Styling */
+              .geocities-badges {
+                position: fixed;
+                top: 120px;
+                left: 10px;
+                z-index: 1000;
+              }
+
+              .geocities-badges div {
+                padding: 3px 8px;
+                margin: 2px 0;
+                border: 2px outset #808080;
+                font-weight: bold;
+                font-family: 'Comic Sans MS', cursive;
+                cursor: pointer;
+                animation: geocitiesBlink 1s infinite;
+              }
+
+              .geocities-webring {
+                position: fixed;
+                bottom: 80px;
+                right: 10px;
+                z-index: 1000;
+                background: linear-gradient(to bottom, #cccccc, #999999);
+                border: 3px ridge #808080;
+                padding: 10px;
+                font-family: Arial, sans-serif;
+                font-size: 11px;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+              }
+
+              .geocities-webring div {
+                text-align: center;
+              }
+
+              .geocities-webring a {
+                color: #0000ff;
+                text-decoration: none;
+                margin: 0 2px;
+              }
+
+              .geocities-webring a:hover {
+                color: #ff0000;
+                text-decoration: underline;
+              }
+
+              .geocities-marquee {
+                position: fixed;
+                bottom: 50px;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                background: #ffff00;
+                border-top: 2px solid #ff0000;
+                border-bottom: 2px solid #ff0000;
+                padding: 5px 0;
+              }
+
+              .geocities-marquee marquee {
+                color: #ff0000;
+                font-weight: bold;
+                font-family: 'Comic Sans MS', cursive;
+              }
+
+              .geocities-badge-netscape {
+                position: fixed;
+                bottom: 10px;
+                left: 10px;
+                z-index: 1000;
+              }
+
+              .geocities-badge-netscape img {
+                border: 1px solid #808080;
+                box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+              }
+
+              /* Additional Geocities Elements */
+              .geocities-guestbook {
+                position: fixed;
+                top: 200px;
+                right: 10px;
+                z-index: 1000;
+                background: linear-gradient(to bottom, #ffffcc, #ccffcc);
+                border: 3px ridge #808080;
+                padding: 15px;
+                width: 200px;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+                font-family: 'Comic Sans MS', cursive;
+              }
+
+              .geocities-awards {
+                position: fixed;
+                top: 400px;
+                right: 10px;
+                z-index: 1000;
+                background: linear-gradient(to bottom, #ffcccc, #ccccff);
+                border: 3px ridge #808080;
+                padding: 10px;
+                width: 150px;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+                font-family: Arial, sans-serif;
+                font-size: 10px;
+                text-align: center;
+              }
+
+              .geocities-email {
+                position: fixed;
+                top: 580px;
+                right: 10px;
+                z-index: 1000;
+                background: #ffff99;
+                border: 2px solid #ff0000;
+                padding: 8px;
+                font-family: 'Comic Sans MS', cursive;
+                font-size: 11px;
+                box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+              }
+
+              .geocities-updated {
+                position: fixed;
+                bottom: 120px;
+                right: 10px;
+                z-index: 1000;
+                background: #cccccc;
+                border: 1px solid #808080;
+                padding: 5px;
+                font-family: Arial, sans-serif;
+                font-size: 9px;
+                color: #000000;
+              }
+
+              .mermaid {
+                background: #ffffcc;
+                color: #000080;
+                border: 2px solid #ff0000;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+              }
+
+              /* Mermaid Gantt chart styling for GeoCities theme */
+              .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+              .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+                fill: #ffcccc !important;
+                stroke: #ff0000 !important;
+                stroke-width: 2px !important;
+              }
+
+              .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+              .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+                fill: #ccffcc !important;
+                stroke: #000080 !important;
+                stroke-width: 1px !important;
+              }
+
+              .era-timeline .mermaid text {
+                fill: #000080 !important;
+                font-family: 'Comic Sans MS', cursive !important;
+                font-weight: bold !important;
+              }
+
+              .era-timeline .mermaid .taskText {
+                fill: #ff0000 !important;
+                font-size: 12px !important;
+              }
+
+              .era-timeline .mermaid .sectionTitle {
+                fill: #000080 !important;
+                font-size: 14px !important;
+                font-weight: bold !important;
+              }
+
+              .counter {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+                background: linear-gradient(to bottom, #ffcccc, #ccccff);
+                border: 3px ridge #808080;
+                margin: 10px;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+                font-family: 'Comic Sans MS', cursive;
+                font-weight: bold;
+                color: #000080;
+              }
+
+              #under-construction {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 1000;
+                background: #ffff00;
+                border: 3px ridge #ff0000;
+                padding: 10px;
+                box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+                animation: geocitiesBlink 1.5s infinite;
+              }
+              /* CSS editor styles - Geocities theme */
+              #css-editor,
+              #html-editor {
+                font-family: 'Courier New', monospace;
+                line-height: 1.5;
+                padding: 15px;
+                border: 3px inset #808080;
+                margin: 10px;
+                background: linear-gradient(to bottom, #ffffcc, #ccffff);
+                color: #000080;
+                resize: vertical;
+                box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+              }
+
+              /* Geocities-style buttons and form elements */
+              button, input[type="button"], input[type="submit"] {
+                background: linear-gradient(to bottom, #cccccc, #999999);
+                border: 2px outset #808080;
+                color: #000000;
+                font-family: 'Comic Sans MS', cursive;
+                font-weight: bold;
+                padding: 5px 15px;
+                cursor: pointer;
+                box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+              }
+
+              button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+                background: linear-gradient(to bottom, #ffff99, #cccc99);
+              }
+
+              button:active, input[type="button"]:active, input[type="submit"]:active {
+                border: 2px inset #808080;
+                box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);
+              }
+
+              /* Scrollbars (for supported browsers) */
+              ::-webkit-scrollbar {
+                width: 16px;
+                height: 16px;
+              }
+
+              ::-webkit-scrollbar-track {
+                background: #cccccc;
+                border: 1px inset #808080;
+              }
+
+              ::-webkit-scrollbar-thumb {
+                background: linear-gradient(to bottom, #dddddd, #aaaaaa);
+                border: 1px outset #808080;
+              }
+
+              ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(to bottom, #eeeeee, #bbbbbb);
+              }
           
           .css-editor {
             margin: auto;
@@ -1860,142 +2301,337 @@ gantt
           }
         `,
           'darkCss': `
-          body { 
-            /* fill the full viewport */
+          /* Dark Mode Geocities - Retro Cyber Aesthetic */
+          body {
             min-height: 100vh;
             margin: 0;
-  
-            /* repeating diagonal stripes */
-            background-image: repeating-linear-gradient(
-                calc(3.125 * var(--stripe-angle)),
-                var(--dark-stripe-color) 0,
-                var(--dark-stripe-color) var(--stripe-width),
-                rgba(0, 0, 0, 0.8) calc(1.125 * var(--stripe-width)),
-                rgba(0, 0, 0, 0.8) var(--stripe-spacing)
-            );
+            /* Dark cyber tiled background */
+            background-image:
+              url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wjRLEuQRNnGt7QpVdNhHJBkaK0VGJQCdHjyOl5Q2FiQDEisM+xmGzyhcAAA=='),
+              repeating-linear-gradient(
+                45deg,
+                #001122 0px,
+                #001122 10px,
+                #002244 10px,
+                #002244 20px
+              );
+            background-size: 16px 16px, 40px 40px;
             font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            color: #00ff00;
+            overflow-x: auto;
           }
+
           .content-wrapper {
-              display: block;
-              position: relative;
-              left: 0;
-              top: 0;
-            }
-            .header-content h1 { 
-              color: #ff0000; 
-              font-size: 3vw;
-              margin-bottom: 5px;
-            }
-            .header-content p { 
-              color: #ffa600; 
-              font-size: 1.5vw;
-            }
-          .era-timeline { 
-            display: block !important;
-            background: var(--bg-color);
-            opacity: var(--opacity);
+            display: block;
+            position: relative;
+            left: 0;
+            top: 0;
+            background: none;
           }
+
+          .header-content {
+            background: linear-gradient(to bottom, #003366, #001133);
+            border: 3px ridge #00ff00;
+            padding: 20px;
+            text-align: center;
+            margin: 10px;
+            box-shadow: 0 0 20px #00ff00;
+          }
+
+          .header-content h1 {
+            color: #00ffff;
+            font-size: 4vw;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ffff;
+            font-weight: bold;
+            text-decoration: underline;
+            animation: cyberpunkGlow 2s infinite alternate;
+          }
+
+          .header-content p {
+            color: #00ff00;
+            font-size: 2vw;
+            font-weight: bold;
+            margin: 5px 0;
+            text-shadow: 0 0 5px #00ff00;
+          }
+
+          @keyframes cyberpunkGlow {
+            0% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+            100% { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff; }
+          }
+
+          .era-timeline {
+            display: block !important;
+            background: #001122;
+            border: 2px solid #00ff00;
+            margin: 10px auto;
+            padding: 15px;
+            box-shadow: 0 0 15px #00ff00;
+          }
+
           .style-card {
-            background: #ffffcc;
+            background: linear-gradient(to bottom, #002244, #001133);
+            border: 2px outset #00ffff;
+            margin: 10px;
+            padding: 15px;
+            box-shadow: 0 0 10px #00ffff;
           }
           .style-description {
-            color: #333333;
-          }
-          .style-title {
-            color: #990000;
+            color: #00ff00;
             font-weight: bold;
           }
-          .style-links a {
-            color: #0000ff;
+
+          .style-title {
+            color: #00ffff;
+            font-weight: bold;
+            font-size: 1.3em;
             text-decoration: underline;
+            cursor: pointer;
+            text-shadow: 0 0 5px #00ffff;
           }
+
+          .style-title:hover {
+            color: #ffff00;
+            background-color: #003366;
+            padding: 2px;
+            text-shadow: 0 0 10px #ffff00;
+          }
+
+          .style-links a {
+            color: #00ffff;
+            text-decoration: underline;
+            font-weight: bold;
+            text-shadow: 0 0 3px #00ffff;
+          }
+
+          .style-links a:visited {
+            color: #ff00ff;
+            text-shadow: 0 0 3px #ff00ff;
+          }
+
+          .style-links a:hover {
+            color: #ffff00;
+            background-color: #003366;
+            padding: 2px;
+            text-shadow: 0 0 8px #ffff00;
+          }
+
           .extra-under { display: block !important; }
-          .mermaid {
-            background:rgb(245, 245, 243);
-            color:rgb(42, 44, 20);
+          .extra-counter { display: block !important; }
+          #geocities-elements { display: block !important; }
+          .geocities-original-counter { display: block !important; }
+
+          /* Dark Mode Geocities Elements Styling */
+          .geocities-badges {
+            position: fixed;
+            top: 120px;
+            left: 10px;
+            z-index: 1000;
           }
+
+          .geocities-badges div {
+            padding: 3px 8px;
+            margin: 2px 0;
+            border: 2px outset #00ffff;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            cursor: pointer;
+            background: linear-gradient(to bottom, #003366, #001133);
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            box-shadow: 0 0 8px #00ffff;
+            animation: cyberpunkGlow 1s infinite alternate;
+          }
+
+          .geocities-webring {
+            position: fixed;
+            bottom: 80px;
+            right: 10px;
+            z-index: 1000;
+            background: linear-gradient(to bottom, #002244, #001133);
+            border: 3px ridge #00ff00;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            box-shadow: 0 0 15px #00ff00;
+            color: #00ff00;
+          }
+
+          .geocities-webring div {
+            text-align: center;
+          }
+
+          .geocities-webring a {
+            color: #00ffff;
+            text-decoration: none;
+            margin: 0 2px;
+            text-shadow: 0 0 3px #00ffff;
+          }
+
+          .geocities-webring a:hover {
+            color: #ffff00;
+            text-decoration: underline;
+            text-shadow: 0 0 8px #ffff00;
+          }
+
+          .geocities-marquee {
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(to right, #003366, #002244);
+            border-top: 2px solid #00ffff;
+            border-bottom: 2px solid #00ffff;
+            padding: 5px 0;
+            box-shadow: 0 0 10px #00ffff;
+          }
+
+          .geocities-marquee marquee {
+            color: #00ff00;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 0 0 5px #00ff00;
+          }
+
+          .geocities-badge-netscape {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            z-index: 1000;
+          }
+
+          .geocities-badge-netscape img {
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 8px #00ffff;
+          }
+
+          /* Dark Mode Additional Geocities Elements */
+          .geocities-guestbook {
+            position: fixed;
+            top: 200px;
+            right: 10px;
+            z-index: 1000;
+            background: linear-gradient(to bottom, #002244, #001133);
+            border: 3px ridge #00ff00;
+            padding: 15px;
+            width: 200px;
+            box-shadow: 0 0 15px #00ff00;
+            font-family: 'Comic Sans MS', cursive;
+            color: #00ff00;
+          }
+
+          .geocities-awards {
+            position: fixed;
+            top: 400px;
+            right: 10px;
+            z-index: 1000;
+            background: linear-gradient(to bottom, #003366, #001133);
+            border: 3px ridge #00ffff;
+            padding: 10px;
+            width: 150px;
+            box-shadow: 0 0 15px #00ffff;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            text-align: center;
+            color: #00ffff;
+          }
+
+          .geocities-email {
+            position: fixed;
+            top: 580px;
+            right: 10px;
+            z-index: 1000;
+            background: linear-gradient(to bottom, #003366, #002244);
+            border: 2px solid #00ffff;
+            padding: 8px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 11px;
+            box-shadow: 0 0 10px #00ffff;
+            color: #00ff00;
+          }
+
+          .geocities-updated {
+            position: fixed;
+            bottom: 120px;
+            right: 10px;
+            z-index: 1000;
+            background: #001122;
+            border: 1px solid #00ffff;
+            padding: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            color: #00ff00;
+            box-shadow: 0 0 8px #00ffff;
+          }
+
+          .mermaid {
+            background: #001122;
+            color: #00ff00;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+          }
+
+          /* Mermaid Gantt chart styling for Dark GeoCities theme */
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #002244 !important;
+            stroke: #00ffff !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: #003366 !important;
+            stroke: #00ff00 !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: #00ff00 !important;
+            font-family: 'Comic Sans MS', cursive !important;
+            font-weight: bold !important;
+            text-shadow: 0 0 3px #00ff00 !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: #00ffff !important;
+            font-size: 12px !important;
+            text-shadow: 0 0 3px #00ffff !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: #ffff00 !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
+            text-shadow: 0 0 5px #ffff00 !important;
+          }
+
           .counter {
             display: flex;
-            flex: row wrap;
-            padding: 2rem;
-            color: #dddddd;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(to bottom, #002244, #001133);
+            border: 3px ridge #00ff00;
+            margin: 10px;
+            box-shadow: 0 0 15px #00ff00;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            color: #00ff00;
           }
+
           #under-construction {
-            position: absolute;
-            margin: 2rem;
-            width: 100%;
-            height: 100%;
-            left: 40%;
-          }
-                    /* CSS editor styles */
-          #css-editor,
-          #html-editor {
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: #003366;
+            border: 3px ridge #00ffff;
             padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            resize: vertical;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .css-editor {
-            margin: auto;
-            max-width: 800vw;
-            min-width: 500px;
-            min-height: 150px;
-            text-align: center;
-            display: block;
-          }
-          
-          .html-editor {
-            margin: auto;
-            max-width: calc(100% - 20px);
-            min-width: 500px;
-            min-height: 500px;
-            text-align: center;
-            display: block;
-          }
-          /* Style cards interactive styles */
-          .style-card {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-          }
-          
-          .style-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-          }
-                
-          /* Tooltip to indicate clickable elements */
-          [data-tooltip]:before {
-            content: attr(data-tooltip);
-            position: absolute;
-            opacity: 0;
-            transition: all 0.15s ease;
-            padding: 5px 10px;
-            color: #fff;
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.8);
-            pointer-events: none;
-            z-index: 10;
-            white-space: nowrap;
-            transform: translateY(10px);
-          }
-          
-          [data-tooltip]:hover:before {
-            opacity: 1;
-            transform: translateY(0);
+            box-shadow: 0 0 20px #00ffff;
+            animation: cyberpunkGlow 1.5s infinite alternate;
           }
         `
         },
@@ -2016,18 +2652,28 @@ gantt
 
           /* Hide modern layout, show table layout */
           main, .intro, .era-timeline, .css-editor, .html-editor,
-          .content-wrapper, .header-content, .floating-3d-panels {
+          .content-wrapper, .header-content, .floating-3d-panels,
+          .hero-section {
             display: none !important;
+          }
+
+          /* Ensure body has proper background */
+          body {
+            background: #ffffff !important;
           }
 
           #main-table {
             display: block !important;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 10;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            overflow: auto !important;
+            background: #ffffff !important;
+            visibility: visible !important;
+            opacity: 1 !important;
           }
 
           /* Authentic table styling */
@@ -2126,6 +2772,41 @@ gantt
             padding: 0 5px;
             z-index: 1000;
           }
+
+          /* Force table visibility with highest specificity */
+          body #main-table.table-active {
+            display: block !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            overflow: auto !important;
+            background: #ffffff !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+
+          /* Additional aggressive visibility rules */
+          html body #main-table {
+            display: block !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            overflow: auto !important;
+            background: #ffffff !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+
+          /* Override any potential hiding styles */
+          #main-table[style*="display: none"] {
+            display: block !important;
+          }
         `,
         'darkCss': `
         /* Authentic 1990s Monochrome Monitor Style */
@@ -2140,18 +2821,23 @@ gantt
 
         /* Hide modern layout, show table layout */
         main, .intro, .era-timeline, .css-editor, .html-editor,
-        .content-wrapper, .header-content, .floating-3d-panels {
+        .content-wrapper, .header-content, .floating-3d-panels,
+        .hero-section {
           display: none !important;
         }
 
         #main-table {
           display: block !important;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100vh;
-          z-index: 10;
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: 100vh !important;
+          z-index: 9999 !important;
+          overflow: auto !important;
+          background: #000000 !important;
+          visibility: visible !important;
+          opacity: 1 !important;
         }
 
         /* Monochrome table styling */
@@ -2252,6 +2938,21 @@ gantt
           padding: 0 5px;
           z-index: 1000;
           color: #00FF00;
+        }
+
+        /* Force table visibility with highest specificity - Dark Mode */
+        body #main-table.table-active {
+          display: block !important;
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: 100vh !important;
+          z-index: 9999 !important;
+          overflow: auto !important;
+          background: #000000 !important;
+          visibility: visible !important;
+          opacity: 1 !important;
         }
       `
       },
@@ -2516,6 +3217,51 @@ gantt
           .style-links a {
             color: #66ccff;
           }
+
+          /* Era timeline styling for Flash theme */
+          .era-timeline {
+            background: #222;
+            border: 2px solid #ff9900;
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
+          }
+
+          /* Mermaid Gantt chart styling for Flash theme */
+          .era-timeline .mermaid {
+            background: #111 !important;
+            color: #fff !important;
+            border: 1px solid #ff9900 !important;
+          }
+
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #333 !important;
+            stroke: #ff9900 !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: #444 !important;
+            stroke: #66ccff !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: #fff !important;
+            font-family: Arial, sans-serif !important;
+            font-weight: bold !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: #66ccff !important;
+            font-size: 12px !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: #ff9900 !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
+          }
                     /* CSS editor styles */
           #css-editor,
           #html-editor {
@@ -2632,6 +3378,51 @@ gantt
         }
         .style-links a {
           color: #66ccff;
+        }
+
+        /* Era timeline styling for Flash dark theme */
+        .era-timeline {
+          background: #111;
+          border: 2px solid #ff9900;
+          box-shadow: 0 0 25px rgba(255, 153, 0, 0.4);
+        }
+
+        /* Mermaid Gantt chart styling for Flash dark theme */
+        .era-timeline .mermaid {
+          background: #000 !important;
+          color: #fff !important;
+          border: 1px solid #ff9900 !important;
+        }
+
+        .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+        .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+          fill: #222 !important;
+          stroke: #ff9900 !important;
+          stroke-width: 2px !important;
+        }
+
+        .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+        .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+          fill: #333 !important;
+          stroke: #66ccff !important;
+          stroke-width: 1px !important;
+        }
+
+        .era-timeline .mermaid text {
+          fill: #fff !important;
+          font-family: Arial, sans-serif !important;
+          font-weight: bold !important;
+        }
+
+        .era-timeline .mermaid .taskText {
+          fill: #66ccff !important;
+          font-size: 12px !important;
+        }
+
+        .era-timeline .mermaid .sectionTitle {
+          fill: #ff9900 !important;
+          font-size: 14px !important;
+          font-weight: bold !important;
         }
                   /* CSS editor styles */
           #css-editor,
@@ -2751,6 +3542,53 @@ gantt
             margin-left: 5px;
             text-transform: uppercase;
             font-weight: bold;
+          }
+
+          /* Era timeline styling for Web 2.0 theme */
+          .era-timeline {
+            background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 100%);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+          }
+
+          /* Mermaid Gantt chart styling for Web 2.0 theme */
+          .era-timeline .mermaid {
+            background: linear-gradient(to bottom, #ffffff 0%, #f9f9f9 100%) !important;
+            color: #333 !important;
+            border: 1px solid #ccc !important;
+            border-radius: 6px !important;
+          }
+
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #e6f3ff !important;
+            stroke: #0066cc !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: #f0f8ff !important;
+            stroke: #0099ff !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: #333 !important;
+            font-family: 'Lucida Grande', Arial, sans-serif !important;
+            font-weight: normal !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: #0066cc !important;
+            font-size: 12px !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: #0066cc !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
           }
                     /* CSS editor styles */
           #css-editor,
@@ -3062,7 +3900,49 @@ gantt
             display: block !important;
             background: url('https://img.freepik.com/free-photo/white-gypsum-wall_1194-6990.jpg?t=st=1746443052~exp=1746446652~hmac=a2420a81ff31a63454846c9c05c450b65b5a3982ffc27fd89a63d2b85f7ca563&w=1380');
             pointer-events: none;
-            
+            border: 3px solid #8B4513;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+          }
+
+          /* Mermaid Gantt chart styling for Skeuomorphic theme */
+          .era-timeline .mermaid {
+            background: linear-gradient(to bottom, #f5f5f5, #e8e8e8) !important;
+            color: #333 !important;
+            border: 2px solid #8B4513 !important;
+            border-radius: 6px !important;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2) !important;
+          }
+
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #d4af37 !important;
+            stroke: #8B4513 !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: #f0e68c !important;
+            stroke: #cd853f !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: #333 !important;
+            font-family: 'Helvetica Neue', Arial, sans-serif !important;
+            font-weight: normal !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: #8B4513 !important;
+            font-size: 12px !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: #654321 !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
           }
                     /* CSS editor styles */
           #css-editor,
@@ -3286,6 +4166,54 @@ gantt
             );
             pointer-events: none;
             z-index: 1000;
+          }
+
+          /* Era timeline styling for Swiss Style theme */
+          .era-timeline {
+            background: white;
+            border: none;
+            border-bottom: 4px solid black;
+            border-radius: 0;
+            box-shadow: none;
+          }
+
+          /* Mermaid Gantt chart styling for Swiss Style theme */
+          .era-timeline .mermaid {
+            background: white !important;
+            color: black !important;
+            border: 2px solid black !important;
+            border-radius: 0 !important;
+          }
+
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #f0f0f0 !important;
+            stroke: black !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: white !important;
+            stroke: black !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: black !important;
+            font-family: Helvetica, Arial, sans-serif !important;
+            font-weight: normal !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: black !important;
+            font-size: 12px !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: black !important;
+            font-size: 14px !important;
+            font-weight: bold !important;
           }
                     /* CSS editor styles */
           #css-editor,
@@ -4191,6 +5119,53 @@ gantt
             color: #0078d7;
             text-decoration: none;
           }
+
+          /* Era timeline styling for Flat Design theme */
+          .era-timeline {
+            background: white;
+            border: none;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          }
+
+          /* Mermaid Gantt chart styling for Flat Design theme */
+          .era-timeline .mermaid {
+            background: white !important;
+            color: #333 !important;
+            border: none !important;
+            border-radius: 2px !important;
+          }
+
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #f0f0f0 !important;
+            stroke: #0078d7 !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: #ffffff !important;
+            stroke: #0078d7 !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: #333 !important;
+            font-family: 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: normal !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: #0078d7 !important;
+            font-size: 12px !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: #333 !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+          }
                     /* CSS editor styles */
           #css-editor,
           #html-editor {
@@ -4517,6 +5492,54 @@ gantt
         .style-title {
           color: #007aff;
         }
+
+        /* Era timeline styling for Semi-Flat theme */
+        .era-timeline {
+          background: white;
+          border: none;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Mermaid Gantt chart styling for Semi-Flat theme */
+        .era-timeline .mermaid {
+          background: white !important;
+          color: #333 !important;
+          border: none !important;
+          border-radius: 6px !important;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        }
+
+        .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+        .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+          fill: #f0f4f8 !important;
+          stroke: #007aff !important;
+          stroke-width: 2px !important;
+        }
+
+        .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+        .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+          fill: #ffffff !important;
+          stroke: #007aff !important;
+          stroke-width: 1px !important;
+        }
+
+        .era-timeline .mermaid text {
+          fill: #333 !important;
+          font-family: 'SF Pro Text', 'Roboto', sans-serif !important;
+          font-weight: normal !important;
+        }
+
+        .era-timeline .mermaid .taskText {
+          fill: #007aff !important;
+          font-size: 12px !important;
+        }
+
+        .era-timeline .mermaid .sectionTitle {
+          fill: #333 !important;
+          font-size: 14px !important;
+          font-weight: 600 !important;
+        }
                   /* CSS editor styles */
           #css-editor,
           #html-editor {
@@ -4594,102 +5617,248 @@ gantt
         'handle': 'parallaxStyle',
         'name': 'Parallax Design',
         'lightCss': `
+          /* Parallax Theme - True Scroll-Based Parallax */
           body {
-            font-family: 'Montserrat', sans-serif;
-            background: #222;
-            color: white;
-            perspective: 1px;
-            height: 100vh;
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
-            overflow-y: auto;
             position: relative;
+            min-height: 200vh; /* Allow for scrolling */
           }
-          
-          /* Parallax background layers */
-          .parallax-bg {
+
+          /* Parallax Container */
+          .parallax-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             z-index: -1;
             overflow: hidden;
+            perspective: 1000px;
           }
-          
+
+          /* Parallax Background Layers */
           .parallax-layer {
             position: absolute;
-            width: 200%;
-            height: 100%;
-            background-repeat: repeat-x;
-            background-size: auto 100%;
+            top: 0;
+            left: 0;
+            width: 120%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             will-change: transform;
+            transform-origin: center center;
           }
-          
-          .layer-1 {
-            background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1200');
-            animation: parallaxScroll 60s linear infinite;
+
+          /* Layer 1 - Farthest background (slowest) */
+          .parallax-layer-1 {
+            background-image:
+              linear-gradient(rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3)),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23667eea" stop-opacity="0.1"/><stop offset="100%" stop-color="%23764ba2" stop-opacity="0.3"/></radialGradient></defs><rect width="100%" height="100%" fill="url(%23a)"/><circle cx="200" cy="200" r="100" fill="%23667eea" opacity="0.1"/><circle cx="800" cy="300" r="150" fill="%23764ba2" opacity="0.1"/><circle cx="400" cy="700" r="80" fill="%23667eea" opacity="0.1"/><circle cx="700" cy="800" r="120" fill="%23764ba2" opacity="0.1"/></svg>');
+            z-index: -5;
+            opacity: 0.6;
+          }
+
+          /* Layer 2 - Middle background */
+          .parallax-layer-2 {
+            background-image:
+              linear-gradient(rgba(118, 75, 162, 0.2), rgba(102, 126, 234, 0.2)),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="b" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23764ba2" stop-opacity="0.2"/><stop offset="100%" stop-color="%23667eea" stop-opacity="0.2"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23b)"/><polygon points="100,100 300,50 250,250" fill="%23764ba2" opacity="0.15"/><polygon points="600,200 900,150 850,400" fill="%23667eea" opacity="0.15"/><polygon points="200,600 500,550 450,800" fill="%23764ba2" opacity="0.15"/></svg>');
+            z-index: -4;
+            opacity: 0.4;
+          }
+
+          /* Layer 3 - Foreground elements */
+          .parallax-layer-3 {
+            background-image:
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="100%" height="100%" fill="transparent"/><circle cx="150" cy="150" r="3" fill="%23ffffff" opacity="0.8"/><circle cx="300" cy="80" r="2" fill="%23ffffff" opacity="0.6"/><circle cx="500" cy="200" r="4" fill="%23ffffff" opacity="0.9"/><circle cx="700" cy="120" r="2" fill="%23ffffff" opacity="0.7"/><circle cx="850" cy="180" r="3" fill="%23ffffff" opacity="0.8"/><circle cx="200" cy="400" r="2" fill="%23ffffff" opacity="0.6"/><circle cx="600" cy="350" r="3" fill="%23ffffff" opacity="0.8"/><circle cx="800" cy="450" r="2" fill="%23ffffff" opacity="0.7"/><circle cx="100" cy="600" r="4" fill="%23ffffff" opacity="0.9"/><circle cx="400" cy="650" r="2" fill="%23ffffff" opacity="0.6"/><circle cx="750" cy="700" r="3" fill="%23ffffff" opacity="0.8"/><circle cx="250" cy="850" r="2" fill="%23ffffff" opacity="0.7"/></svg>');
+            z-index: -3;
+            opacity: 0.8;
+          }
+
+          /* Floating particles layer */
+          .parallax-layer-4 {
+            background-image:
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="100%" height="100%" fill="transparent"/><circle cx="100" cy="100" r="1" fill="%23ffffff" opacity="0.4"><animate attributeName="cy" values="100;50;100" dur="4s" repeatCount="indefinite"/></circle><circle cx="300" cy="200" r="1.5" fill="%23ffffff" opacity="0.5"><animate attributeName="cy" values="200;150;200" dur="6s" repeatCount="indefinite"/></circle><circle cx="500" cy="300" r="1" fill="%23ffffff" opacity="0.3"><animate attributeName="cy" values="300;250;300" dur="5s" repeatCount="indefinite"/></circle><circle cx="700" cy="400" r="1.5" fill="%23ffffff" opacity="0.6"><animate attributeName="cy" values="400;350;400" dur="7s" repeatCount="indefinite"/></circle><circle cx="900" cy="500" r="1" fill="%23ffffff" opacity="0.4"><animate attributeName="cy" values="500;450;500" dur="4.5s" repeatCount="indefinite"/></circle></svg>');
+            z-index: -2;
             opacity: 0.3;
           }
           
-          .layer-2 {
-            background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200');
-            animation: parallaxScroll 40s linear infinite;
-            opacity: 0.2;
-          }
-          
-          .layer-3 {
-            background-image: url('https://images.unsplash.com/photo-1520034475321-cbe63696469a?w=1200');
-            animation: parallaxScroll 20s linear infinite;
-            opacity: 0.1;
-          }
-          
-          @keyframes parallaxScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          
+          /* Main Content with Parallax Sections */
           main {
             position: relative;
-            max-width: 85%;
+            z-index: 10;
+            background: transparent;
+            min-height: 200vh;
+            padding: 0;
+            margin: 0;
+          }
+
+          /* Parallax Content Sections */
+          .parallax-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0;
-            margin: auto;
-            top: 5vh;
-            max-width: 1200px;
-            display: flex;
-            flex-wrap: wrap !important;
-            gap: 20px;
-            transform-style: preserve-3d;
-            z-index: 1;
-          }
-          
-          .style-card {
-            background: rgba(255,255,255,0.8);
-            color: #333;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.02);
             border: none;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: translateZ(0);
-            backdrop-filter: blur(3px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px;
+            border-radius: 0;
+            box-shadow: none;
+            will-change: transform;
+          }
+
+          .parallax-section:nth-child(even) {
+            background: rgba(118, 75, 162, 0.03);
+          }
+
+          .parallax-content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
           }
           
+          /* Header Content Styling */
+          .header-content {
+            background: transparent;
+            border-radius: 0;
+            padding: 40px;
+            text-align: center;
+            box-shadow: none;
+            border: none;
+            margin: 20px;
+            will-change: transform;
+          }
+
+          .header-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+          }
+
+          .header-content p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+          }
+
+          /* Style Cards with Enhanced Parallax Effects */
+          .style-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+            will-change: transform;
+            color: #333333;
+          }
+
           .style-card:hover {
-            transform: translateZ(5px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateY(-10px) rotateX(5deg) rotateY(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(102, 126, 234, 0.5);
+          }
+
+          .style-title {
+            color: #333333;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            text-shadow: none;
+            font-weight: 600;
+          }
+
+          .style-description {
+            color: #555555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+          }
+
+          .style-era {
+            color: #667eea;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          .style-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 12px;
+            margin-bottom: 8px;
+            padding: 10px 18px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 25px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+
+          .style-links a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+            color: #5a67d8;
           }
           
+          /* Timeline and Mermaid Styling */
+          .era-timeline {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px auto;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+          }
+
+          .mermaid {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            color: #333333 !important;
+          }
+
           /* CSS editor styles */
           #css-editor,
           #html-editor {
             font-family: 'Courier New', monospace;
             line-height: 1.5;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 15px;
+            border-radius: 8px;
             margin: 10px 0;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+            color: #333333;
             resize: vertical;
           }
           
@@ -4741,109 +5910,279 @@ gantt
             opacity: 1;
             transform: translateY(0);
           }
+
+          /* Show Parallax Elements */
+          .parallax-container { display: block !important; }
+          .parallax-layer { display: block !important; }
+          .parallax-section { display: block !important; }
+
+          /* Responsive Design */
+          @media (max-width: 768px) {
+            .header-content h1 {
+              font-size: 2.5rem;
+            }
+
+            .header-content p {
+              font-size: 1.1rem;
+            }
+
+            .style-card {
+              margin: 10px;
+              padding: 20px;
+            }
+
+            .parallax-section {
+              padding: 40px 15px;
+              margin: 15px;
+            }
+          }
         `,
         'darkCss': `
-        body {
-          font-family: 'Montserrat', sans-serif;
-          background: #111;
-          color: white;
-          perspective: 1px;
-          height: 100vh;
-          overflow-x: hidden;
-          overflow-y: auto;
-          position: relative;
-        }
+          /* Parallax Theme - Dark Mode - True Scroll-Based Parallax */
+          body {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 200vh; /* Allow for scrolling */
+          }
+
+          /* Parallax Container */
+          .parallax-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            perspective: 1000px;
+          }
+
+          /* Parallax Background Layers - Dark Mode */
+          .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            will-change: transform;
+            transform-origin: center center;
+          }
+
+          /* Layer 1 - Farthest background (slowest) - Dark */
+          .parallax-layer-1 {
+            background-image:
+              linear-gradient(rgba(44, 62, 80, 0.4), rgba(52, 73, 94, 0.4)),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%232c3e50" stop-opacity="0.2"/><stop offset="100%" stop-color="%2334495e" stop-opacity="0.4"/></radialGradient></defs><rect width="100%" height="100%" fill="url(%23a)"/><circle cx="200" cy="200" r="100" fill="%232c3e50" opacity="0.15"/><circle cx="800" cy="300" r="150" fill="%2334495e" opacity="0.15"/><circle cx="400" cy="700" r="80" fill="%232c3e50" opacity="0.15"/><circle cx="700" cy="800" r="120" fill="%2334495e" opacity="0.15"/></svg>');
+            z-index: -5;
+            opacity: 0.7;
+          }
+
+          /* Layer 2 - Middle background - Dark */
+          .parallax-layer-2 {
+            background-image:
+              linear-gradient(rgba(52, 73, 94, 0.3), rgba(44, 62, 80, 0.3)),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="b" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2334495e" stop-opacity="0.3"/><stop offset="100%" stop-color="%232c3e50" stop-opacity="0.3"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23b)"/><polygon points="100,100 300,50 250,250" fill="%2334495e" opacity="0.2"/><polygon points="600,200 900,150 850,400" fill="%232c3e50" opacity="0.2"/><polygon points="200,600 500,550 450,800" fill="%2334495e" opacity="0.2"/></svg>');
+            z-index: -4;
+            opacity: 0.5;
+          }
+
+          /* Layer 3 - Foreground elements - Dark */
+          .parallax-layer-3 {
+            background-image:
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="100%" height="100%" fill="transparent"/><circle cx="150" cy="150" r="3" fill="%23ecf0f1" opacity="0.9"/><circle cx="300" cy="80" r="2" fill="%23ecf0f1" opacity="0.7"/><circle cx="500" cy="200" r="4" fill="%23ecf0f1" opacity="1"/><circle cx="700" cy="120" r="2" fill="%23ecf0f1" opacity="0.8"/><circle cx="850" cy="180" r="3" fill="%23ecf0f1" opacity="0.9"/><circle cx="200" cy="400" r="2" fill="%23ecf0f1" opacity="0.7"/><circle cx="600" cy="350" r="3" fill="%23ecf0f1" opacity="0.9"/><circle cx="800" cy="450" r="2" fill="%23ecf0f1" opacity="0.8"/><circle cx="100" cy="600" r="4" fill="%23ecf0f1" opacity="1"/><circle cx="400" cy="650" r="2" fill="%23ecf0f1" opacity="0.7"/><circle cx="750" cy="700" r="3" fill="%23ecf0f1" opacity="0.9"/><circle cx="250" cy="850" r="2" fill="%23ecf0f1" opacity="0.8"/></svg>');
+            z-index: -3;
+            opacity: 0.9;
+          }
+
+          /* Floating particles layer - Dark */
+          .parallax-layer-4 {
+            background-image:
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="100%" height="100%" fill="transparent"/><circle cx="100" cy="100" r="1" fill="%23ecf0f1" opacity="0.5"><animate attributeName="cy" values="100;50;100" dur="4s" repeatCount="indefinite"/></circle><circle cx="300" cy="200" r="1.5" fill="%23ecf0f1" opacity="0.6"><animate attributeName="cy" values="200;150;200" dur="6s" repeatCount="indefinite"/></circle><circle cx="500" cy="300" r="1" fill="%23ecf0f1" opacity="0.4"><animate attributeName="cy" values="300;250;300" dur="5s" repeatCount="indefinite"/></circle><circle cx="700" cy="400" r="1.5" fill="%23ecf0f1" opacity="0.7"><animate attributeName="cy" values="400;350;400" dur="7s" repeatCount="indefinite"/></circle><circle cx="900" cy="500" r="1" fill="%23ecf0f1" opacity="0.5"><animate attributeName="cy" values="500;450;500" dur="4.5s" repeatCount="indefinite"/></circle></svg>');
+            z-index: -2;
+            opacity: 0.4;
+          }
         
-        /* Parallax background layers */
-        .parallax-bg {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: -1;
-          overflow: hidden;
-        }
+          /* Main Content with Parallax Sections - Dark Mode */
+          main {
+            position: relative;
+            z-index: 10;
+            background: transparent;
+            min-height: 200vh;
+            padding: 0;
+            margin: 0;
+          }
+
+          /* Parallax Content Sections - Dark Mode */
+          .parallax-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: rgba(236, 240, 241, 0.02);
+            border: none;
+            margin: 20px;
+            border-radius: 0;
+            box-shadow: none;
+            will-change: transform;
+          }
+
+          .parallax-section:nth-child(even) {
+            background: rgba(52, 73, 94, 0.03);
+          }
+
+          .parallax-content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+          }
+
+          /* Header Content Styling - Dark Mode */
+          .header-content {
+            background: transparent;
+            border-radius: 0;
+            padding: 40px;
+            text-align: center;
+            box-shadow: none;
+            border: none;
+            margin: 20px;
+            will-change: transform;
+          }
+
+          .header-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ecf0f1, #bdc3c7, #95a5a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+          }
+
+          .header-content p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: #ecf0f1;
+          }
+
+          /* Style Cards with Enhanced Parallax Effects - Dark Mode */
+          .style-card {
+            background: rgba(44, 62, 80, 0.95);
+            border: 1px solid rgba(52, 73, 94, 0.5);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+            will-change: transform;
+            color: #ecf0f1;
+          }
+
+          .style-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(44, 62, 80, 1);
+            border-color: rgba(52, 73, 94, 0.8);
+          }
         
-        .parallax-layer {
-          position: absolute;
-          width: 200%;
-          height: 100%;
-          background-repeat: repeat-x;
-          background-size: auto 100%;
-          will-change: transform;
-        }
-        
-        .layer-1 {
-          background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1200');
-          animation: parallaxScroll 60s linear infinite;
-          opacity: 0.3;
-        }
-        
-        .layer-2 {
-          background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200');
-          animation: parallaxScroll 40s linear infinite;
-          opacity: 0.2;
-          filter: hue-rotate(180deg) brightness(0.5);
-        }
-        
-        .layer-3 {
-          background-image: url('https://images.unsplash.com/photo-1520034475321-cbe63696469a?w=1200');
-          animation: parallaxScroll 20s linear infinite;
-          opacity: 0.1;
-          filter: hue-rotate(180deg) brightness(0.5);
-        }
-        
-        @keyframes parallaxScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        
-        main {
-          position: relative;
-          max-width: 85%;
-          align-items: center;
-          justify-content: center;
-          padding: 0;
-          margin: auto;
-          top: 5vh;
-          max-width: 1200px;
-          display: flex;
-          flex-wrap: wrap !important;
-          gap: 20px;
-          transform-style: preserve-3d;
-          z-index: 1;
-        }
-        
-        .style-card {
-          background: rgba(30,30,30,0.8);
-          color: #eee;
-          border: none;
-          border-radius: 5px;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-          transform: translateZ(0);
-          backdrop-filter: blur(3px);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .style-card:hover {
-          transform: translateZ(5px) scale(1.02);
-          box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-        }
-        
-        /* CSS editor styles */
-        #css-editor,
-        #html-editor {
-          font-family: 'Courier New', monospace;
-          line-height: 1.5;
-          padding: 10px;
-          border-radius: 4px;
-          margin: 10px 0;
-          border: 1px solid #444;
-          background-color: #222;
-          color: #eee;
-          resize: vertical;
-        }
+          .style-title {
+            color: #ecf0f1;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            text-shadow: none;
+            font-weight: 600;
+          }
+
+          .style-description {
+            color: rgba(236, 240, 241, 0.85);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+          }
+
+          .style-era {
+            color: #7fb3d3;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+
+          .style-links a {
+            color: #7fb3d3;
+            text-decoration: none;
+            margin-right: 12px;
+            margin-bottom: 8px;
+            padding: 10px 18px;
+            background: rgba(127, 179, 211, 0.1);
+            border-radius: 25px;
+            border: 1px solid rgba(127, 179, 211, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+
+          .style-links a:hover {
+            background: rgba(127, 179, 211, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(127, 179, 211, 0.3);
+            border-color: rgba(127, 179, 211, 0.5);
+            color: #5dade2;
+          }
+
+          /* Timeline and Mermaid Styling - Dark Mode */
+          .era-timeline {
+            background: rgba(44, 62, 80, 0.9);
+            border: 1px solid rgba(52, 73, 94, 0.5);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px auto;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+          }
+
+          .mermaid {
+            background: rgba(44, 62, 80, 0.9) !important;
+            border: 1px solid rgba(52, 73, 94, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            color: #ecf0f1 !important;
+          }
+
+          /* CSS editor styles - Dark Mode */
+          #css-editor,
+          #html-editor {
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid rgba(52, 73, 94, 0.5);
+            background: rgba(44, 62, 80, 0.9);
+            color: #ecf0f1;
+            resize: vertical;
+          }
         
         .css-editor {
           margin: auto;
@@ -4892,6 +6231,32 @@ gantt
           [data-tooltip]:hover:before {
             opacity: 1;
             transform: translateY(0);
+          }
+
+          /* Show Parallax Elements - Dark Mode */
+          .parallax-container { display: block !important; }
+          .parallax-layer { display: block !important; }
+          .parallax-section { display: block !important; }
+
+          /* Responsive Design - Dark Mode */
+          @media (max-width: 768px) {
+            .header-content h1 {
+              font-size: 2.5rem;
+            }
+
+            .header-content p {
+              font-size: 1.1rem;
+            }
+
+            .style-card {
+              margin: 10px;
+              padding: 20px;
+            }
+
+            .parallax-section {
+              padding: 40px 15px;
+              margin: 15px;
+            }
           }
       `
       },
@@ -6325,8 +7690,58 @@ gantt
             transition: all 0.2s ease;
           }
           .style-links a:hover {
-            box-shadow: inset 3px 3px 6px #b8bec7, 
+            box-shadow: inset 3px 3px 6px #b8bec7,
                         inset -3px -3px 6px #ffffff;
+          }
+
+          /* Era timeline styling for Neumorphism theme */
+          .era-timeline {
+            background: #e0e5ec;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 10px 10px 20px #b8bec7,
+                        -10px -10px 20px #ffffff;
+          }
+
+          /* Mermaid Gantt chart styling for Neumorphism theme */
+          .era-timeline .mermaid {
+            background: #e0e5ec !important;
+            color: #555 !important;
+            border: none !important;
+            border-radius: 16px !important;
+            box-shadow: inset 5px 5px 10px #b8bec7,
+                        inset -5px -5px 10px #ffffff !important;
+          }
+
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #d0d5dc !important;
+            stroke: #555 !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: #e8edf4 !important;
+            stroke: #777 !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: #555 !important;
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 500 !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: #666 !important;
+            font-size: 12px !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: #444 !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
           }
           #css-editor {
             font-family: 'Courier New', monospace;
@@ -6440,8 +7855,58 @@ gantt
             transition: all 0.2s ease;
           }
           .style-links a:hover {
-            box-shadow: inset 3px 3px 6px #1a1f20, 
+            box-shadow: inset 3px 3px 6px #1a1f20,
                         inset -3px -3px 6px #40494c;
+          }
+
+          /* Era timeline styling for Neumorphism dark theme */
+          .era-timeline {
+            background: #2d3436;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 10px 10px 20px #1a1f20,
+                        -10px -10px 20px #40494c;
+          }
+
+          /* Mermaid Gantt chart styling for Neumorphism dark theme */
+          .era-timeline .mermaid {
+            background: #2d3436 !important;
+            color: #e0e0e0 !important;
+            border: none !important;
+            border-radius: 16px !important;
+            box-shadow: inset 5px 5px 10px #1a1f20,
+                        inset -5px -5px 10px #40494c !important;
+          }
+
+          .era-timeline .mermaid .section0, .era-timeline .mermaid .section1,
+          .era-timeline .mermaid .section2, .era-timeline .mermaid .section3 {
+            fill: #1e2426 !important;
+            stroke: #bb86fc !important;
+            stroke-width: 2px !important;
+          }
+
+          .era-timeline .mermaid .task0, .era-timeline .mermaid .task1,
+          .era-timeline .mermaid .task2, .era-timeline .mermaid .task3 {
+            fill: #3c4446 !important;
+            stroke: #03dac6 !important;
+            stroke-width: 1px !important;
+          }
+
+          .era-timeline .mermaid text {
+            fill: #e0e0e0 !important;
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 500 !important;
+          }
+
+          .era-timeline .mermaid .taskText {
+            fill: #03dac6 !important;
+            font-size: 12px !important;
+          }
+
+          .era-timeline .mermaid .sectionTitle {
+            fill: #bb86fc !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
           }
           #css-editor {
             font-family: 'Courier New', monospace;
@@ -8587,7 +10052,7 @@ gantt
               );
             border: 4px ridge #00ff00;
             padding: 25px;
-            margin: 25px 0;
+            margin: 25px auto;
             box-shadow:
               0 0 30px #00ff00,
               inset 0 0 30px rgba(0, 255, 0, 0.1);
@@ -11295,12 +12760,24 @@ gantt
           handleCinematicVideos('stop');
         }
 
-        if (theme.name.includes('Vernacular')) {
+        // Handle Vernacular/Geocities theme special effects
+        if (theme.name.includes('Vernacular') || theme.name.includes('Geocities')) {
+          initGeocitiesEffects();
           $underConstruction.show();
           $visitorCounter.show();
+          $('.geocities-original-counter').show();
         } else {
+          cleanupGeocitiesEffects();
           $underConstruction.hide();
           $visitorCounter.hide();
+          $('.geocities-original-counter').hide();
+        }
+
+        // Handle Parallax theme special effects
+        if (theme.name.includes('Parallax')) {
+          initParallaxEffects();
+        } else {
+          cleanupParallaxEffects();
         }
 
         // Handle retro web theme special effects
@@ -11732,6 +13209,467 @@ gantt
       }
     });
 
+    // ===== Geocities Theme JavaScript =====
+    let geocitiesAnimationInterval;
+    let geocitiesCounterInterval;
+
+    function initGeocitiesEffects() {
+      console.log('Initializing Geocities effects...');
+
+      // Show all Geocities elements
+      $('#geocities-elements').show();
+      $('.geocities-original-counter').show();
+
+      // Start animated counter
+      animateGeocitiesCounter();
+
+      // Add click sounds to elements
+      addGeocitiesClickSounds();
+
+      // Start blinking animations
+      startGeocitiesAnimations();
+
+      // Add authentic Geocities interactions
+      addGeocitiesInteractions();
+    }
+
+    function cleanupGeocitiesEffects() {
+      console.log('Cleaning up Geocities effects...');
+
+      // Hide all Geocities elements
+      $('#geocities-elements').hide();
+      $('.geocities-original-counter').hide();
+
+      // Clear intervals
+      if (geocitiesAnimationInterval) clearInterval(geocitiesAnimationInterval);
+      if (geocitiesCounterInterval) clearInterval(geocitiesCounterInterval);
+
+      // Remove event listeners
+      $('.geocities-badges, .geocities-webring, .geocities-marquee, .geocities-guestbook, .geocities-awards, .geocities-email').off('click.geocities mouseenter.geocities mouseleave.geocities');
+
+      // Remove any dynamically created tooltips or popups
+      $('body').find('[data-tooltip]').removeData('tooltip');
+      $('body').find('.geocities-tooltip, .geocities-popup').remove();
+    }
+
+    function animateGeocitiesCounter() {
+      // Animate the visitor counter with random increments
+      let currentCount = parseInt(localStorage.getItem('page_view') || '123456');
+
+      // Set initial count
+      $('#vistor-counter').text(currentCount.toLocaleString());
+
+      geocitiesCounterInterval = setInterval(() => {
+        // Randomly increment by 1-5 visitors (more realistic for a popular 90s site)
+        currentCount += Math.floor(Math.random() * 5) + 1;
+        $('#vistor-counter').text(currentCount.toLocaleString());
+        localStorage.setItem('page_view', currentCount);
+
+        // Add a brief flash effect to the counter
+        $('#vistor-counter').css('background-color', '#ff0000');
+        setTimeout(() => {
+          $('#vistor-counter').css('background-color', '#ffff00');
+        }, 200);
+      }, 3000); // Update every 3 seconds for more activity
+
+      // Add a rolling counter effect on page load
+      let rollCount = currentCount - 50;
+      const rollInterval = setInterval(() => {
+        rollCount += 2;
+        $('#vistor-counter').text(rollCount.toLocaleString());
+        if (rollCount >= currentCount) {
+          clearInterval(rollInterval);
+          $('#vistor-counter').text(currentCount.toLocaleString());
+        }
+      }, 50);
+    }
+
+    function addGeocitiesClickSounds() {
+      // Add authentic 90s click sounds
+      $('.geocities-badges div, .geocities-webring a, .geocities-marquee').on('click.geocities', function(e) {
+        e.preventDefault();
+
+        try {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
+          // Different sounds for different elements
+          if ($(this).hasClass('geocities-badges') || $(this).parent().hasClass('geocities-badges')) {
+            // Higher pitched beep for badges
+            oscillator.frequency.setValueAtTime(1200, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.1);
+          } else {
+            // Lower pitched click for other elements
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.1);
+          }
+
+          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.1);
+        } catch (e) {
+          console.log('*BEEP*');
+        }
+      });
+    }
+
+    function startGeocitiesAnimations() {
+      // Add extra blinking effects to badges
+      geocitiesAnimationInterval = setInterval(() => {
+        $('.geocities-badges div').each(function(index) {
+          const $badge = $(this);
+          setTimeout(() => {
+            $badge.css('opacity', '0.3');
+            setTimeout(() => {
+              $badge.css('opacity', '1');
+            }, 200);
+          }, index * 100);
+        });
+      }, 3000);
+    }
+
+    function addGeocitiesInteractions() {
+      // Make webring links show popup-style messages
+      $('.geocities-webring a').on('click.geocities', function(e) {
+        e.preventDefault();
+        const linkText = $(this).text();
+
+        // Create a 90s-style alert simulation
+        const $popup = $('<div>').css({
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: 'linear-gradient(to bottom, #cccccc, #999999)',
+          border: '3px outset #808080',
+          padding: '20px',
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '12px',
+          zIndex: 10000,
+          boxShadow: '5px 5px 10px rgba(0,0,0,0.5)'
+        }).html(`
+          <div style="text-align: center; margin-bottom: 15px; font-weight: bold;">
+            Geocities WebRing Navigation
+          </div>
+          <div style="margin-bottom: 15px;">
+            You clicked: ${linkText}
+          </div>
+          <div style="margin-bottom: 15px;">
+            This would take you to another awesome Geocities site!
+          </div>
+          <div style="text-align: center;">
+            <button onclick="$(this).closest('div').remove()" style="background: #cccccc; border: 2px outset #808080; padding: 5px 15px; font-family: Arial; font-size: 11px; cursor: pointer;">
+              OK
+            </button>
+          </div>
+        `);
+
+        $('body').append($popup);
+
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          $popup.remove();
+        }, 5000);
+      });
+
+      // Make badges show tooltips
+      $('.geocities-badges div').on('mouseenter.geocities', function() {
+        const $badge = $(this);
+        const text = $badge.text();
+        const messages = {
+          'NEW!': 'This content was just added!',
+          'HOT!': 'This is the hottest content on the web!',
+          'COOL!': 'Check out this cool stuff!'
+        };
+
+        const $tooltip = $('<div>').css({
+          position: 'absolute',
+          background: '#ffffcc',
+          border: '1px solid #000000',
+          padding: '5px',
+          fontSize: '11px',
+          fontFamily: 'Arial, sans-serif',
+          zIndex: 1001,
+          whiteSpace: 'nowrap',
+          boxShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+        }).text(messages[text] || 'Awesome content!');
+
+        $('body').append($tooltip);
+
+        const badgeOffset = $badge.offset();
+        $tooltip.css({
+          top: badgeOffset.top - $tooltip.outerHeight() - 5,
+          left: badgeOffset.left + $badge.outerWidth() + 5
+        });
+
+        $badge.data('tooltip', $tooltip);
+      }).on('mouseleave.geocities', function() {
+        const $tooltip = $(this).data('tooltip');
+        if ($tooltip) {
+          $tooltip.remove();
+        }
+      });
+
+      // Add interactions for guestbook
+      $('.geocities-guestbook button').on('click.geocities', function() {
+        const messages = [
+          'Thanks for signing my guestbook! You rock!',
+          'Awesome! Your message has been added!',
+          'Cool! Thanks for visiting my homepage!',
+          'Sweet! Come back soon!',
+          'Radical! You\'re now in my guestbook!'
+        ];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        alert(randomMessage);
+
+        // Add a new guestbook entry
+        const names = ['CyberKid2000', 'WebSurfer99', 'DigitalDude', 'NetNinja', 'CodeMaster'];
+        const comments = [
+          'Your site is totally rad!',
+          'Love the animated GIFs!',
+          'This page is da bomb!',
+          'Keep up the awesome work!',
+          'Your homepage rocks!'
+        ];
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomComment = comments[Math.floor(Math.random() * comments.length)];
+
+        const $newEntry = $('<div>').css({
+          'font-size': '11px',
+          'margin-bottom': '8px',
+          'color': '#000080'
+        }).html(`<strong>${randomName}:</strong><br>"${randomComment}"`);
+
+        $('.geocities-guestbook div:last-child').before($newEntry);
+
+        // Remove oldest entry if more than 4 entries
+        const entries = $('.geocities-guestbook div').filter(function() {
+          return $(this).find('strong').length > 0;
+        });
+        if (entries.length > 4) {
+          entries.first().remove();
+        }
+      });
+
+      // Add hover effects for awards
+      $('.geocities-awards div').on('mouseenter.geocities', function() {
+        if ($(this).text().includes('Award') || $(this).text().includes('🏆') || $(this).text().includes('⭐') || $(this).text().includes('🎖️') || $(this).text().includes('🏅') || $(this).text().includes('💎')) {
+          $(this).css({
+            'background-color': '#ffff99',
+            'transform': 'scale(1.1)',
+            'transition': 'all 0.2s ease'
+          });
+        }
+      }).on('mouseleave.geocities', function() {
+        $(this).css({
+          'background-color': '',
+          'transform': 'scale(1)',
+          'transition': 'all 0.2s ease'
+        });
+      });
+
+      // Make email link more interactive
+      $('.geocities-email a').on('click.geocities', function(e) {
+        e.preventDefault();
+        alert('📧 Email client would open here! (This is just a demo)');
+      });
+
+      // Update the "last updated" timestamp periodically
+      setInterval(() => {
+        const now = new Date();
+        const updateTexts = [
+          'Last updated: Just now!',
+          'Last updated: 5 minutes ago',
+          'Last updated: Never!',
+          'Last updated: Yesterday',
+          'Last updated: When I felt like it'
+        ];
+        const randomText = updateTexts[Math.floor(Math.random() * updateTexts.length)];
+        $('.geocities-updated').html(`
+          ${randomText}<br>
+          Created: 1995<br>
+          Hits today: ${Math.floor(Math.random() * 9999) + 1000}
+        `);
+      }, 10000); // Update every 10 seconds
+
+      // Add some random "page loading" effects
+      setTimeout(() => {
+        const $loading = $('<div>').css({
+          position: 'fixed',
+          top: '10px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#ffff00',
+          border: '2px solid #ff0000',
+          padding: '10px',
+          fontFamily: 'Comic Sans MS, cursive',
+          fontSize: '12px',
+          fontWeight: 'bold',
+          zIndex: 10000,
+          animation: 'geocitiesBlink 0.5s infinite'
+        }).text('🌟 PAGE FULLY LOADED! 🌟');
+
+        $('body').append($loading);
+
+        setTimeout(() => {
+          $loading.fadeOut(2000, function() {
+            $(this).remove();
+          });
+        }, 3000);
+      }, 2000);
+    }
+
+    // Parallax Effects System
+    let parallaxAnimationFrame;
+    let isParallaxActive = false;
+
+    function initParallaxEffects() {
+      console.log('Initializing Parallax effects...');
+      isParallaxActive = true;
+
+      // Show parallax elements
+      $('.parallax-container').show();
+      $('.parallax-layer').show();
+      $('.parallax-section').show();
+
+      // Start parallax scroll listener
+      startParallaxScrolling();
+
+      // Add smooth scrolling behavior
+      $('html').css('scroll-behavior', 'smooth');
+
+      // Initialize parallax sections with staggered animations
+      initParallaxSections();
+    }
+
+    function cleanupParallaxEffects() {
+      console.log('Cleaning up Parallax effects...');
+      isParallaxActive = false;
+
+      // Hide parallax elements
+      $('.parallax-container').hide();
+      $('.parallax-layer').hide();
+      $('.parallax-section').hide();
+
+      // Stop parallax animations
+      if (parallaxAnimationFrame) {
+        cancelAnimationFrame(parallaxAnimationFrame);
+        parallaxAnimationFrame = null;
+      }
+
+      // Remove scroll listeners
+      $(window).off('scroll.parallax');
+
+      // Reset scroll behavior
+      $('html').css('scroll-behavior', 'auto');
+
+      // Reset transforms
+      $('.parallax-layer, .parallax-section').css('transform', '');
+    }
+
+    function startParallaxScrolling() {
+      if (!isParallaxActive) return;
+
+      let ticking = false;
+
+      function updateParallax() {
+        if (!isParallaxActive) return;
+
+        const scrollTop = $(window).scrollTop();
+        const windowHeight = $(window).height();
+
+        // Update parallax layers with different speeds
+        $('.parallax-layer-1').css('transform', `translateY(${scrollTop * 0.1}px)`);
+        $('.parallax-layer-2').css('transform', `translateY(${scrollTop * 0.3}px)`);
+        $('.parallax-layer-3').css('transform', `translateY(${scrollTop * 0.5}px)`);
+        $('.parallax-layer-4').css('transform', `translateY(${scrollTop * 0.7}px)`);
+
+        // Update parallax sections
+        $('.parallax-section').each(function(index) {
+          const $section = $(this);
+          const sectionTop = $section.offset().top;
+          const sectionHeight = $section.outerHeight();
+          const sectionCenter = sectionTop + (sectionHeight / 2);
+          const distanceFromCenter = scrollTop + (windowHeight / 2) - sectionCenter;
+          const parallaxSpeed = 0.1 + (index * 0.05); // Different speeds for each section
+
+          // Apply parallax transform based on distance from viewport center
+          const parallaxOffset = distanceFromCenter * parallaxSpeed;
+          $section.css('transform', `translateY(${parallaxOffset}px)`);
+
+          // Add depth-based scaling and opacity effects
+          const distanceRatio = Math.abs(distanceFromCenter) / windowHeight;
+          const scale = Math.max(0.95, 1 - (distanceRatio * 0.05));
+          const opacity = Math.max(0.7, 1 - (distanceRatio * 0.3));
+
+          $section.find('.parallax-content').css({
+            'transform': `scale(${scale})`,
+            'opacity': opacity
+          });
+        });
+
+        ticking = false;
+      }
+
+      function requestTick() {
+        if (!ticking && isParallaxActive) {
+          parallaxAnimationFrame = requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }
+
+      // Use throttled scroll listener for better performance
+      $(window).on('scroll.parallax', requestTick);
+
+      // Initial update
+      updateParallax();
+    }
+
+    function initParallaxSections() {
+      $('.parallax-section').each(function(index) {
+        const $section = $(this);
+
+        // Add entrance animations with staggered delays
+        $section.css({
+          'opacity': '0',
+          'transform': 'translateY(50px)'
+        });
+
+        setTimeout(() => {
+          $section.css({
+            'transition': 'opacity 0.8s ease-out, transform 0.8s ease-out',
+            'opacity': '1',
+            'transform': 'translateY(0)'
+          });
+        }, index * 200);
+      });
+    }
+
+    // Initialize Geocities effects if Geocities theme is already active
+    $(document).ready(function() {
+      const currentTheme = $('#current-theme').text();
+      if (currentTheme.includes('Vernacular') || currentTheme.includes('Geocities')) {
+        initGeocitiesEffects();
+      } else {
+        // Ensure all Geocities elements are hidden if not using Geocities theme
+        cleanupGeocitiesEffects();
+      }
+
+      // Initialize parallax effects if Parallax theme is already active
+      if (currentTheme.includes('Parallax')) {
+        initParallaxEffects();
+      } else {
+        // Ensure all Parallax elements are hidden if not using Parallax theme
+        cleanupParallaxEffects();
+      }
+    });
+
     // ===== Glassmorphism Theme JavaScript =====
     let glassmorphismAnimationId;
     let glassmorphismParticles = [];
@@ -11893,8 +13831,64 @@ gantt
     function initTableBasedEffects() {
       console.log('Initializing Table-Based Design effects...');
 
-      // Show the table layout
-      $('#main-table').show();
+      // Force show the table layout with multiple methods
+      const $mainTable = $('#main-table');
+
+      // Remove any existing inline styles that might hide it
+      $mainTable.removeAttr('style');
+
+      // Add the table-active class for highest CSS specificity
+      $mainTable.addClass('table-active');
+
+      // Force display with inline styles using !important
+      $mainTable.attr('style', 'display: block !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; z-index: 9999 !important; background: #ffffff !important; visibility: visible !important; opacity: 1 !important; overflow: auto !important;');
+
+      // Also apply via jQuery CSS for redundancy
+      $mainTable.css({
+        'display': 'block',
+        'position': 'fixed',
+        'top': '0',
+        'left': '0',
+        'width': '100%',
+        'height': '100vh',
+        'z-index': '9999',
+        'overflow': 'auto',
+        'background': '#ffffff',
+        'visibility': 'visible',
+        'opacity': '1'
+      });
+
+      // Force show with jQuery
+      $mainTable.show();
+
+      console.log('Table element found:', $mainTable.length);
+      console.log('Table display style:', $mainTable.css('display'));
+      console.log('Table visibility:', $mainTable.css('visibility'));
+      console.log('Table position:', $mainTable.css('position'));
+      console.log('Table z-index:', $mainTable.css('z-index'));
+
+      // Multiple fallback attempts to ensure visibility
+      setTimeout(() => {
+        $mainTable.attr('style', 'display: block !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; z-index: 9999 !important; background: #ffffff !important; visibility: visible !important; opacity: 1 !important; overflow: auto !important;');
+        console.log('Table forced visible after CSS delay');
+      }, 100);
+
+      setTimeout(() => {
+        $mainTable.attr('style', 'display: block !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; z-index: 9999 !important; background: #ffffff !important; visibility: visible !important; opacity: 1 !important; overflow: auto !important;');
+        console.log('Table forced visible after second delay');
+      }, 300);
+
+      // Additional fallback to ensure visibility
+      setTimeout(() => {
+        if ($mainTable.css('display') === 'none' || !$mainTable.is(':visible')) {
+          console.log('Table still hidden, forcing display with maximum priority...');
+          $mainTable.attr('style', 'display: block !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; z-index: 9999 !important; background: #ffffff !important; visibility: visible !important; opacity: 1 !important; overflow: auto !important;');
+
+          // Also try to hide other elements that might be interfering
+          $('main, .intro, .era-timeline, .css-editor, .html-editor, .content-wrapper, .header-content, .floating-3d-panels, .hero-section').hide();
+        }
+        console.log('Final visibility check - Table visible:', $mainTable.is(':visible'));
+      }, 500);
 
       // Add authentic 1990s interactions
       addTableInteractions();
@@ -11907,13 +13901,34 @@ gantt
 
       // Initialize table navigation
       initTableNavigation();
+
+      // Debug function to check what's visible
+      setTimeout(() => {
+        console.log('=== TABLE DEBUG INFO ===');
+        console.log('Table element exists:', $mainTable.length > 0);
+        console.log('Table is visible:', $mainTable.is(':visible'));
+        console.log('Table computed display:', window.getComputedStyle($mainTable[0]).display);
+        console.log('Table computed position:', window.getComputedStyle($mainTable[0]).position);
+        console.log('Table computed z-index:', window.getComputedStyle($mainTable[0]).zIndex);
+        console.log('Table computed background:', window.getComputedStyle($mainTable[0]).backgroundColor);
+        console.log('Table offset width:', $mainTable[0].offsetWidth);
+        console.log('Table offset height:', $mainTable[0].offsetHeight);
+        console.log('Table bounding rect:', $mainTable[0].getBoundingClientRect());
+
+        // Check if other elements are covering it
+        const elementsAtCenter = document.elementsFromPoint(window.innerWidth/2, window.innerHeight/2);
+        console.log('Elements at center of screen:', elementsAtCenter.map(el => el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + el.className.split(' ').join('.') : '')));
+        console.log('=== END DEBUG INFO ===');
+      }, 1000);
     }
 
     function cleanupTableBasedEffects() {
       console.log('Cleaning up Table-Based Design effects...');
 
-      // Hide the table layout
-      $('#main-table').hide();
+      // Hide the table layout and remove active class
+      const $mainTable = $('#main-table');
+      $mainTable.hide();
+      $mainTable.removeClass('table-active');
 
       // Clear intervals
       if (tableStatusInterval) clearInterval(tableStatusInterval);
@@ -11922,6 +13937,9 @@ gantt
       // Remove event listeners
       $('#main-table').off('click.table');
       $(document).off('mousemove.table');
+
+      // Remove status bar
+      $('.table-status-bar').remove();
     }
 
     function addTableInteractions() {
@@ -12070,9 +14088,13 @@ gantt
     // Initialize table-based effects if table-based theme is already active
     $(document).ready(function() {
       const currentTheme = $('#current-theme').text();
+      console.log('Current theme on load:', currentTheme);
       if (currentTheme.includes('Table-Based Design')) {
+        console.log('Initializing table-based effects on page load');
         initTableBasedEffects();
       }
+
+
     });
 
     // ===== WebGL & 3D Theme JavaScript =====
